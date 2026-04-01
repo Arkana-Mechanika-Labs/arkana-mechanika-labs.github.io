@@ -5,7 +5,7 @@ width: wide
 ---
 
 {{< hextra/hero-headline >}}
-  Darklands Restoration Project
+  Reverse-Engineering Darklands
 {{< /hextra/hero-headline >}}
 
 {{< hextra/hero-subtitle >}}
