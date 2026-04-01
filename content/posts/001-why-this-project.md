@@ -44,8 +44,6 @@ The first thing I built was the analysis toolchain:
 
 The three of them together form **dos-re-agent**: a system where Claude autonomously analyzes the executable, names functions, maps data structures, and writes its findings to a knowledge base. It runs in a loop, session after session, building up a picture of what the game is actually doing.
 
-The toolchain lives at [github.com/Arkana-Mechanika-Labs/dos-re-agent](https://github.com/Arkana-Mechanika-Labs/dos-re-agent). It's open source. You could point it at a different DOS game if you wanted.
-
 ---
 
 ## Where We Are

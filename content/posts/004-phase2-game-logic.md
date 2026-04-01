@@ -83,7 +83,7 @@ The agent runs in sessions of ~15 turns. Each turn is one Ghidra decompile opera
 
 Progress is cumulative. The Ghidra project file grows richer with each session — more commented functions, more named variables, more confirmed struct field accesses. The goal isn't to finish in one run; it's to steadily build a complete understanding.
 
-The toolchain is open source. The findings are documented in the [analysis repo](https://github.com/Arkana-Mechanika-Labs/darklands-analysis). Every confirmed fact is sourced. The work continues.
+The findings are documented in the analysis repo (available to sponsors). Every confirmed fact is sourced. The work continues.
 
 ---
 
