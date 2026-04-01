@@ -1,6 +1,6 @@
 ---
 title: "Devlog #002 — Phase 1: Naming the Map"
-date: 2026-04-03
+date: 2026-03-15
 tags: ["darklands", "reverse-engineering", "ghidra", "rtlink"]
 description: "382 of 388 functions named. How the AI agent mapped an entire 1992 DOS executable from scratch — RTLink overlays, Borland CRT, and all."
 summary: "382 of 388 functions named. How the AI agent mapped an entire 1992 DOS executable from scratch — RTLink overlays, Borland CRT, and all."
