@@ -29,8 +29,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: recursive
           fetch-depth: 0
+
+      - name: Install PaperMod theme
+        run: git clone --depth=1 https://github.com/adityatelange/hugo-PaperMod themes/PaperMod
+
+      - name: Debug config
+        run: hugo config | grep -i paginate || echo "paginate not found in config"
 
       - name: Setup Pages
         id: pages
