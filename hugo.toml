@@ -2,7 +2,8 @@ baseURL = "https://arkana-mechanika-labs.github.io/"
 languageCode = "en-us"
 title = "Darklands Reborn"
 theme = "PaperMod"
-paginate = 5
+[pagination]
+  pagerSize = 5
 enableRobotsTXT = true
 
 [params]
@@ -37,5 +38,5 @@ enableRobotsTXT = true
     weight = 10
   [[menu.main]]
     name = "Sponsor"
-    url = "https://github.com/sponsors/Arkana-Mechanika-Studios"
+    url = "https://github.com/sponsors/Arkana-Mechanika-Labs"
     weight = 20
