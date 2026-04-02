@@ -8,9 +8,9 @@ summary: "Community researchers documented Darklands file formats in the mid-200
 
 One of the things I didn't expect when I started this project was how much prior work already existed.
 
-Darklands has a small but devoted community that has been quietly reverse engineering it for decades. Not with AI tools — with hex editors, patience, and the kind of obsessive focus that comes from really loving a game that no one else talks about anymore. A researcher going by the name "wallace" built a set of canonical XML format specifications covering almost every file format the game uses. Others contributed code, notes, and corrections. Most of this work dates from the mid-2000s.
+Darklands has a small but devoted community that has been quietly reverse engineering it for decades. Not with AI tools — with hex editors, patience, and the kind of obsessive focus that comes from really loving a game that no one else talks about anymore. A researcher going by the name "Merle" had a now-defunct page "Reversing Darklands: an analysis of Darklands game data files" covering almost every file format the game uses. Others contributed code, notes, and corrections. Most of this work dates from the mid-2000s.
 
-It was sitting there, organized and documented, when I found it. The `DARKLANDS_KB` is my local copy of all of it — annotated, extended, and cross-referenced against what the agent finds in the executable.
+It was sitting there, organized and documented, like a buried treasure. The `DARKLANDS_KB` is my local copy of all of it — annotated, extended, and cross-referenced against what the agent finds in the executable.
 
 ---
 
