@@ -38,6 +38,11 @@ An AI agent (Claude) drives the analysis autonomously, session after session: na
 
 **Toolchain:** Ghidra for static disassembly &nbsp;·&nbsp; QEMU + FreeDOS + GDB for dynamic analysis &nbsp;·&nbsp; Claude as the AI reasoning engine
 
+<figure class="drp-screenshot">
+  <img src="/images/dashboard.png" alt="The dos-re-agent dashboard showing game_main_loop decompiled alongside live agent tool calls" />
+  <figcaption>The dos-re-agent dashboard — named function list on the left, Ghidra decompilation in the centre, live agent tool calls at the bottom. The agent is reading <code>game_main_loop</code> and following cross-references to understand the state machine.</figcaption>
+</figure>
+
 ---
 
 ## The Three Phases
@@ -64,7 +69,7 @@ An AI agent (Claude) drives the analysis autonomously, session after session: na
     </div>
     <div class="drp-phase-body">
       <p>Having a name for every function is only the beginning. Phase 2 goes inside each subsystem to understand exactly what it does: how data structures are laid out in memory, how algorithms work, how the game state machine transitions between its 99 states.</p>
-      <p>Confirmed so far: the <strong>main loop dispatch</strong> (4-instruction sequence at the top of the game loop), the <strong>entity memory layout</strong> (81 entries × 128 bytes at <code>0x9c65</code>), the <strong>RNG</strong> (linear congruential generator seeded at <code>0x7B20</code>), the <strong>LZW sprite pipeline</strong> (GIF-style, 2048-entry code table), and the <strong>dynamic INT builder</strong> (writes <code>0xCD 0xnn</code> bytes at runtime on the stack). Character struct, save/load, and full state handler identification are ongoing.</p>
+      <p>Confirmed so far: the <strong>main loop dispatch</strong> (4-instruction far-call sequence through a runtime-loaded table), the <strong>in-memory character hot-slots</strong> (5 slots × 128 bytes at <code>0x9C00</code>), the <strong>RNG</strong> (linear congruential generator, seed at <code>0x7B20</code>), the <strong>LZW sprite pipeline</strong> (GIF-style, 2048-entry code table), and the <strong>dynamic INT builder</strong> (writes <code>0xCD 0xnn</code> bytes at runtime on the stack). Character struct base, save/load, and full state handler identification are ongoing.</p>
     </div>
   </div>
 

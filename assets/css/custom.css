@@ -386,3 +386,28 @@
     margin-left: 0;
   }
 }
+
+/* --------------------------------------------------
+   DASHBOARD SCREENSHOT
+   -------------------------------------------------- */
+.drp-screenshot {
+  margin: 2rem 0;
+  border: 1px solid var(--drp-surface-border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.3);
+}
+
+.drp-screenshot img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.drp-screenshot figcaption {
+  padding: 0.75rem 1rem;
+  font-size: 0.82rem;
+  color: var(--drp-muted);
+  border-top: 1px solid var(--drp-surface-border);
+  line-height: 1.5;
+}
