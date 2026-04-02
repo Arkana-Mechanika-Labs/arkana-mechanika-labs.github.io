@@ -88,32 +88,26 @@ An AI agent (Claude) drives the analysis autonomously, session after session: na
 
 <div class="drp-goals">
   <div class="drp-goal">
-    <div class="drp-goal-icon">🔍</div>
     <h3>Understand the Engine</h3>
     <p>Deep dive into the inner workings of Darklands — uncovering how MicroProse implemented combat, alchemy, travel, RTLink overlays, and a living world in 16-bit DOS.</p>
   </div>
   <div class="drp-goal">
-    <div class="drp-goal-icon">🔄</div>
     <h3>Incremental Rewriting</h3>
     <p>Gradually replace x86 assembly routines with clean, documented C# code using Spice86 overrides — maintaining 100% behavioral compatibility with the original executable.</p>
   </div>
   <div class="drp-goal">
-    <div class="drp-goal-icon">📚</div>
     <h3>Document Everything</h3>
     <p>Create comprehensive documentation of game mechanics, data structures, file formats, and algorithms — preserving this knowledge for developers and gaming historians.</p>
   </div>
   <div class="drp-goal">
-    <div class="drp-goal-icon">🎮</div>
     <h3>Preserve Gaming History</h3>
     <p>Ensure this landmark RPG remains playable on modern systems and provide a foundation for future enhancements, modding, and community ports.</p>
   </div>
   <div class="drp-goal">
-    <div class="drp-goal-icon">🤖</div>
     <h3>AI-Assisted Analysis</h3>
     <p>Demonstrate what is possible when an AI agent drives reverse engineering — autonomous function naming, pattern recognition, and structured knowledge extraction at scale.</p>
   </div>
   <div class="drp-goal">
-    <div class="drp-goal-icon">🌐</div>
     <h3>Native Cross-Platform</h3>
     <p>Leverage .NET's cross-platform capabilities to run Darklands natively on Windows, macOS, and Linux — no DOSBox, no emulation layer required.</p>
   </div>
