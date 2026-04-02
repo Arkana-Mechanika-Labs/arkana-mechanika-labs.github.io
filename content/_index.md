@@ -22,11 +22,55 @@ width: wide
 
 Darklands is a 1992 MicroProse RPG set in a gritty, historically grounded medieval Germany — no elves, no high fantasy, just Raubritters, saints, alchemists, and the very real fear of dying of plague before you reach Nürnberg. It is one of the most ambitious RPGs of its era, and it has only ever been playable through DOS emulation.
 
-The goal here is to change that.
+The goal here is to change that. The project works in three phases: map the executable, understand it, then rewrite it function by function into native C# using the [Spice86](https://github.com/OpenRakis/Spice86) framework — same game logic, same data files, same experience, running natively on modern hardware.
 
-Using the [Spice86](https://github.com/OpenRakis/Spice86) reverse engineering toolkit, we are gradually rewriting the game from x86 assembly into readable, maintainable C# code — same game logic, same data files, same experience, running natively on modern hardware. An AI agent (Claude) drives the analysis autonomously, session after session: naming functions, mapping data structures, and building a comprehensive knowledge base of how the game actually works.
+An AI agent (Claude) drives the analysis autonomously, session after session: naming functions, mapping data structures, and building a comprehensive knowledge base of how the game actually works.
 
 **Toolchain:** Ghidra for static disassembly &nbsp;·&nbsp; QEMU + FreeDOS + GDB for dynamic analysis &nbsp;·&nbsp; Claude as the AI reasoning engine
+
+---
+
+## The Three Phases
+
+<div class="drp-phases">
+
+  <div class="drp-phase">
+    <div class="drp-phase-header">
+      <span class="drp-phase-number">Phase 1</span>
+      <h3 class="drp-phase-title">Mapping the Executable</h3>
+      <span class="drp-phase-badge complete">Complete</span>
+    </div>
+    <div class="drp-phase-body">
+      <p>Before anything can be rewritten, every function needs a name. The AI agent worked through all 388 functions across 14 code segments, naming each one by analysing Ghidra pseudocode and cross-referencing runtime behaviour observed under QEMU/GDB.</p>
+      <p>382 of 388 functions are now named. Key systems identified: the <strong>RTLink overlay manager</strong> (which appends 1.5 MB of overlay code after the 174 KB main executable), the <strong>Borland C runtime</strong>, the <strong>LZW/LZSS graphics pipeline</strong>, the <strong>resource streaming system</strong>, and the <strong>99-state game loop</strong> dispatched via a far function pointer table.</p>
+    </div>
+  </div>
+
+  <div class="drp-phase">
+    <div class="drp-phase-header">
+      <span class="drp-phase-number">Phase 2</span>
+      <h3 class="drp-phase-title">Deep Analysis</h3>
+      <span class="drp-phase-badge in-progress">In Progress</span>
+    </div>
+    <div class="drp-phase-body">
+      <p>Having a name for every function is only the beginning. Phase 2 goes inside each subsystem to understand exactly what it does: how data structures are laid out in memory, how algorithms work, how the game state machine transitions between its 99 states.</p>
+      <p>Confirmed so far: the <strong>main loop dispatch</strong> (4-instruction sequence at the top of the game loop), the <strong>entity memory layout</strong> (81 entries × 128 bytes at <code>0x9c65</code>), the <strong>RNG</strong> (linear congruential generator seeded at <code>0x7B20</code>), the <strong>LZW sprite pipeline</strong> (GIF-style, 2048-entry code table), and the <strong>dynamic INT builder</strong> (writes <code>0xCD 0xnn</code> bytes at runtime on the stack). Character struct, save/load, and full state handler identification are ongoing.</p>
+    </div>
+  </div>
+
+  <div class="drp-phase">
+    <div class="drp-phase-header">
+      <span class="drp-phase-number">Phase 3</span>
+      <h3 class="drp-phase-title">C# Rewrite via Spice86</h3>
+      <span class="drp-phase-badge planned">Planned</span>
+    </div>
+    <div class="drp-phase-body">
+      <p><a href="https://github.com/OpenRakis/Spice86">Spice86</a> is a reverse engineering toolkit and PC emulator built for 16-bit real mode x86 programs. Its key capability: the original DOS executable runs <em>alongside</em> C# override functions in a hybrid execution model. You replace one function at a time, verify it behaves identically, and move on to the next. The game remains fully playable throughout.</p>
+      <p>This is exactly how Cryo's 1992 Dune game was reverse engineered in the <a href="https://openrakis.github.io/Cryogenic/">Cryogenic</a> project. Phase 3 applies the same approach to Darklands: each analysed function from Phase 2 becomes a C# override, validated against the real executable. First milestone: the title screen rendering entirely in C#.</p>
+    </div>
+  </div>
+
+</div>
 
 ---
 
@@ -64,34 +108,6 @@ Using the [Spice86](https://github.com/OpenRakis/Spice86) reverse engineering to
     <p>Leverage .NET's cross-platform capabilities to run Darklands natively on Windows, macOS, and Linux — no DOSBox, no emulation layer required.</p>
   </div>
 </div>
-
----
-
-## The Spice86 Technology
-
-<div class="drp-tech-intro">
-Spice86 is a revolutionary reverse engineering toolkit and PC emulator built specifically for 16-bit real mode x86 programs. Unlike traditional emulators that simply run old software, Spice86 enables gradual modernization of legacy DOS applications by replacing assembly routines with high-level C# implementations — one function at a time, verifiable at every step.
-</div>
-
-The key insight: the original DOS executable runs *alongside* C# overrides in a hybrid execution model. Override one function, verify it behaves identically, move on to the next. This is how Cryo's 1992 Dune game was successfully reverse engineered in the [Cryogenic](https://openrakis.github.io/Cryogenic/) project — and it is the same framework powering this one.
-
-{{< cards >}}
-  {{< card title="Hybrid Execution" icon="refresh" subtitle="Run the original DOS binary while selectively replacing functions with C# overrides. Test against the real executable in real-time." >}}
-  {{< card title="Runtime Analysis" icon="beaker" subtitle="Collect memory dumps, execution traces, and runtime data while the program runs. Understand behavior through dynamic analysis." >}}
-  {{< card title="Ghidra Integration" icon="puzzle" subtitle="Import runtime data into Ghidra for static analysis. Convert assembly segments to documented C# with context from actual execution." >}}
-  {{< card title="Advanced Debugging" icon="terminal" subtitle="Built-in debugger with GDB remote protocol. Set breakpoints, inspect memory, and step through 16-bit code with modern tools." >}}
-{{< /cards >}}
-
----
-
-## Progress
-
-{{< cards >}}
-  {{< card title="Phase 1 — Complete" icon="check-circle" subtitle="382 of 388 functions named across 14 code segments. RTLink overlay manager, Borland CRT, graphics pipeline, resource system, game loop all mapped." >}}
-  {{< card title="Phase 2 — In Progress" icon="clock" subtitle="Deep analysis: dispatch table confirmed, entity memory layout mapped, RNG / LZW / INT builder documented. State handler identification ongoing." >}}
-  {{< card title="Phase 3 — Planned" icon="arrow-right" subtitle="Spice86 validation — run the game with C# stubs replacing reverse-engineered functions one by one. First milestone: title screen in C#." >}}
-  {{< card title="Phase 4 — Planned" icon="arrow-right" subtitle="Full C# reimplementation. Native executable, original game files, original game — fully debuggable and extensible." >}}
-{{< /cards >}}
 
 ---
 

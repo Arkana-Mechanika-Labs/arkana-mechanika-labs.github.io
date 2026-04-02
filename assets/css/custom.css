@@ -1,42 +1,41 @@
 /* =============================================
    DARKLANDS RESTORATION PROJECT
-   Custom styles — sober dark theme
+   Custom styles — dark theme
    inspired by openrakis.github.io/Cryogenic/
    ============================================= */
 
 /* --------------------------------------------------
    ACCENT PALETTE
-   Muted warm gold — readable on dark, not garish
-   #b09060  primary accent
-   #c4a878  hover / lighter
-   #6b5a3a  dim border tint
+   Muted steel blue — cool, technical, matches Hextra dark
+   #6b8fa8  primary accent
+   #8aadca  hover / lighter
    -------------------------------------------------- */
 
 /* --------------------------------------------------
    LINKS
    -------------------------------------------------- */
 .dark a:not([class*="nx-"]):not([class*="hx-"]) {
-  color: #b09060;
+  color: #6b8fa8;
   transition: color 0.2s ease;
 }
 .dark a:not([class*="nx-"]):not([class*="hx-"]):hover {
-  color: #c4a878;
-  text-shadow: 0 0 8px rgba(196, 168, 120, 0.4);
+  color: #8aadca;
+  text-shadow: 0 0 8px rgba(138, 173, 202, 0.35);
 }
 
 /* --------------------------------------------------
    DIVIDERS
    -------------------------------------------------- */
 .dark hr {
-  border-color: rgba(176, 144, 96, 0.2) !important;
+  border-color: rgba(107, 143, 168, 0.2) !important;
 }
 
 /* --------------------------------------------------
    CARD HOVER
    -------------------------------------------------- */
 .dark .hextra-card:hover {
-  border-color: rgba(176, 144, 96, 0.45) !important;
-  box-shadow: 0 0 18px rgba(176, 144, 96, 0.08);
+  border-color: rgba(107, 143, 168, 0.45) !important;
+  box-shadow: 0 0 18px rgba(107, 143, 168, 0.08);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -54,7 +53,7 @@
   font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: #b09060;
+  color: #6b8fa8;
   margin-bottom: 1.1rem;
   opacity: 0.8;
 }
@@ -66,17 +65,17 @@
   text-transform: uppercase;
   margin: 0 0 0.5rem 0 !important;
   line-height: 1.1 !important;
-  color: #c4a878 !important;
+  color: #8aadca !important;
   text-shadow:
-    0 0 35px rgba(196, 168, 120, 0.35),
-    0 0 70px rgba(196, 168, 120, 0.12);
+    0 0 35px rgba(107, 143, 168, 0.4),
+    0 0 70px rgba(107, 143, 168, 0.15);
 }
 
 .drp-hero-tagline {
   font-size: clamp(0.85rem, 1.8vw, 1rem);
   font-weight: 400;
   letter-spacing: 0.06em;
-  color: #8a7a60;
+  color: #5a7a8e;
   margin-bottom: 0.8rem;
 }
 
@@ -93,12 +92,12 @@
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.12em;
-  color: #b09060;
-  border: 1px solid rgba(176, 144, 96, 0.35);
+  color: #6b8fa8;
+  border: 1px solid rgba(107, 143, 168, 0.35);
   border-radius: 3px;
   padding: 0.35rem 1rem;
   margin-bottom: 1.75rem;
-  background: rgba(176, 144, 96, 0.05);
+  background: rgba(107, 143, 168, 0.05);
 }
 
 .drp-hero-buttons {
@@ -125,27 +124,27 @@
 }
 
 .drp-btn-primary {
-  background: #b09060;
+  background: #6b8fa8;
   color: #0f0f0f !important;
-  border: 1px solid #b09060;
+  border: 1px solid #6b8fa8;
 }
 .drp-btn-primary:hover {
-  background: #c4a878;
-  border-color: #c4a878;
+  background: #8aadca;
+  border-color: #8aadca;
   color: #0f0f0f !important;
-  box-shadow: 0 0 18px rgba(196, 168, 120, 0.4);
+  box-shadow: 0 0 18px rgba(107, 143, 168, 0.4);
 }
 
 .drp-btn-outline {
   background: transparent;
-  color: #b09060 !important;
-  border: 1px solid rgba(176, 144, 96, 0.55);
+  color: #6b8fa8 !important;
+  border: 1px solid rgba(107, 143, 168, 0.55);
 }
 .drp-btn-outline:hover {
-  background: rgba(176, 144, 96, 0.08);
-  border-color: #b09060;
-  color: #c4a878 !important;
-  box-shadow: 0 0 14px rgba(176, 144, 96, 0.2);
+  background: rgba(107, 143, 168, 0.08);
+  border-color: #6b8fa8;
+  color: #8aadca !important;
+  box-shadow: 0 0 14px rgba(107, 143, 168, 0.2);
 }
 
 /* --------------------------------------------------
@@ -159,15 +158,15 @@
 }
 
 .drp-goal {
-  border: 1px solid rgba(176, 144, 96, 0.15);
+  border: 1px solid rgba(107, 143, 168, 0.15);
   border-radius: 5px;
   padding: 1.25rem 1.4rem;
-  background: rgba(176, 144, 96, 0.03);
-  transition: border-color 0.25s ease;
+  background: rgba(107, 143, 168, 0.03);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 .drp-goal:hover {
-  border-color: rgba(176, 144, 96, 0.4);
-  box-shadow: 0 0 16px rgba(176, 144, 96, 0.07);
+  border-color: rgba(107, 143, 168, 0.4);
+  box-shadow: 0 0 16px rgba(107, 143, 168, 0.07);
 }
 
 .drp-goal-icon {
@@ -181,7 +180,7 @@
   font-weight: 600;
   letter-spacing: 0.03em;
   margin: 0 0 0.45rem 0 !important;
-  color: #c4a878;
+  color: #8aadca;
 }
 
 .drp-goal p {
@@ -192,10 +191,94 @@
 }
 
 /* --------------------------------------------------
+   PHASE BLOCKS
+   -------------------------------------------------- */
+.drp-phases {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.drp-phase {
+  border: 1px solid rgba(107, 143, 168, 0.15);
+  border-radius: 5px;
+  padding: 1.4rem 1.6rem;
+  background: rgba(107, 143, 168, 0.03);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.drp-phase:hover {
+  border-color: rgba(107, 143, 168, 0.35);
+  box-shadow: 0 0 18px rgba(107, 143, 168, 0.07);
+}
+
+.drp-phase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.drp-phase-number {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6b8fa8;
+  opacity: 0.75;
+}
+
+.drp-phase-title {
+  font-size: 1rem !important;
+  font-weight: 700;
+  margin: 0 !important;
+  color: #8aadca;
+}
+
+.drp-phase-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 3px;
+  margin-left: auto;
+}
+.drp-phase-badge.complete {
+  background: rgba(74, 160, 100, 0.15);
+  color: #6abf84;
+  border: 1px solid rgba(74, 160, 100, 0.3);
+}
+.drp-phase-badge.in-progress {
+  background: rgba(107, 143, 168, 0.12);
+  color: #8aadca;
+  border: 1px solid rgba(107, 143, 168, 0.3);
+}
+.drp-phase-badge.planned {
+  background: rgba(120, 120, 140, 0.1);
+  color: #9ca3af;
+  border: 1px solid rgba(120, 120, 140, 0.25);
+}
+
+.drp-phase-body {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  line-height: 1.7;
+}
+
+.drp-phase-body p {
+  margin: 0 0 0.5rem 0;
+}
+.drp-phase-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------
    TECH INTRO BLOCK
    -------------------------------------------------- */
 .drp-tech-intro {
-  border-left: 2px solid rgba(176, 144, 96, 0.4);
+  border-left: 2px solid rgba(107, 143, 168, 0.4);
   padding-left: 1.1rem;
   margin: 1.25rem 0 1.75rem;
   color: #9ca3af;
@@ -224,5 +307,8 @@
   .drp-hero-buttons {
     flex-direction: column;
     align-items: center;
+  }
+  .drp-phase-badge {
+    margin-left: 0;
   }
 }
