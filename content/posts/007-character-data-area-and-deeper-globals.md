@@ -63,7 +63,7 @@ and the prefetch pointers track where the next block needs to come from.
 
 ---
 
-## Status Icons, Fully Decoded
+## Status Icons, Fully Decoded (but not yet fully interpreted)
 
 The hot-slot array at `0x9C00` (five slots × 128 bytes, one per party member) holds a
 field at offset `+0x65` — the character's current action or state. Previous sessions
@@ -75,13 +75,13 @@ maps each value to a one-letter icon displayed in the party sidebar:
 |-------|------|---------|
 | `0x000` | `—` | Idle |
 | `0x001` | `F` / `W` | Flagged action (F or W, depending on stance flags) |
-| `0x006` | `B` | Berserk |
-| `0x00a` | `V` | Victory |
-| `0x012` | `A` | Attacking |
-| `0x022` | `P` | Pious |
-| `0x040` | `R` | Riding |
-| `0x080` | `M` | Magic |
-| `0x100` | `T` | Tired |
+| `0x006` | `B` | ? |
+| `0x00a` | `V` | ? |
+| `0x012` | `A` | ?|
+| `0x022` | `P` | ? |
+| `0x040` | `R` | ? |
+| `0x080` | `M` | ? |
+| `0x100` | `T` | ? |
 | `0x400` | *(sub-action)* | In combat — sub-state from `0xa6c4 + index` |
 
 The `0x400` case uses a secondary lookup. The byte at `0xa6c4 + character_index`
