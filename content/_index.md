@@ -42,7 +42,7 @@ An AI agent (Claude) drives the analysis autonomously, session after session: na
     </div>
     <div class="drp-phase-body">
       <p>Before anything can be rewritten, every function needs a name. The AI agent worked through all 388 functions across 14 code segments, naming each one by analysing Ghidra pseudocode and cross-referencing runtime behaviour observed under QEMU/GDB.</p>
-      <p>382 of 388 functions are now named. Key systems identified: the <strong>RTLink overlay manager</strong> (which appends 1.5 MB of overlay code after the 174 KB main executable), the <strong>Borland C runtime</strong>, the <strong>LZW/LZSS graphics pipeline</strong>, the <strong>resource streaming system</strong>, and the <strong>99-state game loop</strong> dispatched via a far function pointer table.</p>
+      <p>382 of 388 functions are now named. Key systems identified: the <strong>RTLink overlay manager</strong> (which appends 1.5 MB of overlay code after the 174 KB main executable), the <strong>Borland C runtime</strong>, the <strong>LZW sprite decoder</strong>, the <strong>LZSS decompressor</strong>, the <strong>resource streaming system</strong>, and the <strong>99-state game loop</strong> dispatched via a far function pointer table.</p>
     </div>
   </div>
 
