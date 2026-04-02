@@ -7,7 +7,6 @@ width: wide
 <div class="drp-hero">
   <div class="drp-hero-copy">
     <div class="drp-hero-eyebrow">Arkana Mechanika Labs</div>
-    <h1 class="drp-hero-title">DARKLANDS</h1>
     <p class="drp-hero-tagline">Reverse Engineering the Classic DOS RPG</p>
     <p class="drp-hero-subtitle">Modernizing MicroProse's 1992 masterpiece through AI-assisted analysis and hybrid ASM/C# technology powered by Spice86</p>
     <div class="drp-hero-status">⚡ 382 of 388 functions named &nbsp;·&nbsp; Phase 2 in progress</div>
