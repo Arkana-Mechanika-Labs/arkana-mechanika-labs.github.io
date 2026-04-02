@@ -79,7 +79,7 @@ The key insight: the original DOS executable runs *alongside* C# overrides in a 
   {{< card title="Hybrid Execution" icon="refresh" subtitle="Run the original DOS binary while selectively replacing functions with C# overrides. Test against the real executable in real-time." >}}
   {{< card title="Runtime Analysis" icon="beaker" subtitle="Collect memory dumps, execution traces, and runtime data while the program runs. Understand behavior through dynamic analysis." >}}
   {{< card title="Ghidra Integration" icon="puzzle" subtitle="Import runtime data into Ghidra for static analysis. Convert assembly segments to documented C# with context from actual execution." >}}
-  {{< card title="Advanced Debugging" icon="bug-ant" subtitle="Built-in debugger with GDB remote protocol. Set breakpoints, inspect memory, and step through 16-bit code with modern tools." >}}
+  {{< card title="Advanced Debugging" icon="wrench-screwdriver" subtitle="Built-in debugger with GDB remote protocol. Set breakpoints, inspect memory, and step through 16-bit code with modern tools." >}}
 {{< /cards >}}
 
 ---
