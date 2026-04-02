@@ -34,9 +34,9 @@ This is how most serious RE work is done: in teams, with tools, with review. The
 
 ## "RTLink overlays make 16-bit real-mode basically impossible to decompile cleanly."
 
-We mapped the RTLink overlay system in Phase 1. The overlay manager lives in segments `19c0h` and `1d14h`, the call stack frame is 6 bytes at `DAT_19c0_09d6`, and the dispatch table is a far-pointer table at `[0x7d10]`. We know how segments are loaded, swapped, and relocated.
+We mapped the RTLink overlay system in Phase 1. The overlay manager lives in segments `19c0h` and `1d14h`. The trampoline that calls into overlays (`rtlink_call_overlay`) pushes a 6-byte frame onto a dedicated call stack at `DAT_19c0_09d6`, and the overlay loader handles both disk and EMS-backed segments. We understand the load and unload cycle, the EMS page mapping, and how the game's overlay file is self-backed inside `DARKLAND.EXE` itself. The internal relocation algorithm is partially mapped but not yet fully decompiled.
 
-It was a significant challenge — Ghidra doesn't handle RTLink out of the box — but it's solved.
+It was a significant challenge — Ghidra doesn't handle RTLink out of the box — but the system is understood well enough to continue.
 
 ---
 
@@ -72,6 +72,6 @@ Probably the hardest question, because it's often true. The honest answer: the a
 
 ## "Why does this need sponsorship?"
 
-Because the AI-assisted analysis runs on commercial API credits, and the costs are significant. Each session currently runs between €8 and €15 in compute costs — and that's for the analysis phase alone. As the project moves deeper into game logic, combat systems, and eventually a C# reimplementation, sessions will grow longer and more expensive. Completing this project from start to finish will realistically cost several hundred euros in AI compute, on top of the infrastructure and development work that runs continuously in the background.
+Because the AI-assisted analysis runs on commercial API credits, and the costs are significant. Each session currently runs between $9 and $16 in compute costs — and that's for the analysis phase alone. As the project moves deeper into game logic, combat systems, and eventually a C# reimplementation, sessions will grow longer and more expensive. Completing this project from start to finish will realistically cost several hundred dollars in AI compute, on top of the infrastructure and development work that runs continuously in the background.
 
 Without sponsorship, the project will eventually have to stop. If you'd like to keep it going, the [GitHub Sponsors page](https://github.com/sponsors/Arkana-Mechanika-Studios) has tiers starting at $3/month, with access to the full analysis repository and the dos-re-agent toolchain for higher tiers.
