@@ -1,41 +1,51 @@
 /* =============================================
    DARKLANDS RESTORATION PROJECT
    Custom styles — dark theme
-   inspired by openrakis.github.io/Cryogenic/
+   heroic, archival, and slightly theatrical
    ============================================= */
-
-/* --------------------------------------------------
-   ACCENT PALETTE
-   Muted steel blue — cool, technical, matches Hextra dark
-   #6b8fa8  primary accent
-   #8aadca  hover / lighter
-   -------------------------------------------------- */
 
 /* --------------------------------------------------
    LINKS
    -------------------------------------------------- */
+:root {
+  --drp-brass: #b99457;
+  --drp-brass-light: #ddb97b;
+  --drp-ember: #b25643;
+  --drp-ink: #efe4ce;
+  --drp-muted: #bcae95;
+  --drp-surface: rgba(36, 22, 16, 0.72);
+  --drp-surface-border: rgba(185, 148, 87, 0.22);
+}
+
+.dark body {
+  background:
+    radial-gradient(circle at top left, rgba(178, 86, 67, 0.16), transparent 26rem),
+    radial-gradient(circle at 82% 9%, rgba(185, 148, 87, 0.12), transparent 24rem),
+    linear-gradient(180deg, #17110f 0%, #0f0b09 60%, #090807 100%);
+}
+
 .dark a:not([class*="nx-"]):not([class*="hx-"]) {
-  color: #6b8fa8;
+  color: var(--drp-brass);
   transition: color 0.2s ease;
 }
 .dark a:not([class*="nx-"]):not([class*="hx-"]):hover {
-  color: #8aadca;
-  text-shadow: 0 0 8px rgba(138, 173, 202, 0.35);
+  color: var(--drp-brass-light);
+  text-shadow: 0 0 10px rgba(221, 185, 123, 0.24);
 }
 
 /* --------------------------------------------------
    DIVIDERS
    -------------------------------------------------- */
 .dark hr {
-  border-color: rgba(107, 143, 168, 0.2) !important;
+  border-color: rgba(185, 148, 87, 0.22) !important;
 }
 
 /* --------------------------------------------------
    CARD HOVER
    -------------------------------------------------- */
 .dark .hextra-card:hover {
-  border-color: rgba(107, 143, 168, 0.45) !important;
-  box-shadow: 0 0 18px rgba(107, 143, 168, 0.08);
+  border-color: rgba(185, 148, 87, 0.45) !important;
+  box-shadow: 0 0 24px rgba(185, 148, 87, 0.08);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -43,9 +53,37 @@
    HERO SECTION
    -------------------------------------------------- */
 .drp-hero {
-  text-align: center;
-  padding: 3rem 1rem 2.5rem;
-  margin-bottom: 0.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 420px);
+  gap: 2.5rem;
+  align-items: center;
+  padding: 3.2rem 1.2rem 3rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+.drp-hero::before {
+  content: "";
+  position: absolute;
+  inset: 1rem 0 0;
+  z-index: 0;
+  border: 1px solid rgba(185, 148, 87, 0.12);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(185, 148, 87, 0.04), rgba(178, 86, 67, 0.03)),
+    rgba(10, 8, 7, 0.35);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.32);
+}
+
+.drp-hero-copy,
+.drp-hero-art {
+  position: relative;
+  z-index: 1;
+}
+
+.drp-hero-copy {
+  text-align: left;
+  padding-left: 1rem;
 }
 
 .drp-hero-eyebrow {
@@ -53,37 +91,37 @@
   font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: #6b8fa8;
+  color: var(--drp-brass);
   margin-bottom: 1.1rem;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .drp-hero-title {
-  font-size: clamp(2.2rem, 7vw, 4rem) !important;
+  font-size: clamp(2.6rem, 7vw, 5rem) !important;
   font-weight: 800 !important;
   letter-spacing: 0.06em !important;
   text-transform: uppercase;
   margin: 0 0 0.5rem 0 !important;
-  line-height: 1.1 !important;
-  color: #8aadca !important;
+  line-height: 0.96 !important;
+  color: var(--drp-ink) !important;
   text-shadow:
-    0 0 35px rgba(107, 143, 168, 0.4),
-    0 0 70px rgba(107, 143, 168, 0.15);
+    0 0 35px rgba(185, 148, 87, 0.22),
+    0 0 70px rgba(185, 148, 87, 0.08);
 }
 
 .drp-hero-tagline {
-  font-size: clamp(0.85rem, 1.8vw, 1rem);
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  color: #5a7a8e;
+  font-size: clamp(0.92rem, 1.8vw, 1.08rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--drp-brass-light);
   margin-bottom: 0.8rem;
 }
 
 .drp-hero-subtitle {
-  font-size: 0.95rem;
-  color: #9ca3af;
-  max-width: 600px;
-  margin: 0 auto 1.5rem;
+  font-size: 1rem;
+  color: var(--drp-muted);
+  max-width: 42rem;
+  margin: 0 0 1.6rem;
   line-height: 1.7;
 }
 
@@ -92,19 +130,46 @@
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.12em;
-  color: #6b8fa8;
-  border: 1px solid rgba(107, 143, 168, 0.35);
+  color: var(--drp-brass-light);
+  border: 1px solid rgba(185, 148, 87, 0.35);
   border-radius: 3px;
   padding: 0.35rem 1rem;
   margin-bottom: 1.75rem;
-  background: rgba(107, 143, 168, 0.05);
+  background: rgba(185, 148, 87, 0.06);
 }
 
 .drp-hero-buttons {
   display: flex;
   gap: 0.85rem;
-  justify-content: center;
   flex-wrap: wrap;
+}
+
+.drp-hero-art {
+  display: flex;
+  justify-content: center;
+}
+
+.drp-hero-cover-frame {
+  width: min(100%, 360px);
+  padding: 0.9rem;
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(185, 148, 87, 0.22), rgba(178, 86, 67, 0.14)),
+    rgba(17, 11, 9, 0.92);
+  box-shadow:
+    0 26px 80px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(185, 148, 87, 0.16);
+}
+
+.drp-hero-cover {
+  display: block;
+  width: 100%;
+  aspect-ratio: 651 / 840;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
 }
 
 /* --------------------------------------------------
@@ -124,27 +189,27 @@
 }
 
 .drp-btn-primary {
-  background: #6b8fa8;
-  color: #0f0f0f !important;
-  border: 1px solid #6b8fa8;
+  background: var(--drp-brass);
+  color: #120d0a !important;
+  border: 1px solid var(--drp-brass);
 }
 .drp-btn-primary:hover {
-  background: #8aadca;
-  border-color: #8aadca;
-  color: #0f0f0f !important;
-  box-shadow: 0 0 18px rgba(107, 143, 168, 0.4);
+  background: var(--drp-brass-light);
+  border-color: var(--drp-brass-light);
+  color: #120d0a !important;
+  box-shadow: 0 0 20px rgba(185, 148, 87, 0.34);
 }
 
 .drp-btn-outline {
   background: transparent;
-  color: #6b8fa8 !important;
-  border: 1px solid rgba(107, 143, 168, 0.55);
+  color: var(--drp-brass) !important;
+  border: 1px solid rgba(185, 148, 87, 0.55);
 }
 .drp-btn-outline:hover {
-  background: rgba(107, 143, 168, 0.08);
-  border-color: #6b8fa8;
-  color: #8aadca !important;
-  box-shadow: 0 0 14px rgba(107, 143, 168, 0.2);
+  background: rgba(185, 148, 87, 0.08);
+  border-color: var(--drp-brass);
+  color: var(--drp-brass-light) !important;
+  box-shadow: 0 0 14px rgba(185, 148, 87, 0.18);
 }
 
 /* --------------------------------------------------
@@ -158,15 +223,15 @@
 }
 
 .drp-goal {
-  border: 1px solid rgba(107, 143, 168, 0.15);
+  border: 1px solid var(--drp-surface-border);
   border-radius: 5px;
   padding: 1.25rem 1.4rem;
-  background: rgba(107, 143, 168, 0.03);
+  background: var(--drp-surface);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 .drp-goal:hover {
-  border-color: rgba(107, 143, 168, 0.4);
-  box-shadow: 0 0 16px rgba(107, 143, 168, 0.07);
+  border-color: rgba(185, 148, 87, 0.42);
+  box-shadow: 0 0 16px rgba(185, 148, 87, 0.07);
 }
 
 .drp-goal-icon {
@@ -180,12 +245,12 @@
   font-weight: 600;
   letter-spacing: 0.03em;
   margin: 0 0 0.45rem 0 !important;
-  color: #8aadca;
+  color: var(--drp-brass-light);
 }
 
 .drp-goal p {
   font-size: 0.87rem;
-  color: #9ca3af;
+  color: var(--drp-muted);
   line-height: 1.65;
   margin: 0;
 }
@@ -201,15 +266,15 @@
 }
 
 .drp-phase {
-  border: 1px solid rgba(107, 143, 168, 0.15);
+  border: 1px solid var(--drp-surface-border);
   border-radius: 5px;
   padding: 1.4rem 1.6rem;
-  background: rgba(107, 143, 168, 0.03);
+  background: var(--drp-surface);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 .drp-phase:hover {
-  border-color: rgba(107, 143, 168, 0.35);
-  box-shadow: 0 0 18px rgba(107, 143, 168, 0.07);
+  border-color: rgba(185, 148, 87, 0.35);
+  box-shadow: 0 0 18px rgba(185, 148, 87, 0.07);
 }
 
 .drp-phase-header {
@@ -225,7 +290,7 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #6b8fa8;
+  color: var(--drp-brass);
   opacity: 0.75;
 }
 
@@ -233,7 +298,7 @@
   font-size: 1rem !important;
   font-weight: 700;
   margin: 0 !important;
-  color: #8aadca;
+  color: var(--drp-brass-light);
 }
 
 .drp-phase-badge {
@@ -251,9 +316,9 @@
   border: 1px solid rgba(74, 160, 100, 0.3);
 }
 .drp-phase-badge.in-progress {
-  background: rgba(107, 143, 168, 0.12);
-  color: #8aadca;
-  border: 1px solid rgba(107, 143, 168, 0.3);
+  background: rgba(185, 148, 87, 0.12);
+  color: var(--drp-brass-light);
+  border: 1px solid rgba(185, 148, 87, 0.3);
 }
 .drp-phase-badge.planned {
   background: rgba(120, 120, 140, 0.1);
@@ -263,7 +328,7 @@
 
 .drp-phase-body {
   font-size: 0.9rem;
-  color: #9ca3af;
+  color: var(--drp-muted);
   line-height: 1.7;
 }
 
@@ -278,10 +343,10 @@
    TECH INTRO BLOCK
    -------------------------------------------------- */
 .drp-tech-intro {
-  border-left: 2px solid rgba(107, 143, 168, 0.4);
+  border-left: 2px solid rgba(185, 148, 87, 0.4);
   padding-left: 1.1rem;
   margin: 1.25rem 0 1.75rem;
-  color: #9ca3af;
+  color: var(--drp-muted);
   font-size: 0.94rem;
   line-height: 1.7;
 }
@@ -299,7 +364,13 @@
    -------------------------------------------------- */
 @media (max-width: 640px) {
   .drp-hero {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
     padding: 2rem 0.5rem 1.5rem;
+  }
+  .drp-hero-copy {
+    text-align: center;
+    padding-left: 0;
   }
   .drp-goals {
     grid-template-columns: 1fr;
@@ -307,6 +378,9 @@
   .drp-hero-buttons {
     flex-direction: column;
     align-items: center;
+  }
+  .drp-hero-cover-frame {
+    width: min(100%, 320px);
   }
   .drp-phase-badge {
     margin-left: 0;
