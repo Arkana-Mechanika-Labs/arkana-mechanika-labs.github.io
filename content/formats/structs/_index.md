@@ -1,6 +1,6 @@
 ---
-title: In-Memory Structs
+title: Common Structures
 weight: 6
 ---
 
-Runtime data structure layouts confirmed by reverse engineering DARKLAND.EXE. These describe how the game organises data in memory during execution, as opposed to the on-disk save file layout.
+Shared data structures used across multiple Darklands file formats. All offsets and field names are sourced from the canonical KB specifications (`structures.xml`, `dksaveXX.sav.xml`).
