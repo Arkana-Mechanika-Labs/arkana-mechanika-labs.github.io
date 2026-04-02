@@ -17,6 +17,10 @@ enableRobotsTXT = true
 [params]
   description = "AI-assisted reverse engineering of MicroProse Darklands (1992) — documenting the journey toward a full C# reimplementation."
 
+  [params.theme]
+    default = "dark"
+    displayToggle = true
+
   [params.navbar]
     displayTitle = true
     displayLogo = false
