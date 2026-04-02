@@ -7,8 +7,8 @@ width: wide
 <div class="drp-hero">
   <div class="drp-hero-copy">
     <div class="drp-hero-eyebrow">Arkana Mechanika Labs</div>
-    <p class="drp-hero-tagline">Reverse Engineering the Classic DOS RPG</p>
-    <p class="drp-hero-subtitle">Modernizing MicroProse's 1992 masterpiece through AI-assisted analysis and hybrid ASM/C# technology powered by Spice86</p>
+    <p class="drp-hero-tagline">Reverse Engineering the Classic 1992 DOS RPG</p>
+    <p class="drp-hero-subtitle">Bringing MicroProse's 1992 masterpiece to the modern world through AI-assisted analysis and hybrid ASM/C# technology powered by Spice86</p>
     <div class="drp-hero-status">⚡ 382 of 388 functions named &nbsp;·&nbsp; Phase 2 in progress</div>
     <div class="drp-hero-buttons">
       <a href="/posts/" class="drp-btn drp-btn-primary">Read the Devlogs</a>
@@ -28,7 +28,7 @@ width: wide
 
 ---
 
-## About the Project
+## The Project
 
 Darklands is a 1992 MicroProse RPG set in a gritty, historically grounded medieval Germany — no elves, no high fantasy, just Raubritters, saints, alchemists, and the very real fear of dying of plague before you reach Nürnberg. It is one of the most ambitious RPGs of its era, and it has only ever been playable through DOS emulation.
 
