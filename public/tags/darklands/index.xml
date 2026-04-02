@@ -1,0 +1,324 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Darklands Restoration Project – Darklands</title><link>https://arkana-mechanika-labs.github.io/tags/darklands/</link><description>Recent content in Darklands on Darklands Restoration Project</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 01 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://arkana-mechanika-labs.github.io/tags/darklands/index.xml" rel="self" type="application/rss+xml"/><item><title>Devlog #005 — Inside the Game Loop</title><link>https://arkana-mechanika-labs.github.io/posts/005-inside-the-game-loop/</link><pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate><guid>https://arkana-mechanika-labs.github.io/posts/005-inside-the-game-loop/</guid><description>
+&lt;p&gt;This session went deep into the heart of the game — the main loop, the entity system,
+and several low-level algorithms that turn out to be more interesting than their names suggest.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;The Dispatch Table, Confirmed&lt;span class="hx:absolute hx:-mt-20" id="the-dispatch-table-confirmed"&gt;&lt;/span&gt;
+&lt;a href="#the-dispatch-table-confirmed" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;In the last devlog I mentioned the state machine at the centre of &lt;code&gt;game_main_loop&lt;/code&gt;. This
+session nailed down exactly how it works at the instruction level:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-nasm" data-lang="nasm"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;MOV&lt;/span&gt; &lt;span class="nb"&gt;ES&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;0x7d10&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;; load the dispatch table segment (set by RTLink at startup)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;MOV&lt;/span&gt; &lt;span class="nb"&gt;BX&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;0xa772&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;; load the current state ID&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;SHL&lt;/span&gt; &lt;span class="nb"&gt;BX&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="c1"&gt;; multiply by 4 (each table entry is a 4-byte far pointer)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;CALLF&lt;/span&gt; &lt;span class="nb"&gt;ES&lt;/span&gt;&lt;span class="p"&gt;:[&lt;/span&gt;&lt;span class="nb"&gt;BX&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;; call the state handler through the table&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+aria-label="Copy code"
+data-copied-label="Copied!"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Four instructions. The entire game — every screen, every menu, every combat encounter,
+every moment of travel — flows through those four instructions in a loop. The table lives
+in a segment set up by the RTLink overlay manager at startup, which means the state handlers
+themselves can be overlay code, loaded and unloaded from that 1.5 MB appended region of
+the executable as needed.&lt;/p&gt;
+&lt;p&gt;We now have the full set of globals that control the loop:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Address&lt;/th&gt;
+&lt;th&gt;Role&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;0xa772&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Current state ID (starts at &lt;code&gt;0x29&lt;/code&gt; = 41)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;0xa764&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Return value from the last state handler&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;0x9081&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Pause flag (bit 0 = loop suspended)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;0x9080&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Mode flags (overlay switch in progress, save trigger, emergency exit)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;0xa88d/a88f&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;State history — the two previous states&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;0xa76c–0xa770&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Overlay switch arguments (segment, offset, flags)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;0xa893&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Exit trigger — value 5 starts cleanup&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;0xa876&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Game mode character (&lt;code&gt;'a'&lt;/code&gt; = adventure, &lt;code&gt;'p'&lt;/code&gt; = something else)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The return codes from state handlers carry meaning too. Normal execution returns the next
+state ID (≥ 0). Return values −2 through −6 trigger RTLink overlay switches — the game
+needs to unload the current overlay and load a different one. Return &lt;code&gt;0x62&lt;/code&gt; (98) ends the
+game. Return −99 is a force-quit.&lt;/p&gt;
+&lt;p&gt;Initial setup is also clearer now: the loop loads 7 map chunks on startup, allocates a
+grid of sprite regions (29 handles in an array at &lt;code&gt;0xa6e0&lt;/code&gt;), seeds the RNG with a random
+value, and sets the initial state to &lt;code&gt;0x29&lt;/code&gt; before entering the loop.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Characters and Entities in Memory&lt;span class="hx:absolute hx:-mt-20" id="characters-and-entities-in-memory"&gt;&lt;/span&gt;
+&lt;a href="#characters-and-entities-in-memory" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The game doesn&amp;rsquo;t just track your party — it tracks everything active in the current scene.
+Party members, NPCs, enemies in an encounter: they all live in the same array.&lt;/p&gt;
+&lt;p&gt;The entity status array starts at &lt;code&gt;0x9c65&lt;/code&gt; and holds up to ~81 entries, each &lt;strong&gt;128 bytes
+(0x80)&lt;/strong&gt;. The first byte of each entry is a status flag:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;0&lt;/code&gt; — active&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1&lt;/code&gt; — loaded&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;3&lt;/code&gt; — pending overlay load (the game loop calls &lt;code&gt;rtlink_load_char&lt;/code&gt; for these)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;5&lt;/code&gt; — dead or removed from scene&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After each state handler returns, the main loop scans this array. Any entity with status
+&lt;code&gt;3&lt;/code&gt; gets its overlay data loaded before the next dispatch.&lt;/p&gt;
+&lt;p&gt;There are also parallel byte arrays alongside this block — separate from the 128-byte
+entries — that track per-character state in combat:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;0xa3d8 + index&lt;/code&gt; — condition flag (&lt;code&gt;'b'&lt;/code&gt; = bleeding, &lt;code&gt;'e'&lt;/code&gt; = exhausted)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0xa6c4 + index&lt;/code&gt; — combat stance (values 1–8)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0xa697 + index×2&lt;/code&gt; — word flags, bit &lt;code&gt;0x10&lt;/code&gt; = blocking stance&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The combat status flags word at the start of each block packs a lot into its bits:
+bleeding, visible, adjacent, prone, resting, morale broken, terrified, unconscious.
+That&amp;rsquo;s the full list of things that can be wrong with a character in a fight.&lt;/p&gt;
+&lt;p&gt;The party sidebar on screen maps directly to this array — party member N appears at
+Y position &lt;code&gt;31 + N × 40&lt;/code&gt; pixels (positions 31, 71, 111, 151, 191 for a five-member party).&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;The RNG&lt;span class="hx:absolute hx:-mt-20" id="the-rng"&gt;&lt;/span&gt;
+&lt;a href="#the-rng" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The random number generator is a textbook &lt;strong&gt;linear congruential generator&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-c" data-lang="c"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;new_seed&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;old_seed&lt;/span&gt; &lt;span class="err"&gt;×&lt;/span&gt; &lt;span class="mh"&gt;0x343FD&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mh"&gt;0x269EC3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new_seed&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="mh"&gt;0x7FFF&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+aria-label="Copy code"
+data-copied-label="Copied!"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;The 32-bit seed is stored split across two words at &lt;code&gt;0x7B20&lt;/code&gt; (low) and &lt;code&gt;0x7B22&lt;/code&gt; (high).
+The multiplication is done in two halves — the constant &lt;code&gt;0x343FD&lt;/code&gt; is passed as &lt;code&gt;0x0003&lt;/code&gt;
+(high) and &lt;code&gt;0x43FD&lt;/code&gt; (low) to a 32-bit multiply routine.&lt;/p&gt;
+&lt;p&gt;There are two convenience wrappers: &lt;code&gt;rand_range(n)&lt;/code&gt; returns a value in &lt;code&gt;[0, n)&lt;/code&gt;, and
+&lt;code&gt;rand_range_1based(n)&lt;/code&gt; returns &lt;code&gt;[1, n]&lt;/code&gt;. Every random event in the game — combat rolls,
+encounter generation, loot drops — comes from one of those two.&lt;/p&gt;
+&lt;p&gt;The seed is initialized with a call to &lt;code&gt;rand_range(90)&lt;/code&gt; at startup, which means two
+runs of the same game can never be identical.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;The Sprite Pipeline&lt;span class="hx:absolute hx:-mt-20" id="the-sprite-pipeline"&gt;&lt;/span&gt;
+&lt;a href="#the-sprite-pipeline" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The LZW decompressor used for sprite data is essentially &lt;strong&gt;GIF-style LZW&lt;/strong&gt;: a 2048-entry
+code table (3 bytes per entry), variable-width codes read from a bitstream, a CLEAR code
+that resets the table. It was a standard algorithm in 1992.&lt;/p&gt;
+&lt;p&gt;What&amp;rsquo;s interesting is the streaming architecture around it. The decompressor doesn&amp;rsquo;t load
+the entire compressed sprite into memory first — it reads through a callback:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Stream read pointer: &lt;code&gt;0xf1fc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Stream end pointer: &lt;code&gt;0x6ba6&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Refill callback (far pointer): &lt;code&gt;0xeeb8&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When the decompressor exhausts the current buffer, it calls the refill callback, which
+reads the next chunk from the catalog file. Sprite dimensions are stored separately in
+&lt;code&gt;0x8e38&lt;/code&gt; (width) and &lt;code&gt;0x8e3a&lt;/code&gt; (height) before decompression begins.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;The Dynamic INT Builder&lt;span class="hx:absolute hx:-mt-20" id="the-dynamic-int-builder"&gt;&lt;/span&gt;
+&lt;a href="#the-dynamic-int-builder" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;One function that caught my attention: &lt;code&gt;dos_int_call_dynamic&lt;/code&gt; at &lt;code&gt;0x18668&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;It builds a real &lt;code&gt;INT n&lt;/code&gt; instruction at runtime on the stack — literally writes the bytes
+&lt;code&gt;0xCD 0xnn&lt;/code&gt; (the x86 encoding for software interrupt) followed by &lt;code&gt;0xCB&lt;/code&gt; (RETF) into a
+local buffer, then far-calls into it. This lets the game call any DOS interrupt by number
+without a fixed &lt;code&gt;INT&lt;/code&gt; in the compiled code.&lt;/p&gt;
+&lt;p&gt;There&amp;rsquo;s a special case for &lt;code&gt;INT 0x25&lt;/code&gt; and &lt;code&gt;INT 0x26&lt;/code&gt; (absolute disk read/write): those
+interrupts leave an extra word on the stack when they return, so the builder uses a
+slightly different sequence to compensate.&lt;/p&gt;
+&lt;p&gt;The function captures the result registers (AX, BX, DX, SI, DI) and the carry flag into
+a result array passed by the caller. It&amp;rsquo;s a general-purpose DOS interrupt wrapper.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Where Things Stand&lt;span class="hx:absolute hx:-mt-20" id="where-things-stand"&gt;&lt;/span&gt;
+&lt;a href="#where-things-stand" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The game loop is fully mapped. The entity memory layout is confirmed. The algorithms
+(RNG, LZW, INT builder) are understood. The next priority is following the state handlers
+themselves — each of the 99 states needs to be identified and labelled, which will reveal
+the full structure of the game&amp;rsquo;s flow from title screen to credits.&lt;/p&gt;
+&lt;p&gt;That work has already started. More soon.&lt;/p&gt;</description></item><item><title>Devlog #004 — Phase 2: Into the Game Logic</title><link>https://arkana-mechanika-labs.github.io/posts/004-phase2-game-logic/</link><pubDate>Wed, 25 Mar 2026 00:00:00 +0000</pubDate><guid>https://arkana-mechanika-labs.github.io/posts/004-phase2-game-logic/</guid><description>
+&lt;p&gt;Phase 1 gave us a map. Phase 2 is about reading it.&lt;/p&gt;
+&lt;p&gt;Naming 382 functions tells you that &lt;code&gt;FUN_130b_0318&lt;/code&gt; is &lt;code&gt;chunk_prefetch&lt;/code&gt; and &lt;code&gt;FUN_16a1_1d2a&lt;/code&gt; is &lt;code&gt;party_add_member&lt;/code&gt;. It doesn&amp;rsquo;t tell you how &lt;code&gt;chunk_prefetch&lt;/code&gt; decides what to prefetch, or what &lt;code&gt;party_add_member&lt;/code&gt; actually does with its arguments. For that, you have to go back into each function and actually understand it — read the decompiled pseudocode, trace the memory accesses, figure out what data structure is being read, and write it all down.&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s Phase 2. It&amp;rsquo;s slower, it&amp;rsquo;s deeper, and it&amp;rsquo;s where the interesting things live.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;The Game Main Loop&lt;span class="hx:absolute hx:-mt-20" id="the-game-main-loop"&gt;&lt;/span&gt;
+&lt;a href="#the-game-main-loop" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The first target was the state machine at &lt;code&gt;0x13A1A&lt;/code&gt; — &lt;code&gt;game_main_loop&lt;/code&gt;. This is the heart of the game. Everything that happens in Darklands flows through here.&lt;/p&gt;
+&lt;p&gt;The dispatch mechanism: the function reads a global state variable, multiplies it by 4, uses it as an index into a function pointer table stored in a far segment (&lt;code&gt;ES = [0x7D10]&lt;/code&gt;), and calls whatever function is there. Each state is a different game mode: travelling on the wilderness map, entering a city, being in combat, resting at an inn, the opening sequence, character creation.&lt;/p&gt;
+&lt;p&gt;There are 99 states (0 through 0x62). The game starts at state &lt;code&gt;0x29&lt;/code&gt; on a new game. State &lt;code&gt;0x62&lt;/code&gt; is the terminal state — game over, credits, exit.&lt;/p&gt;
+&lt;p&gt;The state handlers communicate through return codes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;≥ 0&lt;/code&gt; — normal: become the next state&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;−2&lt;/code&gt; through &lt;code&gt;−6&lt;/code&gt; — signal overlay switches (unload current code, load new code)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0x62&lt;/code&gt; — terminal state, exit game&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;−99&lt;/code&gt; — force quit&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We haven&amp;rsquo;t fully mapped all 99 state handlers yet. That&amp;rsquo;s ongoing work for Phase 2.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;The Character Struct In Memory&lt;span class="hx:absolute hx:-mt-20" id="the-character-struct-in-memory"&gt;&lt;/span&gt;
+&lt;a href="#the-character-struct-in-memory" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The save file format gives us the character struct layout on disk. Phase 2 is about finding where that same struct lives in memory and how the game accesses it.&lt;/p&gt;
+&lt;p&gt;Key addresses confirmed so far:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;0x77B6&lt;/code&gt; — party member counter, incremented each time a character is added&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0x77B8&lt;/code&gt; — base of the in-memory slot header array (8 bytes per slot)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0x7858&lt;/code&gt; — base of the in-memory character data array&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The function &lt;code&gt;party_add_member&lt;/code&gt; (0x1873a) takes a slot index and a compact definition string, initializes the slot, and sets up the character data. The definition string uses single-character tokens — we can see it parsing characters like &lt;code&gt;'a'&lt;/code&gt;, &lt;code&gt;'r'&lt;/code&gt;, &lt;code&gt;'w'&lt;/code&gt;, &lt;code&gt;'+'&lt;/code&gt;, &lt;code&gt;'t'&lt;/code&gt;, &lt;code&gt;'b'&lt;/code&gt; — but what exactly each token means isn&amp;rsquo;t fully confirmed yet.&lt;/p&gt;
+&lt;p&gt;One thing it&amp;rsquo;s &lt;em&gt;not&lt;/em&gt;: a class system. Darklands doesn&amp;rsquo;t have classes. Characters have backgrounds, occupations, and 19 individual skills, but there&amp;rsquo;s no &amp;ldquo;warrior class&amp;rdquo; or &amp;ldquo;mage class&amp;rdquo;. Whatever those tokens encode — possibly sprite body type, possibly starting background configuration — the word &amp;ldquo;class&amp;rdquo; shouldn&amp;rsquo;t be used for them. That was an early analysis error, now corrected.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;What 19 Skills Actually Are&lt;span class="hx:absolute hx:-mt-20" id="what-19-skills-actually-are"&gt;&lt;/span&gt;
+&lt;a href="#what-19-skills-actually-are" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The community documentation had all 19 skills named, which the decompilation confirmed. But seeing them laid out in order makes something clear that isn&amp;rsquo;t obvious from playing the game: weapons are not one skill.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;skill_set&lt;/code&gt; struct has 7 separate weapon skills before it gets to anything else:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Edged Weapon&lt;/li&gt;
+&lt;li&gt;Impact Weapon&lt;/li&gt;
+&lt;li&gt;Flail Weapon&lt;/li&gt;
+&lt;li&gt;Polearm&lt;/li&gt;
+&lt;li&gt;Thrown Weapon&lt;/li&gt;
+&lt;li&gt;Bow&lt;/li&gt;
+&lt;li&gt;Missile Weapon&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Then: Alchemy, Religion, Virtue, Speak Common, Speak Latin, Read/Write, Healing, Artifice, Stealth, Streetwise, Riding, Woodwise.&lt;/p&gt;
+&lt;p&gt;This matters for the port because skill checks in the code will reference specific byte offsets into this struct. A function that reads &lt;code&gt;[SI + 0x6B + 0x03]&lt;/code&gt; is checking Polearm skill specifically. Once you know the layout, you can label every skill access in the entire codebase.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Save And Load Functions&lt;span class="hx:absolute hx:-mt-20" id="save-and-load-functions"&gt;&lt;/span&gt;
+&lt;a href="#save-and-load-functions" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;We know the save file format. We don&amp;rsquo;t yet know exactly which functions read and write it. The search strategy: look for code that accesses offset &lt;code&gt;0xEF&lt;/code&gt; in a large buffer (the party character count) and offset &lt;code&gt;0x189&lt;/code&gt; (the character array). These are distinctive enough to narrow it down.&lt;/p&gt;
+&lt;p&gt;The likely candidates are in segment &lt;code&gt;16A1h&lt;/code&gt; — the Borland CRT segment that handles all file I/O. The save functions probably call &lt;code&gt;crt_fread&lt;/code&gt;/&lt;code&gt;crt_fwrite&lt;/code&gt; with the save buffer and then hand off to the game state.&lt;/p&gt;
+&lt;p&gt;This is on the priority list for the next agent session.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;What Phase 2 Looks Like In Practice&lt;span class="hx:absolute hx:-mt-20" id="what-phase-2-looks-like-in-practice"&gt;&lt;/span&gt;
+&lt;a href="#what-phase-2-looks-like-in-practice" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The agent runs in sessions of ~15 turns. Each turn is one Ghidra decompile operation plus analysis. In a session, the agent might fully analyze 3–5 major functions, adding inline comments to the decompiled code and recording structured findings to the knowledge base.&lt;/p&gt;
+&lt;p&gt;Progress is cumulative. The Ghidra project file grows richer with each session — more commented functions, more named variables, more confirmed struct field accesses. The goal isn&amp;rsquo;t to finish in one run; it&amp;rsquo;s to steadily build a complete understanding.&lt;/p&gt;
+&lt;p&gt;The findings are documented in the analysis repo (available to sponsors). Every confirmed fact is sourced. The work continues.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;More to come as Phase 2 progresses.&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Devlog #003 — The Knowledge Base</title><link>https://arkana-mechanika-labs.github.io/posts/003-the-knowledge-base/</link><pubDate>Fri, 20 Mar 2026 00:00:00 +0000</pubDate><guid>https://arkana-mechanika-labs.github.io/posts/003-the-knowledge-base/</guid><description>
+&lt;p&gt;One of the things I didn&amp;rsquo;t expect when I started this project was how much prior work already existed.&lt;/p&gt;
+&lt;p&gt;Darklands has a small but devoted community that has been quietly reverse engineering it for decades. Not with AI tools — with hex editors, patience, and the kind of obsessive focus that comes from really loving a game that no one else talks about anymore. A researcher going by the name &amp;ldquo;wallace&amp;rdquo; built a set of canonical XML format specifications covering almost every file format the game uses. Others contributed code, notes, and corrections. Most of this work dates from the mid-2000s.&lt;/p&gt;
+&lt;p&gt;It was sitting there, organized and documented, when I found it. The &lt;code&gt;DARKLANDS_KB&lt;/code&gt; is my local copy of all of it — annotated, extended, and cross-referenced against what the agent finds in the executable.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;What The Community Already Knew&lt;span class="hx:absolute hx:-mt-20" id="what-the-community-already-knew"&gt;&lt;/span&gt;
+&lt;a href="#what-the-community-already-knew" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The community had already documented the game&amp;rsquo;s file formats with impressive precision. Here&amp;rsquo;s what was confirmed:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The catalog system.&lt;/strong&gt; Darklands doesn&amp;rsquo;t use one big archive file — it uses a family of catalog files (&lt;code&gt;.CAT&lt;/code&gt; files, plus a few extensionless ones like &lt;code&gt;BC&lt;/code&gt;, &lt;code&gt;LCASTLE&lt;/code&gt;, and &lt;code&gt;MSGFILES&lt;/code&gt;). Each catalog is a flat directory of 24-byte entries followed by file data. The entry structure: 12 bytes of filename (8.3 format, null-padded), 4 bytes of timestamp, 4 bytes of length, 4 bytes of offset. Simple and solid.&lt;/p&gt;
+&lt;p&gt;The specific catalogs: &lt;code&gt;A00C.CAT&lt;/code&gt; holds the alchemist battle sprites. &lt;code&gt;C00C.CAT&lt;/code&gt; the cleric. &lt;code&gt;F01C.CAT&lt;/code&gt; the male fighter, &lt;code&gt;F60C.CAT&lt;/code&gt; the female fighter. &lt;code&gt;E00C.CAT&lt;/code&gt; and &lt;code&gt;M00C.CAT&lt;/code&gt; cover human and non-human enemies respectively. &lt;code&gt;MSGFILES&lt;/code&gt; contains all the game&amp;rsquo;s text menus and situation descriptions. &lt;code&gt;IMAPS.CAT&lt;/code&gt; has the city, mine, outdoor, and castle tile graphics.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The wilderness map.&lt;/strong&gt; &lt;code&gt;DARKLAND.MAP&lt;/code&gt; uses a row-based RLE compression scheme. Each byte encodes 1–7 identical tiles: 3 bits for repeat count, 1 bit for which tile palette, and 4 bits for the tile row within that palette. The map dimensions are stored big-endian — unusual for Darklands, which is otherwise little-endian throughout. The grid uses a hex offset: odd rows are shifted half a tile to the right.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The save file.&lt;/strong&gt; This is the big one. The &lt;code&gt;dksave*.sav&lt;/code&gt; format is fully documented. The file starts with world state (current location, date, party money, reputation, current map coordinates, which menu/screen you&amp;rsquo;re on). At offset &lt;code&gt;0xEF&lt;/code&gt;: how many characters are in your party and how many total characters exist. At &lt;code&gt;0x189&lt;/code&gt;: the character array, each record exactly &lt;strong&gt;554 bytes&lt;/strong&gt; (0x22A).&lt;/p&gt;
+&lt;p&gt;The character struct is more complicated than I expected. Fields are not laid out sequentially — there are gaps and unknowns throughout. The names aren&amp;rsquo;t at the start: &lt;code&gt;full_name&lt;/code&gt; is at offset &lt;code&gt;+0x25&lt;/code&gt;, &lt;code&gt;short_name&lt;/code&gt; at &lt;code&gt;+0x3E&lt;/code&gt;. Equipment type and quality bytes for each slot are scattered across the struct: &lt;code&gt;equip_missile_type&lt;/code&gt; is at &lt;code&gt;+0x22&lt;/code&gt; but &lt;code&gt;equip_missile_q&lt;/code&gt; (the quality of the same weapon) is at &lt;code&gt;+0x5A&lt;/code&gt;, 56 bytes later. The attribute set is at &lt;code&gt;+0x5D&lt;/code&gt;, skills at &lt;code&gt;+0x6B&lt;/code&gt;, and the items array at &lt;code&gt;+0xAA&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Enemy definitions.&lt;/strong&gt; &lt;code&gt;DARKLAND.ENM&lt;/code&gt; has 71 enemy type definitions (204 bytes each) and 82 named individual enemies. Each type includes an &lt;code&gt;image_group&lt;/code&gt; code, full attribute and skill sets, equipment, and palette information for combat rendering.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Item data.&lt;/strong&gt; &lt;code&gt;DARKLAND.LST&lt;/code&gt; has the master list of 200 item slots, 136 saint definitions, and 66 alchemical formula names. Each item definition is 46 bytes with 5 separate flag bitmasks.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Alchemy.&lt;/strong&gt; &lt;code&gt;DARKLAND.ALC&lt;/code&gt; has the descriptions, base difficulty, risk factor, and up to 5 ingredients for each of the 66 formulae.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;What This Means For Phase 2&lt;span class="hx:absolute hx:-mt-20" id="what-this-means-for-phase-2"&gt;&lt;/span&gt;
+&lt;a href="#what-this-means-for-phase-2" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Having confirmed file formats changes what Phase 2 looks like. Instead of decompiling a function and guessing what the struct fields mean, the agent can read the character save record spec and immediately know that the function accessing &lt;code&gt;[SI + 0x6B]&lt;/code&gt; is reading the first skill (Edged Weapon). Instead of inferring the catalog format from the resource loading code, we can confirm it and move on.&lt;/p&gt;
+&lt;p&gt;The KB is now directly referenced in the agent&amp;rsquo;s priorities file. Before each session, it reads the canonical XML specs as ground truth. Anything the decompilation finds gets cross-checked against what the community already documented.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;A Note On Accuracy&lt;span class="hx:absolute hx:-mt-20" id="a-note-on-accuracy"&gt;&lt;/span&gt;
+&lt;a href="#a-note-on-accuracy" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Working with 30-year-old code analyzed by an AI, cross-referenced against 20-year-old community notes — accuracy has to be earned carefully. Early in this project I made the mistake of writing documentation from inference rather than from sources. Wrong filenames, wrong struct layouts, wrong field interpretations. I&amp;rsquo;ve been correcting those as they&amp;rsquo;re caught.&lt;/p&gt;
+&lt;p&gt;The rule now: nothing goes into the public docs unless it&amp;rsquo;s sourced. Either from the canonical XML specs, or from the decompiled code, or from both agreeing. &amp;ldquo;Probably&amp;rdquo; and &amp;ldquo;likely&amp;rdquo; are clearly marked as such. If something is unknown, it says unknown.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;Next: Phase 2 begins — going deeper into the game logic.&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Devlog #002 — Phase 1: Naming the Map</title><link>https://arkana-mechanika-labs.github.io/posts/002-phase1-naming-the-map/</link><pubDate>Sun, 15 Mar 2026 00:00:00 +0000</pubDate><guid>https://arkana-mechanika-labs.github.io/posts/002-phase1-naming-the-map/</guid><description>
+&lt;p&gt;Before you can understand what a piece of code does, you need to know what it&amp;rsquo;s called. That sounds obvious, but with a 1992 DOS executable compiled by Borland C with no debug symbols, every function arrives nameless. Ghidra calls them things like &lt;code&gt;FUN_16a1_1d2a&lt;/code&gt;. There are 388 of them.&lt;/p&gt;
+&lt;p&gt;Phase 1 of the analysis was simple in concept: name every function. Figure out what it does and give it a name that means something. Do that for all 388, and you have a map of the entire codebase — not a detailed map, but a complete one. You know what exists and roughly where.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;How The Executable Is Structured&lt;span class="hx:absolute hx:-mt-20" id="how-the-executable-is-structured"&gt;&lt;/span&gt;
+&lt;a href="#how-the-executable-is-structured" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Darklands uses a Borland linker called &lt;strong&gt;RTLink&lt;/strong&gt; to manage code overlays. In 1992, programs that were too big to fit in the 640KB DOS memory limit would split their code into &amp;ldquo;overlays&amp;rdquo; — chunks that got loaded into memory on demand and swapped out when something else was needed. Darklands does this extensively.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;.EXE&lt;/code&gt; file is 1.67 MB. The MZ header (the standard DOS executable format) only accounts for 174 KB of that. The remaining &lt;strong&gt;1.5 MB&lt;/strong&gt; is the overlay region — code segments that get loaded at runtime as the game needs them. It&amp;rsquo;s all packed into one file, appended after the main executable image.&lt;/p&gt;
+&lt;p&gt;Ghidra can&amp;rsquo;t load this automatically. Getting it set up to see all 14 code segments required some custom scripting. Once it was working, the analysis could begin.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;The RTLink Overlay Manager&lt;span class="hx:absolute hx:-mt-20" id="the-rtlink-overlay-manager"&gt;&lt;/span&gt;
+&lt;a href="#the-rtlink-overlay-manager" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The first thing the agent found was the overlay manager itself — the code responsible for loading and unloading those 1.5 MB of overlays. This turned out to be surprisingly well-preserved: the key functions are in segment &lt;code&gt;19C0h&lt;/code&gt;, and once you find the loader at &lt;code&gt;0x19C0:021C&lt;/code&gt;, the rest unravels fairly cleanly.&lt;/p&gt;
+&lt;p&gt;RTLink keeps a descriptor table at &lt;code&gt;19C0:0B7A&lt;/code&gt; where each 18-byte entry describes an overlay: its location in the file, its size, its memory address when loaded. The loader reads that table, seeks to the right position in the EXE, loads the bytes, applies relocations, and jumps. Standard stuff for 1992, but it was satisfying to confirm it from the code rather than assuming.&lt;/p&gt;
+&lt;p&gt;It also supports &lt;strong&gt;EMS&lt;/strong&gt; (Expanded Memory Specification) — an old technique for accessing memory beyond the 640KB limit using a bank-switching trick. If EMS is available, the overlay manager will cache loaded overlays there rather than re-reading them from disk. That&amp;rsquo;s why Darklands ran better if you had an EMS driver installed.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;The Borland CRT&lt;span class="hx:absolute hx:-mt-20" id="the-borland-crt"&gt;&lt;/span&gt;
+&lt;a href="#the-borland-crt" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;A significant chunk of the 388 functions turned out to be Borland&amp;rsquo;s C runtime library — standard functions like &lt;code&gt;fopen&lt;/code&gt;, &lt;code&gt;fread&lt;/code&gt;, &lt;code&gt;fwrite&lt;/code&gt;, &lt;code&gt;malloc&lt;/code&gt;, &lt;code&gt;sprintf&lt;/code&gt;, and so on. These aren&amp;rsquo;t game logic; they&amp;rsquo;re the plumbing. The agent recognized them quickly by their patterns and named them with &lt;code&gt;crt_&lt;/code&gt; prefixes.&lt;/p&gt;
+&lt;p&gt;Finding the CRT functions was actually useful — once you know which functions handle file I/O, you can follow their call chains to find the game&amp;rsquo;s actual file loading code.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Key Subsystems Found&lt;span class="hx:absolute hx:-mt-20" id="key-subsystems-found"&gt;&lt;/span&gt;
+&lt;a href="#key-subsystems-found" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;By the end of Phase 1, the map looked like this:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Graphics pipeline&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;LZW sprite decoder (segment &lt;code&gt;147Ch&lt;/code&gt;) — decompresses sprite data&lt;/li&gt;
+&lt;li&gt;VGA renderer + sprite cache/blit (segments &lt;code&gt;147Ch&lt;/code&gt;, &lt;code&gt;13ECh&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;LZSS decompressor (segment &lt;code&gt;15D9h&lt;/code&gt;) — used for other compressed data&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Resource system&lt;/strong&gt; (segment &lt;code&gt;1617h&lt;/code&gt;)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;resource_table_lookup&lt;/code&gt; — linear scan of a catalog&amp;rsquo;s flat directory&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;resource_open&lt;/code&gt;, &lt;code&gt;resource_read_at&lt;/code&gt;, &lt;code&gt;resource_read_chunk&lt;/code&gt; — the streaming read pipeline&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;resource_fatal_error&lt;/code&gt; — log error code 3 and exit(99). Cheerful.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Game loop&lt;/strong&gt; (address &lt;code&gt;0x13A1A&lt;/code&gt;)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A state machine with 99 states (0 through 0x62)&lt;/li&gt;
+&lt;li&gt;Dispatches via a function pointer table: &lt;code&gt;(**(code**)(state × 4))(segment)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Initial state on new game: &lt;code&gt;0x29&lt;/code&gt;. Terminal state: &lt;code&gt;0x62&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Each state handler is a separate function — travel map, city, combat, rest, and so on&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Calendar&lt;/strong&gt; (address &lt;code&gt;0x18CB6&lt;/code&gt;)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;game_get_current_date&lt;/code&gt; — converts the DOS system clock into the game&amp;rsquo;s medieval calendar&lt;/li&gt;
+&lt;li&gt;The in-game date is real: time passes whether you&amp;rsquo;re doing anything or not&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;RNG&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Linear congruential generator: &lt;code&gt;seed × 0x343FD + 0x269EC3&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Seed at addresses &lt;code&gt;0x7B20&lt;/code&gt;/&lt;code&gt;0x7B22&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Used everywhere randomness is needed: combat rolls, encounters, loot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;The Result&lt;span class="hx:absolute hx:-mt-20" id="the-result"&gt;&lt;/span&gt;
+&lt;a href="#the-result" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;382 of 388 functions named. The remaining 6 are in segments that haven&amp;rsquo;t been fully analyzed yet — likely minor utility functions.&lt;/p&gt;
+&lt;p&gt;More importantly: the map exists. We know the shape of the codebase. We know which segment handles rendering, which handles resources, which handles the game loop. Phase 2 can now go deep into each of those areas and actually understand what they&amp;rsquo;re doing.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;Next: The Knowledge Base — community research that was already waiting for us.&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Devlog #001 — Why Are We Doing This?</title><link>https://arkana-mechanika-labs.github.io/posts/001-why-this-project/</link><pubDate>Tue, 10 Mar 2026 00:00:00 +0000</pubDate><guid>https://arkana-mechanika-labs.github.io/posts/001-why-this-project/</guid><description>
+&lt;p&gt;I&amp;rsquo;ve been playing Darklands on and off for years. If you haven&amp;rsquo;t heard of it: it&amp;rsquo;s a 1992 MicroProse RPG set in a gritty, historically grounded version of medieval Germany — no elves, no fantasy kingdoms, just Raubritters, saints, alchemists, and the very real fear of dying of dysentery before you reach Nürnberg. It was ambitious to the point of being half-broken on release, patched obsessively by its developers for years, and then quietly abandoned when MicroProse collapsed. It never got a sequel. It never got a modern port. It just&amp;hellip; stopped.&lt;/p&gt;
+&lt;p&gt;The game runs on 16-bit DOS. It barely runs on DOSBox. On modern hardware, through an emulator, with patience, it&amp;rsquo;s still playable — but it&amp;rsquo;s also fragile in ways that are hard to predict. Save file corruption. Crashes. The kind of bugs that have been sitting there since 1992 and will never be fixed because there&amp;rsquo;s no one left to fix them.&lt;/p&gt;
+&lt;p&gt;That bothered me enough that I started looking into what it would take to actually port it.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;The Problem With Porting Old Games&lt;span class="hx:absolute hx:-mt-20" id="the-problem-with-porting-old-games"&gt;&lt;/span&gt;
+&lt;a href="#the-problem-with-porting-old-games" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The obvious approach is to just run the game in an emulator forever and call it done. DOSBox works. People play Darklands that way. But an emulator isn&amp;rsquo;t a port — it&amp;rsquo;s a life support machine. You can&amp;rsquo;t fix the bugs. You can&amp;rsquo;t improve the resolution. You can&amp;rsquo;t make it run natively on a phone or a modern console. You&amp;rsquo;re just preserving a patient in a coma.&lt;/p&gt;
+&lt;p&gt;The other approach is to rewrite it from scratch — a spiritual successor, a game that captures the feel without the code. That&amp;rsquo;s been done for other games. But Darklands is &lt;em&gt;weird&lt;/em&gt; in ways that are hard to replicate from memory. The alchemy system, the saint mechanics, the way the economy and reputation interact — these things work in specific ways that aren&amp;rsquo;t fully documented anywhere. You&amp;rsquo;d be guessing.&lt;/p&gt;
+&lt;p&gt;What I wanted was something in between: a working C# rewrite that runs the actual game logic, uses the actual game data files, and produces the actual game — but compiled natively, debuggable, extensible. A real port, not an emulator wrapper.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;The Spice86 Approach&lt;span class="hx:absolute hx:-mt-20" id="the-spice86-approach"&gt;&lt;/span&gt;
+&lt;a href="#the-spice86-approach" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;There&amp;rsquo;s a framework called &lt;strong&gt;Spice86&lt;/strong&gt;, built by a developer called OpenRakis. The idea is elegant: you reverse engineer a DOS game one function at a time, replacing each ASM function with a C# equivalent, until the emulator is running more C# than 16-bit code. When you&amp;rsquo;re done, you have a native executable that plays the original game.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s been proven to work. OpenRakis did it with Cryo&amp;rsquo;s 1992 Dune game — the full game, running in C#, with the original game files. The process is slow and painstaking, but it works.&lt;/p&gt;
+&lt;p&gt;Darklands is a bigger target. It has 388 functions across 14 code segments, a custom overlay manager (RTLink), and a 1.6 MB executable that hides its overlays in the appended region after the MZ header. But the approach is the same.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;The Toolchain&lt;span class="hx:absolute hx:-mt-20" id="the-toolchain"&gt;&lt;/span&gt;
+&lt;a href="#the-toolchain" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The first thing I built was the analysis toolchain:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Ghidra&lt;/strong&gt; — open source disassembler/decompiler from the NSA. It handles the 16-bit x86 real-mode code reasonably well, and it has a scripting API I can drive remotely.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;QEMU + FreeDOS&lt;/strong&gt; — a full DOS environment where I can run the game and attach a GDB debugger to watch what happens at runtime.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Claude&lt;/strong&gt; — an AI that can read decompiled pseudocode and make sense of it. This is the part that would have been impossible a few years ago.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The three of them together form &lt;strong&gt;dos-re-agent&lt;/strong&gt;: a system where Claude autonomously analyzes the executable, names functions, maps data structures, and writes its findings to a knowledge base. It runs in a loop, session after session, building up a picture of what the game is actually doing.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Where We Are&lt;span class="hx:absolute hx:-mt-20" id="where-we-are"&gt;&lt;/span&gt;
+&lt;a href="#where-we-are" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;This is the first devlog, so we&amp;rsquo;re at the beginning. But the beginning is further along than it sounds — the groundwork is laid, the toolchain is working, and the analysis has already started in earnest. Future entries will get into the actual findings.&lt;/p&gt;
+&lt;p&gt;For now: this is why the project exists. Darklands deserves better than a coma.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;Next: Phase 1 — naming the map.&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>
