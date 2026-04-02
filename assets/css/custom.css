@@ -35,8 +35,9 @@
    CARD HOVER
    -------------------------------------------------- */
 .dark .hextra-card:hover {
-  border-color: rgba(176, 144, 96, 0.4) !important;
-  transition: border-color 0.25s ease;
+  border-color: rgba(176, 144, 96, 0.45) !important;
+  box-shadow: 0 0 18px rgba(176, 144, 96, 0.08);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 /* --------------------------------------------------
@@ -66,6 +67,9 @@
   margin: 0 0 0.5rem 0 !important;
   line-height: 1.1 !important;
   color: #c4a878 !important;
+  text-shadow:
+    0 0 35px rgba(196, 168, 120, 0.35),
+    0 0 70px rgba(196, 168, 120, 0.12);
 }
 
 .drp-hero-tagline {
@@ -129,6 +133,7 @@
   background: #c4a878;
   border-color: #c4a878;
   color: #0f0f0f !important;
+  box-shadow: 0 0 18px rgba(196, 168, 120, 0.4);
 }
 
 .drp-btn-outline {
@@ -140,6 +145,7 @@
   background: rgba(176, 144, 96, 0.08);
   border-color: #b09060;
   color: #c4a878 !important;
+  box-shadow: 0 0 14px rgba(176, 144, 96, 0.2);
 }
 
 /* --------------------------------------------------
@@ -160,7 +166,8 @@
   transition: border-color 0.25s ease;
 }
 .drp-goal:hover {
-  border-color: rgba(176, 144, 96, 0.35);
+  border-color: rgba(176, 144, 96, 0.4);
+  box-shadow: 0 0 16px rgba(176, 144, 96, 0.07);
 }
 
 .drp-goal-icon {
