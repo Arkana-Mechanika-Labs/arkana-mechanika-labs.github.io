@@ -7,6 +7,7 @@ width: wide
 Session-by-session notes from the Darklands reverse engineering project. Each entry covers one or more analysis sessions — what the AI agent found, how it found it, and what it means for the eventual C# port.
 
 {{< cards >}}
+  {{< card link="008-world-map-first-contact" title="008 — First Contact with the World Map" icon="book-open" subtitle="Static analysis hits its limits, a DOSBox-X patch restores mid-session breaks, and the world map yields its first confirmed runtime anchor at 4A66:0E20." >}}
   {{< card link="007-character-data-area-and-deeper-globals" title="007 — A Pointer to the Character Data" icon="book-open" subtitle="Memory pool fully mapped, all status icon values decoded, and a far pointer found that may lead directly to the full character struct." >}}
   {{< card link="006-corrections-and-character-layout" title="006 — When the AI Catches Its Own Mistakes" icon="book-open" subtitle="A major misidentification corrected: crt_fdopen ≠ party_add_member. Character hot-slot array mapped at 0x9C00." >}}
   {{< card link="005-inside-the-game-loop" title="005 — Inside the Game Loop" icon="book-open" subtitle="Dispatch table confirmed at the instruction level. Entity memory layout, RNG, LZW sprite pipeline, dynamic INT builder." >}}
