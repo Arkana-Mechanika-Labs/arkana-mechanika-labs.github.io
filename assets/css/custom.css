@@ -428,3 +428,28 @@
   border-top: 1px solid var(--drp-surface-border);
   line-height: 1.5;
 }
+
+/* --------------------------------------------------
+   LIGHT THEME OVERRIDES
+   Remap the pale golden palette to darker tones so
+   hero text stays readable on a white background.
+   -------------------------------------------------- */
+html:not(.dark) {
+  --drp-brass: #7a5c1e;
+  --drp-brass-light: #5e4416;
+  --drp-muted: #4a3e2c;
+  --drp-ink: #1c1308;
+  --drp-surface: rgba(245, 235, 210, 0.65);
+  --drp-surface-border: rgba(100, 78, 30, 0.22);
+}
+
+html:not(.dark) .drp-hero::before {
+  background:
+    linear-gradient(135deg, rgba(185, 148, 87, 0.07), rgba(178, 86, 67, 0.04)),
+    rgba(250, 245, 235, 0.7);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+html:not(.dark) .drp-screenshot {
+  background: rgba(0, 0, 0, 0.04);
+}
