@@ -1,5 +1,5 @@
 ---
-title: "010 — Reading the State Machine's Skeleton"
+title: "Devlog #010 — Reading the State Machine's Skeleton"
 date: 2026-04-04
 draft: false
 tags: ["phase2", "state-machine", "rtlink", "runtime", "dosbox-x", "dispatch-table"]

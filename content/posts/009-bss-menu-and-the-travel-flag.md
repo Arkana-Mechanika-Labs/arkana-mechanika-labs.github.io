@@ -1,5 +1,5 @@
 ---
-title: "009 — BSS, Menus, and the Flag That Wasn't What We Thought"
+title: "Devlog #009 — BSS, Menus, and the Flag That Wasn't What We Thought"
 date: 2026-04-04
 draft: false
 tags: ["phase2", "static-analysis", "state-machine", "ui", "bss"]
