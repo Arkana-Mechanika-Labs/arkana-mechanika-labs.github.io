@@ -7,6 +7,7 @@ width: wide
 Session-by-session notes from the Darklands reverse engineering project. Each entry covers one or more analysis sessions — what the AI agent found, how it found it, and what it means for the eventual C# port.
 
 {{< cards >}}
+  {{< card link="010-the-dispatch-table-skeleton" title="010 — Reading the State Machine's Skeleton" icon="book-open" subtitle="The full 99-entry state dispatch table captured at runtime. 98 RTLink trampolines, one anomalous resident handler for the world map, and the protocol that made it possible." >}}
   {{< card link="009-bss-menu-and-the-travel-flag" title="009 — BSS, Menus, and the Flag That Wasn't What We Thought" icon="book-open" subtitle="A misread global turns out to be the best static lead yet for the travelling-map state. Plus: BSS boundary confirmed and the menu system fully mapped." >}}
   {{< card link="008-world-map-first-contact" title="008 — The Runtime Side Starts to Click" icon="book-open" subtitle="The custom DOSBox-X workflow matures into a real collaboration layer: agent, emulator, and human pilot each doing what they do best." >}}
   {{< card link="007-character-data-area-and-deeper-globals" title="007 — A Pointer to the Character Data" icon="book-open" subtitle="Memory pool fully mapped, all status icon values decoded, and a far pointer found that may lead directly to the full character struct." >}}

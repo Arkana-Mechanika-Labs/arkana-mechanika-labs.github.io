@@ -9,7 +9,7 @@ width: wide
     <div class="drp-hero-eyebrow">Arkana Mechanika Labs</div>
     <p class="drp-hero-tagline">Reverse Engineering the Classic 1992 DOS RPG</p>
     <p class="drp-hero-subtitle">Bringing MicroProse's 1992 masterpiece to the modern world through AI-assisted analysis and hybrid ASM/C# technology powered by Spice86</p>
-    <div class="drp-hero-status">⚡ 382 of 388 functions named &nbsp;·&nbsp; Phase 2 in progress</div>
+    <div class="drp-hero-status">⚡ 382 of 388 functions named &nbsp;·&nbsp; Phase 2 in progress &nbsp;·&nbsp; Dispatch table fully decoded</div>
     <div class="drp-hero-buttons">
       <a href="/posts/" class="drp-btn drp-btn-primary">Read the Devlogs</a>
       <a href="/formats/" class="drp-btn drp-btn-outline">Explore File Formats</a>
@@ -38,10 +38,16 @@ An AI agent (Claude) drives the analysis autonomously, session after session: na
 
 **Toolchain:** Ghidra for static disassembly &nbsp;·&nbsp; patched DOSBox-X for guided interactive runtime sessions &nbsp;·&nbsp; QEMU + FreeDOS + GDB for low-level tracing &nbsp;·&nbsp; Claude as the AI reasoning engine
 
-<figure class="drp-screenshot">
-  <img src="/images/dashboard.png" alt="The dos-re-agent dashboard showing game_main_loop decompiled alongside live agent tool calls" />
-  <figcaption>The dos-re-agent dashboard — named function list on the left, Ghidra decompilation in the centre, live agent tool calls at the bottom. The agent is reading <code>game_main_loop</code> and following cross-references to understand the state machine.</figcaption>
-</figure>
+<div class="drp-screenshots">
+  <figure class="drp-screenshot">
+    <img src="/images/dashboard.png" alt="The dos-re-agent dashboard showing game_main_loop decompiled alongside live agent tool calls" />
+    <figcaption>The dos-re-agent dashboard — named function list on the left, Ghidra decompilation in the centre, live agent tool calls at the bottom. The agent is reading <code>game_main_loop</code> and following cross-references to understand the state machine.</figcaption>
+  </figure>
+  <figure class="drp-screenshot">
+    <img src="/images/dosbox_capture.png" alt="Custom DOSBox-X running Darklands on the world map with the debug socket active and register state visible" />
+    <figcaption>The runtime side: custom patched DOSBox-X halted mid-session on the world map. The debug socket reads <code>DS:[0x7d10]</code> (dispatch table segment) and dumps the full 99-entry state handler table — all entries pointing into the same RTLink overlay segment.</figcaption>
+  </figure>
+</div>
 
 ---
 

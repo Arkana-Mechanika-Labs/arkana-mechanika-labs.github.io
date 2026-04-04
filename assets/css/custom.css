@@ -388,8 +388,25 @@
 }
 
 /* --------------------------------------------------
-   DASHBOARD SCREENSHOT
+   SCREENSHOTS (single + two-up grid)
    -------------------------------------------------- */
+.drp-screenshots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+.drp-screenshots .drp-screenshot {
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .drp-screenshots {
+    grid-template-columns: 1fr;
+  }
+}
+
 .drp-screenshot {
   margin: 2rem 0;
   border: 1px solid var(--drp-surface-border);
