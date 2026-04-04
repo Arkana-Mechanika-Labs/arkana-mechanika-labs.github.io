@@ -19,7 +19,7 @@ enableRobotsTXT = true
 
   [params.theme]
     default = "dark"
-    displayToggle = true
+    displayToggle = false
 
   [params.navbar]
     displayTitle = true
