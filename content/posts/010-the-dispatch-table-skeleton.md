@@ -50,7 +50,7 @@ answering it.
 ## What the dispatch table actually looks like
 
 To capture the table, the DOSBox-X patch needed one new capability: `read_memory`.
-Codex added it to the debug socket backend, rebuilt the binary, and ran a guided
+We added it to the debug socket backend, rebuilt the binary, and ran a guided
 Quickstart → world-map session. At the world map, a forced live break confirmed the state
 (`DS:[0xa772] = 0x000C`), the dispatch table segment (`DS:[0x7d10] = 0x35D2`), and then
 dumped all 396 bytes from `35D2:0000`.
