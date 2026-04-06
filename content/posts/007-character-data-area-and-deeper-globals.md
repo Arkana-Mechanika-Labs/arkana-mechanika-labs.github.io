@@ -1,10 +1,13 @@
----
+﻿---
 title: "Devlog #007 — A Pointer to the Character Data"
 date: 2026-04-02
 tags: ["devlog", "reverse-engineering", "darklands", "character-struct", "memory-layout"]
 description: "The session maps the memory pool layout, decodes every status icon value in the hot-slot array, and finds a far pointer that may be the key to locating the full character struct."
 summary: "The session maps the memory pool layout, decodes every status icon value in the hot-slot array, and finds a far pointer that may be the key to locating the full character struct."
 ---
+
+_Published April 2, 2026_
+
 
 Some sessions produce dramatic corrections. This one produced something quieter but potentially
 more valuable: a pointer. A single far pointer stored in two globals at `0x9060`/`0x9062`,

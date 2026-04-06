@@ -1,9 +1,12 @@
----
+﻿---
 title: "Devlog #010 — Reading the State Machine's Skeleton"
 date: 2026-04-04
 draft: false
 tags: ["phase2", "state-machine", "rtlink", "runtime", "dosbox-x", "dispatch-table"]
 ---
+
+_Published April 4, 2026_
+
 
 The last devlog ended with a plan: follow the XREFs from `0xa891` — the travel map active
 flag — and use them to find which Ghidra functions belong to the travelling-map state

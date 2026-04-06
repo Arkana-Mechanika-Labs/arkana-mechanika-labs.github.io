@@ -1,10 +1,13 @@
----
+﻿---
 title: "Devlog #008 — The Runtime Side Starts to Click"
 date: 2026-04-03
 tags: ["devlog", "reverse-engineering", "darklands", "dosbox-x", "runtime", "tooling", "world-map"]
 description: "The custom DOSBox-X workflow matures into a real collaboration layer: the agent asks better questions, the human handles the fiddly bits, and the world map finally gives up its first confirmed runtime hook."
 summary: "The custom DOSBox-X workflow matures into a real collaboration layer: the agent asks better questions, the human handles the fiddly bits, and the world map finally gives up its first confirmed runtime hook."
 ---
+
+_Published April 3, 2026_
+
 
 This session felt like an important turning point for the project.
 

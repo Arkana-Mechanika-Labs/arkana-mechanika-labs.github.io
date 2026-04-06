@@ -1,10 +1,13 @@
----
+﻿---
 title: "Devlog #001 — Why Are We Doing This?"
 date: 2026-03-10
 tags: ["darklands", "spice86", "reverse-engineering"]
 description: "Darklands deserves better than a coma. Why I'm reverse engineering a 1992 DOS RPG and what I plan to do with it."
 summary: "Darklands deserves better than a coma. Why I'm reverse engineering a 1992 DOS RPG and what I plan to do with it."
 ---
+
+_Published March 10, 2026_
+
 
 I've been playing Darklands on and off for years. If you haven't heard of it: it's a 1992 MicroProse RPG set in a gritty, historically grounded version of medieval Germany — no elves, no fantasy kingdoms, just Raubritters, saints, alchemists, and the very real fear of dying of dysentery before you reach Nürnberg. It was ambitious to the point of being half-broken on release, patched obsessively by its developers for years, and then quietly abandoned when MicroProse collapsed. It never got a sequel. It never got a modern port. It just... stopped.
 

@@ -1,9 +1,12 @@
----
+﻿---
 title: "Devlog #009 — BSS, Menus, and the Flag That Wasn't What We Thought"
 date: 2026-04-04
 draft: false
 tags: ["phase2", "static-analysis", "state-machine", "ui", "bss"]
 ---
+
+_Published April 4, 2026_
+
 
 Three findings from this session, and one correction that matters more than all of them.
 

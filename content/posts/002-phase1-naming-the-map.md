@@ -1,10 +1,13 @@
----
+﻿---
 title: "Devlog #002 — Phase 1: Naming the Map"
 date: 2026-03-15
 tags: ["darklands", "reverse-engineering", "ghidra", "rtlink"]
 description: "382 of 388 functions named. How the AI agent mapped an entire 1992 DOS executable from scratch — RTLink overlays, Borland CRT, and all."
 summary: "382 of 388 functions named. How the AI agent mapped an entire 1992 DOS executable from scratch — RTLink overlays, Borland CRT, and all."
 ---
+
+_Published March 15, 2026_
+
 
 Before you can understand what a piece of code does, you need to know what it's called. That sounds obvious, but with a 1992 DOS executable compiled by Borland C with no debug symbols, every function arrives nameless. Ghidra calls them things like `FUN_16a1_1d2a`. There are 388 of them.
 
