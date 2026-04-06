@@ -1,5 +1,5 @@
 ---
-title: "Devlog #011, The Reverse-Engineering Lab Gets a Cockpit"
+title: "Devlog #011 - The Reverse-Engineering Lab Gets a Cockpit"
 date: 2026-04-06
 draft: false
 tags: ["workflow", "frontend", "runtime", "codex", "claude", "dosbox-x", "ghidra", "automation"]
@@ -23,7 +23,7 @@ ephemeral conversation.
 
 ---
 
-## Why this matters
+## Back and Forth without amnesia
 
 Reverse engineering a 16-bit DOS game is not a straight line.
 
@@ -53,8 +53,7 @@ That means:
 In practical terms, if one provider becomes expensive, constrained, or temporarily unavailable,
 the project does not stall. A clean session boundary is now a true switching point.
 
-That is a big deal for a sponsor-facing project, because it means the work is becoming
-operationally resilient, not just technically interesting.
+That is a big deal because it is a step toward a real flexible tool.
 
 ---
 
@@ -92,10 +91,9 @@ The new runtime cockpit inside the frontend is designed to make that loop much m
 
 It can now:
 
-- launch the patched DOSBox-X plus Darklands session on the host
-- switch the runtime workflow onto Codex automatically as a safeguard
+- launch the custom-patched DOSBox-X plus Darklands session on the host
 - show the active runtime request and its capture requirements
-- guide a human operator through the live session
+- guide a human operator (me) through the live session
 - set breakpoints, continue, wait for events, read registers, capture screenshots
 - check whether the requested evidence is actually complete before allowing a save
 - run a bounded Codex summarizer on the capture
@@ -107,25 +105,25 @@ pipeline, not an awkward detour.
 
 ---
 
-## A hybrid model that actually respects what humans are good at
+## A hybrid model
 
 One of the most promising things about this workflow is that it does not pretend the human should
 disappear.
 
-In these runtime sessions, the human pilot is still the best part of the system for:
+In these runtime sessions, the human pilot (me) is still piloting dosbox-x:
 
 - navigating DOS-era menus
 - recognizing whether the game is on the right screen
 - reacting to weird edge cases in real time
 
-The agent is better at:
+While the agent is:
 
 - planning the probe
 - choosing the breakpoint target
 - deciding what to capture
 - turning the results into a reusable answer
 
-So the workflow now leans into that hybrid model instead of fighting it. The runtime coach can ask
+So the workflow now leans into that hybrid model instead of fighting it. The runtime agent can ask
 for checkpoints like "tell me when you are on the world map," react to what the operator reports,
 and then turn the resulting trace into a structured handoff for the next static session.
 
@@ -134,7 +132,7 @@ human plus agent plus emulator loop designed specifically for old software archa
 
 ---
 
-## Why sponsors should care
+## Where are we now ?
 
 There are two kinds of progress in a project like this.
 
@@ -144,10 +142,7 @@ mapped. That is still happening, and it will keep happening.
 The second is infrastructure progress: making the process itself faster, more resilient, more
 reproducible, and less dependent on one lucky session going well.
 
-That is what this sprint accomplished.
-
-Sponsorship is not just buying another hour of reverse engineering. It is helping build a toolchain
-that makes every future hour more productive:
+In this session, we built a toolchain that makes every future hour more productive:
 
 - less credit waste
 - fewer dead-end sessions

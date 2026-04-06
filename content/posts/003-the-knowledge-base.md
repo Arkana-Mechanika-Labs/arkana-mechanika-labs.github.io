@@ -1,5 +1,5 @@
 ---
-title: "Devlog #003, The Knowledge Base"
+title: "Devlog #003 - The Knowledge Base"
 date: 2026-03-20
 tags: ["darklands", "reverse-engineering", "file-formats", "community"]
 description: "Community researchers documented Darklands file formats in the mid-2000s with hex editors and patience. We found it, verified it, and built on it."

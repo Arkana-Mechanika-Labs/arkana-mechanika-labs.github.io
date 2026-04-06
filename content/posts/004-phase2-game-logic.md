@@ -1,5 +1,5 @@
 ---
-title: "Devlog #004, Phase 2: Into the Game Logic"
+title: "Devlog #004 - Phase 2: Into the Game Logic"
 date: 2026-03-25
 tags: ["darklands", "reverse-engineering", "ghidra", "state-machine", "character-struct"]
 description: "Phase 1 gave us a map. Phase 2 is about reading it, the state machine, the character struct, 19 skills, and what save/load probably looks like."

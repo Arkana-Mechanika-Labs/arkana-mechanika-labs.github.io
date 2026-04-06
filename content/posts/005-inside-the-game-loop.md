@@ -1,5 +1,5 @@
 ---
-title: "Devlog #005, Inside the Game Loop"
+title: "Devlog #005 - Inside the Game Loop"
 date: 2026-04-01
 tags: ["darklands", "reverse-engineering", "ghidra", "state-machine", "combat", "lzw", "rng"]
 description: "Four instructions dispatch the entire game. This session confirmed the dispatch table, mapped the entity memory layout, and decoded the RNG, LZW pipeline, and dynamic INT builder."

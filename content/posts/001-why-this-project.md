@@ -1,5 +1,5 @@
 ---
-title: "Devlog #001, Why Are We Doing This?"
+title: "Devlog #001 - Why Are We Doing This?"
 date: 2026-03-10
 tags: ["darklands", "spice86", "reverse-engineering"]
 description: "Darklands deserves better than a coma. Why I'm reverse engineering a 1992 DOS RPG and what I plan to do with it."

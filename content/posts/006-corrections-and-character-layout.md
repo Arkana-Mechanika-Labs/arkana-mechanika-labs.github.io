@@ -1,5 +1,5 @@
 ---
-title: "Devlog #006, When the AI Catches Its Own Mistakes"
+title: "Devlog #006 - When the AI Catches Its Own Mistakes"
 date: 2026-04-02
 tags: ["devlog", "reverse-engineering", "darklands", "character-struct"]
 description: "The agent corrects a major misidentification from a previous session and maps the in-memory character layout."
