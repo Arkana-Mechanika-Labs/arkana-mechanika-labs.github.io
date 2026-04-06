@@ -4,12 +4,10 @@ date: 2026-03-20
 tags: ["darklands", "reverse-engineering", "file-formats", "community"]
 description: "Community researchers documented Darklands file formats in the mid-2000s with hex editors and patience. We found it, verified it, and built on it."
 summary: "Community researchers documented Darklands file formats in the mid-2000s with hex editors and patience. We found it, verified it, and built on it."
-
+---
 
 _Published March 20, 2026_
 
-
----
 
 One of the things I didn't expect when I started this project was how much prior work already existed.
 
