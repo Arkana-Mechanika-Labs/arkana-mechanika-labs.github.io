@@ -30,9 +30,9 @@ width: wide
 
 ## The Project
 
-Darklands is a 1992 MicroProse RPG set in a gritty, historically grounded medieval Germany — no elves, no high fantasy, just Raubritters, saints, alchemists, and the very real fear of dying of plague before you reach Nürnberg. It is one of the most ambitious RPGs of its era, and it has only ever been playable through DOS emulation.
+Darklands is a 1992 MicroProse RPG set in a gritty, historically grounded medieval Germany , no elves, no high fantasy, just Raubritters, saints, alchemists, and the very real fear of dying of plague before you reach Nürnberg. It is one of the most ambitious RPGs of its era, and it has only ever been playable through DOS emulation.
 
-The goal here is to change that. The project works in three phases: map the executable, understand it, then rewrite it function by function into native C# using the [Spice86](https://github.com/OpenRakis/Spice86) framework — same game logic, same data files, same experience, running natively on modern hardware.
+The goal here is to change that. The project works in three phases: map the executable, understand it, then rewrite it function by function into native C# using the [Spice86](https://github.com/OpenRakis/Spice86) framework , same game logic, same data files, same experience, running natively on modern hardware.
 
 An AI agent (Claude) drives the analysis autonomously, session after session: naming functions, mapping data structures, and building a comprehensive knowledge base of how the game actually works.
 
@@ -41,11 +41,11 @@ An AI agent (Claude) drives the analysis autonomously, session after session: na
 <div class="drp-screenshots">
   <figure class="drp-screenshot">
     <img src="/images/dashboard.png" alt="The dos-re-agent dashboard showing game_main_loop decompiled alongside live agent tool calls" />
-    <figcaption>The dos-re-agent dashboard — named function list on the left, Ghidra decompilation in the centre, live agent tool calls at the bottom. The agent is reading <code>game_main_loop</code> and following cross-references to understand the state machine.</figcaption>
+    <figcaption>The dos-re-agent dashboard , named function list on the left, Ghidra decompilation in the centre, live agent tool calls at the bottom. The agent is reading <code>game_main_loop</code> and following cross-references to understand the state machine.</figcaption>
   </figure>
   <figure class="drp-screenshot">
     <img src="/images/dosbox_capture.png" alt="Custom DOSBox-X running Darklands on the world map with the debug socket active and register state visible" />
-    <figcaption>The runtime side: custom patched DOSBox-X halted mid-session on the world map. The debug socket reads <code>DS:[0x7d10]</code> (dispatch table segment) and dumps the full 99-entry state handler table — all entries pointing into the same RTLink overlay segment.</figcaption>
+    <figcaption>The runtime side: custom patched DOSBox-X halted mid-session on the world map. The debug socket reads <code>DS:[0x7d10]</code> (dispatch table segment) and dumps the full 99-entry state handler table , all entries pointing into the same RTLink overlay segment.</figcaption>
   </figure>
 </div>
 
@@ -101,15 +101,15 @@ An AI agent (Claude) drives the analysis autonomously, session after session: na
 <div class="drp-goals">
   <div class="drp-goal">
     <h3>Understand the Engine</h3>
-    <p>Deep dive into the inner workings of Darklands — uncovering how MicroProse implemented combat, alchemy, travel, RTLink overlays, and a living world in 16-bit DOS.</p>
+    <p>Deep dive into the inner workings of Darklands , uncovering how MicroProse implemented combat, alchemy, travel, RTLink overlays, and a living world in 16-bit DOS.</p>
   </div>
   <div class="drp-goal">
     <h3>Incremental Rewriting</h3>
-    <p>Gradually replace x86 assembly routines with clean, documented C# code using Spice86 overrides — maintaining 100% behavioral compatibility with the original executable.</p>
+    <p>Gradually replace x86 assembly routines with clean, documented C# code using Spice86 overrides , maintaining 100% behavioral compatibility with the original executable.</p>
   </div>
   <div class="drp-goal">
     <h3>Document Everything</h3>
-    <p>Create comprehensive documentation of game mechanics, data structures, file formats, and algorithms — preserving this knowledge for developers and gaming historians.</p>
+    <p>Create comprehensive documentation of game mechanics, data structures, file formats, and algorithms , preserving this knowledge for developers and gaming historians.</p>
   </div>
   <div class="drp-goal">
     <h3>Preserve Gaming History</h3>
@@ -117,11 +117,11 @@ An AI agent (Claude) drives the analysis autonomously, session after session: na
   </div>
   <div class="drp-goal">
     <h3>AI-Assisted Analysis</h3>
-    <p>Demonstrate what is possible when an AI agent drives reverse engineering — autonomous function naming, pattern recognition, and structured knowledge extraction at scale.</p>
+    <p>Demonstrate what is possible when an AI agent drives reverse engineering , autonomous function naming, pattern recognition, and structured knowledge extraction at scale.</p>
   </div>
   <div class="drp-goal">
     <h3>Native Cross-Platform</h3>
-    <p>Leverage .NET's cross-platform capabilities to run Darklands natively on Windows, macOS, and Linux — no DOSBox, no emulation layer required.</p>
+    <p>Leverage .NET's cross-platform capabilities to run Darklands natively on Windows, macOS, and Linux , no DOSBox, no emulation layer required.</p>
   </div>
 </div>
 

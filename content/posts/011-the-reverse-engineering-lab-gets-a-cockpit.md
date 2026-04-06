@@ -1,5 +1,5 @@
-﻿---
-title: "Devlog #011 â€” The Reverse-Engineering Lab Gets a Cockpit"
+---
+title: "Devlog #011, The Reverse-Engineering Lab Gets a Cockpit"
 date: 2026-04-06
 draft: false
 tags: ["workflow", "frontend", "runtime", "codex", "claude", "dosbox-x", "ghidra", "automation"]

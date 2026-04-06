@@ -1,5 +1,5 @@
-﻿---
-title: "Devlog #006 — When the AI Catches Its Own Mistakes"
+---
+title: "Devlog #006, When the AI Catches Its Own Mistakes"
 date: 2026-04-02
 tags: ["devlog", "reverse-engineering", "darklands", "character-struct"]
 description: "The agent corrects a major misidentification from a previous session and maps the in-memory character layout."
@@ -8,9 +8,8 @@ summary: "The agent corrects a major misidentification from a previous session a
 
 _Published April 2, 2026_
 
-
 One of the questions people ask about AI-assisted reverse engineering is whether the model
-can be trusted to stay accurate across sessions. Today's session is a useful data point —
+can be trusted to stay accurate across sessions. Today's session is a useful data point,
 because the agent caught a significant mistake it had made in a previous run, and corrected
 the record before it could propagate further.
 
@@ -18,21 +17,21 @@ the record before it could propagate further.
 
 ## The Misidentification
 
-In an earlier session, the agent identified function `0x1873a` as `party_add_member` — the
+In an earlier session, the agent identified function `0x1873a` as `party_add_member`, the
 routine that adds a new character to your adventuring party. The reasoning looked plausible
 at the time: the function iterates an array of slots, parses a sequence of single-character
 tokens ('r', 'w', 'a', 'b', 't', '+'), and increments a counter at `0x77b6`. The agent
 labelled those characters as "class codes" for party members and filed the finding in the
 knowledge base.
 
-This session, the agent went back to that function for a different reason — it was trying to
-cross-reference known Borland C runtime patterns — and the context clicked differently.
+This session, the agent went back to that function for a different reason, it was trying to
+cross-reference known Borland C runtime patterns, and the context clicked differently.
 Those characters are not class codes. They are standard C file mode string characters:
 'r' = read, 'w' = write, 'a' = append, '+' = update, 'b' = binary, 't' = text. The
 function is `crt_fdopen`, the Borland runtime's file-open implementation.
 
 The same correction applied to a nearby function. `0x17c82`, previously labelled
-`find_free_char_slot`, is actually `crt_find_free_file_slot` — it scans the C runtime's
+`find_free_char_slot`, is actually `crt_find_free_file_slot`, it scans the C runtime's
 internal FILE struct array looking for an unused descriptor. The globals the agent had
 attributed to party tracking (`0x77b8`, `0x77b6`, `0x7767`) are CRT internals: the FILE
 array pointer, the open file count, and the maximum descriptor count respectively. None of
@@ -52,7 +51,7 @@ hypothesis at the time is "find the party management code", it will weight that
 interpretation more heavily.
 
 The correction happened because the agent re-examined the function from a different angle.
-It already had detailed notes about the Borland CRT layout — file descriptors, the fopen
+It already had detailed notes about the Borland CRT layout, file descriptors, the fopen
 family, the FILE struct array. When it tried to reconcile those notes with the surrounding
 code, the match was unambiguous. CRT file modes, not party classes.
 
@@ -78,20 +77,20 @@ game is running.
 
 Within each slot, two fields are of particular interest:
 
-- **Offset +0x65** — the character's current action or state. `0` means idle. `0x400`
+- **Offset +0x65**, the character's current action or state. `0` means idle. `0x400`
   means in-combat. The main loop reads this to determine which characters need processing
   after each state transition.
-- **Offset +0x69** — an RTLink overlay load state byte. `0` means the character's overlay
+- **Offset +0x69**, an RTLink overlay load state byte. `0` means the character's overlay
   data is already loaded. `3` means it needs to be loaded. `5` means skip. After every
   state handler returns, `game_main_loop` scans this field for each slot and calls the
   overlay loader for any character marked `3`.
 
-Running alongside these slots — not embedded in them, but indexed in parallel by character
-number — are three flat byte arrays:
+Running alongside these slots, not embedded in them, but indexed in parallel by character
+number, are three flat byte arrays:
 
-- `0x9064 + index` — health or presence flag
-- `0xa3d8 + index` — combat binding status
-- `0xa6c4 + index` — combat condition flags (unconscious, down, dead, and similar states)
+- `0x9064 + index`, health or presence flag
+- `0xa3d8 + index`, combat binding status
+- `0xa6c4 + index`, combat condition flags (unconscious, down, dead, and similar states)
 
 The parallel array pattern is consistent with what we already knew about the entity status
 block from the previous session. The game keeps high-frequency, per-tick data in tight,
@@ -105,7 +104,7 @@ The important implication of the 128-byte slot size: these hot slots cannot cont
 full character record.
 
 The save file analysis established that each character's persistent data is `0x22a` (554)
-bytes — name, attributes, skills, equipment, inventory. That does not fit in 128 bytes.
+bytes, name, attributes, skills, equipment, inventory. That does not fit in 128 bytes.
 The hot-slot holds only the runtime bookkeeping the game loop needs to operate moment to
 moment. The full struct lives somewhere else in memory, at an address the agent has not
 yet pinned down.
@@ -121,7 +120,7 @@ Two clear priorities for the next session:
    party management code is narrower.
 
 2. Locate the base address of the full `0x22a`-byte character struct in memory. The hot
-   slots at `0x9C00` reference or point to it — following those references is the most
+   slots at `0x9C00` reference or point to it, following those references is the most
    direct path. Once the base address is confirmed, the in-memory struct layout can be
    cross-referenced against the save file layout to validate both.
 
