@@ -7,6 +7,7 @@ width: wide
 Session-by-session notes from the Darklands reverse engineering project. Each entry covers one or more analysis sessions, what the AI agent found, how it found it, and what it means for the eventual C# port.
 
 {{< cards >}}
+  {{< card link="012-catching-the-party-writer" title="012 - Catching the Party Writer in the Act" icon="book-open" subtitle="April 10, 2026. A wrong hypothesis, five empty breakpoint sessions, a new emulator backend, and the exact instruction that adds a character to the party, caught live in memory." >}}
   {{< card link="011-the-reverse-engineering-lab-gets-a-cockpit" title="011 - The Reverse-Engineering Lab Gets a Cockpit" icon="sparkles" subtitle="April 6, 2026, Claude/Codex switching, artifact-driven handoffs, a guided DOSBox-X runtime cockpit, and a Codex coach that turns hybrid debugging into a repeatable workflow." >}}
   {{< card link="010-the-dispatch-table-skeleton" title="010 - Reading the State Machine's Skeleton" icon="book-open" subtitle="April 4, 2026, The full 99-entry state dispatch table captured at runtime. 98 RTLink trampolines, one anomalous resident handler for the world map, and the protocol that made it possible." >}}
   {{< card link="009-bss-menu-and-the-travel-flag" title="009 - BSS, Menus, and the Flag That Wasn't What We Thought" icon="book-open" subtitle="April 4, 2026, A misread global turns out to be the best static lead yet for the travelling-map state. Plus: BSS boundary confirmed and the menu system fully mapped." >}}
