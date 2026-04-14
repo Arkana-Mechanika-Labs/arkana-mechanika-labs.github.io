@@ -359,6 +359,21 @@
   padding: 2rem 0 0.5rem;
 }
 
+.drp-contact {
+  margin-top: 0.9rem;
+  font-size: 0.88rem;
+  color: var(--drp-muted);
+}
+
+.drp-contact a {
+  color: var(--drp-brass-light);
+  text-decoration: none;
+}
+
+.drp-contact a:hover {
+  text-decoration: underline;
+}
+
 /* --------------------------------------------------
    RESPONSIVE
    -------------------------------------------------- */
