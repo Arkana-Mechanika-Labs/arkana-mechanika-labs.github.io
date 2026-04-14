@@ -7,6 +7,7 @@ width: wide
 Session-by-session notes from the Darklands reverse engineering project. Each entry covers one or more analysis sessions, what the AI agent found, how it found it, and what it means for the eventual C# port.
 
 {{< cards >}}
+  {{< card link="019-the-loader-unmasked" title="019 - The Loader Unmasked" icon="book-open" subtitle="April 14, 2026. The Darklands runtime loader is fully characterised: not INT 3Fh, not appended MZ overlays, not standard RTLink — a custom segmented loader with resolver records, source descriptors, and chained dispatch." >}}
   {{< card link="018-create-new-world-full-coverage" title="018 - Create New World: Full Coverage" icon="book-open" subtitle="April 13, 2026. The third and widest runtime dump closes the tail that used to escape the window. A full seven-anchor structure map now covers the function from entry guard to slot activation." >}}
   {{< card link="017-tracing-the-story-continues" title="017 - Tracing The Story Continues" icon="book-open" subtitle="April 11, 2026. Four overlay families identified on the load/save screen. The full Down Arrow navigation path decoded — none of it explained by the Create New World loader machinery." >}}
   {{< card link="016-the-world-slot-machine" title="016 - The World Slot Machine" icon="book-open" subtitle="April 12, 2026. A wide runtime dump of the 1C85 overlay materialized the Create New World slot-commit function. Four-slot scan, a 24-byte template, and the same table bases as Add to Party." >}}
