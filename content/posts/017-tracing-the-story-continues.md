@@ -1,6 +1,6 @@
 ---
-title: "017 - Tracing The Story Continues"
-date: 2026-04-11
+title: "Devlog #017 - Tracing The Story Continues"
+date: 2026-04-12T12:00:00
 summary: "A runtime pass on the load/save screen decoded the full Down Arrow navigation path and identified four overlay families that own it — none of which are explained by the Create New World loader machinery."
 ---
 

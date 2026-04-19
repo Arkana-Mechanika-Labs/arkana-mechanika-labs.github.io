@@ -1,6 +1,6 @@
 ---
-title: "015 - The Party Writer Has Roommates"
-date: 2026-04-12
+title: "Devlog #015 - The Party Writer Has Roommates"
+date: 2026-04-12T04:00:00
 summary: "The function that adds a character to the party is not a function — it is one case in a large selector-dispatch worker that manages the entire character lifecycle. Five confirmed cases, a multi-phase linear body, and an RTLink integrity mechanism that validates every overlay before it dispatches."
 ---
 

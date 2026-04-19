@@ -1,5 +1,5 @@
 ---
-title: "019 - The Loader Unmasked"
+title: "Devlog #019 - The Loader Unmasked"
 date: 2026-04-14
 summary: "After months of incremental tracing, the Darklands runtime loader is fully characterised. It is not INT 3Fh, not appended MZ overlays, not a standard Borland RTLink mechanism. It is a custom segmented loader built entirely on DOS file I/O, with resolver records, source descriptors, EXE-style relocation, and a continuation-based chained dispatcher."
 ---

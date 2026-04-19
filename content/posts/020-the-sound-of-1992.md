@@ -1,5 +1,5 @@
 ---
-title: "020 - The Sound of 1992"
+title: "Devlog #020 - The Sound of 1992"
 date: 2026-04-15
 summary: "The .DGT audio format decoded: headerless unsigned 8-bit PCM, mono, 8000 Hz. One ffmpeg command away from a playable WAV. The opening sequence has audio again."
 ---

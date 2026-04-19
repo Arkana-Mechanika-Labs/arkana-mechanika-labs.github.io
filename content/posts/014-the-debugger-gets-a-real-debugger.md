@@ -1,6 +1,6 @@
 ---
-title: "014 - The Debugger Gets a Real Debugger"
-date: 2026-04-12
+title: "Devlog #014 - The Debugger Gets a Real Debugger"
+date: 2026-04-12T00:00:00
 summary: "Socket-driven breakpoints kept failing while manual DOSBox-X debugger UI worked fine. A day of systematic isolation identified one flag as the culprit, rebuilt the binary with native stepping and disassembly, and left the toolchain in better shape than it has ever been."
 ---
 

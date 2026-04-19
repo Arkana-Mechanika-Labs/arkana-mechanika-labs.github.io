@@ -1,5 +1,5 @@
 ---
-title: "022 - Inside the PAN Format"
+title: "Devlog #022 - Inside the PAN Format"
 date: 2026-04-17
 summary: "Darklands' intro presentation format reverse engineered: DRLE compression, a blit bytecode grammar, a palette/fade pipeline, and the exact overlay family that plays it all back — live in a 1992 DOS process."
 ---

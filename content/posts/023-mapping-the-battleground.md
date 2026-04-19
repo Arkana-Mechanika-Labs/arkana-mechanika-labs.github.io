@@ -1,5 +1,5 @@
 ---
-title: "023 - Mapping the Battleground"
+title: "Devlog #023 - Mapping the Battleground"
 date: 2026-04-18
 summary: "The BC archive cracked open: 65 entries, seven combat art families, a 33×33 encounter-map grid, and a hidden string bank that names every battle environment in the game."
 ---

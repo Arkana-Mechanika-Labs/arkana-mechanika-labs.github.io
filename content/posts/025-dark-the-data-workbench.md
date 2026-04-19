@@ -1,6 +1,6 @@
 ---
-title: "025 - DARK: A Workbench for Darklands Data"
-date: 2026-04-19
+title: "Devlog #025 - DARK: A Workbench for Darklands Data"
+date: 2026-04-19T12:00:00
 summary: "A single tool that brings together years of community format research: browse save games, enemies, cities, items, dialog trees, images, fonts, and archives — all in one place, on a modern system."
 ---
 

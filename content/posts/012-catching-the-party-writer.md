@@ -1,6 +1,6 @@
 ---
 title: "Devlog #012 - Catching the Party Writer in the Act"
-date: 2026-04-10
+date: 2026-04-10T00:00:00
 draft: false
 tags: ["phase2", "runtime", "spice86", "dosbox-x", "party", "overlay", "memory-write"]
 description: "A wrong hypothesis, several empty breakpoint sessions, a new emulator backend, and the exact instruction that writes a character into the party — all in one week."

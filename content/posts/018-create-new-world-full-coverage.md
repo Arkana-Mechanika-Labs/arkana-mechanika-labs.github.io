@@ -1,5 +1,5 @@
 ---
-title: "018 - Create New World: Full Coverage"
+title: "Devlog #018 - Create New World: Full Coverage"
 date: 2026-04-13
 summary: "The third and widest runtime dump of the Create New World worker closes the tail that used to escape the window. A full seven-anchor structure map now covers the function from entry guard to slot activation."
 ---

@@ -1,6 +1,6 @@
 ---
-title: "016 - The World Slot Machine"
-date: 2026-04-12
+title: "Devlog #016 - The World Slot Machine"
+date: 2026-04-12T08:00:00
 summary: "A wide runtime dump of the 1C85 overlay materialized the Create New World function in Ghidra. It turns out to be a four-slot commit worker — and it initializes slots from the same table bases as Add to Party."
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: "024 - The Intro's Hidden Layer"
-date: 2026-04-19
+title: "Devlog #024 - The Intro's Hidden Layer"
+date: 2026-04-19T00:00:00
 summary: "The birds and the gargoyle in the OPENING2 pan sequence use a second pipeline — one that reuses the RTLink resolver mid-frame, reads a reverse 6-byte descriptor list, and routes a live overlay dump into the blitter."
 ---
 

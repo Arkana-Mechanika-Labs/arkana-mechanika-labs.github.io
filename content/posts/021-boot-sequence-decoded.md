@@ -1,5 +1,5 @@
 ---
-title: "021 - The Boot Sequence Decoded"
+title: "Devlog #021 - The Boot Sequence Decoded"
 date: 2026-04-16
 summary: "From blank screen to game: the full Darklands startup chain now mapped. BANNER.DAT, CONFIG.DRK, sound driver selection, the memory check stage, and the graphics bootstrap — one function at a time."
 ---

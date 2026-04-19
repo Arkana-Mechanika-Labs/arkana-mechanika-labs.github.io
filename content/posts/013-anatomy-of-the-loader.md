@@ -1,6 +1,6 @@
 ---
 title: "Devlog #013 - Anatomy of the Custom Code Loader"
-date: 2026-04-10
+date: 2026-04-10T12:00:00
 draft: false
 tags: ["phase2", "runtime", "dosbox-x", "loader", "overlay", "relocation", "rtlink"]
 description: "Instruction-level tracing of the Darklands runtime loader reveals a custom record-driven system with two operating modes, a decoded 18-byte record format, and a fully verified relocation pass."
