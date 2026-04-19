@@ -32,6 +32,10 @@ The sidebar organises everything into seven sections.
 
 Any save file opens into a structured view of the party: all seven attributes with their current and maximum values, all 19 skills laid out with their names rather than raw numbers, equipment in each slot, inventory contents, and the party-level state — currency split across florins, groschens, and pfenniges, the bank note balance, fame, and the Philosopher's Stone quality. Every field is editable and saves back to the original file.
 
+The **Quests / Events tab** lists every active and completed quest and event record in the save: status, open date, destination city, source location, required item, and a text summary for each entry. A panel on the right plots the quest destination on a mini-map of the game world, so you can see at a glance where each objective is sending the party.
+
+![Save Game Editor showing the Quests / Events tab with mini-map locator](/images/dark_saveeditor_quests.png)
+
 ---
 
 ## Enemies
@@ -105,6 +109,10 @@ A browser for the CAT archive format that holds most of the game's packed assets
 ---
 
 ## Research
+
+The **DGT Audio** viewer decodes and plays back Darklands' presentation audio files. All `.DGT` files in the game folder are listed; selecting one shows the waveform alongside file metadata: sample count, playback format (unsigned 8-bit PCM, mono, 8000 Hz), and duration. Play and stop controls let you audition the audio directly; an Export WAV button converts any file to a standard WAV for use outside the tool.
+
+![DGT Audio player showing ENDDARK1.DGT waveform with playback controls](/images/dark_dgt.png)
 
 Viewers for image bank formats such as `COMMONSP.IMG` and `BATTLEGR.IMG`, a workbench for the PAN presentation format used in the intro sequences, a standalone DRLE decompressor, and general-purpose hex viewers for data structures that are still being decoded. These surfaces are intended for ongoing format analysis work alongside the [reverse engineering project](/posts/).
 
