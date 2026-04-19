@@ -1,6 +1,6 @@
 ---
 title: "025 - DARK: A Workbench for Darklands Data"
-date: 2026-04-20
+date: 2026-04-19
 summary: "All the reverse-engineered format knowledge, in one place: DARK (Darklands Authoring & Resource Kit) is a standalone desktop tool that lets you browse, inspect, and edit Darklands game data — save files, enemies, cities, items, dialog, images, fonts, and archives."
 ---
 
