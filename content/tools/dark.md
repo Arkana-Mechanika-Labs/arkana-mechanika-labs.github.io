@@ -132,4 +132,4 @@ After loading a game folder, DARK can run a validation pass across the world dat
 
 Unzip and run `DARK.exe`. Requires a Darklands installation — point the tool at your game folder on first launch.
 
-DARK is a community project, developed openly alongside the reverse engineering work documented in the [devlogs](/posts/). Source and issue tracker are on [GitHub](https://github.com/Arkana-Mechanika-Labs/dos-re-agent).
+DARK is a community project, developed alongside the reverse engineering work documented in the [devlogs](/posts/).
