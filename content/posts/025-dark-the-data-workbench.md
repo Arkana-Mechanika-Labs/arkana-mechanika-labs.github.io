@@ -18,29 +18,73 @@ DARK's starting point is that body of existing knowledge. The format library und
 
 DARK — Darklands Authoring & Resource Kit — is a desktop application that reads Darklands game files directly from a standard installation and presents them in a single workbench. You point it at a game folder and everything becomes accessible from one interface, without installing anything else.
 
+![DARK welcome screen showing the full sidebar navigation](/images/dark_welcome.png)
+
 The sidebar organises everything into seven sections.
 
-**Save Games.** Any save file opens into a structured view of the party: all seven attributes with their current and maximum values, all 19 skills laid out with their names rather than raw numbers, equipment in each slot, inventory contents, and the party-level state — currency split across florins, groschens, and pfenniges, the bank note balance, fame, and the Philosopher's Stone quality. Every field is editable and saves back to the original file. The tool knows the format well enough to show when a value is out of expected range.
+## Save Games
 
-**Enemies.** The enemy data from `DARKLAND.ENM` decoded into a navigable list. All 71 enemy types with their full stat blocks — base attributes, skill ratings, weapon assignments, armor and shield item codes with quality values, palette chunk references, and variant counts. The 82 named enemies reference their type and show their name strings. This is the data that drives every combat encounter in the game, made readable without a hex editor.
+Any save file opens into a structured view of the party: all seven attributes with their current and maximum values, all 19 skills laid out with their names rather than raw numbers, equipment in each slot, inventory contents, and the party-level state — currency split across florins, groschens, and pfenniges, the bank note balance, fame, and the Philosopher's Stone quality. Every field is editable and saves back to the original file.
 
-**Locations.** All 414 world locations with icon type, map coordinates, city size, and name. The location list and city database are presented together so cross-referencing between `DARKLAND.LOC` and `DARKLAND.CTY` is straightforward. The 92 city records include all their internal location names — inn, cathedral, market, fortress, kloster, university — building-presence flags, dock destination links, and the nine shop quality ratings.
+## Enemies
 
-**World Map.** The full Darklands wilderness map rendered as a navigable image. The underlying `DARKLAND.MAP` is a 328×932 hex-grid of RLE-encoded tile data, drawing from two PIC tile palettes. The viewer decodes that data and renders the complete map — every terrain type, every river, every coastline — at a scale where you can actually see the geography. Panning and zooming let you locate specific areas, and clicking tiles shows the raw tile data behind them. This is one of the more useful surfaces for anyone working on the world map system, because seeing the full map in one view is something the original game never offered.
+The enemy data from `DARKLAND.ENM` decoded into a navigable list. All 71 enemy types with their full stat blocks — base attributes, skill ratings, weapon assignments, armor and shield item codes with quality values, palette chunk references, and variant counts. The 82 named enemies reference their type and show their name strings. The tool resolves the image group to the actual IMC files it covers, previews the sprite directly from the loaded catalog with the correct palette applied, and flags known data issues such as invalid item references.
 
-**Text.** The `DARKLAND.MSG` dialog files contain the branching conversation trees that appear throughout the game — city menus, quest dialogues, encounter scripts. The tool renders these as structured trees with all branches and option text visible, making it possible to read the full content of a dialog without guessing which option leads where. City descriptions from `DARKLAND.DSC` are shown alongside their corresponding city records for easy comparison.
+![Enemies editor showing Sergeant1 with sprite preview, attributes and skills](/images/dark_enemies.png)
 
-**Images.** PIC sprite sheets decoded and displayed with correct palette mapping — the tool understands the standard VGA palette and applies it so images look as they would in the game. Tactical combat sprites from the IMC format come with enemy palette chunk overlays from `ENEMYPAL.DAT`, so each enemy type renders in its actual in-game colours rather than a default palette that makes everything look wrong.
+## Locations and Cities
 
-**Fonts.** The game's bitmap font sets from `FONTS.FNT` and `FONTS.UTL` rendered glyph by glyph in an editable grid. Each glyph can be inspected and modified. For anyone working on a port or a translation, this is where the character set lives.
+All 414 world locations with icon type, map coordinates, city size, and name. The location list and city database are presented together so cross-referencing between the two files is straightforward. The 92 city records include all their internal location names — inn, cathedral, market, fortress, kloster, university — building-presence flags, dock destination links, and the nine shop quality ratings.
 
-**Archive.** A browser for the CAT archive format — the container that holds most of the game's packed assets. The directory of any archive opens as a file list; selecting an entry previews it inline (PIC images render as images, everything else appears in a hex view with decoded offsets); individual files can be extracted to disk. The archives covered include the battle sprite catalogs, the enemy info catalog, the message file archive, the map tile catalog, and the extensionless archives like `BC` and `LCASTLE`.
+## Items, Saints & Formulae
 
-**Research.** The forward-looking section of the tool. Viewers for image bank formats, a workbench for the PAN presentation format used in the intro sequences, a standalone DRLE decompressor for testing compressed streams in isolation, and general-purpose hex viewers for data structures that are still being decoded. These are surfaces for ongoing analysis work, not finished features.
+The complete item table from `DARKLAND.LST` in a searchable, filterable grid: item code, full name, short name, type, weight, base quality, and value, all decoded from the binary flags into readable columns. Saints and alchemical formulae live on adjacent tabs in the same editor, loaded and saved together.
+
+![Items, Saints & Formulae editor showing the full item table](/images/dark_items.png)
+
+## World Map
+
+The full Darklands wilderness map rendered as a navigable, pannable, zoomable image. The underlying `DARKLAND.MAP` is a 328×932 hex-grid of RLE-encoded tile data drawing from two PIC tile palettes; the viewer decodes that and renders the complete geography — terrain, rivers, coastlines, roads — at any scale. Location icons and labels are overlaid on top. Clicking any tile shows its raw encoding and terrain type in the status bar; clicking a location or city pulls up its full data panel on the right: name, type, size, buildings, services with quality bars, ruler, dock connections, and description. An edit mode allows tile changes to be written back to `DARKLAND.MAP` directly, with undo and revert.
+
+![World Map editor showing Wittenberg selected with full city data panel](/images/dark_worldmap.png)
+
+## Text — Dialog Cards
+
+The `DARKLAND.MSG` dialog files contain the branching conversation trees that appear throughout the game — city menus, quest dialogues, encounter scripts. The tool renders these as structured card lists: select a file from the left panel, select a card, and the right panel shows every text element and option in sequence with a rendered preview below. Cards and elements can be added, removed, and reordered; the result saves back as a valid MSG file.
+
+![Dialog Cards editor showing a branching conversation with rendered preview](/images/dark_dialogs.png)
+
+## Images — PIC and IMC
+
+PIC sprite sheets are decoded and displayed with correct palette mapping — the tool resolves the embedded palette and renders the image as the game would show it, with export to PNG. The example below is `APROCH2.PIC`, one of the city approach background paintings.
+
+![PIC Image Viewer showing a night scene with a cathedral silhouette](/images/dark_pic.png)
+
+Tactical combat sprites from the IMC format get a dedicated animated viewer. Selecting a sprite from a CAT catalog shows the full animation strip with frame-by-frame navigation and playback. The enemy palette from `ENEMYPAL.DAT` is applied automatically so each sprite renders in its actual in-game colours. Individual frames or full contact sheets can be exported.
+
+![IMC Sprite Viewer showing an animated enemy with frame strip](/images/dark_imc.png)
+
+## Fonts
+
+The game's bitmap font sets from `FONTS.FNT` and `FONTS.UTL` rendered glyph by glyph in an editable grid. The whole-font preview on the right shows every character at once; selecting a glyph opens its pixel bitmap for editing. Changes apply immediately to the preview and can be saved back to the font file.
+
+![Font Editor showing the complete Darklands glyph set with editable bitmap grid](/images/dark_fonts.png)
+
+## Archive — CAT Extractor
+
+A browser for the CAT archive format that holds most of the game's packed assets. The directory of any archive opens as a file list alongside a hex view of the selected entry. PIC images can be previewed inline; everything else shows its raw bytes. Individual files and the full archive can be extracted to disk.
+
+![CAT Archive Browser with hex view of a selected entry](/images/dark_cat.png)
+
+## Research
+
+The forward-looking section of the tool. Viewers for image bank formats such as `COMMONSP.IMG` and `BATTLEGR.IMG`, a workbench for the PAN presentation format used in the intro sequences, a standalone DRLE decompressor, and general-purpose hex viewers for data structures that are still being decoded. These are surfaces for ongoing analysis work, not finished features.
+
+![IMG Banks research viewer showing BATTLEGR.IMG in hex view](/images/dark_imgbanks.png)
 
 ## A Validation Layer
 
-One feature worth mentioning separately: after loading a game folder, the tool can run a validation pass across the world data. It checks city dock destinations for consistency, verifies location reference integrity, checks enemy item assignments against the item table, validates palette range bounds, and counts dialog option references. The report is navigable — clicking a finding takes you to the relevant record. It is useful both for catching format decode errors and for finding quirks in the original data.
+After loading a game folder, the tool can run a validation pass across the world data: city dock destinations, location reference integrity, enemy item assignments, palette range bounds, dialog option counts. The report is navigable — clicking a finding takes you to the relevant record. It is useful both for catching format decode errors and for finding quirks in the original data.
 
 ## Download
 
