@@ -7,6 +7,7 @@ width: wide
 Session-by-session notes from the Darklands reverse engineering project. Each entry covers one or more analysis sessions, what the AI agent found, how it found it, and what it means for the eventual C# port.
 
 {{< cards >}}
+  {{< card link="025-dark-the-data-workbench" title="025 - DARK: A Workbench for Darklands Data" icon="sparkles" subtitle="April 20, 2026. All the format RE knowledge in one tool: DARK (Darklands Authoring & Resource Kit) lets you browse, inspect, and edit save games, enemies, cities, items, dialog trees, images, fonts, and archives." >}}
   {{< card link="024-the-intros-hidden-layer" title="024 - The Intro's Hidden Layer" icon="book-open" subtitle="April 19, 2026. The animated birds and gargoyle in OPENING2 use a second pipeline: RTLink resolver dispatch mid-playback, reverse-walk 6-byte descriptors, and a live overlay dump of the intro scheduler's state." >}}
   {{< card link="023-mapping-the-battleground" title="023 - Mapping the Battleground" icon="book-open" subtitle="April 18, 2026. The BC archive decoded: 65 entries, seven combat tile families, the 33×33 IMAPS encounter grid, and a hidden string bank at EXE offset 0x17F670 that names every battle environment." >}}
   {{< card link="022-inside-the-pan-format" title="022 - Inside the PAN Format" icon="book-open" subtitle="April 17, 2026. Darklands' intro presentation format reverse engineered: DRLE compression, a confirmed blit bytecode grammar, a palette/fade pipeline, and the exact overlay family that plays it all." >}}
