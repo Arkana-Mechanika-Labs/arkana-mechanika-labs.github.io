@@ -17,15 +17,13 @@ to the active party. The path to get there was not.
 
 ## The hypothesis that was wrong
 
-`game_main_loop` scans the hot-slot array — five slots at `0x9C00`, one per party member, stride
-`0x80` — and checks the status byte at `+0x69` in each slot. When that byte is `0x03`, it calls
+`game_main_loop` scans the hot-slot array (five slots at `0x9C00`, one per party member, stride `0x80`) and checks the status byte at `+0x69` in each slot. When that byte is `0x03`, it calls
 `rtlink_load_char`. The assumption going into this sprint was that catching a slot byte flip to
 `0x03` would lead directly to `party_add_member`.
 
 Multiple guided DOSBox-X sessions later, the hypothesis was dead.
 
-Over five or six live passes — world map, city navigation, tavern menus, character-sheet opens,
-save-state loads — the hot-slot status bytes were always `01 01 01 01 00` in steady state. No
+Over five or six live passes (world map, city navigation, tavern menus, character-sheet opens, save-state loads), the hot-slot status bytes were always `01 01 01 01 00` in steady state. No
 slot ever reached `0x03`. The static model of the loader path was correct, but the specific
 gameplay paths being tested never triggered it. Either `0x03` is a rarer edge case, or the write
 happens so transiently it's invisible to the workflow we were using.
@@ -41,7 +39,7 @@ Devlog 011 mentioned that a second emulator backend was under evaluation. That e
 concluded: **Spice86 is now a first-class runtime backend for this project.**
 
 [Spice86](https://github.com/OpenRakis/Spice86) is the same emulator at the heart of the
-planned Phase 3 rewrite — the one that will eventually run Darklands's own assembly alongside
+planned Phase 3 rewrite, the one that will eventually run Darklands's own assembly alongside
 C# override functions. But it turns out to be immediately useful for Phase 2 as well, because it
 exposes something DOSBox-X does not: **memory write breakpoints**.
 
@@ -68,7 +66,7 @@ test: a clean game state, a deliberate action, a predictable result.
 On the first `Add to the Party`, Spice86 halted immediately.
 
 The hot-slot bytes before the action were `00 00 00 00 00`. After the halt, slot 0 was `01`.
-The write was direct. There was no intermediate `0x03` state — the transition was `00 → 01` in
+The write was direct. There was no intermediate `0x03` state; the transition was `00 → 01` in
 one instruction, not `00 → 03 → loader → 01`. The deferred-load hypothesis was simply wrong for
 this path.
 
@@ -106,7 +104,7 @@ actual add-to-party implementation.
 happens here, followed by a sequence of far-calls to per-slot callback routines at `0B3D:2049`,
 `017D:1588`, `017D:1716`, and `081E:1DE2`.
 
-One path that looked plausible — `15DF:0B48` — turned out to be a decode mistake. The call
+One path that looked plausible, `15DF:0B48`, turned out to be a decode mistake. The call
 instruction at `15DF:033D` is `E8 08 00`, a near call with a signed 16-bit displacement of `+8`.
 Target: `15DF:0348`. Not `0B48`. The arithmetic matters when you are reading raw bytes.
 
@@ -143,7 +141,7 @@ to "what writes this memory address and from where," Spice86's write-probe capab
 the right tool.
 
 That also means the breakpoint vocabulary is different. Addresses confirmed in DOSBox-X sessions
-do not automatically transfer to Spice86 — runtime segment assignments can differ between
+do not automatically transfer to Spice86; runtime segment assignments can differ between
 environments. Going forward, runtime findings from each backend will be tagged accordingly and
 mapped across only when a live session confirms the equivalence.
 

@@ -34,9 +34,9 @@ The fix was to route socket `set_breakpoint` through the real `BP` parser, recov
 
 While isolating the launch issue, Codex added several capabilities that had been missing from the toolchain:
 
-**Native stepping.** `step`, `step_over`, and `step_out` are now socket commands backed by the DOSBox-X debugger internals directly — not fake stepping from the adapter side. Validated live: `step` advanced deterministically from `11E3:052B` through the far call at `11E3:0598 -> 11E3:021C`; `step_out` from inside that call returned cleanly to `11E3:059D`; `step_over` at the same far call landed at the same return site.
+**Native stepping.** `step`, `step_over`, and `step_out` are now socket commands backed by the DOSBox-X debugger internals directly, not fake stepping from the adapter side. Validated live: `step` advanced deterministically from `11E3:052B` through the far call at `11E3:0598 -> 11E3:021C`; `step_out` from inside that call returned cleanly to `11E3:059D`; `step_over` at the same far call landed at the same return site.
 
-**Native disassembly.** A new `disassemble` socket command accepts a segment, offset, and instruction count and returns structured per-instruction output — bytes, size, and rendered text — directly from the DOSBox-X backend. No more byte-scraping or ad-hoc text parsing.
+**Native disassembly.** A new `disassemble` socket command accepts a segment, offset, and instruction count and returns structured per-instruction output (bytes, size, and rendered text) directly from the DOSBox-X backend. No more byte-scraping or ad-hoc text parsing.
 
 **Chunked memory dump.** `dosboxx_dump_memory_range` reads an arbitrary memory range in chunks, writes a hex artifact and a metadata JSON to `output/dosboxx_dumps/`, and handles the chunking automatically. This is what now feeds the overlay materialisation workflow that created the `15DF` dump in [devlog 012](/posts/012-catching-the-party-writer/).
 

@@ -6,7 +6,7 @@ summary: "A runtime pass on the load/save screen decoded the full Down Arrow nav
 
 ## Two Paths from the Main Menu
 
-After Quickstart and Create New World are well-characterised, the third main-menu option gets its first proper runtime analysis: **The Story Continues** — the load/save game screen.
+After Quickstart and Create New World are well-characterised, the third main-menu option gets its first proper runtime analysis: **The Story Continues**, the load/save game screen.
 
 The working hypothesis was that it might share the same `11E3:052B` loader wrapper already confirmed for Create New World. That turned out to be wrong. The Story Continues screen uses a distinct overlay family that the loader model does not yet explain.
 

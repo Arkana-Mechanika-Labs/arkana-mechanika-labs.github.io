@@ -54,9 +54,9 @@ The loader maintains a small set of working globals inside segment `11E3`:
 
 | Global | Confirmed meaning |
 |--------|-------------------|
-| `[09E6]` | Relocation delta base — the base segment shift used during fixup |
-| `[09E8]` | Current record pointer — the address of the active load record |
-| `[09EC]` | Open file handle — confirmed as handle `0005` in all observed runs |
+| `[09E6]` | Relocation delta base: the base segment shift used during fixup |
+| `[09E8]` | Current record pointer: the address of the active load record |
+| `[09EC]` | Open file handle: confirmed as handle `0005` in all observed runs |
 
 The file handle `0005` is open before any menu code runs. The loader is not invoked on demand
 from a menu action; it is resident infrastructure.
@@ -201,12 +201,11 @@ segment-sensitive references; the relocation loop fixes them up at load time.
 ## What remains
 
 The one confirmed gap is the final execution handoff. We have proven:
-- **load** — the code chunk arrives in memory at the correct segment
-- **relocate** — all segment-sensitive words are patched
+- **load**: the code chunk arrives in memory at the correct segment
+- **relocate**: all segment-sensitive words are patched
 
 The remaining question is: **how does control reach the loaded code?** The trace ends at
-the relocation loop. What follows — a far jump, a far call, a stored entry point retrieved
-by the dispatch system, or something else — is the next target.
+the relocation loop. What follows (a far jump, a far call, a stored entry point retrieved by the dispatch system, or something else) is the next target.
 
 The document from this session ends with a precise recommendation: continue stepping from
 `11E3:03F6` (the instruction after the relocation loop) and capture the first far transfer
@@ -216,7 +215,7 @@ of control into the loaded segment. That will complete the picture.
 
 ## The short version
 
-- The Darklands runtime loader is custom — not provably standard RTLink, despite the
+- The Darklands runtime loader is custom, not provably standard RTLink, despite the
   RTLink infrastructure elsewhere in the binary
 - Two confirmed modes: startup bulk-loading (chunked, looped) and code-chunk loading
   (seek → read → relocate)
@@ -224,5 +223,5 @@ of control into the loaded segment. That will complete the picture.
   address, and `0xFFFF` sentinel all confirmed; `+02` and `+0E` still unresolved
 - Relocation pass fully understood: 4-byte fixup entries `{offset, seg_addend}`;
   `word[reloc_delta + seg_addend : offset] += reloc_delta`
-- Verified with actual before/after memory values — arithmetic confirmed to the word
+- Verified with actual before/after memory values; arithmetic confirmed to the word
 - One open question: the final execution handoff after the relocation loop completes

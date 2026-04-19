@@ -12,7 +12,7 @@ What we found instead was that the owning function is not the party writer at al
 
 ## The Frame That Contains Everything
 
-Working outward from `15DF:0D5F` through the dump, the first thing that becomes clear is that the function boundary is not where earlier sessions assumed. The gate at `15DF:0329` — which checks `AX == 0x011B` and conditionally calls `15DF:0348` — is not the entry point of the owning routine. It is the tail of a caller further up.
+Working outward from `15DF:0D5F` through the dump, the first thing that becomes clear is that the function boundary is not where earlier sessions assumed. The gate at `15DF:0329`, which checks `AX == 0x011B` and conditionally calls `15DF:0348` — is not the entry point of the owning routine. It is the tail of a caller further up.
 
 The real entry is `15DF:0444`: `ENTER 0x00A8,0`. A 168-byte local frame. This is a large selector-dispatch worker that takes a 16-bit selector argument at `[BP+6]` and dispatches to one of several case bodies based on its value.
 
@@ -20,7 +20,7 @@ Five case edges are confirmed from the dump:
 
 | Selector | Target |
 |----------|--------|
-| `0x1E41` | `15DF:09AF` — add-to-party |
+| `0x1E41` | `15DF:09AF`: add-to-party |
 | `0x2368` | `15DF:0F5F` |
 | `0x0433` | `15DF:2174` |
 | `0x0231` | `15DF:14D1` |
@@ -30,7 +30,7 @@ Unmatched selectors fall through to the epilogue. So this is not `party_add_memb
 
 ## The Add-to-Party Case Body
 
-Following selector `0x1E41` to `15DF:09AF`, the case body begins with ES-segment attribute and init writes — fields around `[ES:BX+0x340A]` through at least `[ES:BX+0x3413]` — plus direct writes to globals like `[0xE762]=0x1C` and `[0xE765]=0x17`. These look like character presentation state initialization before the slot is formally claimed.
+Following selector `0x1E41` to `15DF:09AF`, the case body begins with ES-segment attribute and init writes — fields around `[ES:BX+0x340A]` through at least `[ES:BX+0x3413]`, plus direct writes to globals like `[0xE762]=0x1C` and `[0xE765]=0x17`. These look like character presentation state initialization before the slot is formally claimed.
 
 Then a pre-finalization call chain through segment `0x05F9`: three far calls at `0x058B`, `0x0553`, and `0x05A5`. These appear to set up the display context for the character being added.
 
@@ -46,11 +46,11 @@ This is significant: the slot chosen during Add to Party is keyed to the current
 
 Three rounds of setup happen before the slot is marked active.
 
-**The copy/setup trio:** `081E:1DE2([BP-0x0a], AX, 0, 1)` — `081E:0716(0x9C55 + slot*0x80, 0x80, 1, [BP-0x0a])` — `081E:1DE2([BP-0x0a], 0, 0, 1)`. This initializes the per-slot record region at `0x9C55 + slot_index*0x80` before filling it.
+**The copy/setup trio:** `081E:1DE2([BP-0x0a], AX, 0, 1)`, then `081E:0716(0x9C55 + slot*0x80, 0x80, 1, [BP-0x0a])`, then `081E:1DE2([BP-0x0a], 0, 0, 1)`. This initializes the per-slot record region at `0x9C55 + slot_index*0x80` before filling it.
 
 **Three bulk-transfer calls:** The same resolved slot index drives three slot-indexed destinations at `0x082C + slot*0x14`, `0x07BE + slot*0x16`, and `0x3E00 + slot*0x180`. These copy pre-computed tables into the slot's data regions.
 
-**The activation write:** `mov byte ptr [bx+0x9c69],0x01` — the same instruction caught at runtime in devlog 012. Slot stride `0x80`. The `0x9c69` write is offset `+0x14` inside the per-slot record based at `0x9C55 + slot_index*0x80`.
+**The activation write:** `mov byte ptr [bx+0x9c69],0x01`, the same instruction caught at runtime in devlog 012. Slot stride `0x80`. The `0x9c69` write is offset `+0x14` inside the per-slot record based at `0x9C55 + slot_index*0x80`.
 
 ## After the Write
 

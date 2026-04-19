@@ -18,9 +18,9 @@ Starting from the trusted entry at `0x1D1FE`, the recovered body is a **four-slo
 
 The scan structure is clear from the recovered bytes:
 
-- `0x32356` — the existing-slot scan: compare each of the four 16-bit local handle entries against `DS:E7DA` (current world ID). If a match is found, skip to the reuse-existing path.
-- `0x3237D` — the free-slot scan: search the same four entries for `0xFFFF` (empty slot marker).
-- `0x323BA` — the commit path: once a usable slot is chosen, execution branches here.
+- `0x32356`: existing-slot scan: compare each of the four 16-bit local handle entries against `DS:E7DA` (current world ID). If a match is found, skip to the reuse-existing path.
+- `0x3237D`: free-slot scan: search the same four entries for `0xFFFF` (empty slot marker).
+- `0x323BA`: commit path: once a usable slot is chosen, execution branches here.
 
 Before the slot loop begins, `[0xE7DC]` is checked against zero. A non-positive value exits the worker immediately. The positive branch enters the four-slot scan.
 
