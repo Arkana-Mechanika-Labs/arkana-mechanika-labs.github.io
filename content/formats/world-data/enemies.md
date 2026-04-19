@@ -5,7 +5,7 @@ weight: 2
 
 All enemy and creature definitions: stats, equipment, sprite references, palette indices, and individual named enemy instances.
 
-*Canonical source: `darkland.enm.xml` (wallace.net)*
+*Canonical source: `darkland.enm.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout
 

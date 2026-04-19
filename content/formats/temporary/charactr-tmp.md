@@ -5,7 +5,7 @@ weight: 2
 
 Temporary file containing the current party's character data after a saved game is loaded. A bridge between the durable save format and the live runtime party state.
 
-*Canonical source: `character.tmp.html` (wallace.net)*
+*Canonical source: `character.tmp.html` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout
 

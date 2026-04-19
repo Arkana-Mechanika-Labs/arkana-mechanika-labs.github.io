@@ -7,7 +7,7 @@ Each saved game consists of two files:
 - `dksave*.sav` — world and character data (this document)
 - `dksave*.bsv` — battle/dungeon data for the last unfinished dungeon
 
-*Canonical source: `dksaveXX.sav.xml` (wallace.net)*
+*Canonical source: `dksaveXX.sav.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## Top-Level Layout
 

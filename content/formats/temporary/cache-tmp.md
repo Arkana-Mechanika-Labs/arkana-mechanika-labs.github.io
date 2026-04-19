@@ -5,7 +5,7 @@ weight: 1
 
 Temporary file created when a saved game is loaded. Contains the current inn storage state. Structures here are shared with the save-file format; this page documents only the cache-specific layout.
 
-*Canonical source: `cache.tmp.xml` (wallace.net)*
+*Canonical source: `cache.tmp.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout
 

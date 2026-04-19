@@ -5,7 +5,7 @@ weight: 5
 
 Long text descriptions of all 136 saints, used in the in-game saint reference screen. Saint order matches `DARKLAND.LST`.
 
-*Canonical source: `darkland.snt.xml` (wallace.net)*
+*Canonical source: `darkland.snt.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout
 

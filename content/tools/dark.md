@@ -14,7 +14,7 @@ Unzip and run `DARK.exe`. Requires a Darklands installation — point the tool a
 
 ## Built on Community Work
 
-Most of Darklands' file formats were documented years ago by a small group of dedicated researchers, primarily working in and around the Darklands Yahoo Group. Merle, Joel "Quadko" McIntyre, and others spent real time reversing binary structures, writing format specifications, and building tools — largely without automated help, largely because they cared about the game. The XML specifications at wallace.net are the canonical record of that work and remain the reference source for most of what DARK understands.
+Most of Darklands' file formats were documented years ago by a small group of dedicated researchers, primarily working in and around the Darklands Yahoo Group. Merle, Joel "Quadko" McIntyre, and others spent real time reversing binary structures, writing format specifications, and building tools — largely without automated help, largely because they cared about the game. Those XML specifications are preserved in [Wendigo's Darklands repository](https://github.com/vvendigo/Darklands) ([wendigo.online-siesta.com/darklands](https://wendigo.online-siesta.com/darklands/)) and remain the reference source for most of what DARK understands. For anything game-side — mechanics, items, locations, lore — [darklands.net](https://www.darklands.net) by Matt Wirkkala is the place to go.
 
 That community also produced tools: save editors, archive extractors, map viewers. Some still work perfectly. Some have grown harder to run on modern systems. They were always separate — one application to edit a save, another to look inside a catalog, something else for images.
 

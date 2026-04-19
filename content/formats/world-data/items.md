@@ -5,7 +5,7 @@ weight: 3
 
 Item definitions, saint names, and alchemical formula names. The item code used everywhere in the game is an index into the `item_definitions` array here.
 
-*Canonical source: `darkland.lst.xml` (wallace.net)*
+*Canonical source: `darkland.lst.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout
 

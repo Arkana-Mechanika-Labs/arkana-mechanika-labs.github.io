@@ -5,7 +5,7 @@ weight: 3
 
 Contains the entire Darklands wilderness map. The map is rendered from tiles stored in two PIC files: `MAPICONS.PIC` and `MAPICON2.PIC`.
 
-*Canonical source: `darkland.map.xml` (wallace.net)*
+*Canonical source: `darkland.map.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout
 

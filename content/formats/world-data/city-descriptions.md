@@ -5,7 +5,7 @@ weight: 7
 
 Long text descriptions of all 92 cities, displayed on the city approach screen. Order matches `DARKLAND.CTY`.
 
-*Canonical source: `darkland.dsc.xml` (wallace.net)*
+*Canonical source: `darkland.dsc.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout
 

@@ -5,7 +5,7 @@ weight: 3
 
 Temporary file created when a saved game is loaded. Contains the full location array with runtime state (reputation, inn cache indices, etc.) that differs from the static `DARKLAND.LOC` source.
 
-*Canonical source: `locs.tmp.xml` (wallace.net)*
+*Canonical source: `locs.tmp.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout
 

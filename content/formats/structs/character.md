@@ -5,7 +5,7 @@ weight: 1
 
 Each character in a Darklands save file occupies exactly **554 bytes (0x22a)**. Fields are **not sequential** — there are gap bytes throughout. All offsets are relative to the start of the character record.
 
-*Source: `dksaveXX.sav.xml` (wallace.net community KB)*
+*Source: `dksaveXX.sav.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 > **Note:** Darklands has no class system. Characters are defined by backgrounds, occupations, and 19 individual skills. Equipment type and quality for each slot are **not adjacent** in the struct — see the table below.
 

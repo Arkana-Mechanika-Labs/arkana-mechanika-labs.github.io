@@ -5,7 +5,7 @@ weight: 1
 
 All named locations on the Darklands wilderness map: cities, villages, castles, monasteries, dungeons, caves, shrines, etc. This data is copied into each save file at game creation and updated there during play.
 
-*Canonical source: `darkland.loc.xml` (wallace.net)*
+*Canonical source: `darkland.loc.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout
 

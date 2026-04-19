@@ -5,7 +5,7 @@ weight: 6
 
 City-specific data: names for every location within each city, coordinates, dock connections, building inventory, and shop quality ratings. Non-city locations are in `DARKLAND.LOC`.
 
-*Canonical source: `darkland.cty.xml` (wallace.net)*
+*Canonical source: `darkland.cty.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout
 

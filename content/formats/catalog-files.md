@@ -5,7 +5,7 @@ weight: 1
 
 Darklands stores game assets in **catalog files** — simple archive containers, each holding a set of related files. There is no single monolithic pack file; assets are split across multiple named catalogs.
 
-*Canonical source: `X.cat.xml` (wallace.net)*
+*Canonical source: `X.cat.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## Known Catalog Files
 

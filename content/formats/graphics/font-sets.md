@@ -5,7 +5,7 @@ weight: 3
 
 Font definition files used for UI text rendering.
 
-*Canonical source: `X.fnt.xml` (wallace.net)*
+*Canonical source: `X.fnt.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## Files
 

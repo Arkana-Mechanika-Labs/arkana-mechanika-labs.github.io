@@ -3,7 +3,9 @@ title: File Formats
 weight: 1
 ---
 
-On-disk format documentation for every Darklands data file, produced by cross-referencing community research (wallace.net XML specs) with reverse-engineered code from DARKLAND.EXE.
+On-disk format documentation for every Darklands data file, produced by cross-referencing community research with reverse-engineered code from DARKLAND.EXE.
+
+The primary source for community-documented formats is [Wendigo's Darklands repository](https://github.com/vvendigo/Darklands) ([wendigo.online-siesta.com/darklands](https://wendigo.online-siesta.com/darklands/)), which preserves the XML format specifications originally assembled by Merle, Quadko (Joel McIntyre), and others. For general Darklands reference — game mechanics, items, locations, and lore — [darklands.net](https://www.darklands.net) by Matt Wirkkala remains the authoritative community resource.
 
 All formats documented here are based on the original game files and are public knowledge. Sources are cited per page.
 

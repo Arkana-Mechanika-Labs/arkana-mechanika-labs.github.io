@@ -5,7 +5,7 @@ weight: 4
 
 Descriptions, ingredients, difficulty, and risk for all 66 alchemical formulae. Formula order matches `DARKLAND.LST`.
 
-*Canonical source: `darkland.alc.xml` (wallace.net)*
+*Canonical source: `darkland.alc.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout
 

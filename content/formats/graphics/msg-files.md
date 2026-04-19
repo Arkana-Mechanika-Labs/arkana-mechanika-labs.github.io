@@ -5,7 +5,7 @@ weight: 4
 
 Text and layout data for game screens ("cards") — option menus, situation descriptions, and in-game text. Almost all `.MSG` files are packaged inside the `MSGFILES` catalog.
 
-*Canonical source: `X.msg.xml` (wallace.net)*
+*Canonical source: `X.msg.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## Files
 

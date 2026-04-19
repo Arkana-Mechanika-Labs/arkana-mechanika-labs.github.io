@@ -5,7 +5,7 @@ weight: 2
 
 Combat animation sprite files. Each IMC contains all animation frames for one character body type and animation type. IMC files are accessed through the [catalog system](../catalog-files) (e.g. `A00C.CAT` contains alchemist IMC files).
 
-*Canonical source: `X.imc.xml` (wallace.net)*
+*Canonical source: `X.imc.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## Compression
 
