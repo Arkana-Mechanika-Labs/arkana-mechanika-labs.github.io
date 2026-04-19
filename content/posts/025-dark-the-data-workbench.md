@@ -1,120 +1,53 @@
 ---
 title: "025 - DARK: A Workbench for Darklands Data"
 date: 2026-04-19
-summary: "All the reverse-engineered format knowledge, in one place: DARK (Darklands Authoring & Resource Kit) is a standalone desktop tool that lets you browse, inspect, and edit Darklands game data — save files, enemies, cities, items, dialog, images, fonts, and archives."
+summary: "A single tool that brings together years of community format research: browse save games, enemies, cities, items, dialog trees, images, fonts, and archives — with new coverage for formats that were still undocumented."
 ---
 
-## The Problem With Having a Knowledge Base
+## Standing on Other People's Work
 
-The format work has been producing results for months. Save file layout. City structs with 19 named fields. Enemy attribute tables. CAT archive extraction. PIC image decoding. DRLE decompression. Dialog card trees. Font bitmaps.
+Before describing what DARK does, it is worth being clear about where it comes from.
 
-All of this lives in markdown notes and Python scripts. It is useful for the rewrite. It is not useful for someone who just wants to open a save file and see what it contains.
+Most of Darklands' file formats were documented years ago by a small group of dedicated researchers, primarily working in and around the Darklands Yahoo Group. Merle, Joel "Quadko" McIntyre, and others spent real time reversing binary structures, writing format specifications, and building tools — largely without automated help, largely because they cared about the game. The XML specifications at wallace.net are the canonical record of that work and are still the reference source for most of what this project understands.
 
-So we built a tool.
+That community also produced tools. Save editors, archive extractors, map viewers — the pieces existed. Some of them still work perfectly. Some have grown harder to run on modern systems. And they were always separate: open one to edit a save, a different one to look inside a catalog, something else for images.
 
-## DARK
+DARK's starting point is that body of existing knowledge. The format library underneath it is built on those same XML specs. The goal is not to redo what was done, but to bring it together and extend it in the areas where the original documentation ran out.
 
-**DARK** — Darklands Authoring & Resource Kit — is a standalone Windows desktop application built on top of everything the format research has produced. Point it at your Darklands installation folder and it becomes a complete workbench for the game's data.
+## What the Tool Is
 
-It is a Python/Qt6 application packaged as a self-contained `DarklandsBrowser.exe`. No installation. No Python required. Open the exe, set the path, start exploring.
+DARK — Darklands Authoring & Resource Kit — is a desktop application that reads Darklands game files from a standard installation and presents them in a single tabbed workbench. You point it at a game folder and everything is available from one interface.
 
-> **Download:** [Releases page — link coming when 1.0 ships]([PLACEHOLDER_LINK])
+The seven sections of the sidebar cover the full range of the game's data.
 
----
+**Save Games.** Any save file opens into a full character view: all seven attributes (current and maximum), all 19 skills — 7 weapon types plus 12 non-combat — equipment, inventory, and party-level state including currency and fame. Fields are editable and the result can be saved back.
 
-## What Is In There
+**Data.** The world data files in human-readable form. Enemies: 71 types and 82 named encounters, with attributes, weapon assignments, armor, and palette references decoded. Locations: all 414 world locations with icon type, coordinates, and names. Items, saints, and alchemical formulae from the item list. An interactive world map rendered from its RLE tile data. And the full city database: all 92 cities with their named internal locations, building flags, dock connections, and shop quality ratings.
 
-The sidebar organises everything into seven sections.
+**Text.** The message files exposed as readable dialog trees with all branches and option text visible. City descriptions alongside the corresponding city records for cross-reference.
 
-### Save Games
+**Images.** PIC sprite sheets decoded and displayed with correct palette mapping. Tactical combat sprites from the IMC format, with enemy palette chunk overlays applied so they appear in the colours the game would show.
 
-Load any `DKSAVE??.SAV` file and see the full state of the party. Characters with all seven attributes and all 19 skills (7 weapon + 12 non-combat), current and maximum values. Equipment slots. Inventory. Party-level state: florins, groschens, pfenniges, bank notes, fame, and the Philosopher's Stone. Edit any field and save back.
+**Fonts.** The game's bitmap font sets rendered glyph by glyph. Editing is supported — for anyone working on a port or a translation.
 
-### Data
+**Archive.** A browser for the CAT archive format that underlies most of the game's asset storage. Navigate the directory, preview entries inline (images render as images, everything else shows in a hex view), and extract files individually.
 
-The world data files decoded into human-readable tables.
+**Research.** The forward edge of the project. Viewers for the named image-bank format, a workbench for the PAN presentation format, a standalone DRLE decompressor, and general-purpose hex viewers for data structures that are still being decoded. These are not finished tools — they are surfaces for ongoing analysis work.
 
-**Enemies** — all 71 enemy types and 82 named enemies. Attributes, skills, weapon types, armor and shield assignments, palette references, variant counts.
+## The Formats the Community Did Not Document
 
-**Locations** — all 414 world locations with icon type, map coordinates, city size, and name.
+The well-documented formats are well-served by the existing tools. Where DARK adds something genuinely new is in the formats that were not previously understood.
 
-**Items / Saints / Formulae** — from `DARKLAND.LST`. Item definitions with all five flag bitmasks decoded, weight, quality, and value. Saint names (full and short). Formula names.
+The PAN format — the animated scene container used for the entire intro sequence — had no public documentation before this project. The format, its blit bytecode grammar, and the player architecture in the executable were all recovered through runtime tracing of the live DOS binary. The same applies to the DRLE compression used inside PAN files, to the BANNER.DAT startup resource, to the COMMONSP.IMG sprite bank and its named subrecord structure, and to the late OPENING2 pipeline that drives animated elements through a reused overlay resolver.
 
-**World Map** — an interactive viewer for `DARKLAND.MAP`. The 328×932 hex-grid wilderness map rendered from its RLE tile data and the two PIC tile palettes.
+The workbench's Research section is where that work is being turned into tooling. It is a work in progress by definition.
 
-**Cities** — all 92 cities from `DARKLAND.CTY`. The full 19-field city struct: short name, full name, coordinates, dock connections, building-presence bitmask, shop quality ratings, all named locations within the city.
+## A Validation Layer
 
-### Text
+One feature worth calling out specifically: the validation report. After loading a game folder, the tool can run a consistency check across the loaded world data — verifying city dock destinations, location references, enemy item assignments, palette range bounds, and dialog option counts. When the format decode is wrong somewhere, the validator is often what surfaces it first.
 
-**Dialog Cards** — `DARKLAND.MSG` conversation trees with all branches and options, readable as structured text rather than a packed binary blob.
+## Download
 
-**Descriptions** — the 92 city descriptions from `DARKLAND.DSC`, 80 bytes each, cross-referenced with city order.
+**[PLACEHOLDER_LINK]**
 
-### Images
-
-**PIC Images** — palette-indexed sprite sheets decoded and rendered. Palette-aware: the tool understands the standard VGA palette and displays images correctly.
-
-**IMC Sprites** — tactical combat sprites with enemy palette overlay support. The palette-chunk system from `ENEMYPAL.DAT` is applied so sprites render in the colours the game would actually show.
-
-### Fonts
-
-The game's bitmap font sets from `FONTS.FNT` and `FONTS.UTL`, rendered glyph-by-glyph. Editable — if you want to patch font glyphs for a port or a mod, this is where you do it.
-
-### Archive
-
-A CAT archive browser for all the game's packed assets: `E00C.CAT`, `M00C.CAT`, `MSGFILES`, `EINFO.CAT`, and others. Navigate the directory, preview files inline (PIC images shown as images; everything else shown in a hex view), and extract individual entries to disk.
-
-This is where the format RE work on the CAT archive structure — 24-byte directory entries, timestamp, length, offset — turns into something practical.
-
-### Research
-
-The forward-looking section. Tools for formats that are still being decoded:
-
-- **IMG Banks** — viewer for the named image-bank format (`COMMONSP.IMG`, `BATTLEGR.IMG`, and their relatives).
-- **PAN Sequences** — a workbench for `OPENING*.PAN` playback research.
-- **DRLE Decompressor** — the DRLE decompressor exposed as a standalone tool; useful for testing individual compressed streams.
-- **Miscellaneous** — additional research files and hex views for undocumented or partially-decoded data.
-
-These are live research surfaces, not finished features. The point is to have the tooling close to the analysis.
-
----
-
-## Under the Hood
-
-DARK bundles a `darklands` Python package that contains all the format readers and writers accumulated over the project. The library includes:
-
-- Readers for ENM, LOC, MSG, LST, SAV, IMC, ENEMYPAL, DRLE
-- Format parsers for DSC, CTY, FNT, PIC
-- CAT archive extraction
-- World map writer
-- LZW and RLE decompression
-
-Every format the app shows was first documented in the KB, then implemented as a library reader, then surfaced in DARK. The tool is downstream of the RE work, not upstream of it.
-
----
-
-## Validation
-
-One of the more useful features for development work is the built-in validator. **View → Validation Report** runs a consistency check across the loaded world data:
-
-- 92 cities cross-checked for dock destination validity
-- 414 locations checked for reference integrity
-- Enemy type item references checked against the item table
-- Palette range checks on enemy type records
-- Dialog option count checks across MSG cards
-
-The validator reports problems with clickable navigation to the relevant tool and field. When a format decode is wrong, it shows up here.
-
----
-
-## Why It Exists
-
-The longer-term goal of this project is a C# rewrite of Darklands — new code, original data, the same game. That rewrite needs a complete understanding of every data file the original engine touches.
-
-DARK is the workbench that makes that understanding practical. It is also a way of making the format research useful to anyone in the community who wants to explore the game's internals — without needing to understand segmented 16-bit real-mode x86 assembly to do it.
-
-The tool is dedicated to Arnold Hendrick, the lead designer of Darklands.
-
----
-
-> **Download:** Available soon — [link to be added when 1.0 ships]([PLACEHOLDER_LINK])
+The tool is a community project, developed openly alongside the broader reverse engineering work documented in these devlogs.
