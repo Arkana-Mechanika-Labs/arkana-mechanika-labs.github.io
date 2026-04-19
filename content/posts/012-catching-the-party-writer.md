@@ -3,8 +3,8 @@ title: "Devlog #012 - Catching the Party Writer in the Act"
 date: 2026-04-10T00:00:00
 draft: false
 tags: ["phase2", "runtime", "spice86", "dosbox-x", "party", "overlay", "memory-write"]
-description: "A wrong hypothesis, several empty breakpoint sessions, a new emulator backend, and the exact instruction that writes a character into the party — all in one week."
-summary: "A wrong hypothesis, several empty breakpoint sessions, a new emulator backend, and the exact instruction that writes a character into the party — all in one week."
+description: "A wrong hypothesis, several empty breakpoint sessions, a new emulator backend, and the exact instruction that writes a character into the party, all in one week."
+summary: "A wrong hypothesis, several empty breakpoint sessions, a new emulator backend, and the exact instruction that writes a character into the party, all in one week."
 ---
 
 _Published April 10, 2026_
@@ -55,8 +55,8 @@ anything writes to this address." You do not need to know where the write comes 
 need to know what address gets written.
 
 We knew exactly what address gets written: `DS:0x9C69`, the hot-slot status byte for slot 0.
-Linear address `0x251353` in this run. One probe, and we would catch whatever code writes there
-— wherever it lived.
+Linear address `0x251353` in this run. One probe, and we would catch whatever code writes there,
+wherever it lived.
 
 ---
 
@@ -88,21 +88,21 @@ containing overlay segment was `15DF`.
 
 ## The overlay structure
 
-`15DF` is a runtime overlay — not mapped in Ghidra's static image. But halted on the writer,
+`15DF` is a runtime overlay, not mapped in Ghidra's static image. But halted on the writer,
 Spice86 could dump it: the full region `15DF:0000-0EFF`, readable as hex from live memory.
 
 That dump revealed the surrounding structure. Working backward from the writer at `15DF:0D5F`:
 
-**`15DF:0329` — the far-entry gate.** This is a boolean wrapper at the tail of an existing far
+**`15DF:0329`: the far-entry gate.** This is a boolean wrapper at the tail of an existing far
 frame. It compares `AX` with `0x011B`, converts the result into a 0/1 stack argument for the
 function below, and jumps back toward `0x005B` on failure. On the matching path it does `PUSH CS
 / CALL near 0x0348`. It is a dispatcher, not the body of `party_add_member` itself.
 
-**`15DF:0348` — the inner worker.** The near-call target. The bytes at this address show a
+**`15DF:0348`: the inner worker.** The near-call target. The bytes at this address show a
 normal function prologue and immediate setup work. This is the best current candidate for the
 actual add-to-party implementation.
 
-**`15DF:0D59–0D5F` — the writer/finalization block.** Below the worker. The slot-status write
+**`15DF:0D59–0D5F`: the writer/finalization block.** Below the worker. The slot-status write
 happens here, followed by a sequence of far-calls to per-slot callback routines at `0B3D:2049`,
 `017D:1588`, `017D:1716`, and `081E:1DE2`.
 
@@ -151,11 +151,11 @@ mapped across only when a live session confirms the equivalence.
 
 ## The short version
 
-- Chased hot-slot state `0x03` through five DOSBox-X sessions — never appeared on the tested paths
+- Chased hot-slot state `0x03` through five DOSBox-X sessions; never appeared on the tested paths
 - Spice86 added to the toolchain; MEMORY_WRITE breakpoints on `DS:0x9C69` immediately trapped the
   party writer
-- Write is direct `00 → 01`, not via deferred-load state `03` — the old hypothesis was wrong
+- Write is direct `00 → 01`, not via deferred-load state `03`; the old hypothesis was wrong
 - Exact writer: `15DF:0D5F: mov byte ptr [bx + 0x9c69], 0x01`
-- Overlay dump `15DF:0000-0EFF` recovered from live memory — bytes in hand for static reconstruction
+- Overlay dump `15DF:0000-0EFF` recovered from live memory; bytes in hand for static reconstruction
 - Call chain confirmed: gate (`15DF:0329`) → inner worker (`15DF:0348`) → writer (`15DF:0D5F`)
 - Next: recover the full routine around `15DF:0348` and name `party_add_member` definitively
