@@ -8,11 +8,12 @@ width: wide
   <div class="drp-hero-copy">
     <div class="drp-hero-eyebrow">Arkana Mechanika Labs</div>
     <p class="drp-hero-tagline">Reverse Engineering the Classic 1992 DOS RPG</p>
-    <p class="drp-hero-subtitle">Bringing MicroProse's 1992 masterpiece to the modern world through AI-assisted analysis and hybrid ASM/C# technology powered by Spice86</p>
-    <div class="drp-hero-status">⚡ 382 of 388 functions named &nbsp;·&nbsp; Phase 2 in progress &nbsp;·&nbsp; Dispatch table fully decoded</div>
+    <p class="drp-hero-subtitle">Bringing MicroProse's 1992 masterpiece to the modern world through AI-assisted reverse engineering and deep format documentation</p>
+    <div class="drp-hero-status">⚡ Phase 1 complete &nbsp;·&nbsp; Phase 2 active &nbsp;·&nbsp; All file formats documented</div>
     <div class="drp-hero-buttons">
       <a href="/posts/" class="drp-btn drp-btn-primary">Read the Devlogs</a>
       <a href="/formats/" class="drp-btn drp-btn-outline">Explore File Formats</a>
+      <a href="/tools/" class="drp-btn drp-btn-outline">Explore the Tools</a>
     </div>
   </div>
   <div class="drp-hero-art">
@@ -32,11 +33,11 @@ width: wide
 
 Darklands is a 1992 MicroProse RPG set in a gritty, historically grounded medieval Germany, no elves, no high fantasy, just Raubritters, saints, alchemists, and the very real fear of dying of plague before you reach Nürnberg. It is one of the most ambitious RPGs of its era, and it has only ever been playable through DOS emulation.
 
-The goal here is to change that. The project works in three phases: map the executable, understand it, then rewrite it function by function into native C# using the [Spice86](https://github.com/OpenRakis/Spice86) framework, same game logic, same data files, same experience, running natively on modern hardware.
+The goal here is to change that. The project works in three phases: map the executable, understand it deeply, then rewrite it function by function into native C# — same game logic, same data files, same experience, running natively on modern hardware without a DOS emulator.
 
-An AI agent (Claude) drives the analysis autonomously, session after session: naming functions, mapping data structures, and building a comprehensive knowledge base of how the game actually works.
+An AI agent (Codex) drives the analysis autonomously, session after session: naming functions, mapping data structures, and building a comprehensive knowledge base of how the game actually works.
 
-**Toolchain:** Ghidra for static disassembly &nbsp;·&nbsp; patched DOSBox-X for guided interactive runtime sessions &nbsp;·&nbsp; QEMU + FreeDOS + GDB for low-level tracing &nbsp;·&nbsp; Claude as the AI reasoning engine
+**Toolchain:** Ghidra for static disassembly &nbsp;·&nbsp; patched DOSBox-X for guided interactive runtime sessions &nbsp;·&nbsp; Codex as the AI reasoning engine
 
 <div class="drp-screenshots">
   <figure class="drp-screenshot">
@@ -62,9 +63,9 @@ An AI agent (Claude) drives the analysis autonomously, session after session: na
       <span class="drp-phase-badge complete">Complete</span>
     </div>
     <div class="drp-phase-body">
-      <p>Before anything can be rewritten, every function needs a name. The AI agent worked through all 388 functions across 14 code segments, naming each one by analysing Ghidra pseudocode and cross-referencing runtime behaviour observed under QEMU/GDB.</p>
-      <p>382 of 388 functions are now named. Key systems identified: the <strong>RTLink overlay manager</strong> (which appends 1.5 MB of overlay code after the 174 KB main executable), the <strong>Borland C runtime</strong>, the <strong>LZW sprite decoder</strong>, the <strong>LZSS decompressor</strong>, the <strong>resource streaming system</strong>, and the <strong>99-state game loop</strong> dispatched via a far function pointer table.</p>
-      <p>Static analysis was complemented by a custom patched DOSBox-X workflow: the agent sets breakpoints and captures runtime state while a human pilot navigates the game's graphical menus. City navigation gates and the world-map hook were confirmed this way.</p>
+      <p>Before anything can be rewritten, every function needs a name. The AI agent worked through all 388 functions across 14 code segments, naming each one by analysing Ghidra pseudocode and cross-referencing runtime behaviour captured under a custom patched DOSBox-X instance.</p>
+      <p>All 388 functions are named. Key systems identified: a <strong>custom record-driven runtime loader</strong> (an RTLink-derived overlay system that packs the game's entire overlay code inside DARKLAND.EXE itself, with 0x12-byte resolver records and a multi-level dispatcher hierarchy), the <strong>Borland C runtime</strong>, the <strong>LZW sprite decoder</strong>, the <strong>LZSS decompressor</strong>, the <strong>resource streaming system</strong>, and the <strong>99-state game loop</strong> dispatched via a far function pointer table.</p>
+      <p>The DOSBox-X workflow was essential for corroborating static analysis: the agent sets breakpoints and captures register and memory state while a human pilot navigates the graphical menus. Add-to-party, city navigation, the world-map hook, and the overlay dispatcher were all confirmed this way.</p>
     </div>
   </div>
 
@@ -75,8 +76,9 @@ An AI agent (Claude) drives the analysis autonomously, session after session: na
       <span class="drp-phase-badge in-progress">In Progress</span>
     </div>
     <div class="drp-phase-body">
-      <p>Having a name for every function is only the beginning. Phase 2 goes inside each subsystem to understand exactly what it does: how data structures are laid out in memory, how algorithms work, how the game state machine transitions between its 99 states.</p>
-      <p>Confirmed so far: the <strong>main loop dispatch</strong> (4-instruction far-call sequence through a runtime-loaded table), the <strong>in-memory character hot-slots</strong> (5 slots × 128 bytes at <code>0x9C00</code>), the <strong>RNG</strong> (linear congruential generator, seed at <code>0x7B20</code>), a <strong>LZW decompressor</strong> in the renderer segment (2048-entry code table, variable-width codes), and the <strong>dynamic INT builder</strong> (writes <code>0xCD 0xnn</code> bytes at runtime on the stack). Character struct base, save/load, and full state handler identification are ongoing.</p>
+      <p>Having a name for every function is only the beginning. Phase 2 goes inside each subsystem to understand exactly what it does: how data structures are laid out in memory and on disk, how algorithms work, how the game state machine transitions between its 99 states.</p>
+      <p>Completed so far: the <strong>full file format catalogue</strong> is documented — save files, the CAT archive system, all world data structures (locations, cities, enemies, items, saints, alchemy), the wilderness map (328×932 hex grid, RLE encoded), the PAN animated presentation format, DGT audio, bitmap fonts, and dialog trees; the <strong>runtime loader</strong> is fully characterised as a custom record-driven system distinct from standard RTLink; the <strong>main loop dispatch</strong> (4-instruction far-call sequence through a runtime-loaded table), <strong>character hot-slots</strong> (5 slots × 128 bytes at <code>0x9C00</code>), the <strong>RNG</strong> (LCG, seed at <code>0x7B20</code>), and the <strong>combat tile archive</strong> (BC: 65 entries, 7 tile families, 5 environments) are all mapped. The DOSBox-X hybrid workflow has matured into a reliable collaboration between the AI agent, the emulator, and a human pilot.</p>
+      <p>Still in progress: the full character struct base address, save/load function mapping, and complete state handler identification across all 99 game states.</p>
     </div>
   </div>
 
@@ -87,8 +89,8 @@ An AI agent (Claude) drives the analysis autonomously, session after session: na
       <span class="drp-phase-badge planned">Planned</span>
     </div>
     <div class="drp-phase-body">
-      <p><a href="https://github.com/OpenRakis/Spice86">Spice86</a> is a reverse engineering toolkit and PC emulator built for 16-bit real mode x86 programs. Its key capability: the original DOS executable runs <em>alongside</em> C# override functions in a hybrid execution model. You replace one function at a time, verify it behaves identically, and move on to the next. The game remains fully playable throughout.</p>
-      <p>This is exactly how Cryo's 1992 Dune game was reverse engineered in the <a href="https://openrakis.github.io/Cryogenic/">Cryogenic</a> project. Phase 3 applies the same approach to Darklands: each analysed function from Phase 2 becomes a C# override, validated against the real executable. First milestone: the title screen rendering entirely in C#.</p>
+      <p>Phase 3 has not started yet — it begins once Phase 2 has produced sufficient coverage of the game's core systems. The planned approach uses <a href="https://github.com/OpenRakis/Spice86">Spice86</a>, a reverse engineering framework for 16-bit real-mode x86 programs. Its key capability: the original DOS executable runs <em>alongside</em> C# override functions in a hybrid execution model. You replace one function at a time, verify it behaves identically, and move on to the next. The game remains fully playable throughout.</p>
+      <p>This is exactly how Cryo's 1992 Dune game was reverse engineered in the <a href="https://openrakis.github.io/Cryogenic/">Cryogenic</a> project. Phase 3 will apply the same approach to Darklands: each system fully mapped in Phase 2 becomes a C# override, validated against the real executable.</p>
     </div>
   </div>
 
@@ -105,7 +107,7 @@ An AI agent (Claude) drives the analysis autonomously, session after session: na
   </div>
   <div class="drp-goal">
     <h3>Incremental Rewriting</h3>
-    <p>Gradually replace x86 assembly routines with clean, documented C# code using Spice86 overrides, maintaining 100% behavioral compatibility with the original executable.</p>
+    <p>Gradually replace x86 assembly routines with clean, documented C# code, one function at a time, maintaining 100% behavioral compatibility with the original executable throughout.</p>
   </div>
   <div class="drp-goal">
     <h3>Document Everything</h3>
