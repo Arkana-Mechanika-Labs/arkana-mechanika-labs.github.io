@@ -6,7 +6,7 @@ summary: "The .DGT audio format decoded: headerless unsigned 8-bit PCM, mono, 80
 
 ## An Unidentified File
 
-Every Darklands session opens the same way: a `.PAN` image sequence — a slow pan across a medieval battlefield. It has always been clear that something was supposed to go with it. `OPENDARK.DGT` sits next to `OPENDARK.PAN` in the game directory, and the name is not subtle. *DGT.* Digital.
+Every Darklands session opens the same way: a `.PAN` image sequence, a slow pan across a medieval battlefield. It has always been clear that something was supposed to go with it. `OPENDARK.DGT` sits next to `OPENDARK.PAN` in the game directory, and the name is not subtle. *DGT.* Digital.
 
 Until now, nobody had formally documented what was in it.
 
@@ -16,16 +16,16 @@ Until now, nobody had formally documented what was in it.
 
 ```
 Offset    Size    Description
-0x0000    N       Raw PCM samples — one byte each, unsigned, silence ≈ 128
+0x0000    N       Raw PCM samples: one byte each, unsigned, silence ≈ 128
 ```
 
 That is the entire format specification. There is nothing else in the file.
 
 ## Finding the Sample Rate
 
-Because there is no header, the sample rate has to come from somewhere else — either the engine hardcodes it, or it reads it from a config structure not in the file itself. The engine side has not been traced yet, so the rate was determined experimentally: convert the raw bytes to WAV at several candidate rates and compare.
+Because there is no header, the sample rate has to come from somewhere else: either the engine hardcodes it, or it reads it from a config structure not in the file itself. The engine side has not been traced yet, so the rate was determined experimentally: convert the raw bytes to WAV at several candidate rates and compare.
 
-At **8000 Hz**, `OPENDARK.DGT` plays back as recognisable, natural-sounding audio. At 11025 Hz, the same audio is noticeably faster and higher-pitched — plausible for a slightly different hardware configuration, but not the best match. 8000 Hz is consistent with one of the standard Sound Blaster DSP playback rates for the era.
+At **8000 Hz**, `OPENDARK.DGT` plays back as recognisable, natural-sounding audio. At 11025 Hz, the same audio is noticeably faster and higher-pitched, plausible for a slightly different hardware configuration, but not the best match. 8000 Hz is consistent with one of the standard Sound Blaster DSP playback rates for the era.
 
 The confirmed working conversion:
 
@@ -48,7 +48,7 @@ with wave.open("OPENDARK.wav", "wb") as f:
 
 ## Where It Fits in the Engine
 
-The presentation system pairs `.DGT` with `.PAN` files. The engine loads both, then plays them in sync through a presentation loop — audio streaming alongside image sequence rendering. The likely hardware path is Sound Blaster DAC output via DMA-based buffer feeding, driven by a timer, which was the standard playback mechanism for raw PCM in 1992 DOS games.
+The presentation system pairs `.DGT` with `.PAN` files. The engine loads both, then plays them in sync through a presentation loop, with audio streaming alongside image sequence rendering. The likely hardware path is Sound Blaster DAC output via DMA-based buffer feeding, driven by a timer, which was the standard playback mechanism for raw PCM in 1992 DOS games.
 
 For the rewrite, the format itself requires no parsing at all:
 
@@ -59,7 +59,7 @@ for (int i = 0; i < raw.Length; i++)
     samples[i] = (raw[i] - 128) / 128f;
 ```
 
-The complexity is entirely in the engine layer — sample rate selection, hardware abstraction, buffer timing. The format is trivial. This is actually good news: it means the audio data will survive a rewrite intact, and the only work is reimplementing the playback driver.
+The complexity is entirely in the engine layer: sample rate selection, hardware abstraction, buffer timing. The format is trivial. This is actually good news: it means the audio data will survive a rewrite intact, and the only work is reimplementing the playback driver.
 
 ## What Remains Open
 

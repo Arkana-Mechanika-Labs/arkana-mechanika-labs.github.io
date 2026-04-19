@@ -37,7 +37,7 @@ behavior should be assumed until each piece is independently verified.
 The loader operates in two observably different modes depending on when it runs:
 
 **Startup bulk-loading mode** fires immediately at launch, before any intro or menu. It reads
-large chunks of data — likely initialization data, resources, or the resident code image itself —
+large chunks of data (likely initialization data, resources, or the resident code image itself)
 in a boundary-limited loop. Each iteration reads as much as will fit without crossing a
 paragraph boundary, advances the destination segment, and loops until nothing remains.
 

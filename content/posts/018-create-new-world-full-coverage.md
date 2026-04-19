@@ -14,7 +14,7 @@ The Create New World slot-commit worker has been recovered incrementally across 
 | `RUNTIME_1C85_0700_EXPANDED` | `1C85:0700-21FF` | `0x32000` |
 | `RUNTIME_1C85_0500_WIDE` | `1C85:0500-21FF` | `0x36000` |
 
-Each window was taken from a live DOSBox-X session while the Create New World family was resident. The first gave us the trusted entry point. The second gave us the slot-scan branch split. The third — taken this session — closes the tail.
+Each window was taken from a live DOSBox-X session while the Create New World family was resident. The first gave us the trusted entry point. The second gave us the slot-scan branch split. The third (taken this session) closes the tail.
 
 `RUNTIME_1C85_0500_WIDE` is now the preferred static surface. The earlier blocks are kept as overlap comparison slices.
 
@@ -27,7 +27,7 @@ After [devlog 016](/posts/016-the-world-slot-machine/), the recovered body ended
 0x32700 -> 0x3000:405C
 ```
 
-These were exits into an unresolved continuation — real code that follows the slot-indexed table copies, but beyond what the previous dump captured. The only way to recover it without guessing was another wider dump.
+These were exits into an unresolved continuation: real code that follows the slot-indexed table copies, but beyond what the previous dump captured. The only way to recover it without guessing was another wider dump.
 
 The `1C85:0500-21FF` range brought those exits inside the window. The tail is no longer unresolved.
 
@@ -37,12 +37,12 @@ With all three windows reconciled, the worker now has seven confirmed anchor poi
 
 | Flat Address | Anchor |
 |-------------|--------|
-| `0x364AE` | Bounded worker gate — compare `[0xE7DC]` against zero, exit on non-positive |
-| `0x36556` | Existing-slot scan — walk four local entries against `DS:E7DA` (current world ID) |
-| `0x3657D` | Empty-slot scan — walk the same four entries for `0xFFFF` |
-| `0x365BA` | Commit slot setup — store world ID, copy slot name from `A668 + slot*0x80`, refresh `E88E` |
-| `0x36697` | Default-template / seed burst — mirror 24 bytes into globals `E753..E76A` and per-slot record |
-| `0x36785` | Post-init refresh / presentation phase — update display state |
+| `0x364AE` | Bounded worker gate: compare `[0xE7DC]` against zero, exit on non-positive |
+| `0x36556` | Existing-slot scan: walk four local entries against `DS:E7DA` (current world ID) |
+| `0x3657D` | Empty-slot scan: walk the same four entries for `0xFFFF` |
+| `0x365BA` | Commit slot setup: store world ID, copy slot name from `A668 + slot*0x80`, refresh `E88E` |
+| `0x36697` | Default-template / seed burst: mirror 24 bytes into globals `E753..E76A` and per-slot record |
+| `0x36785` | Post-init refresh / presentation phase: update display state |
 | `0x36801` | Slot-indexed payload copy + activation + follow-up initializer chain |
 
 These addresses are from the `RUNTIME_1C85_0500_WIDE` block. The same structure carries through all three windows at different flat offsets (the relative layout is preserved; only the base changes between materialization sessions).
@@ -56,13 +56,13 @@ The activation chain at `0x36801` is the current frontier of the recovered body:
 - Runs two slot-indexed follow-up initializers
 - Refreshes presentation state
 
-This is structurally identical to the write pattern seen in [devlog 015](/posts/015-the-party-writer-has-roommates/) for the party-add case in the `15DF` overlay. The same table bases, the same slot activation write, the same follow-up initializer shape — the slot management model is consistent across both paths.
+This is structurally identical to the write pattern seen in [devlog 015](/posts/015-the-party-writer-has-roommates/) for the party-add case in the `15DF` overlay. The same table bases, the same slot activation write, the same follow-up initializer shape; the slot management model is consistent across both paths.
 
 After `0x36801`, execution continues into code that the widened block still has not fully characterized. The next static session should treat "what happens after `0x36801`" as the single highest-value bounded question for this function.
 
 ## Cross-Window Validation
 
-Having three overlapping windows for the same runtime body is not redundant — it is the validation protocol. Each window was captured in a separate live session with the overlay freshly loaded. All three agree over their overlapping ranges:
+Having three overlapping windows for the same runtime body is not redundant: it is the validation protocol. Each window was captured in a separate live session with the overlay freshly loaded. All three agree over their overlapping ranges:
 
 - The slot-scan logic matches at every overlap address
 - The resident helper trio `0xDCB3`, `0xCF95`, `0xA884` appears in the same order in all three

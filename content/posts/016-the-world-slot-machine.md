@@ -1,14 +1,14 @@
 ---
 title: "Devlog #016 - The World Slot Machine"
 date: 2026-04-12T08:00:00
-summary: "A wide runtime dump of the 1C85 overlay materialized the Create New World function in Ghidra. It turns out to be a four-slot commit worker — and it initializes slots from the same table bases as Add to Party."
+summary: "A wide runtime dump of the 1C85 overlay materialized the Create New World function in Ghidra. It turns out to be a four-slot commit worker that initializes slots from the same table bases as Add to Party."
 ---
 
 ## The Target
 
-The game's main loop dispatches through a table of far pointers keyed by state number. State `0x29` is the startup state — it includes the path through `Quickstart` and `Create New World`. The `1C85` overlay family handles that state, and the Create New World path lives somewhere inside it.
+The game's main loop dispatches through a table of far pointers keyed by state number. State `0x29` is the startup state; it includes the path through `Quickstart` and `Create New World`. The `1C85` overlay family handles that state, and the Create New World path lives somewhere inside it.
 
-A bounded slice of `1C85` had already been captured in an earlier session and materialized in Ghidra as `RUNTIME_1C85_0900`. That gave us a trusted entry label at flat address `0x1D1FE`. But the window was narrow — the function prologue was outside the captured range, and the body was truncated.
+A bounded slice of `1C85` had already been captured in an earlier session and materialized in Ghidra as `RUNTIME_1C85_0900`. That gave us a trusted entry label at flat address `0x1D1FE`. But the window was narrow: the function prologue was outside the captured range, and the body was truncated.
 
 The session described here widened the dump to `1C85:0700-21FF`, producing a new block `RUNTIME_1C85_0700_EXPANDED`. Both windows agree over their overlap. The wider block is the working surface.
 
@@ -49,7 +49,7 @@ At `0x32601`, three bulk-transfer calls initialize the slot's data regions from 
 
 Readers of [devlog 015](/posts/015-the-party-writer-has-roommates/) will recognize the first two bases immediately. The add-to-party case in the `15DF` overlay uses `0x082C + slot*0x14` and `0x07BE + slot*0x16` for the same bulk-transfer step before marking a party slot active.
 
-Both flows — creating a world slot and adding a character to the party — draw initialization data from the same pair of tables. The slot management model is unified: the same table-driven initialization applies whether the slot being claimed is a saved world or a party member.
+Both flows (creating a world slot and adding a character to the party) draw initialization data from the same pair of tables. The slot management model is unified: the same table-driven initialization applies whether the slot being claimed is a saved world or a party member.
 
 ## The Activation Write
 
@@ -59,7 +59,7 @@ After the table copies, the slot is marked active:
 [0x9C69 + slot*0x80] = 1
 ```
 
-This is the same write pattern as the party activation flag. The `0x9C00` hot-slot array is not just for party members — it also tracks active world slots via the same stride and the same offset convention.
+This is the same write pattern as the party activation flag. The `0x9C00` hot-slot array is not just for party members; it also tracks active world slots via the same stride and the same offset convention.
 
 After the activation write, two slot-indexed follow-up initializers run, then presentation state is refreshed, and execution exits into code beyond the current dump window.
 
@@ -76,6 +76,6 @@ The same three functions (`0xDCB3`, `0xCF95`, `0xA884`) recur here as in other h
 
 ## The Limits of the Current Window
 
-The dump covers `1C85:0700-21FF`. The function prologue is still outside that range — the true entry point is unknown, and the argument layout has not been confirmed from actual caller evidence. The body is recovered as a truncated slice.
+The dump covers `1C85:0700-21FF`. The function prologue is still outside that range; the true entry point is unknown, and the argument layout has not been confirmed from actual caller evidence. The body is recovered as a truncated slice.
 
 What is established: the bounded behavior from the trusted entry at `0x1D1FE` through the commit tail. The structure is stable across both recovered windows. That is enough to treat this as the Create New World slot-commit body in the analysis model, with the caveat that the outer caller/argument shape is not yet pinned.

@@ -6,7 +6,7 @@ summary: "After months of incremental tracing, the Darklands runtime loader is f
 
 ## The Question That Kept Coming Back
 
-Every session that touched the loader produced more detail but left the same question open: *what is this thing, exactly?* Earlier devlogs established the thunk table structure, the resolver records, the seek/read pattern, the relocation pass. But the pieces were confirmed individually. The full pipeline — from thunk entry to resident loaded code — had not been traced as a single continuous sequence.
+Every session that touched the loader produced more detail but left the same question open: *what is this thing, exactly?* Earlier devlogs established the thunk table structure, the resolver records, the seek/read pattern, the relocation pass. But the pieces were confirmed individually. The full pipeline (from thunk entry to resident loaded code) had not been traced as a single continuous sequence.
 
 This session closed that gap. The loader pipeline is now proven end-to-end at the instruction level.
 
@@ -47,9 +47,9 @@ CHAINED DISPATCH
 Each callable entry is exactly 10 bytes:
 
 ```asm
-jmp far  <target>      ; 5 bytes — jump to already-loaded code, or...
-dw       <metadata_id> ; 2 bytes — resolver record index
-call     052B          ; 3 bytes — trigger the loader if not resident
+jmp far  <target>      ; 5 bytes: jump to already-loaded code, or...
+dw       <metadata_id> ; 2 bytes: resolver record index
+call     052B          ; 3 bytes: trigger the loader if not resident
 ```
 
 The `call 052B` path is what fires when the target is not yet in memory. `052B` rewrites the pending far return to the continuation bridge and kicks off the resolver chain. If the target is already resident, the `jmp far` at the top of the thunk jumps directly to it and `call 052B` is never reached.
@@ -65,7 +65,7 @@ The full field map, confirmed from the traced loader path:
 | `+00` | Destination load segment |
 | `+02` | Pointer to source descriptor |
 | `+04/+06` | Packed file position (seek target) |
-| `+07` | Flags — bit `0x02` = resident |
+| `+07` | Flags: bit `0x02` = resident |
 | `+08` | Total resident paragraph span |
 | `+0A` | Relocation entry count |
 | `+0C` | Chained dispatch ID (`0xFFFF` = none) |
@@ -74,14 +74,14 @@ The full field map, confirmed from the traced loader path:
 
 ### Source Descriptors
 
-The `+02` field in the resolver record is not a direct filename — it is a pointer to a source descriptor. The descriptor format:
+The `+02` field in the resolver record is not a direct filename; it is a pointer to a source descriptor. The descriptor format:
 
 ```
-byte 0:    flags (mutable — the loader ORs bit 0x01 to mark active)
+byte 0:    flags (mutable: the loader ORs bit 0x01 to mark active)
 byte 1..:  ASCIIZ filename
 ```
 
-For the confirmed Create New World path, `+02` resolves to descriptor `0x1763`, which contains `"C:\DARKLAND.EXE"`. The loader opens the EXE itself as the data source, seeks into it for the overlay payload, and reads from it directly. This explains why there is no separate `.OVL` file — the overlay code lives inside the EXE after the resident image.
+For the confirmed Create New World path, `+02` resolves to descriptor `0x1763`, which contains `"C:\DARKLAND.EXE"`. The loader opens the EXE itself as the data source, seeks into it for the overlay payload, and reads from it directly. This explains why there is no separate `.OVL` file: the overlay code lives inside the EXE after the resident image.
 
 The descriptor system is polymorphic by design. The `+02` field is described as a descriptor *pointer*, not a filename pointer, because different descriptor types are possible. The current evidence covers the file-backed case; other source types may exist and should not be ruled out yet.
 
@@ -97,7 +97,7 @@ Reads `[record+02]` to get the descriptor pointer. Checks whether the source fil
 mov ax, 4200h
 int 21h          ; DOS LSEEK from start of file
 ```
-The seek position is computed from `[record+04/+06]` — the packed file position fields.
+The seek position is computed from `[record+04/+06]`, the packed file position fields.
 
 **3. Load.**
 ```asm
@@ -111,7 +111,7 @@ The loader reads the image in chunks, converting paragraph counts to byte counts
 dx = [record+08] - [record+10]
 call clear_memory
 ```
-The difference between the total resident paragraph span (`+08`) and the loaded image size (`+10`) is the BSS tail — uninitialised data that needs to be zeroed before code runs. The loader clears it explicitly.
+The difference between the total resident paragraph span (`+08`) and the loaded image size (`+10`) is the BSS tail, uninitialised data that needs to be zeroed before code runs. The loader clears it explicitly.
 
 **5. Relocation.**
 ```asm
@@ -141,7 +141,7 @@ mov ax, [record+0C]
 cmp ax, 0FFFFh
 jne → call 021C(ax)
 ```
-If `[record+0C]` is not `0xFFFF`, the loader immediately triggers a second load using that ID as the next metadata index. This is how multi-segment loads are chained — the first loaded record can specify a follow-on record that must also be loaded before execution continues.
+If `[record+0C]` is not `0xFFFF`, the loader immediately triggers a second load using that ID as the next metadata index. This is how multi-segment loads are chained: the first loaded record can specify a follow-on record that must also be loaded before execution continues.
 
 ## Confidence Assessment
 
@@ -155,8 +155,8 @@ The findings above sit at different confidence levels depending on how they were
 
 ## What This Changes
 
-The naming in the KB — `rtlink_call_overlay`, `rtlink_overlay_records`, and so on — remains useful as a label convention but should not be read as implying this is standard Borland RTLink. It is a custom mechanism that was either written from scratch by the Darklands team or evolved from an in-house toolkit.
+The naming in the KB (`rtlink_call_overlay`, `rtlink_overlay_records`, and so on) remains useful as a label convention but should not be read as implying this is standard Borland RTLink. It is a custom mechanism that was either written from scratch by the Darklands team or evolved from an in-house toolkit.
 
 For the Spice86 rewrite, the practical consequence is that the loader cannot be replaced with a standard overlay manager. It needs to be either reimplemented as a C# class that mirrors the same seek/read/relocate/chain behavior, or bypassed by pre-loading all segments at startup. Either way, the field map above is now accurate enough to base that decision on.
 
-The highest-value next static target is `1537:1331` — the full source resolution logic that handles all descriptor types, not just the file-backed case already confirmed.
+The highest-value next static target is `1537:1331`, the full source resolution logic that handles all descriptor types, not just the file-backed case already confirmed.

@@ -10,23 +10,23 @@ After catching the exact instruction that adds a character to the party in [devl
 
 Except the socket-driven breakpoints kept failing.
 
-The session would launch, attach, arm `11E3:052B` — the confirmed Quickstart loader entry — and then the breakpoint would simply not hit. No event. No stop. Meanwhile, if you opened the DOSBox-X debugger UI and typed `BP 11E3:052B` by hand, it hit immediately. Every time. The manual path worked. The socket-driven path did not.
+The session would launch, attach, arm `11E3:052B` (the confirmed Quickstart loader entry) and then the breakpoint would simply not hit. No event. No stop. Meanwhile, if you opened the DOSBox-X debugger UI and typed `BP 11E3:052B` by hand, it hit immediately. Every time. The manual path worked. The socket-driven path did not.
 
 This had been attributed to timing, stale state, adapter quirks. Today that explanation ran out of road.
 
 ## Divide and Conquer
 
-Rather than continuing to patch symptoms, we introduced **staged launch modes** — a way to reintroduce DOSBox-X startup arguments one group at a time and test the known anchor `11E3:052B` after each addition. The baseline (`-debug-socket` only) worked. Adding the `C:` mount worked. Adding `c:` and `darkland.exe` and `-fastlaunch` all worked. The anchor continued to hit at every stage.
+Rather than continuing to patch symptoms, we introduced **staged launch modes**: a way to reintroduce DOSBox-X startup arguments one group at a time and test the known anchor `11E3:052B` after each addition. The baseline (`-debug-socket` only) worked. Adding the `C:` mount worked. Adding `c:` and `darkland.exe` and `-fastlaunch` all worked. The anchor continued to hit at every stage.
 
 Then `-defaultconf` was added.
 
-The breakpoint stopped hitting. Not just through the socket path — in the *manual debugger UI* too. This was not a transport regression. The `-defaultconf` flag changes the runtime layout enough that the trusted `11E3:052B` anchor no longer corresponds to the same code. The whole `11E3:*` Quickstart family silently becomes invalid.
+The breakpoint stopped hitting. Not just through the socket path, but in the *manual debugger UI* too. This was not a transport regression. The `-defaultconf` flag changes the runtime layout enough that the trusted `11E3:052B` anchor no longer corresponds to the same code. The whole `11E3:*` Quickstart family silently becomes invalid.
 
-This is now a **hard guard**: `-defaultconf` is prohibited for any Darklands runtime session that relies on known anchor addresses. The guard is enforced in code — the host runner refuses to launch with that flag rather than silently producing misleading breakpoint behavior.
+This is now a **hard guard**: `-defaultconf` is prohibited for any Darklands runtime session that relies on known anchor addresses. The guard is enforced in code: the host runner refuses to launch with that flag rather than silently producing misleading breakpoint behavior.
 
 ## What the Root Cause Was
 
-Digging into why socket-driven breakpoints differed from the manual UI path revealed a separate but related issue: the socket `set_breakpoint` command was bypassing the internal DOSBox-X debugger `BP` parser path and trying to create breakpoints directly in the backend. Something in that parser path — likely a debugger-loop or cache coordination side effect — was needed for breakpoints to actually arm correctly in the running emulator.
+Digging into why socket-driven breakpoints differed from the manual UI path revealed a separate but related issue: the socket `set_breakpoint` command was bypassing the internal DOSBox-X debugger `BP` parser path and trying to create breakpoints directly in the backend. Something in that parser path (likely a debugger-loop or cache coordination side effect) was needed for breakpoints to actually arm correctly in the running emulator.
 
 The fix was to route socket `set_breakpoint` through the real `BP` parser, recover the backend breakpoint ID afterward via `list_breakpoints`, and resume the emulator only if the adapter had interrupted a running session to install the breakpoint. This made socket-driven breakpoints behave the same way as manual `BP` commands.
 

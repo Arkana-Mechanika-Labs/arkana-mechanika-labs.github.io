@@ -1,7 +1,7 @@
 ---
 title: "Devlog #017 - Tracing The Story Continues"
 date: 2026-04-12T12:00:00
-summary: "A runtime pass on the load/save screen decoded the full Down Arrow navigation path and identified four overlay families that own it — none of which are explained by the Create New World loader machinery."
+summary: "A runtime pass on the load/save screen decoded the full Down Arrow navigation path and identified four overlay families that own it, none of which are explained by the Create New World loader machinery."
 ---
 
 ## Two Paths from the Main Menu
@@ -21,17 +21,17 @@ A guided runtime session on the load/save screen, armed with the patched DOSBox-
 | `4A3E:*` | Input / action helper |
 | `4A65:*` | Redraw and list update |
 
-The session reached the controller entry point at `24A0:01C2` and the action-code decoder at `24A0:030A`, then stepped through a concrete user action — pressing Down Arrow on the save-game list — to trace the full dispatch path.
+The session reached the controller entry point at `24A0:01C2` and the action-code decoder at `24A0:030A`, then stepped through a concrete user action (pressing Down Arrow on the save-game list) to trace the full dispatch path.
 
 ## The Down Arrow Path
 
 Starting from the input helper and working outward:
 
-1. `4A3E:0049` — action-driven navigation helper. This is where keyboard input for this screen enters the picture.
+1. `4A3E:0049`: action-driven navigation helper. This is where keyboard input for this screen enters the picture.
 2. Returns to `24A0:01CB`, which is inside the enclosing controller loop at `24A0:01C2`.
-3. `24A0:030A` — the action-code decoder. It receives `AX = SI = 0x5000` for the Down Arrow action.
+3. `24A0:030A`: the action-code decoder. It receives `AX = SI = 0x5000` for the Down Arrow action.
 4. The `0x5000` case resolves to `24A0:065A`, the concrete navigation/update handler.
-5. `24A0:065A` updates four screen/list state globals — `8C4C`, `8C50`, `8C52`, `8C54` — then calls the veneer at `0C9F:04DC`.
+5. `24A0:065A` updates four screen/list state globals (`8C4C`, `8C50`, `8C52`, `8C54`) then calls the veneer at `0C9F:04DC`.
 6. `0C9F:04DC` is a thin trampoline on this path.
 7. The real redraw/update worker is `4A65:009A`. This is where the list visually refreshes after cursor movement.
 8. Returns to `24A0:067B`, back inside the `0x5000` handler.
@@ -45,21 +45,21 @@ The entry-frame reconstruction for `4A65:009A` is concrete:
 - Far return address: `24A0:067B`
 - Argument block on the stack at call time: `27F4, 00C4, 0016, 007B, 0010, 0012, 0010`
 
-The first instructions at `4A65:009A` consume these stack/frame arguments directly. This is not another veneer — it is the genuine redraw/update logic for the load/save list.
+The first instructions at `4A65:009A` consume these stack/frame arguments directly. This is not another veneer: it is the genuine redraw/update logic for the load/save list.
 
 The argument values look like display geometry: `0x00C4` = 196, `0x0016` = 22, `0x007B` = 123, `0x0010` = 16, `0x0012` = 18. These are plausibly viewport or item-row dimensions for the scrollable save-game list.
 
 ## The Loader Connection Is Missing
 
-A widened resolver-record dump around `11E3:0E80` — the Create New World record — was checked for adjacent records whose `+00` field would match `4A3E`. No match. The `4A3E` family is not currently explained by the same slice of the resolver-record table that covers Create New World metadata id `0x002B`.
+A widened resolver-record dump around `11E3:0E80` (the Create New World record) was checked for adjacent records whose `+00` field would match `4A3E`. No match. The `4A3E` family is not currently explained by the same slice of the resolver-record table that covers Create New World metadata id `0x002B`.
 
 This means the load/save screen either:
 - uses a different range of the resolver-record table (the table has more entries than the current slice shows), or
 - is loaded through a different mechanism entirely
 
-The four families identified here — `24A0`, `0C9F`, `4A3E`, `4A65` — are now confirmed runtime anchors. The highest-value next question is not "what helper does `4A65:009A` call?" but "which loader record and metadata ID owns this family?"
+The four families identified here (`24A0`, `0C9F`, `4A3E`, `4A65`) are now confirmed runtime anchors. The highest-value next question is not "what helper does `4A65:009A` call?" but "which loader record and metadata ID owns this family?"
 
-{{< figure src="/images/darkland_004.png" caption="The Quickstart party at the tavern — the state you're in when you'd press Escape to reach the main menu and choose The Story Continues." >}}
+{{< figure src="/images/darkland_004.png" caption="The Quickstart party at the tavern, the state you're in when you'd press Escape to reach the main menu and choose The Story Continues." >}}
 
 ## What This Establishes
 

@@ -124,8 +124,7 @@ After this sprint:
 - The overlay bytes `15DF:0000-0EFF` are in hand, making future static reconstruction possible
   without needing the overlay to appear in Ghidra's static image
 
-The next step is to recover the complete containing routine rooted at `15DF:0348` —
-function boundaries, full control flow, any further downstream calls — so the implementation
+The next step is to recover the complete containing routine rooted at `15DF:0348` (function boundaries, full control flow, any further downstream calls) so the implementation
 can be translated cleanly in Phase 3.
 
 ---
