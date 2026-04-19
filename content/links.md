@@ -40,24 +40,52 @@ width: normal
 
 ---
 
-## darklands.net
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.15rem;margin:1.75rem 0;">
+  <a href="http://www.darklands.net/" style="display:block;text-decoration:none;border:1px solid rgba(185,148,87,.22);border-radius:14px;overflow:hidden;background:rgba(36,22,16,.46);box-shadow:0 16px 45px rgba(0,0,0,.16);">
+    <img src="/images/dark_worldmap.png" alt="darklands.net preview" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;" />
+    <div style="padding:1rem 1.05rem 1.1rem;">
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem;">
+        <span style="display:inline-flex;width:1.65rem;height:1.65rem;align-items:center;justify-content:center;border-radius:999px;background:rgba(185,148,87,.16);color:#ddb97b;font-size:.9rem;">✦</span>
+        <span style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#b99457;">Game Reference</span>
+      </div>
+      <div style="font-weight:700;font-size:1.06rem;margin-bottom:.45rem;">darklands.net</div>
+      <p style="margin:0;color:#bcae95;line-height:1.65;font-size:.93rem;">Matt Wirkkala’s long-standing reference site: mechanics, attributes, skills, items, saints, alchemy, cities, and the wider lore of the game.</p>
+    </div>
+  </a>
 
-**[darklands.net](http://www.darklands.net/)** by Matt Wirkkala is the definitive Darklands reference site. Everything game-side lives here: mechanics, character attributes and skills, items and their stats, locations, the bestiary, alchemy formulae, saints and prayers, and the lore of the setting. The community has relied on it for decades and it remains the first place to look for anything about how the game actually plays.
+  <a href="https://groups.io/g/darklands" style="display:block;text-decoration:none;border:1px solid rgba(185,148,87,.22);border-radius:14px;overflow:hidden;background:rgba(36,22,16,.46);box-shadow:0 16px 45px rgba(0,0,0,.16);">
+    <img src="/images/dark_dialogs.png" alt="Darklands community group preview" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;" />
+    <div style="padding:1rem 1.05rem 1.1rem;">
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem;">
+        <span style="display:inline-flex;width:1.65rem;height:1.65rem;align-items:center;justify-content:center;border-radius:999px;background:rgba(185,148,87,.16);color:#ddb97b;font-size:.9rem;">✉</span>
+        <span style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#b99457;">Community</span>
+      </div>
+      <div style="font-weight:700;font-size:1.06rem;margin-bottom:.45rem;">Darklands Community Group</div>
+      <p style="margin:0;color:#bcae95;line-height:1.65;font-size:.93rem;">The active mailing list and archive of discussion, discoveries, old Yahoo Group knowledge, modding questions, and technical context.</p>
+    </div>
+  </a>
 
----
+  <a href="https://wendigo.online-siesta.com/darklands/" style="display:block;text-decoration:none;border:1px solid rgba(185,148,87,.22);border-radius:14px;overflow:hidden;background:rgba(36,22,16,.46);box-shadow:0 16px 45px rgba(0,0,0,.16);">
+    <img src="/images/dark_cat.png" alt="Wendigo research site preview" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;" />
+    <div style="padding:1rem 1.05rem 1.1rem;">
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem;">
+        <span style="display:inline-flex;width:1.65rem;height:1.65rem;align-items:center;justify-content:center;border-radius:999px;background:rgba(185,148,87,.16);color:#ddb97b;font-size:.9rem;">⌘</span>
+        <span style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#b99457;">Format Notes</span>
+      </div>
+      <div style="font-weight:700;font-size:1.06rem;margin-bottom:.45rem;">Wendigo Research Site</div>
+      <p style="margin:0;color:#bcae95;line-height:1.65;font-size:.93rem;">Dedicated Darklands research pages with file format notes, tool history, catalog observations, and documentation that still matters today.</p>
+    </div>
+  </a>
 
-## Darklands Community Group
-
-**[groups.io/g/darklands](https://groups.io/g/darklands)** is the active Darklands mailing list, successor to the original Yahoo Group where most of the early format research happened. It is still the place where players, modders, and researchers discuss the game, share discoveries, and ask questions. The group archives preserve a significant body of technical analysis from the early 2000s that underpins much of what is known about the binary formats.
-
----
-
-## Wendigo's Darklands Research Site
-
-**[wendigo.online-siesta.com/darklands](https://wendigo.online-siesta.com/darklands/)** is Wendigo's dedicated Darklands research site, hosting format notes, tools, and research documentation. The XML format specifications that describe Darklands' binary file layouts — save files, catalog archives, enemy data, location tables, and more — are the primary reference source for this project's format library and for the data layer in DARK.
-
----
-
-## Wendigo's Darklands Repository
-
-**[github.com/vvendigo/Darklands](https://github.com/vvendigo/Darklands)** is the GitHub home of Wendigo's format specifications and community tools. The XML specs are preserved here in version-controlled form, alongside extractors and viewers developed over the years. If you are building anything that reads Darklands data files, this repository is where to start.
+  <a href="https://github.com/vvendigo/Darklands" style="display:block;text-decoration:none;border:1px solid rgba(185,148,87,.22);border-radius:14px;overflow:hidden;background:rgba(36,22,16,.46);box-shadow:0 16px 45px rgba(0,0,0,.16);">
+    <img src="/images/dashboard.png" alt="Wendigo repository preview" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;" />
+    <div style="padding:1rem 1.05rem 1.1rem;">
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem;">
+        <span style="display:inline-flex;width:1.65rem;height:1.65rem;align-items:center;justify-content:center;border-radius:999px;background:rgba(185,148,87,.16);color:#ddb97b;font-size:.9rem;">⌥</span>
+        <span style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#b99457;">Repository</span>
+      </div>
+      <div style="font-weight:700;font-size:1.06rem;margin-bottom:.45rem;">Wendigo’s Darklands Repository</div>
+      <p style="margin:0;color:#bcae95;line-height:1.65;font-size:.93rem;">The GitHub home of Wendigo’s XML specifications and tools. If you are building Darklands readers, editors, or extractors, this is foundational.</p>
+    </div>
+  </a>
+</div>
