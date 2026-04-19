@@ -43,6 +43,10 @@ enableRobotsTXT = true
     url = "/faq/"
     weight = 25
   [[menu.main]]
+    name = "Tools"
+    url = "/tools/"
+    weight = 27
+  [[menu.main]]
     name = "Sponsor ♥"
     url = "https://github.com/sponsors/Arkana-Mechanika-Studios"
     weight = 30
