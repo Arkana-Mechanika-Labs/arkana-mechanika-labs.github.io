@@ -88,6 +88,8 @@ After loading a game folder, the tool can run a validation pass across the world
 
 ## Download
 
-**[PLACEHOLDER_LINK]**
+**[DARK v1.0 — Windows (64-bit)](https://github.com/Arkana-Mechanika-Labs/dos-re-agent/releases/download/dark-v1.0/DARK_v1.0.zip)**
+
+Unzip and run `DARK.exe`. Requires a Darklands installation — point the tool at your game folder on first launch.
 
 The tool is a community project, developed openly alongside the reverse engineering work documented in these devlogs.
