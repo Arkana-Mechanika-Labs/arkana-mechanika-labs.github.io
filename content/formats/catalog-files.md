@@ -115,8 +115,6 @@ This appears to be a generic streamed resource-input path used by the engine. It
 
 **Important:** `.CAT` files are not compressed containers. They are flat archives holding raw file payloads. Compression, when present, belongs to the embedded file format:
 
-- `.IMC` uses Darklands `DL-RLE` / `DRLE`
+- `.IMC` uses Darklands `DRLE`
 - `.PIC` uses its own image compression pipeline
 - `.MSG` files are structured text data, not compressed by the catalog
-
-Earlier reverse-engineering notes associated this streamed path with an apparent LZW decoder in the EXE, but that should not be read as "catalog files use LZW" in general.
