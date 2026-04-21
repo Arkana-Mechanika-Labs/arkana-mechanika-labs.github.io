@@ -49,11 +49,17 @@ Offset 0x02:  entry[0..n]  entries      - array of 24-byte directory entries
 | Offset | Size | Field | Description |
 |--------|------|-------|-------------|
 | +0x00 | 12 | `filename` | 8.3 DOS filename, null-padded to 12 bytes |
-| +0x0c | 4 | `timestamp` | Seconds since epoch (approx. 1/1/1980) |
+| +0x0c | 4 | `entry_metadata` | Native 24-byte catalog-entry metadata field; often timestamp-like, but not yet proven universal |
 | +0x10 | 4 | `length` | Length of file data in bytes |
 | +0x14 | 4 | `offset` | Byte offset from start of catalog to file data |
 
-**Timestamp notes:** Exact epoch is uncertain - likely 1/1/1980 (DOS standard), possibly 3/1/1979. `EINFO.CAT` has notably smaller timestamps than the others, consistent with being created ~6 months earlier.
+**Metadata notes:** In most ordinary CAT-family archives (`A00C.CAT`, `BC`, `C00C.CAT`, `E00C.CAT`, `EINFO.CAT`, `F01C.CAT`, `F60C.CAT`, `IMAPS.CAT`, `LCASTLE`, `M00C.CAT`), this field decodes cleanly as a plausible clustered DOS-style date/time value. `MSGFILES` is the main exception: it keeps the same structural field, but the values span a wider range, cluster by filename family, and collide across unrelated message families.
+
+The generic executable resource-open/read path uses the filename, size, and payload offset fields, but does not currently appear to consume the `0x0C` dword directly. So the safest interpretation is:
+
+- it is native archive metadata in the 24-byte entry layout
+- `timestamp` remains a useful working interpretation for many CAT-family archives
+- its exact semantics may vary by catalog family and should not yet be treated as universally proven
 
 ## BC Archive - Combat Tile Art
 
