@@ -49,8 +49,10 @@ Each saved game consists of two files:
 | after num_events | `events[num_events]` | Event records, 0x30 bytes each |
 | after events | `num_locations` (= 0x19e) | Number of map locations |
 | after num_locations | `locations[0x19e]` | Map location data |
+| after locations | `max_cache_slot` (byte = 0x63) | Cache warning/limit marker used by the inn-storage block |
 | after locations | `num_caches` (byte) | Number of active item caches |
-| after num_caches | `caches[num_caches]` | Inn item caches *(known to corrupt on overflow)* |
+| after num_caches | `cache_offsets[0x62]` | Word offsets into the cache payload |
+| after cache_offsets | `caches[num_caches]` | Inn item caches *(known to corrupt on overflow)* |
 
 ## Common Structs
 
@@ -95,3 +97,12 @@ Key landmarks:
 - Saints bitmask at +0x80 (20 bytes / 160 bits)
 - Formulae bitmask at +0x94 (22 bytes)
 - Items array at +0xaa (up to 64 × 6 bytes)
+
+## Cache Block
+
+The trailing cache block mirrors `CACHE.TMP`:
+
+- `max_cache_slot` is the constant byte `0x63`
+- `num_caches` is the number of active inn caches
+- `cache_offsets[0x62]` are word offsets into the cache payload
+- `caches[num_caches]` contains the actual cache records

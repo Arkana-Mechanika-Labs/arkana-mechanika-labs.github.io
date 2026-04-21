@@ -35,6 +35,8 @@ Offset 0x03:  item_definition[200]
 | +0x25 | 1 | `weight` | Item weight when wielded |
 | +0x26 | 1 | `quality` | Default/base quality |
 | +0x27 | 1 | `rarity` | Rarity (0–12; relics=12, quest items=0, missiles=1) |
+| +0x28 | 2 | *(unknown)* | Non-zero only for relics; ranges from `0x06` to `0x50` in known data |
+| +0x2a | 2 | *(unknown)* | Non-zero for relics and the unused residency permit |
 | +0x2c | 2 | `value` | Item value in pfenniges |
 
 ### flags_1 (weapon/armor types)
@@ -79,6 +81,20 @@ Offset 0x03:  item_definition[200]
 | 2 | `is_nonmetal_armor` |
 | 3 | `is_missile_weapon` |
 | 6 | `is_music` (harp, flute) |
+
+### flags_5 (rarity/category)
+
+This bitmask remains only partially understood in the KB:
+
+| Bit | Flag |
+|-----|------|
+| 0 | `is_unknown_2` |
+| 7 | `is_unknown_3` |
+
+Notes:
+- `is_unknown_2` / bit 1 are used across many ordinary weapons, armor, potions, and ingredients
+- `is_unknown_3` appears on cloth armor, quest items, relics, and creature parts
+- The full semantics of this byte are still unresolved
 
 ## Confidence
 

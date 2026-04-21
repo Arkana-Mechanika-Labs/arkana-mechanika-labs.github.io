@@ -66,7 +66,8 @@ City order here is the definitive ordering; the full name is the best unique ide
 | `+0x29` | 1 | *(unknown)* | |
 | `+0x2A` | 1 | `qual_cloth` | Quality of the clothing merchant |
 | `+0x2B` | 1 | *(constant)* | Always 0 |
-| `+0x2C` | 2 | *(unknown)* | Two bytes; possibly a single word |
+| `+0x2C` | 1 | *(unknown)* | Often paired with the next byte; may be half of a word-like value |
+| `+0x2D` | 1 | *(unknown)* | Usually `0` or `1` |
 
 > **Quality note:** A zero value means the city does not have that shop. Non-zero values are relative — a higher number does not equal an item quality number directly, but a city with a higher value than another offers equal or greater quality items. Example: Nürnberg has `0x31` for the armory but offers quality 37 (`0x25`) armor.
 

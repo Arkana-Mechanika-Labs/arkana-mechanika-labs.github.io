@@ -16,8 +16,10 @@ All formats documented here are based on the original game files and are public 
 | **Graphics** | PIC sprites; IMC icons; MSG font bitmaps; COMMONSP.IMG startup sprite bank; enemy palettes |
 | **Audio** | DGT raw PCM audio |
 | **World Data** | Locations, cities, city descriptions, enemies, items, alchemy, saints, CFILE.DAT |
+| **Common** | Shared structures are currently documented across the Save File and Structs pages rather than in a standalone common note |
 | **Save File** | Full save-game format including character, item, and quest structures |
 | **Temporary** | Runtime files created on save-load: CACHE.TMP, CHARACTR.TMP, LOCS.TMP |
 | **Structs** | Shared in-memory structures (character, item, etc.) |
 | **Wilderness Map** | DARKLAND.MAP RLE tile format |
+| **Executable** | Main executable reference note for `DARKLAND.EXE` |
 | **Auxiliary Executables** | MGRAPHIC.EXE, MISC.EXE, MPSCOPY.EXE, DKED.EXE, DKQUE.EXE, installer tools |

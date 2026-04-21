@@ -24,7 +24,7 @@ Offset 0x02:  location[414] locations
 | +0x11 | 1 | `city_size` | City size: 3=small to 8=Köln; non-cities always 1 |
 | +0x12 | 2 | `local_rep` | Local reputation (0 in this file; non-zero in save copies) |
 | +0x18 | 2 | `inn_cache_idx` | Inn item cache index (0xffff in this file; set in save) |
-| +0x25 | 20 | `name` | Location name string |
+| +0x26 | 20 | `name` | Location name string |
 
 ## location_icon enum
 
@@ -39,11 +39,13 @@ Offset 0x02:  location[414] locations
 | 0x06 | Mines |
 | 0x08 | Village |
 | 0x09 | Ruins of a village |
+| 0x0a | Village (square variant; apparently unused) |
 | 0x0d | Tomb |
 | 0x0f | Dragon's lair (invisible) |
 | 0x10 | Spring |
 | 0x11 | Lake |
 | 0x12 | Shrine |
+| 0x13 | Cave |
 | 0x14 | Pagan altar |
 | 0x15 | Witch sabbat |
 | 0x16 | Templar castle |
