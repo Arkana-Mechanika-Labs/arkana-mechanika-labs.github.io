@@ -6,7 +6,7 @@ width: normal
 
 DARK is a desktop workbench that brings together Darklands' file formats in a single application. Point it at a game installation and every data file becomes accessible from one interface — no additional tools, no command-line setup, no emulation required.
 
-**[Download DARK v0.9 beta — Windows (64-bit)](/downloads/dark/DARK_v0.9b.zip)**
+**[Download DARK v0.9b2 — Windows (64-bit)](https://github.com/Arkana-Mechanika-Labs/DARK/releases/download/v0.9b2/DARK_v0.9b2.zip)**
 
 Unzip and run `DARK.exe`. Requires a Darklands installation — point the tool at your game folder on first launch.
 
@@ -128,7 +128,7 @@ After loading a game folder, DARK can run a validation pass across the world dat
 
 ## Download
 
-**[DARK v0.9 beta — Windows (64-bit)](/downloads/dark/DARK_v0.9b.zip)**
+**[DARK v0.9b2 — Windows (64-bit)](https://github.com/Arkana-Mechanika-Labs/DARK/releases/download/v0.9b2/DARK_v0.9b2.zip)**
 
 Unzip and run `DARK.exe`. Requires a Darklands installation — point the tool at your game folder on first launch.
 
