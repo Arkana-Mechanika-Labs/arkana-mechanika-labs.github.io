@@ -73,21 +73,32 @@ City order here is the definitive ordering; the full name is the best unique ide
 
 ### city_contents bitmask
 
-| Bit | Flag | Meaning |
-|-----|------|---------|
-| 0 | `is_kloster` | Has a Kloster |
-| 1 | `is_slums` | Has slums |
-| 2 | *(unknown)* | |
-| 3 | `is_cathedral` | Has a cathedral |
-| 4 | *(unknown)* | |
-| 5 | `is_no_fortress` | **No** city fortress (reversed boolean) |
-| 6 | `is_town_hall` | Has a town hall |
-| 7 | `is_polit` | Has a political centre (constant 1) |
-| 8–11 | *(constant 0)* | |
-| 12 | `docks` | Has docks |
-| 13 | *(unknown)* | |
-| 14 | `is_pawnshop` | Has a Leihhaus (pawnshop) |
-| 15 | `is_university` | Has a university |
+> **Byte-order note:** `city_contents` is stored as a **big-endian** 16-bit word in the file. Earlier little-endian interpretations shift the flags and produce the wrong mapping.
+
+| Mask | Flag | Meaning |
+|------|------|---------|
+| `0x8000` | `is_kloster` | Has a Kloster |
+| `0x4000` | `is_slums` | Has a slums district |
+| `0x2000` | *(unknown)* | Strongly correlates with the unknown name slot at `+0x1CE` |
+| `0x1000` | `is_cathedral` | Has a cathedral |
+| `0x0800` | *(constant)* | Set in all stock cities |
+| `0x0400` | `is_fortress` | Has a city fortress |
+| `0x0200` | `is_town_hall` | Has a town hall |
+| `0x0100` | `is_polit` | Has a political centre |
+| `0x0080` | *(constant)* | Zero in all stock cities |
+| `0x0040` | *(constant)* | Zero in all stock cities |
+| `0x0020` | *(constant)* | Zero in all stock cities |
+| `0x0010` | *(constant)* | Zero in all stock cities |
+| `0x0008` | `docks` | Has docks |
+| `0x0004` | *(unknown)* | Matches the second unknown name slot at `+0x18E` (`"Munzenplatz"`) |
+| `0x0002` | `is_pawnshop` | Has a Leihhaus (pawnshop) |
+| `0x0001` | `is_university` | Has a university |
+
+Validation notes from the KB:
+
+- `is_fortress` now behaves like a positive fortress flag, not a reversed boolean
+- `is_kloster`, `is_cathedral`, and `is_town_hall` match their corresponding name fields across all 92 stock cities
+- `is_polit`, `docks`, `is_pawnshop`, and `is_university` each have a single known stock-city mismatch
 
 ### ruler enum (city_type)
 
