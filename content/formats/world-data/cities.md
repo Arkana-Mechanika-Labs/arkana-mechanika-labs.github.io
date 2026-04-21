@@ -32,9 +32,9 @@ City order here is the definitive ordering; the full name is the best unique ide
 | `+0x12E` | 32 | `cathedral_name` | Name of the cathedral |
 | `+0x14E` | 32 | `church_name` | Name of the church |
 | `+0x16E` | 32 | `market_name` | Name of the marketplace |
-| `+0x18E` | 32 | *(unknown)* | Often `"Munzenplatz"` — possibly central square |
+| `+0x18E` | 32 | *(unknown)* | In the stock file this is non-empty in exactly 6 cities, always `"Munzenplatz"` |
 | `+0x1AE` | 32 | `slum_name` | Name of the slums |
-| `+0x1CE` | 32 | *(unknown)* | Many entries contain `"Zeughaus"` (armoury) or names ending in `-turm`/`-tor`; possibly tied to an unused rebellion codepath |
+| `+0x1CE` | 32 | *(unknown)* | Many populated values are `"Zeughaus"` or gate/tower names ending in `-tor` / `-turm` |
 | `+0x1EE` | 32 | `pawnshop_name` | Name of the Leihhaus (pawnshop); either `"Leifhaus"` or empty |
 | `+0x20E` | 32 | `kloster_name` | Name of the Kloster (church law/administration) |
 | `+0x22E` | 32 | `inn_name` | Name of the inn |
@@ -90,7 +90,7 @@ City order here is the definitive ordering; the full name is the best unique ide
 | `0x0020` | *(constant)* | Zero in all stock cities |
 | `0x0010` | *(constant)* | Zero in all stock cities |
 | `0x0008` | `docks` | Has docks |
-| `0x0004` | *(unknown)* | Matches the second unknown name slot at `+0x18E` (`"Munzenplatz"`) |
+| `0x0004` | *(unknown)* | Matches the second unknown name slot at `+0x18E` (`"Munzenplatz"`) exactly in the stock file |
 | `0x0002` | `is_pawnshop` | Has a Leihhaus (pawnshop) |
 | `0x0001` | `is_university` | Has a university |
 
@@ -99,6 +99,8 @@ Validation notes from the KB:
 - `is_fortress` now behaves like a positive fortress flag, not a reversed boolean
 - `is_kloster`, `is_cathedral`, and `is_town_hall` match their corresponding name fields across all 92 stock cities
 - `is_polit`, `docks`, `is_pawnshop`, and `is_university` each have a single known stock-city mismatch
+- `0x2000` may indicate some gate/tower/armory-style city feature, but its exact meaning is still unconfirmed
+- `0x0004` may represent a special central-square/location feature, but its exact meaning is still unconfirmed
 
 ### ruler enum (city_type)
 
