@@ -20,6 +20,9 @@ Offset 0x01:  formula_definition[66]
 - the 66 formulas form **22** three-formula families sharing the same effect description
 - formula order matches the formula-name order in `DARKLAND.LST`
 - stock formulas use **3**, **4**, or **5** populated ingredient slots; none use `0`, `1`, or `2`
+- within those 22 stock families, `mystic_number` increases monotonically in all `22/22`
+- `risk_factor` is not a clean three-tier ladder within every family; it is monotonic in `20/22` families, but stock families such as `Trueflight` and `Hardarmor` break a simple low/medium/high progression
+- ingredient slot order is best treated as raw recipe data, not as a normalized ascending list; some family members behave more like alternate recipes for the same effect than strict upgrades
 
 ## formula_definition struct (104 bytes)
 
@@ -32,9 +35,10 @@ Offset 0x01:  formula_definition[66]
 
 Notes:
 
-- within a three-formula family, `mystic_number` usually rises from simpler to harder variants
+- within the stock three-formula families, `mystic_number` increases monotonically in all `22/22` families
 - stock `risk_factor` counts are 28 low, 21 medium, and 17 high
 - `risk_factor` behaves like a coarse tier rather than a direct encoding of `mystic_number`; the value ranges overlap
+- it does not define a universal family tier on its own; a few stock families contain reversed or mixed patterns
 
 ### ingredient struct (4 bytes)
 
@@ -48,6 +52,7 @@ Ingredient-order notes:
 - ingredients are often, but not always, listed in increasing item-code order
 - in the stock file, 51 of 66 formulas are sorted that way and 15 are not
 - because of those exceptions, the on-disk ingredient-slot order should be preserved rather than normalized automatically
+- family members are often related, but they do not form a clean superset chain; many look like alternate recipe variants for the same effect
 
 ## Confidence
 

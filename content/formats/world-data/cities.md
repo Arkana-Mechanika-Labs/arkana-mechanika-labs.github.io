@@ -99,8 +99,9 @@ Validation notes from the KB:
 - `is_fortress` now behaves like a positive fortress flag, not a reversed boolean
 - `is_kloster`, `is_cathedral`, and `is_town_hall` match their corresponding name fields across all 92 stock cities
 - `is_polit`, `docks`, `is_pawnshop`, and `is_university` each have a single known stock-city mismatch
-- `0x2000` may indicate some gate/tower/armory-style city feature, but its exact meaning is still unconfirmed
-- `0x0004` may represent a special central-square/location feature, but its exact meaning is still unconfirmed
+- the `+0x18E` slot is populated in Köln, Freiberg, Mainz, Frankfurt am Main, Trier, and Prag
+- `0x2000` looks more like a named civic/defensive structure than a fortress flag, but its exact meaning is still unconfirmed
+- `0x0004` may represent a special central-square/location feature rather than a normal shop/building flag
 
 ### ruler enum (city_type)
 

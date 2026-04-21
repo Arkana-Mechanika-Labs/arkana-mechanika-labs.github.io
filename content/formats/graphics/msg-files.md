@@ -21,7 +21,7 @@ Stock `MSGFILES` is a flat archive of **419** individual `.MSG` payloads.
 - Header: `uint16 num_entries`
 - Catalog entry size: `24` bytes
 - First payload offset in the stock file: `0x274A`
-- Payload layout in the stock file is contiguous, with each payload beginning where the previous one ends
+- Payload layout in the stock file is contiguous, with each `offset[n+1] == offset[n] + size[n]`
 
 Catalog entry layout:
 
@@ -34,7 +34,20 @@ The dword at `0x0C` should currently be treated as unknown/raw engine metadata:
 
 - it is non-zero for all 419 stock entries
 - it has many collisions, including across unrelated filename families
+- it has `326` distinct values among `419` entries, so it is not unique per file
 - it is not a simple CRC/hash of the filename or payload
+- values often cluster within filename families such as `MINET`, `LASTC`, and `WITCD`
+- for example, `0x19026110` is shared by `13` `LASTC` entries, while `0x18FB85DC`, `0x18FB8A61`, and `0x18FBA06E` each cover `7` `MINET` entries
+- for example, `0x18FD84F0` occurs on `CITYW`, `MEETW`, and `SLUMD` entries
+
+Executable notes:
+
+- the generic catalog/resource path in `DARKLAND.EXE` uses the same `24`-byte entry layout
+- `resource_table_lookup` matches only the first `12` bytes as the filename
+- `resource_open` and `resource_read_entry` then use the size and payload offset fields
+- in the common open/read path currently decompiled, the dword at `0x0C` is not consumed directly
+
+So the field is native to the engine's catalog-entry structure, but the normal loader path we have traced so far still does not explain its meaning.
 
 ## File Layout
 
