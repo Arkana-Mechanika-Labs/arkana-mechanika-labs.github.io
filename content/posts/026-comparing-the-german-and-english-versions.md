@@ -10,6 +10,8 @@ Luckily, James, a fellow member of the Darklands Yahoo Group who goes by “Marb
 
 This one turned out to be much more than that.
 
+{{< figure src="/images/de_darklands_00.png" caption="The German edition's startup screen. Once it was on hand as a comparison target, it quickly became more than a curiosity." >}}
+
 The German edition is not a different engine, and it does not hide some alternate master format that would invalidate the work done on the English version. If anything, it reinforces it. But once that baseline is confirmed, the comparison starts paying off in ways that go deeper than expected.
 
 It reveals a richer runtime message and token system than the English data suggests, sharpens the meaning of several previously ambiguous city-data strings, and provides a second structural view of at least one real loader-managed object inside the executable.
@@ -72,6 +74,8 @@ Even if nothing else had come out of this comparison, that alone would have made
 ## The German strings also clarified some of the city data
 
 One of the nicest surprises was that the German edition helped interpret several previously uncertain strings in `DARKLAND.CTY`.
+
+{{< figure src="/images/de_darklands_01.png" caption="A German in-game city screen. These localized labels and landmark names ended up being some of the strongest clues for interpreting ambiguous CTY-only fields." >}}
 
 A string slot that looked ambiguous in English contains `Munzenplatz` in six cities. In the German edition, that same slot becomes `Reichsmünzstätte`.
 
