@@ -56,11 +56,17 @@ Offset 0x03:  item_definition[200]
 
 | Bit | Flag |
 |-----|------|
+| 0 | *(unknown)* |
+| 1 | *(unknown)* |
 | 2 | `is_component` |
 | 3 | `is_potion` |
 | 4 | `is_relic` |
 | 5 | `is_horse` |
 | 6 | `is_quest_1` |
+
+Notes:
+- bits 0 and 1 seem to mark ordinary pawnshop-style non-equippable items
+- observed values include `0x03` for harp/flute, `0x02` for clock, grappling hook, and lockpicks, and `0x01` for other pawnshop items
 
 ### flags_3 (projectile/misc)
 
@@ -69,18 +75,31 @@ Offset 0x03:  item_definition[200]
 | 0 | `is_lockpicks` |
 | 1 | `is_light` (torch, candle, lantern) |
 | 2 | `is_arrow` |
+| 3 | *(constant 0)* |
 | 4 | `is_quarrel` |
 | 5 | `is_ball` |
+| 6 | *(constant 0)* |
 | 7 | `is_quest_2` |
+
+Notes:
+- `is_quest_2` appears on outdoor quest items, fortress/Baphomet/dragon items, and creature parts
 
 ### flags_4 (additional types)
 
 | Bit | Flag |
 |-----|------|
 | 0 | `is_throw_potion` |
+| 1 | *(constant 0)* |
 | 2 | `is_nonmetal_armor` |
 | 3 | `is_missile_weapon` |
+| 4 | *(constant 0)* |
+| 5 | `is_unknown_1` |
 | 6 | `is_music` (harp, flute) |
+| 7 | *(constant 0)* |
+
+Notes:
+- `is_unknown_1` is set on a small mixed group including certain hammers, leather armor, pure gold, and several mine-related materials
+- the KB’s best guess is that it may relate to mine chest contents, but that remains speculative
 
 ### flags_5 (rarity/category)
 
@@ -89,12 +108,24 @@ This bitmask remains only partially understood in the KB:
 | Bit | Flag |
 |-----|------|
 | 0 | `is_unknown_2` |
+| 1 | *(unknown)* |
+| 2 | *(constant 0)* |
+| 3 | *(constant 0)* |
+| 4 | *(constant 0)* |
+| 5 | *(constant 0)* |
+| 6 | *(constant 0)* |
 | 7 | `is_unknown_3` |
 
 Notes:
 - `is_unknown_2` / bit 1 are used across many ordinary weapons, armor, potions, and ingredients
 - `is_unknown_3` appears on cloth armor, quest items, relics, and creature parts
 - The full semantics of this byte are still unresolved
+
+## Notes
+
+- `num_item_slots` is the number of definition slots, not the number of actually populated items
+- empty item-definition slots are all zero
+- saint and formula name order here is the definitive order used by other files
 
 ## Confidence
 
