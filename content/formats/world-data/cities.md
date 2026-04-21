@@ -32,10 +32,10 @@ City order here is the definitive ordering; the full name is the best unique ide
 | `+0x12E` | 32 | `cathedral_name` | Name of the cathedral |
 | `+0x14E` | 32 | `church_name` | Name of the church |
 | `+0x16E` | 32 | `market_name` | Name of the marketplace |
-| `+0x18E` | 32 | *(unknown)* | In the stock file this is non-empty in exactly 6 cities, always `"Munzenplatz"` |
+| `+0x18E` | 32 | *(unknown)* | In the stock file this is non-empty in exactly 6 cities, and every populated value is `Munzenplatz` |
 | `+0x1AE` | 32 | `slum_name` | Name of the slums |
-| `+0x1CE` | 32 | *(unknown)* | Many populated values are `"Zeughaus"` or gate/tower names ending in `-tor` / `-turm` |
-| `+0x1EE` | 32 | `pawnshop_name` | Name of the Leihhaus (pawnshop); either `"Leifhaus"` or empty |
+| `+0x1CE` | 32 | *(unknown)* | Many populated values are `Zeughaus`, gate names ending in `-tor`, or tower names ending in `-turm` |
+| `+0x1EE` | 32 | `pawnshop_name` | Name of the Leihhaus (pawnshop); either `Leifhaus` or empty |
 | `+0x20E` | 32 | `kloster_name` | Name of the Kloster (church law/administration) |
 | `+0x22E` | 32 | `inn_name` | Name of the inn |
 | `+0x24E` | 32 | `university_name` | Name of the university |
@@ -44,19 +44,19 @@ City order here is the definitive ordering; the full name is the best unique ide
 
 | Offset | Size | Field | Description |
 |--------|------|-------|-------------|
-| `+0x00` | 2 | `city_size` | City size: 3 (small) to 8 (Köln) |
+| `+0x00` | 2 | `city_size` | City size: 3 (small) to 8 (Koln) |
 | `+0x02` | 4 | `entry_coords` | Map coordinates when entering the city |
 | `+0x06` | 4 | `exit_coords` | Map coordinates when leaving the city (chosen to avoid untenable positions) |
 | `+0x0A` | 8 | `dock_destinations[4]` | Indices of cities reachable via this city's docks; `0xFFFF` = no connection |
 | `+0x12` | 2 | *(unknown)* | Coastal side: `0xFFFF` = inland, `0` = north of river, `1` = south; flood risk indicator |
 | `+0x14` | 2 | *(constant)* | Always `4` |
-| `+0x16` | 2 | *(pseudo-ordinal)* | Runs 0–0x5B with gaps; probably unused |
+| `+0x16` | 2 | *(pseudo-ordinal)* | Runs `0-0x5B` with gaps; probably unused |
 | `+0x18` | 2 | `city_type` | Ruler type (see enum below) |
-| `+0x1A` | 2 | *(unknown)* | Values 0, 1, 2, or 3 |
-| `+0x1C` | 2 | *(constant)* | Always 0 |
+| `+0x1A` | 2 | *(unknown)* | Values `0`, `1`, `2`, or `3` |
+| `+0x1C` | 2 | *(constant)* | Always `0` |
 | `+0x1E` | 2 | `city_contents` | Building-presence bitmask (see below) |
-| `+0x20` | 2 | *(constant)* | Always 0 |
-| `+0x22` | 1 | `qual_black` | Quality of the blacksmith (0 = not present) |
+| `+0x20` | 2 | *(constant)* | Always `0` |
+| `+0x22` | 1 | `qual_black` | Quality of the blacksmith (`0` = not present) |
 | `+0x23` | 1 | `qual_merch` | Quality of the merchant |
 | `+0x24` | 1 | `qual_sword` | Quality of the swordsmith |
 | `+0x25` | 1 | `qual_armor` | Quality of the armorer |
@@ -65,11 +65,11 @@ City order here is the definitive ordering; the full name is the best unique ide
 | `+0x28` | 1 | `qual_tink` | Quality of the tinker |
 | `+0x29` | 1 | *(unknown)* | |
 | `+0x2A` | 1 | `qual_cloth` | Quality of the clothing merchant |
-| `+0x2B` | 1 | *(constant)* | Always 0 |
+| `+0x2B` | 1 | *(constant)* | Always `0` |
 | `+0x2C` | 1 | *(unknown)* | Often paired with the next byte; may be half of a word-like value |
 | `+0x2D` | 1 | *(unknown)* | Usually `0` or `1` |
 
-> **Quality note:** A zero value means the city does not have that shop. Non-zero values are relative — a higher number does not equal an item quality number directly, but a city with a higher value than another offers equal or greater quality items. Example: Nürnberg has `0x31` for the armory but offers quality 37 (`0x25`) armor.
+> **Quality note:** A zero value means the city does not have that shop. Non-zero values are relative - a higher number does not equal an item quality number directly, but a city with a higher value than another offers equal or greater quality items. Example: Nuernberg has `0x31` for the armory but offers quality 37 (`0x25`) armor.
 
 ### city_contents bitmask
 
@@ -90,7 +90,7 @@ City order here is the definitive ordering; the full name is the best unique ide
 | `0x0020` | *(constant)* | Zero in all stock cities |
 | `0x0010` | *(constant)* | Zero in all stock cities |
 | `0x0008` | `docks` | Has docks |
-| `0x0004` | *(unknown)* | Matches the second unknown name slot at `+0x18E` (`"Munzenplatz"`) exactly in the stock file |
+| `0x0004` | *(unknown)* | Matches the second unknown name slot at `+0x18E` (`Munzenplatz`) exactly in the stock file |
 | `0x0002` | `is_pawnshop` | Has a Leihhaus (pawnshop) |
 | `0x0001` | `is_university` | Has a university |
 
@@ -99,9 +99,16 @@ Validation notes from the KB:
 - `is_fortress` now behaves like a positive fortress flag, not a reversed boolean
 - `is_kloster`, `is_cathedral`, and `is_town_hall` match their corresponding name fields across all 92 stock cities
 - `is_polit`, `docks`, `is_pawnshop`, and `is_university` each have a single known stock-city mismatch
-- the `+0x18E` slot is populated in Köln, Freiberg, Mainz, Frankfurt am Main, Trier, and Prag
-- `0x2000` looks more like a named civic/defensive structure than a fortress flag, but its exact meaning is still unconfirmed
-- `0x0004` may represent a special central-square/location feature rather than a normal shop/building flag
+- the `+0x18E` slot is populated in Koln, Freiberg, Mainz, Frankfurt am Main, Trier, and Prag
+- the German edition preserves the same six populated `+0x18E` cities, but translates the value as `Reichsmuenzstaette`
+- that German rendering is a much stronger semantic clue than the English `Munzenplatz`; it points specifically toward an imperial mint / imperial mint site
+- the executable variable table includes `$imperialMint`, which now looks like the strongest candidate mapping for the `+0x18E` slot
+- no shipped English or German `MSGFILES` card references `$imperialMint`, so the linkage is still not runtime-proven
+- the `0x2000` flag correlates strongly with the `+0x1CE` slot (`31/34` exact matches); the flagged-but-empty exceptions are Groningen, Koblenz, and Basel
+- the German edition preserves the specific gate/tower names in `+0x1CE`, but translates many generic `Zeughaus` entries as `Kaserne`
+- that pushes `0x2000` toward a garrison/barracks/fortification-landmark reading rather than a simple armory label
+- all cities with populated `+0x1CE` strings also have both a political center and a fortress name
+- both `+0x18E` and `+0x1CE` look more like CTY-only landmark labels than ordinary visitable `LOC` records or widely exercised message-card variables
 
 ### ruler enum (city_type)
 
