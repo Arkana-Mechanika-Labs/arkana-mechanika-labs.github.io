@@ -1,6 +1,6 @@
 ---
 title: "Devlog #027 - How Darklands Builds Its Text"
-date: 2026-04-23T18:00:00
+date: 2026-04-23T06:00:00
 summary: "The runtime machinery behind the $-token system traced end to end: the recursive scanner at 0xD728, the pronoun grammar bundle that the German edition uses but English data never surfaced, the template engine at 0xD67E, and the Create New World screen owner at 0xD444."
 ---
 
