@@ -7,6 +7,7 @@ width: wide
 Session-by-session notes from the Darklands reverse engineering project. Each entry covers one or more analysis sessions, what the AI agent found, how it found it, and what it means for the eventual C# port.
 
 {{< cards >}}
+  {{< card link="028-the-pan-format-decoded" title="Devlog #028 - The PAN format, decoded." icon="book-open" subtitle="April 24, 2026. OPENING8.PAN decoded byte-for-byte against live DOSBox playback. The model holds across all 15 PAN files and 2,068 frame records in the corpus." >}}
   {{< card link="027-how-darklands-builds-its-text" title="Devlog #027 - How Darklands Builds Its Text" icon="book-open" subtitle="April 23, 2026. The $-token pipeline traced end to end: the recursive scanner, the pronoun grammar bundle, the template engine, and the Create New World screen owner at 0xD444." >}}
   {{< card link="026-comparing-the-german-and-english-versions" title="Devlog #026 - What comparing the English and German editions actually bought us" icon="sparkles" subtitle="April 21, 2026. What the German Edition Revealed About Darklands’ Data, Tokens, and Runtime Structures." >}}	
   {{< card link="025-dark-the-data-workbench" title="Devlog #025 - DARK: A Workbench for Darklands Data" icon="sparkles" subtitle="April 20, 2026. All the format RE knowledge in one tool: DARK (Darklands Authoring & Resource Kit) lets you browse, inspect, and edit save games, enemies, cities, items, dialog trees, images, fonts, and archives." >}}
