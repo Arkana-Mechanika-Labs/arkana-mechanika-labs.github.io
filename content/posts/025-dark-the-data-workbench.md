@@ -96,7 +96,7 @@ After loading a game folder, the tool can run a validation pass across the world
 
 ## Download
 
-**[DARK v0.9b2, Windows (64-bit)](https://github.com/Arkana-Mechanika-Labs/DARK/releases/download/v0.9b2/DARK_v0.9b2.zip)**
+**[DARK on GitHub Releases](https://github.com/Arkana-Mechanika-Labs/DARK/releases)**
 
 Unzip and run `DARK.exe`. Requires a Darklands installation; point the tool at your game folder on first launch.
 
