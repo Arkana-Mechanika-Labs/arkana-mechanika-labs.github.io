@@ -108,21 +108,6 @@ machinery loads it on demand; the static executable contains only the thunk stub
 where to find it. The actual logic has been sitting 464 KB into the EXE file, waiting for
 someone to go looking.
 
-## Separate from the title screen
-
-One thing that needed clarifying after this discovery: the `H` key and `BUTTON4.PIC` are
-a different question entirely.
-
-In the `1C85` controller, `H` and `h` are live and active. They map to the Heraldry command.
-That is confirmed.
-
-The title screen (`2649` controller) is a different overlay, a different controller, a different
-context. The `H` key there still hits the dispatcher but does not change the screen in the
-current v483.07 build. That question is left open and is covered in [devlog #031](/posts/031-the-start-screen-complete/).
-
-Finding Heraldry in the party controller is not the same thing as finding what H does on the
-title screen. These two `H` keys live in separate parts of the game.
-
 ## What the five-slot table means
 
 The five cleared records at `9C69..9EE9` are the party slots. Each is 128 bytes. The controller
