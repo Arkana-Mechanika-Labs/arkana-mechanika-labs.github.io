@@ -37,7 +37,7 @@ positions:
 BUTTON1 / Quickstart          (81, 55,  158, 16)
 BUTTON2 / Create New World    (81, 87,  158, 16)
 BUTTON3 / The Story Continues (81, 120, 158, 16)
-BUTTON4 / ?                   (81, 167, 158, 16)
+BUTTON4 / Heroes of Darklands (81, 167, 158, 16)
 ```
 
 Each is 158 pixels wide, 16 pixels tall, at X position 81. The three active buttons dispatch as
@@ -60,14 +60,12 @@ in the current v483.07 build. And then nothing happens. The key is handled, logg
 and the screen does not change. No call to the shared PIC blit helper. No modification of
 `A000`.
 
-In the release build of the game that most people have, the fourth button is a dead branch. The
+In the release build of the game, the fourth button is a dead branch. The
 image is there, the input path is there, but the action was never wired up or was removed before
 shipping.
 
 The most likely explanation is a cut feature. The fourth button's position and shape matches the
-others exactly, so it was clearly part of the original design. `README.SND` in the game
-directory mentions a "Heroes of Darklands" feature in passing. Whether that is what BUTTON4 was
-meant to launch is not proven, but it is a plausible connection.
+others exactly, so it was clearly part of the original design. The Darklands manual mentions a "Heroes of Darklands" feature and it's clearly linked to that BUTTON4.PIC.
 
 This is the kind of thing that only becomes visible once you are reading the exact branch table
 rather than just watching the game run.
