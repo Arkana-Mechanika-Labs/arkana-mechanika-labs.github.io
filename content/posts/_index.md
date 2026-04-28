@@ -7,6 +7,7 @@ width: wide
 Session-by-session notes from the Darklands reverse engineering project. Each entry covers one or more analysis sessions, what the AI agent found, how it found it, and what it means for the eventual C# port.
 
 {{< cards >}}
+  {{< card link="031-building-from-the-inside-out" title="Devlog #031 - Building from the Inside Out" icon="book-open" subtitle="April 28, 2026. Darklands.Engine exists now. Not a remake, not an emulator: a host-neutral reconstruction of what the original game actually did, with every gap labeled and every confirmed fact backed by observation." >}}
   {{< card link="030-the-start-screen-complete" title="Devlog #030 - The Start Screen, Complete" icon="book-open" subtitle="April 27, 2026. The 2649 controller fully mapped: BIOS keyboard polling, confirmed Q/C/T dispatch, a fourth button that never fires in v483.07, eight bytes of sound config, and the voice that says 'Welcome to Darklands'." >}}
   {{< card link="029-digging-up-overlays" title="Devlog #029 - Digging Up Overlays" icon="book-open" subtitle="April 26, 2026. 137 overlay resolver records decoded from DARKLAND.EXE. A trace-bridge tool materializes live overlays in Ghidra. First major find: the party creation screen, command table confirmed against a real screenshot." >}}
   {{< card link="028-the-pan-format-decoded" title="Devlog #028 - The PAN format, decoded." icon="book-open" subtitle="April 24, 2026. OPENING8.PAN decoded byte-for-byte against live DOSBox playback. The model holds across all 15 PAN files and 2,068 frame records in the corpus." >}}
