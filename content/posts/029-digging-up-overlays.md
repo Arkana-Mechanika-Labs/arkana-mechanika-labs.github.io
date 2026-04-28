@@ -1,5 +1,5 @@
 ---
-title: "Devlog #030 - Digging Up Overlays"
+title: "Devlog #029 - Digging Up Overlays"
 date: 2026-04-26T09:00:00
 summary: "137 overlay resolver records decoded from DARKLAND.EXE. A trace-bridge tool dumps live overlay code from DOSBox memory and materializes it in Ghidra. The first major find: the party creation screen, with its full command table confirmed against a real screenshot."
 ---

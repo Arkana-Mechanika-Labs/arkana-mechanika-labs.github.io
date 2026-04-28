@@ -1,5 +1,5 @@
 ---
-title: "Devlog #031 - The Start Screen, Complete"
+title: "Devlog #030 - The Start Screen, Complete"
 date: 2026-04-27T09:00:00
 summary: "The 2649 start-screen controller fully mapped: BIOS keyboard polling, exact button coordinates, confirmed dispatch for Q/C/T, and a fourth button that loads and draws but never fires in v483.07. Also: eight bytes that configure a sound card, and a voice clip that says 'Welcome to Darklands'."
 ---
@@ -45,7 +45,7 @@ follows:
 
 - `Q` (Quickstart) calls into `1C85:4184` and returns `011B`.
 - `C` (Create New World) calls into `1C85:0000`, which is the party creation controller
-  identified in [devlog #030](/posts/030-digging-up-overlays/), and returns `011B`.
+  identified in [devlog #029](/posts/029-digging-up-overlays/), and returns `011B`.
 - `T` (The Story Continues) calls into `24A0:0002` and returns `011B`.
 
 The `011B` return value is the BIOS word for the Escape key. Returning it is how the controller
