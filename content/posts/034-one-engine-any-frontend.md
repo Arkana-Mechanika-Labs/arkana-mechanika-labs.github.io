@@ -79,6 +79,8 @@ way the original controller code did. The host never decides what a keypress
 means in game terms. It decides what the player pressed; Core decides what that
 press does.
 
+{{< figure src="/images/rider_reimplement1.png" caption="The C# reimplementation open in Rider. Core behavioral classes on the left, the SDL host on the right: two separate projects that share nothing except the event contract." >}}
+
 ## Research and Implementation in Parallel
 
 This separation has a consequence beyond portability: it allows research and
