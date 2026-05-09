@@ -63,4 +63,16 @@ width: normal
       <p style="margin:0;color:#bcae95;line-height:1.65;font-size:.93rem;">The GitHub home of Wendigo's XML specifications and tools. A foundational source for Darklands readers, editors, and extractors.</p>
     </div>
   </a>
+
+  <a href="https://alexbevi.com/blog/2026/03/14/reverse-engineering-a-dos-game-with-ghidra-and-codex/" style="display:block;text-decoration:none;border:1px solid rgba(185,148,87,.22);border-radius:14px;background:rgba(36,22,16,.46);box-shadow:0 16px 45px rgba(0,0,0,.16);overflow:hidden;">
+    <img src="/images/links/re-harvester.png" alt="Reverse Engineering Harvester series banner" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-bottom:1px solid rgba(185,148,87,.18);" />
+    <div style="padding:1rem 1.05rem 1.1rem;">
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem;">
+        <span style="display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:rgba(185,148,87,.16);color:#ddb97b;font-size:.72rem;padding:.22rem .55rem;">BLOG</span>
+        <span style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#b99457;">RE Series</span>
+      </div>
+      <div style="font-weight:700;font-size:1.06rem;margin-bottom:.45rem;">Reverse Engineering Harvester — Alex Bevilacqua</div>
+      <p style="margin:0;color:#bcae95;line-height:1.65;font-size:.93rem;">A six-part series documenting the reverse engineering of the 1996 DOS game Harvester using Ghidra and Codex, with the goal of a ScummVM engine reimplementation.</p>
+    </div>
+  </a>
 </div>
