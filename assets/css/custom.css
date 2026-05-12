@@ -445,6 +445,236 @@
 }
 
 /* --------------------------------------------------
+   FORMAT META BLOCK
+   Compact key-value summary shown at the top of every
+   format page — byte order, compression, size, status.
+   -------------------------------------------------- */
+.drp-format-meta {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.3rem 1.5rem;
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--drp-surface-border);
+  border-left: 2px solid rgba(185, 148, 87, 0.55);
+  border-radius: 4px;
+  background: var(--drp-surface);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.drp-format-meta dt {
+  font-size: 0.67rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--drp-brass);
+  padding: 0.12rem 0;
+  white-space: nowrap;
+  margin: 0;
+  align-self: center;
+}
+
+.drp-format-meta dd {
+  margin: 0;
+  color: var(--drp-ink);
+  padding: 0.12rem 0;
+  align-self: center;
+  font-size: 0.875rem;
+}
+
+.drp-format-meta dd code {
+  font-size: 0.82rem;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+  background: rgba(185, 148, 87, 0.09);
+  padding: 0.08rem 0.35rem;
+  border-radius: 3px;
+}
+
+/* --------------------------------------------------
+   STATUS BADGES
+   Shared between the format meta block and the index
+   table. Four states: high / partial / stub / ref.
+   -------------------------------------------------- */
+.drp-status {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.5rem;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.drp-status.high {
+  background: rgba(74, 160, 100, 0.15);
+  color: #6abf84;
+  border: 1px solid rgba(74, 160, 100, 0.3);
+}
+
+.drp-status.partial {
+  background: rgba(185, 148, 87, 0.12);
+  color: var(--drp-brass-light);
+  border: 1px solid rgba(185, 148, 87, 0.3);
+}
+
+.drp-status.stub {
+  background: rgba(120, 120, 140, 0.1);
+  color: #9ca3af;
+  border: 1px solid rgba(120, 120, 140, 0.25);
+}
+
+.drp-status.ref {
+  background: rgba(100, 130, 180, 0.1);
+  color: #8fafd4;
+  border: 1px solid rgba(100, 130, 180, 0.25);
+}
+
+/* --------------------------------------------------
+   UNKNOWN FIELD ROWS
+   CSS-only: dims rows where the field-name cell is
+   italic, produced by *(unknown)* in Markdown tables.
+   tr:has() is supported in all modern browsers.
+   -------------------------------------------------- */
+.dark table tr:has(td em) {
+  opacity: 0.52;
+}
+
+html:not(.dark) table tr:has(td em) {
+  opacity: 0.6;
+}
+
+/* --------------------------------------------------
+   CAUTION / PARTIAL NOTICE
+   Callout for formats with unresolved fields or
+   known caveats. Distinct from blockquote.
+   -------------------------------------------------- */
+.drp-caution {
+  margin: 1.25rem 0;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid rgba(185, 148, 87, 0.28);
+  border-left: 3px solid rgba(185, 148, 87, 0.65);
+  border-radius: 4px;
+  background: rgba(185, 148, 87, 0.05);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--drp-muted);
+}
+
+.drp-caution p {
+  margin: 0 0 0.45rem;
+}
+
+.drp-caution p:last-child {
+  margin-bottom: 0;
+}
+
+.drp-caution strong {
+  color: var(--drp-brass-light);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------
+   FORMAT INDEX TABLE
+   Dense reference table on the formats/_index page.
+   Category separator rows use .drp-cat-sep.
+   -------------------------------------------------- */
+.drp-format-index {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.865rem;
+  margin: 1rem 0 0.5rem;
+  line-height: 1.5;
+}
+
+.drp-format-index thead th {
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--drp-brass);
+  border-bottom: 1px solid rgba(185, 148, 87, 0.35);
+  padding: 0.5rem 0.8rem;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.drp-format-index td {
+  padding: 0.4rem 0.8rem;
+  border-bottom: 1px solid rgba(185, 148, 87, 0.07);
+  vertical-align: middle;
+  color: var(--drp-muted);
+}
+
+.drp-format-index td:first-child {
+  color: var(--drp-ink);
+  font-weight: 500;
+}
+
+.drp-format-index td:first-child a {
+  color: var(--drp-ink) !important;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.drp-format-index td:first-child a:hover {
+  color: var(--drp-brass-light) !important;
+}
+
+.drp-format-index td code {
+  font-size: 0.8rem;
+  color: var(--drp-brass-light);
+  background: rgba(185, 148, 87, 0.09);
+  padding: 0.08rem 0.35rem;
+  border-radius: 3px;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+}
+
+.drp-format-index .drp-cat-sep td {
+  padding: 1.1rem 0.8rem 0.3rem;
+  border-bottom: none;
+  border-top: 1px solid rgba(185, 148, 87, 0.18);
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--drp-brass) !important;
+  background: transparent;
+  font-family: inherit;
+}
+
+.drp-format-index .drp-cat-sep:first-child td {
+  border-top: none;
+  padding-top: 0.3rem;
+}
+
+/* --------------------------------------------------
+   SECTION HEADING  (reusable label + horizontal rule)
+   -------------------------------------------------- */
+.drp-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2.5rem 0 1rem;
+}
+
+.drp-section-heading-label {
+  font-size: 0.67rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--drp-brass);
+  white-space: nowrap;
+}
+
+.drp-section-heading-rule {
+  flex: 1;
+  height: 1px;
+  background: rgba(185, 148, 87, 0.2);
+}
+
+/* --------------------------------------------------
    LIGHT THEME OVERRIDES
    Remap the pale golden palette to darker tones so
    hero text stays readable on a white background.

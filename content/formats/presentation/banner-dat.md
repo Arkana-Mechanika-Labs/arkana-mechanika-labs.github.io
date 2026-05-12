@@ -5,15 +5,18 @@ weight: 2
 
 Text-mode startup resource. Loaded by `DARKLAND.EXE` before the VGA mode switch. Contains the welcome banner rows, the startup selection menu, and the memory/disk diagnostic strings.
 
+{{< format-meta
+  ext="<code>BANNER.DAT</code>"
+  location="<code>DARKLAND\</code>"
+  endian="Little-endian (16-bit)"
+  size="1,519 B fixed — 20-entry offset table (40 B) + string payload"
+  compression="None"
+  magic="None — 20 LE uint16 offsets at 0x00, first entry always points to 0x0028"
+  status="high"
+  source="RE — direct byte inspection + DARKLAND.EXE runtime tracing (2026-04-16)"
+>}}
+
 *Reverse-engineered from `DARKLAND.EXE` startup analysis and direct file inspection (2026-04-16).*
-
-## File Facts
-
-| Property | Value |
-|----------|-------|
-| Path | `DARKLAND\BANNER.DAT` |
-| Size | 1519 bytes |
-| Format | Uncompressed — offset table + inline strings |
 
 ## File Layout
 

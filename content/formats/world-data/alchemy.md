@@ -5,6 +5,17 @@ weight: 4
 
 Descriptions, ingredients, difficulty, and risk for all 66 alchemical formulae. Formula order matches `DARKLAND.LST`.
 
+{{< format-meta
+  ext="<code>DARKLAND.ALC</code>"
+  location="Game root"
+  endian="Little-endian (16-bit)"
+  size="6,865 B — 1-byte count (66) + 66 × 104-byte formula_definition records"
+  compression="None"
+  magic="None — num_formulae byte = 66 at 0x00"
+  status="high"
+  source="Wendigo — darkland.alc.xml"
+>}}
+
 *Canonical source: `darkland.alc.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout

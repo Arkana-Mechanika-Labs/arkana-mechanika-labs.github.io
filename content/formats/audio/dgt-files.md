@@ -5,6 +5,21 @@ weight: 1
 
 `.DGT` files are the raw digital audio assets used in Darklands, most visibly in the intro sequence where they accompany `.PAN` visual assets. The format is about as minimal as digital audio gets: no header, no metadata, just a stream of unsigned 8-bit PCM samples.
 
+{{< format-meta
+  ext="<code>*.DGT</code>"
+  location="Game root"
+  endian="— (byte stream; no multi-byte values)"
+  size="Variable — entire file is sample data"
+  compression="None"
+  magic="None — no header of any kind"
+  status="partial"
+  source="Experimental — waveform and spectrogram analysis of OPENDARK.DGT"
+>}}
+
+{{< format-caution >}}
+**Partial.** Encoding (unsigned 8-bit PCM, mono) is confirmed. Sample rate is not yet proven — 8000 Hz gives the best playback match for `OPENDARK.DGT`, but 11025 Hz is plausible. Confirming the exact rate requires tracing the sound driver in `DARKLAND.EXE`.
+{{< /format-caution >}}
+
 *Source: experimental validation via waveform and spectrogram analysis of `OPENDARK.DGT`.*
 
 ---
@@ -13,7 +28,6 @@ weight: 1
 
 | Property | Value |
 |----------|-------|
-| Extension | `.DGT` |
 | Encoding | Raw unsigned 8-bit PCM |
 | Channels | Mono |
 | Header | None |

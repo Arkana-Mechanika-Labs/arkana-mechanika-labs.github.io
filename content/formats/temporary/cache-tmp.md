@@ -5,6 +5,17 @@ weight: 1
 
 Temporary file created when a saved game is loaded. Contains the current inn storage state. Structures here are shared with the save-file format; this page documents only the cache-specific layout.
 
+{{< format-meta
+  ext="<code>CACHE.TMP</code>"
+  location="Game root (runtime-generated)"
+  endian="Little-endian (16-bit)"
+  size="Variable — 1-byte constant + 1-byte count + 0xC4-byte offset table + cache records"
+  compression="None"
+  magic="Byte 0x63 at offset 0x00 (constant max_cache_slot)"
+  status="partial"
+  source="Wendigo — cache.tmp.xml; reference-only (byte-level correlation against live sample pending)"
+>}}
+
 *Canonical source: `cache.tmp.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout

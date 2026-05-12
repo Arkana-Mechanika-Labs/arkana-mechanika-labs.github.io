@@ -5,6 +5,21 @@ weight: 6
 
 City-specific data: names for every location within each city, coordinates, dock connections, building inventory, and shop quality ratings. Non-city locations are in `DARKLAND.LOC`.
 
+{{< format-meta
+  ext="<code>DARKLAND.CTY</code>"
+  location="Game root"
+  endian="Mixed — <code>city_contents</code> word is big-endian; all other fields are little-endian"
+  size="57,225 B — 1-byte count (92) + 92 × 622-byte city records"
+  compression="None"
+  magic="None — num_cities byte = 0x5C at 0x00"
+  status="partial"
+  source="Wendigo — darkland.cty.xml; partially correlated with in-game city content"
+>}}
+
+{{< format-caution >}}
+**Partial.** Two name slots are not fully resolved: +0x18E (populated in 6 cities as `Munzenplatz` / German `Reichsmuenzstaette` — likely maps to `$imperialMint` variable, but not runtime-proven) and +0x1CE (gate/tower names; correlates with `city_contents` bit 0x2000 in 31/34 cases). The `city_contents` word must be treated as **big-endian** — earlier little-endian readings shift all flags and produce wrong results.
+{{< /format-caution >}}
+
 *Canonical source: `darkland.cty.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout

@@ -5,6 +5,17 @@ weight: 2
 
 Combat animation sprite files. Each IMC contains all animation frames for one character body type and animation type. IMC files are accessed through the [catalog system](../catalog-files) (e.g. `A00C.CAT` contains alchemist IMC files).
 
+{{< format-meta
+  ext="<code>*.IMC</code>"
+  location="Via CAT archives (e.g. <code>A00C.CAT</code>, <code>E00C.CAT</code>)"
+  endian="Little-endian (16-bit) — decompressed layout"
+  size="Variable — frame-based; CB: 72 frames, WK: 72, DY: 16"
+  compression="Darklands DRLE — applied to the whole file; offsets below are post-decompress"
+  magic="None"
+  status="partial"
+  source="Wendigo — X.imc.xml; Olemars — imcfile.cpp"
+>}}
+
 *Canonical source: `X.imc.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## Compression

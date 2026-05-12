@@ -16,6 +16,17 @@ Covert Action or Railroad Tycoon.*
 Runtime SHA1 verification confirms byte-for-byte agreement between static replay and live DOSBox
 framebuffer output.*
 
+{{< format-meta
+  ext="<code>*.PAN</code>"
+  location="Game root"
+  endian="Little-endian (16-bit)"
+  size="Variable — compressed; logical stream opens with magic 0x0A5A + frame table + 768-byte palette"
+  compression="Custom LZ bitstream — stateful decoder at 0DFC:0070; control bits via RCR BP,1"
+  magic="<code>0x0A5A</code> at logical stream offset 0x00 (post-decompression)"
+  status="high"
+  source="RE — no prior public docs; corpus-validated 15 assets / 2,068 frames; runtime SHA1-verified"
+>}}
+
 ---
 
 ## Format Overview

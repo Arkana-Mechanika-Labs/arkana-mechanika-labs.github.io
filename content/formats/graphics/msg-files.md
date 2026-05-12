@@ -5,6 +5,21 @@ weight: 4
 
 Text and layout data for game screens ("cards") - option menus, situation descriptions, and in-game text. Almost all `.MSG` files are packaged inside the `MSGFILES` catalog.
 
+{{< format-meta
+  ext="<code>*.MSG</code>"
+  location="<code>MSGFILES</code> catalog (419 files) + loose <code>DARKLAND.MSG</code>"
+  endian="Little-endian (16-bit)"
+  size="Variable — card array; header byte = num_cards"
+  compression="None"
+  magic="None"
+  status="partial"
+  source="Wendigo — X.msg.xml"
+>}}
+
+{{< format-caution >}}
+**Partial.** The `entry_metadata` dword at `+0x0C` in each MSGFILES catalog entry has not been definitively decoded. Values cluster by filename family and decode as plausible DOS date/time words, but MSGFILES spans a wider range than ordinary CAT archives and does not fit the timestamp model cleanly. Do not rely on this field for grouping or ordering without independent verification.
+{{< /format-caution >}}
+
 *Canonical source: `X.msg.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## Files

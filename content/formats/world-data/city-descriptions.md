@@ -5,6 +5,21 @@ weight: 7
 
 Long text descriptions of all 92 cities, displayed on the city approach screen. Order matches `DARKLAND.CTY`.
 
+{{< format-meta
+  ext="<code>DARKLAND.DSC</code>"
+  location="Game root"
+  endian="Little-endian (16-bit)"
+  size="7,361 B — 1-byte (incorrect) count + 92 × 80-byte null-padded strings"
+  compression="None"
+  magic="None — header byte = 0x5E (94), but actual count is 92; game ignores the header"
+  status="partial"
+  source="Wendigo — darkland.dsc.xml"
+>}}
+
+{{< format-caution >}}
+**Partial.** The stored header count (0x5E = 94) does not match the actual number of city descriptions (92). The game appears to ignore this byte and always reads 92 entries. Do not use the header byte as a record count.
+{{< /format-caution >}}
+
 *Canonical source: `darkland.dsc.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout

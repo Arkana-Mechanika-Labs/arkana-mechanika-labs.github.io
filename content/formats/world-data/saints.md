@@ -5,6 +5,17 @@ weight: 5
 
 Long text descriptions of all 136 saints, used in the in-game saint reference screen. Saint order matches `DARKLAND.LST`.
 
+{{< format-meta
+  ext="<code>DARKLAND.SNT</code>"
+  location="Game root"
+  endian="Little-endian (16-bit)"
+  size="48,961 B — 1-byte count (136) + 136 × 360-byte null-padded description strings"
+  compression="None"
+  magic="None — num_saints byte = 136 at 0x00"
+  status="high"
+  source="Wendigo — darkland.snt.xml"
+>}}
+
 *Canonical source: `darkland.snt.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout

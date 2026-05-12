@@ -1,0 +1,19 @@
+<dl class="drp-format-meta">
+  {{ with .Get "ext"         }}<dt>Extension</dt><dd>{{ . | safeHTML }}</dd>{{ end }}
+  {{ with .Get "location"    }}<dt>Location</dt><dd>{{ . | safeHTML }}</dd>{{ end }}
+  {{ with .Get "endian"      }}<dt>Byte order</dt><dd>{{ . }}</dd>{{ end }}
+  {{ with .Get "size"        }}<dt>Size</dt><dd>{{ . }}</dd>{{ end }}
+  {{ with .Get "compression" }}<dt>Compression</dt><dd>{{ . }}</dd>{{ end }}
+  {{ with .Get "magic"       }}<dt>Magic</dt><dd>{{ . | safeHTML }}</dd>{{ end }}
+  {{ with .Get "status"      }}
+  <dt>Status</dt><dd>
+    {{- $s := . -}}
+    {{- if eq $s "high"    }}<span class="drp-status high">Documented</span>
+    {{- else if eq $s "partial" }}<span class="drp-status partial">Partial</span>
+    {{- else if eq $s "stub"    }}<span class="drp-status stub">Stub</span>
+    {{- else if eq $s "ref"     }}<span class="drp-status ref">Reference</span>
+    {{- end }}
+  </dd>
+  {{ end }}
+  {{ with .Get "source"      }}<dt>Source</dt><dd>{{ . | safeHTML }}</dd>{{ end }}
+</dl>

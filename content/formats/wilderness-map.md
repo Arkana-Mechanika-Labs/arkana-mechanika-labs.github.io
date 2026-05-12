@@ -5,6 +5,21 @@ weight: 3
 
 Contains the entire Darklands wilderness map. The map is rendered from tiles stored in two PIC files: `MAPICONS.PIC` and `MAPICON2.PIC`.
 
+{{< format-meta
+  ext="<code>DARKLAND.MAP</code>"
+  location="Game root"
+  endian="Mixed — dimension words (0x00–0x03) are big-endian; row offsets (dword[]) and tile bytes are little-endian"
+  size="Variable — 4-byte header + 0x3A3 row-offset dwords + RLE tile stream"
+  compression="Bit-packed RLE — 3-bit repeat count + 1-bit palette set + 4-bit tile row per byte"
+  magic="None — dimensions: max_x=0x0147 (BE), max_y=0x03A3 (BE)"
+  status="partial"
+  source="Wendigo — darkland.map.xml"
+>}}
+
+{{< format-caution >}}
+**Partial.** The RLE encoding and row-offset structure are confirmed. Tile column derivation from adjacent tiles is documented but does not fully reproduce in-game results — exact adjacency logic is unresolved. The hex-grid odd-row offset is confirmed.
+{{< /format-caution >}}
+
 *Canonical source: `darkland.map.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout
