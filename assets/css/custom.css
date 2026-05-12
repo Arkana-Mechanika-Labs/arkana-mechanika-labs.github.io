@@ -681,8 +681,8 @@ html:not(.dark) table tr:has(td em) {
    -------------------------------------------------- */
 html:not(.dark) {
   --drp-brass: #7a5c1e;
-  --drp-brass-light: #5e4416;
-  --drp-muted: #4a3e2c;
+  --drp-brass-light: #6b4e1a;
+  --drp-muted: #3d3120;
   --drp-ink: #1c1308;
   --drp-surface: rgba(245, 235, 210, 0.65);
   --drp-surface-border: rgba(100, 78, 30, 0.22);
