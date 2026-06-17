@@ -5,15 +5,22 @@ weight: 6
 
 Compact startup graphics bank loaded during the VGA bootstrap phase. Contains common UI sprites and shape records used across multiple game screens. Loaded by `DARKLAND.EXE` startup helper `1699:179A0` after `mgraphic.exe` is installed.
 
+{{< format-meta
+  ext="<code>COMMONSP.IMG</code>"
+  location="<code>DARKLAND\</code>"
+  endian="Little-endian (16-bit)"
+  size="4,078 B fixed (0x0FEE) — length word + 14-entry offset table + 4,048-byte payload"
+  compression="None"
+  magic="None — payload_length word (0x0FD0) at 0x00"
+  status="partial"
+  source="RE — direct file inspection + DARKLAND.EXE startup analysis (2026-04-16)"
+>}}
+
+{{< format-caution >}}
+**Partial.** File layout and offset table are confirmed. Per-record row encoding in the large body (slice 13) and the exact semantics of slices 0–10 are not yet fully solved. The label/dimension pattern is well-supported but pixel-row encoding is not complete.
+{{< /format-caution >}}
+
 *Reverse-engineered from direct file inspection and `DARKLAND.EXE` startup analysis (2026-04-16).*
-
-## File Facts
-
-| Property | Value |
-|----------|-------|
-| Path | `DARKLAND\COMMONSP.IMG` |
-| Size | 4078 bytes (`0x0FEE`) |
-| Format | Length word + 14-entry offset table + payload |
 
 ## File Layout
 

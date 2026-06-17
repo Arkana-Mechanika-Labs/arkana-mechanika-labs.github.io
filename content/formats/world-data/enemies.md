@@ -5,6 +5,21 @@ weight: 2
 
 All enemy and creature definitions: stats, equipment, sprite references, palette indices, and individual named enemy instances.
 
+{{< format-meta
+  ext="<code>DARKLAND.ENM</code>"
+  location="Game root"
+  endian="Little-endian (16-bit)"
+  size="16,452 B — 71 × 204-byte enemy_type + 82 × 24-byte enemy records"
+  compression="None"
+  magic="None — first record begins immediately at 0x00"
+  status="partial"
+  source="Wendigo — darkland.enm.xml; partially correlated against combat runtime"
+>}}
+
+{{< format-caution >}}
+**Partial.** Two large blocks in each `enemy_type` record are unresolved: +0x32 (66 bytes — likely potion-carrying odds/quality, possibly 22 triplets) and +0x74 (30 bytes — possibly component-carry probabilities). Several individual fields are also unknown: +0x10, +0x12, +0x2E, +0x30, +0x31, +0x97, +0x9A–+0xA5, +0xAD–+0xCC.
+{{< /format-caution >}}
+
 *Canonical source: `darkland.enm.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout

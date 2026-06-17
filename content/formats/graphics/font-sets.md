@@ -5,6 +5,17 @@ weight: 3
 
 Font definition files used for UI text rendering.
 
+{{< format-meta
+  ext="<code>FONTS.FNT</code> (game fonts), <code>FONTS.UTL</code> (editor fonts)"
+  location="Game root"
+  endian="Little-endian (16-bit)"
+  size="Variable — 3 fonts; header at offset 0x00 (font_count word + 3 offset words)"
+  compression="None"
+  magic="None — font_count = 3 at 0x00"
+  status="partial"
+  source="Wendigo — X.fnt.xml"
+>}}
+
 *Canonical source: `X.fnt.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## Files

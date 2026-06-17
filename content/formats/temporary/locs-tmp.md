@@ -5,6 +5,17 @@ weight: 3
 
 Temporary file created when a saved game is loaded. Contains the full location array with runtime state (reputation, inn cache indices, etc.) that differs from the static `DARKLAND.LOC` source.
 
+{{< format-meta
+  ext="<code>LOCS.TMP</code>"
+  location="Game root (runtime-generated)"
+  endian="Little-endian (16-bit)"
+  size="24,336 B — 2-byte count (414) + 414 × 58-byte location records (mirrors DARKLAND.LOC)"
+  compression="None"
+  magic="None — num_locations word = 0x019E at 0x00"
+  status="partial"
+  source="Wendigo — locs.tmp.xml; reference-only validation"
+>}}
+
 *Canonical source: `locs.tmp.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout

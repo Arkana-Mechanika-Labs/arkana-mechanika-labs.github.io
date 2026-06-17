@@ -5,15 +5,22 @@ weight: 8
 
 Small static file shipped with the game. Contains exactly four `item` records using the same 6-byte structure found in save files. The file's consumer and exact gameplay purpose are not yet identified.
 
+{{< format-meta
+  ext="<code>CFILE.DAT</code>"
+  location="<code>DARKLAND\</code>"
+  endian="Little-endian (16-bit)"
+  size="24 B fixed — 4 × 6-byte item structs, no header"
+  compression="None"
+  magic="None — no header; first word is item code 0x0073 (Essence o'Grace)"
+  status="partial"
+  source="RE — direct byte inspection + cross-reference with DARKLAND.LST (2026-04-19)"
+>}}
+
+{{< format-caution >}}
+**Partial.** The 4-item structural decode is confirmed (all type/weight bytes match DARKLAND.LST). The consumer routine and gameplay purpose are unresolved — the exact 24-byte sequence was not found in save files or cache files during the decode pass. It may be a starter inventory template, trade-helper bundle, or tool artifact.
+{{< /format-caution >}}
+
 *Reverse-engineered by direct byte inspection and cross-reference with `darkland.lst` and save-file structures (2026-04-19).*
-
-## File Facts
-
-| Property | Value |
-|----------|-------|
-| Path | `DARKLAND\CFILE.DAT` |
-| Size | 24 bytes (`4 × 6`) |
-| Format | Four contiguous `item` structs — no header |
 
 ## Item struct (6 bytes)
 

@@ -5,6 +5,21 @@ weight: 3
 
 Item definitions, saint names, and alchemical formula names. The item code used everywhere in the game is an index into the `item_definitions` array here.
 
+{{< format-meta
+  ext="<code>DARKLAND.LST</code>"
+  location="Game root"
+  endian="Little-endian (16-bit)"
+  size="Variable — 3-byte header + 200 × 46-byte item_definition + saint/formula name strings"
+  compression="None"
+  magic="None — num_item_slots (200), num_saints (136), num_formulae (66) at 0x00–0x02"
+  status="partial"
+  source="Wendigo — darkland.lst.xml"
+>}}
+
+{{< format-caution >}}
+**Partial.** `flags_5` (rarity/category byte) semantics are unresolved — bit 0 (`is_unknown_2`) and bit 7 (`is_unknown_3`) appear across many item types without a clear pattern. `flags_2` bits 0 and 1 are also not definitively named. `item_definition` fields at +0x28 and +0x2A are non-zero only for relics and one unused item.
+{{< /format-caution >}}
+
 *Canonical source: `darkland.lst.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout

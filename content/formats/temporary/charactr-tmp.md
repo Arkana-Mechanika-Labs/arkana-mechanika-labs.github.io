@@ -5,6 +5,17 @@ weight: 2
 
 Temporary file containing the current party's character data after a saved game is loaded. A bridge between the durable save format and the live runtime party state.
 
+{{< format-meta
+  ext="<code>CHARACTR.TMP</code>"
+  location="Game root (runtime-generated)"
+  endian="Little-endian (16-bit)"
+  size="Variable — 2-byte count + 10-byte index table + 20-byte image IDs + (num_chars × 554-byte character records)"
+  compression="None"
+  magic="None"
+  status="partial"
+  source="Wendigo — character.tmp.html; byte-level validation against a live file pending"
+>}}
+
 *Canonical source: `character.tmp.html` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout

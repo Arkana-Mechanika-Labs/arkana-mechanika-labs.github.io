@@ -5,6 +5,17 @@ weight: 1
 
 Image files used for UI artwork, world/city presentation, map tiles, and character portraits. All `.PIC` files live in the `PICS\` subdirectory.
 
+{{< format-meta
+  ext="<code>*.PIC</code>"
+  location="<code>PICS\</code>"
+  endian="Little-endian (16-bit)"
+  size="Variable — chunk sequence with no global file header"
+  compression="Custom: RLE + Darklands-specific encoder"
+  magic="None"
+  status="partial"
+  source="Quadko — PicFileFormat.txt; working C++ decoder: PicReaderC.cpp"
+>}}
+
 *Source: Quadko's `PicFileFormat.txt` (no XML spec exists for this format)*
 
 ## Structure

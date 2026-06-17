@@ -5,6 +5,17 @@ weight: 5
 
 Palette chunks used for enemy IMC combat sprite rendering. Each chunk defines 16 RGB color triplets remapped into runtime VGA palette slots during combat.
 
+{{< format-meta
+  ext="<code>ENEMYPAL.DAT</code>"
+  location="Game root"
+  endian="LE-8 (byte arrays; no multi-byte integers)"
+  size="3,692 B fixed — 71 × 52-byte palette_chunk records"
+  compression="None"
+  magic="None"
+  status="high"
+  source="Wendigo — enemypal.dat.xml; Olemars — colortable.cpp"
+>}}
+
 *Canonical source: `enemypal.dat.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout

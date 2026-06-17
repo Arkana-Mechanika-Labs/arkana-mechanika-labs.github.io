@@ -5,6 +5,21 @@ weight: 1
 
 Each character in a Darklands save file occupies exactly **554 bytes (0x22a)**. Fields are **not sequential** — there are gap bytes throughout. All offsets are relative to the start of the character record.
 
+{{< format-meta
+  ext="Embedded struct — not a standalone file"
+  location="Inside <code>dksave*.sav</code>, repeated num_characters times starting at 0x189"
+  endian="Little-endian (16-bit)"
+  size="554 B fixed (0x22A)"
+  compression="None"
+  magic="N/A"
+  status="partial"
+  source="Wendigo — dksaveXX.sav.xml"
+>}}
+
+{{< format-caution >}}
+**Partial.** The first 17 bytes (+0x00–+0x11) are undocumented. Equipment type and quality fields are non-adjacent and interleaved with unknown bytes. The character struct is navigable via known anchors (names at +0x25/+0x3E, attributes at +0x5D, skills at +0x6B) but has scattered gaps throughout.
+{{< /format-caution >}}
+
 *Source: `dksaveXX.sav.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 > **Note:** Darklands has no class system. Characters are defined by backgrounds, occupations, and 19 individual skills. Equipment type and quality for each slot are **not adjacent** in the struct — see the table below.

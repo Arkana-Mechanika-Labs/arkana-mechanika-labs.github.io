@@ -8,6 +8,17 @@ install-time artifacts; others are diagnostic tools that reveal details about in
 data structures. Analysis here is based on static inspection of the binaries (string
 extraction, disassembly) cross-referenced with the main RE work on `DARKLAND.EXE`.
 
+{{< format-meta
+  ext="<code>MGRAPHIC.EXE</code>, <code>MISC.EXE</code>, <code>MPSCOPY.EXE</code>, <code>DKED.EXE</code>, <code>DKQUE.EXE</code>, installer tools"
+  location="Game root"
+  endian="Little-endian (MZ COM/EXE)"
+  size="Varies per binary"
+  compression="None"
+  magic="<code>4D 5A</code> (MZ) for .EXE; <code>EB xx 90</code> typical for .COM"
+  status="ref"
+  source="RE — static analysis (string extraction, disassembly) cross-referenced with DARKLAND.EXE"
+>}}
+
 ---
 
 ## DKED.EXE — Save Game Editor

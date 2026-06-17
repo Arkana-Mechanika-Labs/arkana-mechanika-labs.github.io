@@ -7,6 +7,21 @@ Each saved game consists of two files:
 - `dksave*.sav` — world and character data (this document)
 - `dksave*.bsv` — battle/dungeon data for the last unfinished dungeon
 
+{{< format-meta
+  ext="<code>dksave*.sav</code>"
+  location="Game root"
+  endian="Little-endian (16-bit)"
+  size="Variable — 0xEF world header + 0x99 roster + (num_chars × 554) + events + 414 locations + cache block"
+  compression="None"
+  magic="None"
+  status="partial"
+  source="Wendigo — dksaveXX.sav.xml"
+>}}
+
+{{< format-caution >}}
+**Partial.** World state header has several undocumented blocks (notably 0x0C–0x14, 0x3E–0x62, 0x84–0x89). The 48-byte event record is only partially decoded — offsets for quest discriminator, dates, and location indices are established, but the remaining fields are unknown. Character records have gap bytes at the start (+0x00–+0x11) and scattered unknown fields.
+{{< /format-caution >}}
+
 *Canonical source: `dksaveXX.sav.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## Top-Level Layout

@@ -5,6 +5,21 @@ weight: 1
 
 All named locations on the Darklands wilderness map: cities, villages, castles, monasteries, dungeons, caves, shrines, etc. This data is copied into each save file at game creation and updated there during play.
 
+{{< format-meta
+  ext="<code>DARKLAND.LOC</code>"
+  location="Game root"
+  endian="Little-endian (16-bit)"
+  size="24,334 B — 2-byte count (0x019E = 414) + 414 × 58-byte location records"
+  compression="None"
+  magic="None — num_locations word = 0x019E at 0x00"
+  status="partial"
+  source="Wendigo — darkland.loc.xml; partially correlated against save file copies"
+>}}
+
+{{< format-caution >}}
+**Partial.** Several fields in the 58-byte location record are unknown: +0x02 (non-zero for non-cities), +0x08 (1–10 range, possibly site strength), +0x0A (1–5; pagan altars = 0x63), +0x0E (usually 0x62; Raubritter castles use 0x92), +0x14 (ruins/destroyed markers), +0x1C (Nürnberg exception). Runtime fields (`local_rep`, `inn_cache_idx`) are zero in the static file and live in save copies.
+{{< /format-caution >}}
+
 *Canonical source: `darkland.loc.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## File Layout

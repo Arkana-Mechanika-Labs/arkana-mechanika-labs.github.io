@@ -5,6 +5,17 @@ weight: 11
 
 Historical reference note for the main Darklands executable. Unlike the data-file pages in this section, this is not a stable binary format so much as a catalog of known offsets, string tables, and pointer arrays preserved from the legacy community corpus.
 
+{{< format-meta
+  ext="<code>DARKLAND.EXE</code>"
+  location="Game root"
+  endian="Little-endian (MZ segmented executable)"
+  size="~370 KB — overlay-managed; code segments paged via EMS at runtime"
+  compression="None (unpacked)"
+  magic="<code>4D 5A</code> (MZ) at 0x00"
+  status="ref"
+  source="Wendigo — darkland.exe.xml (historical); live RE in RE\\reports\\darkland_exe_notes.md"
+>}}
+
 *Canonical source: `darkland.exe.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
 
 ## Scope
