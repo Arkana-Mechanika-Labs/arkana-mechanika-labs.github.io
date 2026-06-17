@@ -1,5 +1,5 @@
 ---
-title: "Devlog #035 - The City Is a Menu Machine"
+title: "Devlog #036 - The City Is a Menu Machine"
 date: 2026-06-17T09:00:00
 summary: "City navigation looked like a list of places connected by routes. It is not. The original game runs it through a shared menu machine with status rules, handlers, side effects, random gates, services, and card selection."
 ---
