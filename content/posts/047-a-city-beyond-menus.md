@@ -1,6 +1,6 @@
 ---
 title: "Devlog #047 - A City Beyond Menus"
-date: 2026-08-07T09:00:00
+date: 2026-08-06T09:00:00
 summary: "The reconstruction now reaches character sheets, saints, church services, marketplaces, and the council hall—using original resources and certified owner logic rather than modern stand-ins."
 ---
 

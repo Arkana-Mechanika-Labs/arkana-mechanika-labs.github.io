@@ -7,7 +7,7 @@ width: wide
 Session-by-session notes from the Darklands reverse engineering project. Each entry covers one or more analysis sessions, what the AI agent found, how it found it, and what it means for the eventual C# port.
 
 {{< cards >}}
-  {{< card link="047-a-city-beyond-menus" title="Devlog #047 - A City Beyond Menus" icon="book-open" subtitle="August 7, 2026. Character sheets, saints, church services, marketplaces, and the council hall now emerge from certified original owners and real resources." >}}
+  {{< card link="047-a-city-beyond-menus" title="Devlog #047 - A City Beyond Menus" icon="book-open" subtitle="August 6, 2026. Character sheets, saints, church services, marketplaces, and the council hall now emerge from certified original owners and real resources." >}}
   {{< card link="046-main-street-opens-up" title="Devlog #046 - Main Street Opens Up" icon="book-open" subtitle="August 4, 2026. Main Street now branches into day and night streets, groves, markets, docks, churches, and returning city loops through the original state graph." >}}
   {{< card link="045-the-msg-machine-revealed" title="Devlog #045 - The MSG Machine Revealed" icon="book-open" subtitle="August 3, 2026. The shared owner-publication, layout, input, callback, action, and redispatch mechanism is now understood well enough to drive clean C# gameplay." >}}
   {{< card link="044-when-evidence-became-reusable" title="Devlog #044 - When Evidence Became Reusable" icon="book-open" subtitle="August 3, 2026. Darklays can now index current MSG evidence, match exact helper contracts, and promote ordinary selected paths without reopening known cones." >}}
