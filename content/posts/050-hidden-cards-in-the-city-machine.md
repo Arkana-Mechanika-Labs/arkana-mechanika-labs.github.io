@@ -1,6 +1,6 @@
 ---
 title: "Devlog #050 - Hidden Cards in the City Machine"
-date: 2026-08-09T16:00:00
+date: 2026-08-09T08:00:00+02:00
 summary: "Main Street, the night streets, and the side streets can publish conditional entry cards before their normal rows. The original guards, pictures, RNG, disabled actions, and redispatch routes are now closed independently."
 ---
 

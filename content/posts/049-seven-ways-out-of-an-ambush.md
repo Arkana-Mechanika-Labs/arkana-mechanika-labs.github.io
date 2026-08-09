@@ -1,6 +1,6 @@
 ---
 title: "Devlog #049 - Seven Ways Out of an Ambush"
-date: 2026-08-09T12:00:00
+date: 2026-08-09T07:00:00+02:00
 summary: "The seven actions on $CITYT00 are becoming real gameplay: prayer, potions, arms, grovelling, fleeing, and combat are now separated into exact owner consequences instead of guessed menu routes."
 ---
 

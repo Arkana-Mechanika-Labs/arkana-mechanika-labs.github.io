@@ -1,6 +1,6 @@
 ---
 title: "Devlog #048 - The Popup Is Part of the Game"
-date: 2026-08-09T08:00:00
+date: 2026-08-09T06:00:00+02:00
 summary: "Darklands' saint and potion choices are not modal menus pasted over MSG cards. Their hover lifecycle, candidate filtering, prayer controller, and character-sheet integration are now reconstructed from the original owners."
 ---
 
