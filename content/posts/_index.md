@@ -7,6 +7,8 @@ width: wide
 Session-by-session notes from the Darklands reverse engineering project. Each entry covers one or more analysis sessions, what the AI agent found, how it found it, and what it means for the eventual C# port.
 
 {{< cards >}}
+  {{< card link="052-fifteen-pieces-of-combat" title="Devlog #052 - Fifteen Pieces of Combat" icon="book-open" subtitle="August 11, 2026. Fifteen original combat procedures now execute as byte-certified raw C# owners, while the missing orchestration remains an explicit boundary." >}}
+  {{< card link="051-combat-is-a-pipeline" title="Devlog #051 - Combat Is a Pipeline" icon="book-open" subtitle="August 11, 2026. The generic entry, three generation families, prepared 40×40 battlefield, placement search, and raw result protocol are now mapped from the original bytes." >}}
   {{< card link="050-hidden-cards-in-the-city-machine" title="Devlog #050 - Hidden Cards in the City Machine" icon="book-open" subtitle="August 9, 2026. Main Street and the side streets now execute their original optional entry cards, event guards, retained pictures, disabled rows, and redispatch paths." >}}
   {{< card link="049-seven-ways-out-of-an-ambush" title="Devlog #049 - Seven Ways Out of an Ambush" icon="book-open" subtitle="August 9, 2026. The CITYT00 ambush now exercises real prayer, potions, arms, grovelling, fleeing, inventory loss, time, RNG, and explicit combat boundaries." >}}
   {{< card link="048-the-popup-is-part-of-the-game" title="Devlog #048 - The Popup Is Part of the Game" icon="book-open" subtitle="August 9, 2026. Hover-driven saint and potion popups, party-derived candidates, shared prayer, and character-sheet integration are reconstructed from the original owners." >}}
