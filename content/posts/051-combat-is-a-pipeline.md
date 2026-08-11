@@ -1,6 +1,6 @@
 ---
 title: "Devlog #051 - Combat Is a Pipeline"
-date: 2026-08-11T18:00:00+02:00
+date: 2026-08-11T09:00:00+02:00
 summary: "Darklands combat is no longer a black box behind an encounter choice: its generic entry, three generation families, prepared battlefield, placement search, and raw result protocol are now mapped from the original bytes."
 ---
 

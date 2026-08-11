@@ -1,6 +1,6 @@
 ---
 title: "Devlog #052 - Fifteen Pieces of Combat"
-date: 2026-08-11T19:00:00+02:00
+date: 2026-08-11T09:05:00+02:00
 summary: "Fifteen original combat procedures now execute as byte-certified raw C# owners. Here is what they do, why they are not yet a playable battle, and how 94 research commits were reconciled without importing a speculative combat rewrite."
 ---
 
