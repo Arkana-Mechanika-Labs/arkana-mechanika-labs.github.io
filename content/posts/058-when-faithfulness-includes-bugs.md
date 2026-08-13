@@ -82,6 +82,13 @@ forums, Yahoo/Groups.io archives, and earlier versions. Reports fixed before
 483.07 remain historical. Reports allegedly affecting 483.07 are leads for
 testing, not implementation authority.
 
+The byte-confirmed register is published alongside this devlog as
+[`KNOWN_ORIGINAL_BUGS.md`](/downloads/KNOWN_ORIGINAL_BUGS.md). This is a
+website snapshot of the maintained engine document; the
+[canonical source](https://github.com/Arkana-Mechanika-Studios/darklands-engine/blob/main/docs/KNOWN_ORIGINAL_BUGS.md)
+remains in the engine repository so future discoveries, evidence, and policy
+decisions stay versioned with the implementation.
+
 This distinction matters because Darklands circulated in several patched
 versions. Reimplementing a famous 1992 bug that was fixed in 483.07 would be
 just as inaccurate as silently fixing a defect that remains in 483.07.
