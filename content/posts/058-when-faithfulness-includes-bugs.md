@@ -69,8 +69,9 @@ behavior that is not in the original 483.07 owner.
 
 These discoveries led to a formal bug catalogue.
 
-`KNOWN_ORIGINAL_BUGS.md` contains byte-confirmed defects, the exact original
-units and instruction ranges, and the chosen reimplementation disposition:
+The project's byte-confirmed register contains defects backed by exact
+original units and instruction ranges, together with the chosen
+reimplementation disposition:
 
 - `replicate` for strict compatibility;
 - `correct` for an explicit project fix;
@@ -82,12 +83,11 @@ forums, Yahoo/Groups.io archives, and earlier versions. Reports fixed before
 483.07 remain historical. Reports allegedly affecting 483.07 are leads for
 testing, not implementation authority.
 
-The byte-confirmed register is published alongside this devlog as
-[`KNOWN_ORIGINAL_BUGS.md`](/downloads/KNOWN_ORIGINAL_BUGS.md). This is a
-website snapshot of the maintained engine document; the
-[canonical source](https://github.com/Arkana-Mechanika-Studios/darklands-engine/blob/main/docs/KNOWN_ORIGINAL_BUGS.md)
-remains in the engine repository so future discoveries, evidence, and policy
-decisions stay versioned with the implementation.
+The complete versioned research catalogue is published alongside this devlog
+as [`DARKLANDS_483_07_REPORTED_BUG_CATALOGUE.md`](/downloads/DARKLANDS_483_07_REPORTED_BUG_CATALOGUE.md).
+The website hosts its own copy, including the status and confidence system,
+version qualifications, evidence targets, archive corrections, and suggested
+regression boundaries.
 
 This distinction matters because Darklands circulated in several patched
 versions. Reimplementing a famous 1992 bug that was fixed in 483.07 would be
