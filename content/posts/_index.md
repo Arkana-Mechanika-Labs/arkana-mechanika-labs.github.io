@@ -7,6 +7,7 @@ width: wide
 Session-by-session notes from the Darklands reverse engineering project. Each entry covers one or more analysis sessions, what the AI agent found, how it found it, and what it means for the eventual C# port.
 
 {{< cards >}}
+  {{< card link="063-more-pixels-the-same-painting" title="Devlog #063 - More Pixels, the Same Painting" icon="book-open" subtitle="August 17, 2026. High-resolution PIC prototypes preserve Darklands’ original watercolor compositions while exploring spring/summer, autumn, and winter variants." >}}
   {{< card link="062-the-street-only-thirty-two-cities-have" title="Devlog #062 - The Street Only Thirty-Two Cities Have" icon="book-open" subtitle="August 17, 2026. Street of the Blacksmiths appears in only 32 of 92 city records, then selects a direct merchant or one of two larger street controllers." >}}
   {{< card link="061-the-road-darklands-refuses-to-show" title="Devlog #061 - The Road Darklands Refuses to Show" icon="book-open" subtitle="August 16, 2026. Soldier's Road is hidden by the ordinary owner, but a forced publication proves its cards, Arms Outfitter, two-hour cost, and return loop." >}}
   {{< card link="060-four-night-gates-with-no-caller" title="Devlog #060 - Four Night Gates With No Caller" icon="book-open" subtitle="August 15, 2026. The wall route now reaches the original gate controller, while four authentic nighttime gate cards remain callerless in version 4.83.07." >}}
