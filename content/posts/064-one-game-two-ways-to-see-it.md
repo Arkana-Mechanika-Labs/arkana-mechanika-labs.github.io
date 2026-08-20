@@ -1,5 +1,5 @@
 ---
-title: "Devlog #064 - Let's pump up the resolution"
+title: "Devlog #064 - Darklands in higher resolution"
 date: 2026-08-19T14:00:00+02:00
 summary: "Darklands now has a permanent Classic presenter, a resolution-independent SDL output path, and a first Enhanced Faithful presenter that can combine restored 1920×1080 art with the original interactive UI without changing gameplay."
 width: wide
@@ -27,7 +27,7 @@ as one indivisible whole.
 
 This devlog is about the architecture that made that possible.
 
-## The Game is not the window
+## The Game is not the Window
 
 Darklands was designed for a 320×200 VGA display. Its pictures, card borders,
 fonts, party panel and mouse regions all assume that canvas. It would have been
@@ -57,7 +57,7 @@ Darklands.DevHost
     implements the current SDL window, textures, input and audio devices
 ```
 
-The core engine layer remains below all of this. It does not know whether
+The core layer remains below all of this. It does not know whether
 a picture is shown at 320×200, restored at 1920×1080, displayed in SDL, or one
 day assembled from Unity sprites. It still produces the same game decisions,
 resource identities, text, selectable owners, time effects, random results and
@@ -107,9 +107,8 @@ path. It selects a concrete presenter for the current snapshot.
 The two implemented profiles are:
 
 - **Classic**, which presents the exact original indexed surface;
-- **Enhanced Faithful**, which plays in higher resolution and may or 
-  may not substitute a restored picture while preserving the original 
-  interaction and user-interface composition.
+- **Enhanced Faithful**, which may substitute a restored picture while
+  preserving the original interaction and user-interface composition.
 
 A third profile, **Enhanced Modern**, is reserved for later work. That is where
 rows could move into a larger side panel, portraits could become independent
@@ -234,6 +233,120 @@ message presentation. Other picture-backed generic MSG scenes can use the same
 path when a valid restored asset is mapped and the complete UI phase is
 supported.
 
+### Five Enhanced Faithful Examples
+
+The same composition can be previewed across several mapped picture-backed
+scenes. The screenshots below show Main Street, the City Square, the
+marketplace, a city gate and an inn. In each case, a restored high-resolution
+picture sits behind the original Darklands card, bitmap text, choices and party
+panel.
+
+These examples demonstrate the presentation direction; they are not a claim
+that every screen family has already been migrated. Click any image to open the
+original PNG at its full stored resolution.
+
+<figure style="margin: 1.25rem 0 2rem; min-width: 0;">
+  <a
+    href="/images/devlogs/064/MainStreet.png"
+    target="_blank"
+    rel="noopener"
+    title="Open the Enhanced Faithful Main Street screenshot at full size"
+  >
+    <img
+      src="/images/devlogs/064/MainStreet.png"
+      alt="Enhanced Faithful Darklands Main Street with a restored high-resolution background and the original interactive message interface"
+      loading="lazy"
+      decoding="async"
+      style="display: block; width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 0 0 1px rgba(127,127,127,0.28); cursor: zoom-in;"
+    >
+  </a>
+  <figcaption style="margin-top: 0.55rem; text-align: center; font-size: 0.9rem;">
+    Main Street — restored high-resolution scenery with the original interactive UI.
+  </figcaption>
+</figure>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; align-items: start; margin: 1.25rem 0 2.5rem;">
+<figure style="margin: 0; min-width: 0;">
+  <a
+    href="/images/devlogs/064/CitySquare.png"
+    target="_blank"
+    rel="noopener"
+    title="Open the Enhanced Faithful City Square screenshot at full size"
+  >
+    <img
+      src="/images/devlogs/064/CitySquare.png"
+      alt="Enhanced Faithful Darklands City Square with a restored high-resolution background and the original interactive message interface"
+      loading="lazy"
+      decoding="async"
+      style="display: block; width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 0 0 1px rgba(127,127,127,0.28); cursor: zoom-in;"
+    >
+  </a>
+  <figcaption style="margin-top: 0.5rem; text-align: center; font-size: 0.9rem;">
+    City Square
+  </figcaption>
+</figure>
+
+<figure style="margin: 0; min-width: 0;">
+  <a
+    href="/images/devlogs/064/Market.png"
+    target="_blank"
+    rel="noopener"
+    title="Open the Enhanced Faithful marketplace screenshot at full size"
+  >
+    <img
+      src="/images/devlogs/064/Market.png"
+      alt="Enhanced Faithful Darklands marketplace with a restored high-resolution background and the original interactive message interface"
+      loading="lazy"
+      decoding="async"
+      style="display: block; width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 0 0 1px rgba(127,127,127,0.28); cursor: zoom-in;"
+    >
+  </a>
+  <figcaption style="margin-top: 0.5rem; text-align: center; font-size: 0.9rem;">
+    Marketplace
+  </figcaption>
+</figure>
+
+<figure style="margin: 0; min-width: 0;">
+  <a
+    href="/images/devlogs/064/Gate.png"
+    target="_blank"
+    rel="noopener"
+    title="Open the Enhanced Faithful city-gate screenshot at full size"
+  >
+    <img
+      src="/images/devlogs/064/Gate.png"
+      alt="Enhanced Faithful Darklands city gate with a restored high-resolution background and the original interactive message interface"
+      loading="lazy"
+      decoding="async"
+      style="display: block; width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 0 0 1px rgba(127,127,127,0.28); cursor: zoom-in;"
+    >
+  </a>
+  <figcaption style="margin-top: 0.5rem; text-align: center; font-size: 0.9rem;">
+    City Gate
+  </figcaption>
+</figure>
+
+<figure style="margin: 0; min-width: 0;">
+  <a
+    href="/images/devlogs/064/Inn.png"
+    target="_blank"
+    rel="noopener"
+    title="Open the Enhanced Faithful inn screenshot at full size"
+  >
+    <img
+      src="/images/devlogs/064/Inn.png"
+      alt="Enhanced Faithful Darklands inn with a restored high-resolution background and the original interactive message interface"
+      loading="lazy"
+      decoding="async"
+      style="display: block; width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 0 0 1px rgba(127,127,127,0.28); cursor: zoom-in;"
+    >
+  </a>
+  <figcaption style="margin-top: 0.5rem; text-align: center; font-size: 0.9rem;">
+    Inn
+  </figcaption>
+</figure>
+</div>
+
 ## Transparency could not be guessed
 
 Separating the original UI from the original background was more subtle than it
@@ -266,7 +379,7 @@ This is the kind of invisible detail that determines whether a presentation
 system remains trustworthy when hundreds of pictures and many palette cases are
 added later.
 
-## The Manifest uses original names
+## The Manifest uses original Names
 
 An optional enhanced asset pack contains a strict `manifest.json`. Its job is
 to map an original Darklands picture identity to a restored PNG:
@@ -306,7 +419,7 @@ original picture.
 No production high-resolution pack is bundled with the engine. The feature is
 optional, and the game remains complete without it.
 
-## Falling Back is part of the design
+## Falling back is part of the Design
 
 The enhanced path currently supports a bounded class of picture-backed generic
 MSG scenes. Many other surfaces are not migrated yet:
@@ -359,7 +472,7 @@ This makes side-by-side testing practical. The same card can be inspected in
 Classic, switched to Enhanced Faithful, and switched back again while its
 controller state remains untouched.
 
-## The same Actions return to the same Game
+## The Same Actions return to the same Game
 
 A modern interface cannot safely identify a choice by its position or by the
 sentence printed beside it. Hidden rows can change visible indices. Text may be
@@ -407,7 +520,7 @@ The intended Unity work targets the upcoming Unity generation with modern
 .NET support. The current engine remains on .NET 10; no compatibility version
 of the game logic is being created alongside it.
 
-## What We Have—and What We Do Not
+## What we have—and what we do not
 
 The project now has a working dual-presentation architecture:
 
@@ -430,12 +543,7 @@ season selection, weather layers and the Unity frontend remain future work.
 That distinction matters. The architecture is ready; the content and
 screen-by-screen migration are not being declared finished before they exist.
 
-The full validation suite now passes **4,902 tests**, with a warning-free
-Release build. Classic was smoke-tested at its default size and at 1920×1080.
-Enhanced mode without an asset pack was also tested to ensure that it reports
-the missing pack and reaches the game through complete Classic fallback.
-
-## The Canvas is finally Optional
+## The Canvas is finally optional
 
 The significance of this work is not merely that Darklands can open a larger
 window. DOSBox has always been able to enlarge a 320×200 image.
