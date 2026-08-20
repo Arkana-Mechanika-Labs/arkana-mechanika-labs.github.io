@@ -50,7 +50,3 @@ enableRobotsTXT = true
     name = "Links"
     url = "/links/"
     weight = 29
-  [[menu.main]]
-    name = "Sponsor ♥"
-    url = "https://github.com/sponsors/Arkana-Mechanika-Studios"
-    weight = 30

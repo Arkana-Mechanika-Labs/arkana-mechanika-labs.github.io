@@ -131,6 +131,5 @@ An AI agent (Codex) drives the analysis autonomously, session after session: nam
 ---
 
 <div class="drp-cta">
-  <a href="https://github.com/sponsors/Arkana-Mechanika-Studios" class="drp-btn drp-btn-primary">Support the Project ♥</a>
   <p class="drp-contact">Questions or contributions: <a href="mailto:arkana.mechanika.studios@gmail.com">arkana.mechanika.studios@gmail.com</a></p>
 </div>

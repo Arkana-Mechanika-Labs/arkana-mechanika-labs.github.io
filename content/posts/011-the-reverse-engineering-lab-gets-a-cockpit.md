@@ -169,6 +169,3 @@ inspectable, cross-provider, hybrid, and durable.
 That is the sort of infrastructure that makes a restoration effort feel less like a heroic one-off
 and more like the foundation of a real lab.
 
-If that vision resonates, you can help keep the work moving:
-
-[Sponsor the project](https://github.com/sponsors/Arkana-Mechanika-Studios)

@@ -67,11 +67,3 @@ The language is a tool, not a statement.
 ## "This will die like every other fan RE project."
 
 Probably the hardest question, because it's often true. The honest answer: the analysis work has value independent of the reimplementation. Every named function, every mapped struct, every documented subsystem is useful even if the C# port never ships. Merle and Qadko's file format work has been useful to this project twenty years later. The goal is to leave something that lasts, whatever form it takes.
-
----
-
-## "Why does this need sponsorship?"
-
-Because the AI-assisted analysis runs on commercial API credits, and the costs are significant. Each session currently runs between $9 and $16 in compute costs, and that's for the analysis phase alone. As the project moves deeper into game logic, combat systems, and eventually a C# reimplementation, sessions will grow longer and more expensive. Completing this project from start to finish will realistically cost several hundred dollars in AI compute, on top of the infrastructure and development work that runs continuously in the background.
-
-Without sponsorship, the project will eventually have to stop. If you'd like to keep it going, the [GitHub Sponsors page](https://github.com/sponsors/Arkana-Mechanika-Studios) has tiers starting at $3/month, with access to the full analysis repository and the dos-re-agent toolchain for higher tiers.
