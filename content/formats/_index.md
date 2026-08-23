@@ -9,6 +9,17 @@ The primary source for community-documented formats is [Wendigo's Darklands repo
 
 All formats documented here are based on the original game files and are public knowledge. Sources are cited per page.
 
+## Original Behavior Reference
+
+<a class="drp-bug-index-card" href="original-bugs-and-oddities/">
+  <span class="drp-bug-index-kicker">Synchronized restoration catalogue</span>
+  <strong>Original Bugs &amp; Oddities</strong>
+  <p>Browse byte-confirmed defects and anomalies, dormant original branches, and versioned research leads—with evidence tiers kept clearly separate.</p>
+  <span class="drp-bug-index-action">Open the complete reference →</span>
+</a>
+
+## On-Disk Formats
+
 <table class="drp-format-index">
 <thead>
 <tr>

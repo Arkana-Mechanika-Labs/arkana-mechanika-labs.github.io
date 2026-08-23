@@ -9,8 +9,7 @@ width: wide
   <div class="drp-hero-copy">
     <div class="drp-hero-eyebrow">Arkana Mechanika Studios</div>
     <p class="drp-hero-tagline">Rebuilding the classic 1992 DOS RPG for modern systems</p>
-    <p class="drp-hero-subtitle">Darklands is being reconstructed as a faithful native C# engine: original behaviour, original data, and a modern host—without turning uncertain reverse-engineering guesses into gameplay.</p>
-    <div class="drp-hero-status">C# rewrite active &nbsp;·&nbsp; Runnable SDL host &nbsp;·&nbsp; City gameplay expanding</div>
+    <p class="drp-hero-subtitle">A faithful C# reconstruction bringing Darklands to modern systems while preserving the gameplay, data, and atmosphere of the 1992 original.</p>
     <div class="drp-hero-buttons">
       <a href="#showcase" class="drp-btn drp-btn-primary">Watch the Showcase</a>
       <a href="/posts/" class="drp-btn drp-btn-outline">Read the Devlogs</a>

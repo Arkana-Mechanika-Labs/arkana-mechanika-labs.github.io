@@ -1,0 +1,168 @@
+{{- $data := index hugo.Data "original_oddities" -}}
+<div class="drp-bug-reference" data-bug-catalog>
+  <div class="drp-bug-snapshot">
+    <div><strong>{{ $data.counts.byte_confirmed }}</strong><span>byte-confirmed entries</span></div>
+    <div><strong>{{ $data.counts.dormant_groups }}</strong><span>dormant branch groups</span></div>
+    <div><strong>{{ $data.counts.reported_leads }}</strong><span>reported research leads</span></div>
+    <div><strong>{{ $data.source_commit_date }}</strong><span>source synchronization</span></div>
+  </div>
+
+  <div class="drp-bug-legend" aria-label="Evidence tier legend">
+    <div><span class="drp-bug-dot confirmed"></span><strong>Byte-confirmed</strong><p>Original-code evidence exists and the rewrite disposition is recorded.</p></div>
+    <div><span class="drp-bug-dot dormant"></span><strong>Dormant</strong><p>The original branch exists, but its complete ordinary owner keeps it hidden.</p></div>
+    <div><span class="drp-bug-dot reported"></span><strong>Reported</strong><p>A versioned research lead—not implementation authority or a confirmed 483.07 bug.</p></div>
+  </div>
+
+  <div class="drp-bug-tools">
+    <label for="bug-reference-search">Search the complete reference</label>
+    <div class="drp-bug-search-row">
+      <input id="bug-reference-search" type="search" placeholder="Try merchant, inventory, saint, dormant, palette…" autocomplete="off" data-bug-search>
+      <button type="button" data-bug-clear>Clear</button>
+    </div>
+    <p><span data-bug-visible>{{ add (add $data.counts.byte_confirmed $data.counts.dormant_groups) $data.counts.reported_leads }}</span> entries shown</p>
+  </div>
+
+  <nav class="drp-bug-jump" aria-label="Bug reference sections">
+    <a href="#byte-confirmed-original-behavior">Byte-confirmed</a>
+    <a href="#dormant-original-branches">Dormant branches</a>
+    <a href="#reported-research-leads">Reported leads</a>
+    <a href="#catalogue-synchronization">Synchronization</a>
+  </nav>
+
+  <section class="drp-bug-tier" id="byte-confirmed-original-behavior" data-bug-section>
+    <div class="drp-bug-tier-heading">
+      <span class="drp-bug-tier-number">01</span>
+      <div><h2>Byte-confirmed original behavior</h2><p>These entries come from the canonical original-bug register. “Confirmed” means the behavior is established in original bytes; it does not always mean the behavior has been classified as an unintended defect.</p></div>
+    </div>
+    <div class="drp-bug-list">
+      {{- range $data.known }}
+      {{- $search := printf "%s %s %s %s %s %s" .id .title .status .affected .disposition .summary | plainify | lower -}}
+      <details class="drp-bug-entry drp-bug-entry--confirmed" data-bug-entry data-search="{{ $search }}">
+        <summary>
+          <span class="drp-bug-id">{{ .id }}</span>
+          <span class="drp-bug-title">{{ .title | plainify }}</span>
+          <span class="drp-bug-chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="drp-bug-entry-body">
+          <dl>
+            <div><dt>Evidence status</dt><dd>{{ .status | markdownify }}</dd></div>
+            {{- with .affected }}<div><dt>Affected route/input</dt><dd>{{ . | markdownify }}</dd></div>{{ end }}
+            {{- with .disposition }}<div><dt>Rewrite disposition</dt><dd>{{ . | markdownify }}</dd></div>{{ end }}
+            {{- with .original_units }}<div><dt>Original unit(s)</dt><dd>{{ . | markdownify }}</dd></div>{{ end }}
+          </dl>
+          <div class="drp-bug-summary">{{ .summary | markdownify }}</div>
+        </div>
+      </details>
+      {{- end }}
+    </div>
+  </section>
+
+  <section class="drp-bug-tier" id="dormant-original-branches" data-bug-section>
+    <div class="drp-bug-tier-heading">
+      <span class="drp-bug-tier-number">02</span>
+      <div><h2>Dormant original branches</h2><p>These lanes are present in the shipped resources or code but proven unpublished by their complete ordinary owner. Faithful behavior keeps them hidden; decoding a latent action does not make it playable content.</p></div>
+    </div>
+    <div class="drp-bug-list">
+      {{- range $data.dormant }}
+      {{- $search := printf "%s %s %s %s %s %s" .title .classification .text .effect .disposition .summary | plainify | lower -}}
+      <details class="drp-bug-entry drp-bug-entry--dormant" data-bug-entry data-search="{{ $search }}">
+        <summary>
+          <span class="drp-bug-id">{{ .classification }}</span>
+          <span class="drp-bug-title">{{ .title | plainify }}</span>
+          <span class="drp-bug-chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="drp-bug-entry-body">
+          <dl>
+            {{- with .text }}<div><dt>Encoded text</dt><dd>{{ . | markdownify }}</dd></div>{{ end }}
+            {{- with .owner }}<div><dt>Ordinary owner</dt><dd>{{ . | markdownify }}</dd></div>{{ end }}
+            {{- with .effect }}<div><dt>Latent effect</dt><dd>{{ . | markdownify }}</dd></div>{{ end }}
+            {{- with .disposition }}<div><dt>Faithful disposition</dt><dd>{{ . | markdownify }}</dd></div>{{ end }}
+            {{- with .boundary }}<div><dt>First unresolved boundary</dt><dd>{{ . | markdownify }}</dd></div>{{ end }}
+          </dl>
+          {{- with .summary }}<div class="drp-bug-summary">{{ . | markdownify }}</div>{{ end }}
+        </div>
+      </details>
+      {{- end }}
+    </div>
+  </section>
+
+  <section class="drp-bug-tier" id="reported-research-leads" data-bug-section>
+    <div class="drp-bug-tier-heading">
+      <span class="drp-bug-tier-number">03</span>
+      <div><h2>Reported research leads</h2><p>These reports are preserved for investigation and boundary testing. They cannot authorize reconstructed behavior until the exact 483.07 owner and path are established from original evidence.</p></div>
+    </div>
+    <div class="drp-reported-groups">
+      {{- range $data.reported_groups }}
+      <details class="drp-reported-group" data-bug-group>
+        <summary><span>{{ .title }}</span><small>{{ len .entries }} entries</small><span class="drp-bug-chevron" aria-hidden="true"></span></summary>
+        <div class="drp-reported-list">
+          {{- range .entries }}
+          {{- $search := printf "%s %s %s %s %s" .id .report .status .confidence .note | plainify | lower -}}
+          <article class="drp-reported-entry" data-bug-entry data-search="{{ $search }}">
+            <header>{{ with .id }}<code>{{ . }}</code>{{ end }}<span>{{ .status | plainify }}</span></header>
+            <div class="drp-reported-title">{{ .report | markdownify }}</div>
+            {{- with .confidence }}<p><strong>Confidence:</strong> {{ . | plainify }}</p>{{ end }}
+            {{- with .note }}<p><strong>Research note:</strong> {{ . | plainify }}</p>{{ end }}
+          </article>
+          {{- end }}
+        </div>
+      </details>
+      {{- end }}
+    </div>
+  </section>
+
+  <section class="drp-bug-sync" id="catalogue-synchronization">
+    <h2>Catalogue synchronization</h2>
+    <p>This page is generated from the restoration engine’s canonical catalogues at commit <code>{{ substr $data.source_commit 0 12 }}</code> ({{ $data.source_commit_date }}). The public summary preserves the source status and rewrite disposition; the engine files remain authoritative.</p>
+    <details>
+      <summary>Source files and hashes <span class="drp-bug-chevron" aria-hidden="true"></span></summary>
+      <ul>
+        {{- range $data.source_files }}
+        <li><code>{{ .path }}</code><span>SHA-256 {{ substr .sha256 0 16 }}…</span></li>
+        {{- end }}
+      </ul>
+      <p>Refresh with <code>python tools/sync-original-oddities.py</code>. CI or a local audit can detect drift with <code>python tools/sync-original-oddities.py --check</code>.</p>
+    </details>
+  </section>
+</div>
+
+<script>
+(() => {
+  const root = document.querySelector('[data-bug-catalog]');
+  if (!root) return;
+  const input = root.querySelector('[data-bug-search]');
+  const clear = root.querySelector('[data-bug-clear]');
+  const count = root.querySelector('[data-bug-visible]');
+  const entries = [...root.querySelectorAll('[data-bug-entry]')];
+  const groups = [...root.querySelectorAll('[data-bug-group]')];
+
+  const update = () => {
+    const query = input.value.trim().toLocaleLowerCase();
+    let visible = 0;
+    entries.forEach(entry => {
+      const match = !query || entry.dataset.search.includes(query);
+      entry.hidden = !match;
+      if (match) visible += 1;
+      if (query && match && entry.tagName === 'DETAILS') entry.open = true;
+    });
+    groups.forEach(group => {
+      const matches = [...group.querySelectorAll('[data-bug-entry]')].some(entry => !entry.hidden);
+      group.hidden = !matches;
+      if (query && matches) group.open = true;
+    });
+    root.querySelectorAll('[data-bug-section]').forEach(section => {
+      section.hidden = ![...section.querySelectorAll('[data-bug-entry]')].some(entry => !entry.hidden);
+    });
+    count.textContent = String(visible);
+  };
+
+  input.addEventListener('input', update);
+  clear.addEventListener('click', () => {
+    input.value = '';
+    entries.forEach(entry => { if (entry.tagName === 'DETAILS') entry.open = false; });
+    groups.forEach(group => { group.open = false; });
+    update();
+    input.focus();
+  });
+})();
+</script>

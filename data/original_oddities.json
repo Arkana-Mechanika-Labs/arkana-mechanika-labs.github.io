@@ -1,0 +1,721 @@
+{
+  "schema": "darklands.original-oddities.public.v1",
+  "source_commit": "9065b551a0da5f3b3496f524ea9e94e4a1abb35c",
+  "source_commit_date": "2026-08-23",
+  "source_files": [
+    {
+      "path": "docs/KNOWN_ORIGINAL_BUGS.md",
+      "sha256": "5fd7c0d30df19506a88bf921fe94de5e72a1765dd8e3bfd6d5fbcf387eae07a6"
+    },
+    {
+      "path": "docs/DORMANT_ORIGINAL_BRANCHES.md",
+      "sha256": "a2349bbf275b9623562834bbeda2c8eacf033a86dbec43f64bca208ac5bbc631"
+    },
+    {
+      "path": "docs/research/DARKLANDS_483_07_REPORTED_BUG_CATALOGUE.md",
+      "sha256": "618930c174679686f1a28578ab33805e72eabcee47a1890a1b0f6f179d695260"
+    }
+  ],
+  "counts": {
+    "byte_confirmed": 17,
+    "dormant_groups": 7,
+    "reported_leads": 60
+  },
+  "known": [
+    {
+      "id": "DL-ORIG-GAME-0012",
+      "title": "`$URBAN01` retains an orphan tenth exit slot beyond its encoded rows",
+      "status": "byte-confirmed dormant original oddity; defect classification pending",
+      "affected": "no encoded input; `$URBAN01.MSG` card 0 ends at row 8 while the owner allocates slot 9",
+      "disposition": "`pending` (remain absent)",
+      "original_units": "`proc_0051_12F0`; `proc_0051_1B12`",
+      "summary": "The night-inn owner publishes ten controller bytes and ten callback/action cells even though `$URBAN01` card 0 contains only nine source rows. The tenth control is permanently zero, so the generic controller cannot return ordinal 9. Nevertheless, its latent action is coherent: it presents card 0 in mode 0, runs the zero-hour calendar/event service, and publishes state `0004h`, the ordinary `$CITYE00` family. It contains no audio gateway.\n\nThis may be harmless fixed-width template residue, an abandoned tenth choice, or an accidentally omitted resource row. The rewrite keeps it absent. The latent destination must not be exposed unless a distinct original publisher is proved or an explicit enhanced-mode policy is adopted separately from faithful behavior."
+    },
+    {
+      "id": "DL-ORIG-GAME-0008",
+      "title": "`$HANSE01` owner publishes the shared `$HANSE00` card corpus",
+      "status": "byte-confirmed resource-identity oddity; likely deliberate reuse, defect classification pending",
+      "affected": "state `0047h`, Hanseatic League office at night",
+      "disposition": "`replicate`; keep owner identity and selectable document identity distinct",
+      "original_units": "`proc_0061_2278`",
+      "summary": "`$HANSE01.MSG` contains one rowless card describing the nighttime Hanseatic League office. Nevertheless, the state-`0047h` owner publishes ten selectable rows and later card 6 from the thirteen-card `$HANSE00.MSG` corpus. The resource basename copied at owner entry, exact controller publication, and extracted MSG corpus all agree; this is not a missing `$HANSE01` extraction.\n\nThe arrangement may be intentional day/night resource reuse rather than a defect. It is recorded because conflating owner and card-document identity causes unresolved-token failures and misleading row bindings. Clean code keeps `$HANSE01.MSG` as the owner resource and `$HANSE00.MSG` as the displayed card document. Tests must reject any future attempt to treat `$HANSE01.MSG` as the selectable multi-card document."
+    },
+    {
+      "id": "DL-ORIG-GAME-0005",
+      "title": "`$MILCR00` contains a coherent but unpublished Soldier's Road",
+      "status": "byte-confirmed dormant original oddity; defect classification pending",
+      "affected": "`$MILCR00.MSG` card-0 encoded row 0, Soldier's Road",
+      "disposition": "`pending` (remain hidden)",
+      "original_units": "`proc_0049_2E2C`; `proc_0049_315C`; `proc_0049_310E`",
+      "summary": "The complete ordinary owner writes row 0's publication state to zero and never enables it. Nevertheless, its callback and local action form a coherent lane: signed selector parity chooses card 1 or 2, the Arms Outfitter opens, two hours pass, state returns to `$MILCR00`, and the existing audio cue is retained. A controlled forced-publication experiment confirmed both latent branches without establishing natural reachability.\n\nThis may be deliberately cut content, an unfinished alternate publisher, or an accidental omission. The rewrite keeps it hidden. Proving a distinct original publisher through the unresolved alternate dispatch would explain the apparent anomaly; absent that proof, neither the complete latent code nor the runtime experiment authorizes exposing it."
+    },
+    {
+      "id": "DL-ORIG-GAME-0006",
+      "title": "`$BLACK01` authors a hidden guild-guard row whose action does nothing",
+      "status": "byte-confirmed dormant original oddity; defect classification pending",
+      "affected": "`$BLACK01.MSG` card-0 encoded row 4, `guard the guild block`",
+      "disposition": "`pending` (remain hidden)",
+      "original_units": "`proc_0063_0000`; `proc_0063_0966`; `proc_0063_0964`",
+      "summary": "The owner permanently leaves row 4 unpublished despite substantive prose in the resource. Its callback returns the ordinary no-check sentinel, but its local action is only a one-byte `RETF` and produces no gameplay, presentation, calendar, or audio effect. Neighboring rows 5 through 8 are explicit literal placeholders and are catalogued separately rather than treated as completed content.\n\nThis may be an intentional stub or an abandoned feature rather than a defect. The rewrite keeps it hidden; a future reclassification requires either a distinct original publisher/action or external design evidence that explains the stub without overriding the byte-proven faithful behavior."
+    },
+    {
+      "id": "DL-ORIG-GAME-0007",
+      "title": "`$COUNC00` literal placeholder rows retain substantive exit actions",
+      "status": "byte-confirmed dormant original oddity; defect classification pending",
+      "affected": "`$COUNC00.MSG` card-0 encoded rows 6 and 7, literal texts `6` and `7`",
+      "disposition": "`pending` (remain hidden)",
+      "original_units": "`proc_0054_1A78`; `proc_0054_2C4C`; `proc_0054_2C6A`; `proc_0054_2CA2`; `proc_0054_2CC0`",
+      "summary": "The complete owner permanently suppresses both literal placeholder rows, but each retains a callback and a substantive action. The two action bodies are byte-identical: they present council card 0, invoke the zero-hour helper, and publish state `0004h` / ordinary `$CITYE00`. Row 7 additionally returns a selected-character threshold pair from its callback even though the action does not consume that argument. No audio gateway occurs.\n\nThis could be compiler/template residue, deliberately abandoned exits, or an unfinished pair of choices. The rewrite keeps both rows hidden and does not convert their latent destination into a useful route. A distinct original publisher would be required to explain the apparent anomaly and reopen their classification."
+    },
+    {
+      "id": "DL-ORIG-GAME-0004",
+      "title": "`$COUNC00` contains a complete but hidden weapons-training route",
+      "status": "byte-confirmed dormant original oddity; defect classification pending",
+      "affected": "`$COUNC00.MSG` card-0 encoded row 5, `...inquire about weapons training.`",
+      "disposition": "`pending` (remain hidden)",
+      "original_units": "`proc_0054_1A78`; `proc_0054_2B8C`; `proc_0054_29F8`",
+      "summary": "The council owner leaves row 5's publication state at zero, so the generic controller cannot select it. This is despite a complete callback/action path that would negotiate guard training, create five kind-`0028h` training events, display success/refusal cards 12/13, create a kind-`0041h` cooldown, and return to the day/night city square.\n\nThe latent action also formats a dynamic displayed price, while the five training records contain one fixed 50-pfennig fee and four fixed 25-pfennig fees. Because the parent makes the route unreachable, controlled normal runtime cannot establish whether the hidden publication and price/fee mismatch are abandoned content, an accidental omission, or an unfinished feature."
+    },
+    {
+      "id": "DL-ORIG-UI-0001",
+      "title": "Ctrl+F leader shortcut corrupts merchant UI state",
+      "status": "byte-confirmed original defect/quirk",
+      "affected": "Ctrl+F1 through Ctrl+F5 while the Goods Merchant controller is active",
+      "disposition": "`disable`",
+      "original_units": "`proc_0043_33C6`; `proc_0032_0000`; `proc_0032_0F60`; `proc_0032_076C`; `proc_0032_078E`",
+      "summary": "The generic extended-key dispatcher maps BIOS words `5E00h..6200h` to party slots 0..4, writes the chosen leader to byte `DS:907Bh`, and repaints the party panel. That is consistent with the quick-reference card's “define leader” description.\n\nThe nested merchant controller intercepts the same keys. It validates the chosen active party slot, writes `DS:907Bh`, and repaints only the party panel. It does not call the full merchant redraw at `proc_0032_078E`, does not update the merchant transaction target at `DS:884Eh`, and does not recompose the displayed barterer text, inventory lists, or prices. Execution then falls through into `ovl_0032:160F..1763`, the same block used to switch Purchase and Sell, which flips the active list and redraws the two controls with their enabled/disabled colors."
+    },
+    {
+      "id": "DL-ORIG-GAME-0001",
+      "title": "Merchant charges for an item that a full inventory cannot accept",
+      "status": "byte-confirmed original defect/quirk",
+      "affected": "Purchase with 40h occupied inventory records and no compatible stack that can accept quantity 01h",
+      "disposition": "`replicate`",
+      "original_units": "`proc_0032_0F60`; `proc_0029_5090`; `proc_0031_4A04`; `proc_0032_1770`",
+      "summary": "The Goods Merchant Purchase arm checks affordability, calculates its payment price, and calls `proc_0029_5090` to subtract that price from the three-word party purse before calling `proc_0031_4A04` to insert the item. The inventory owner first tries to merge the item into an exact code/type/quality stack. If no compatible stack accepts the additional quantity, it may append a new six-byte record only while the inventory count is below `40h`.\n\nAt count `40h`, a failed merge returns the unchanged count without inserting the purchased item. The Purchase caller does not test that return for failure and does not refund the earlier purse subtraction; it stores the returned count and redraws the held-item list through `proc_0032_1770`. The resulting observable behavior is therefore:"
+    },
+    {
+      "id": "DL-ORIG-GAME-0002",
+      "title": "Stablemaster mount predicate selects counterintuitive card text",
+      "status": "byte-confirmed original anomaly; defect classification needs controlled runtime confirmation",
+      "affected": "`$URBAN00` card 0 row 3, “visit the stables”",
+      "disposition": "`replicate`",
+      "original_units": "`proc_0051_0EE0`; `proc_0029_1326` selector `0005h`",
+      "summary": "The original action calls `proc_0029_1326(0005h)` and displays `$URBAN00` card 1 when the result is nonzero, otherwise card 7. Selector `0005h` returns nonzero only when every active party record owns a nonzero-quantity item whose definition word at `+20h` intersects mount flag `2000h`. Therefore:\n\nBoth cards say that boarding is included in the inn charge and introduce the Stablemaster's available horses and mules. Card 7 alone adds that the Stablemaster asks whether any of the party's mounts are for sale. This is counterintuitive: the extra sale inquiry appears even when nobody owns a mount, while it is omitted when every active member owns one. The same shared merchant controller follows either card and allows selling in both cases."
+    },
+    {
+      "id": "DL-ORIG-GAME-0003",
+      "title": "`$AFFAI00` fallback reverses its value-000Ch condition by location mode",
+      "status": "byte-confirmed original anomaly; defect classification needs controlled runtime confirmation",
+      "affected": "`$CITYN00` card 0 row 1, “inquire about empire affairs,” when no value-0002h event selects a location-specific card",
+      "disposition": "`replicate` for the certified indexed-location route; coordinate-mode clean projection remains `pending` and fail-closed",
+      "original_units": "`proc_0071_15A4`; `proc_0029_360C`; `resident_06A1_2FE8`",
+      "summary": "The owner accepts either an indexed current location in `DS:907Eh` or the sentinel `FFFFh`, which selects the coordinate pair at `DS:E3D0h:E3D2h`. After the shared value-0004h prefix and the location-specific value-0002h search fail to choose a final card, the two modes test a due value-000Ch event with opposite fallback results:\n\nThus, with no due value-0002h, value-0004h, or value-000Ch event, an indexed location displays `$AFFAI00` card 3 while the coordinate fallback displays no final card. With only value-000Ch due, the indexed route displays the card-17 prefix and no final card, while the coordinate route displays card 17 followed by card 3. Exact bytes, Ghidra, and independent Reko output agree on this asymmetry. Raw owner tests preserve both sides, including negative cases that prevent the coordinate arm from inheriting the intuitive indexed fallback."
+    },
+    {
+      "id": "DL-ORIG-GAME-0009",
+      "title": "`$RAUBI00` assumes a differently keyed quest event exists",
+      "status": "confirmed original publisher/consumer mismatch with platform-memory-dependent unchecked continuation",
+      "affected": "state `0090h`, `$RAUBI00` robber-knight quest offer",
+      "disposition": "`pending`; fail closed when the event is absent",
+      "original_units": "`proc_0061_260A`; `proc_0039_10B6`; `proc_0080_0000`; `proc_0029_3B62`",
+      "summary": "The owner searches for kind `0008h` with `field1A=DS:E896h` and `field28=0003h`. It stores the returned slot but never compares it with the `FFFFh` not-found sentinel. Instead it immediately multiplies the slot by four, indexes the event-pointer table, reads event field `+00h`, and passes that word to `proc_0029_0DB4`.\n\nIf every legal state-`0090h` publisher has already created this exact record, the omission is a harmless original invariant. If state `0090h` can be reached without it, the `FFFFh` index wraps and reads an unrelated pointer cell. The same unchecked pattern begins the paired state-`0091h` `proc_0080_038C` completion owner for its required kind-`0024h` record."
+    },
+    {
+      "id": "DL-ORIG-GAME-0011",
+      "title": "Full-party `$VILLA02` help displays a one-florin gift without adding money",
+      "status": "byte-confirmed original anomaly; defect classification needs controlled runtime confirmation",
+      "affected": "`$VILLA02.MSG` card 0 row 1, “ask for help,” with signed local reputation at least 50 and five occupied party slots",
+      "disposition": "`pending`; no natural clean `$VILLA02` route is authorized",
+      "original_units": "`proc_0077_15EC`; `proc_0077_1958`; `proc_0029_5040`",
+      "summary": "The action treats high local reputation as a guaranteed-recruitment tier. If fewer than five party slots are occupied, it shows card 4 and constructs the Schulz companion. If all five slots are occupied, it instead shows card 6, whose prose says that the Schulz drops one florin into the party's hand.\n\nThat full-party branch jumps directly to the common cooldown suffix and never calls `proc_0029_5040`; the purse is unchanged. The same card 6 is also used by the low-reputation fame-weighted success branch, but that separate branch does call `proc_0029_5040(DS:906Bh,0001h,0000h,0000h)` and therefore really adds one florin. Result-card identity is consequently insufficient to infer the money effect."
+    },
+    {
+      "id": "DL-ORIG-GAME-0010",
+      "title": "`$RAUBI01` companion-departure prose ignores companion membership",
+      "status": "byte-confirmed original anomaly; actual upstream companion-removal behavior needs controlled runtime confirmation",
+      "affected": "robber-knight offer from the village Schulz or Hanse, followed by state `0091h` completion",
+      "disposition": "`pending`; no clean quest-completion projection is authorized",
+      "original_units": "`proc_0080_0000`; `proc_0080_038C`",
+      "summary": "The `$RAUBI00` offer allows the player to accept or decline a temporary Schulz companion for origin `0086h`, or a Hanse guard/knight for origin `0047h`. Both actions return through the same inherited origin value. Decline only writes `DS:E48Ah=DS:E7D8h`; it does not mark the quest event with a distinction later read by `$RAUBI01`.\n\nAt completion, `$RAUBI01` selects card 1 unconditionally for origin `0086h`. That card says the Schulz departs from the party. For origin `0047h`, the owner draws `RNG(2)` and selects card 6 on a nonzero result or card 7 on zero. Card 6 says the Hanse friend leaves and card 7 does not. The completion owner does not inspect party membership, does not inspect an acceptance flag, and contains no party/roster-removal call."
+    },
+    {
+      "id": "DL-ORIG-GAME-0013",
+      "title": "`$DOCKS01` describes chunks of ice through May",
+      "status": "byte-confirmed original seasonal oddity; defect classification pending",
+      "affected": "`$DOCKS01.MSG` card selection and swimming-row publication",
+      "disposition": "faithfully preserved",
+      "original_units": "`proc_0052_0000`",
+      "summary": "The owner reads the zero-based current month from `DS:00E4h`. It selects frozen-water card 1 and disables the two swimming variants when the signed month is at least 10 or at most 4: November through December and January through May. Only June through October selects ordinary card 0. The predicate does not read the current hour.\n\nCard 1 explicitly describes chunks of ice in the water, making its use through all of May geographically and seasonally surprising. This may be an intentional broad cold-water season rather than a defect, so the catalogue does not classify it as a confirmed bug. The faithful projection preserves the exact month boundary; it must not substitute a modernized climate rule."
+    },
+    {
+      "id": "DL-ORIG-GAME-0014",
+      "title": "Night state `0014h` retains unrelated MSG labels under a different action table",
+      "status": "byte-confirmed original owner/resource mismatch; runtime presentation confirmation pending",
+      "affected": "`$SIDES01.MSG` card 0 row 5 ordinary success whose one-hour advance ends outside hours 5 through 18",
+      "disposition": "faithfully preserves the owner/resource split",
+      "original_units": "`proc_0046_1132`; `proc_0046_1734`; `proc_0049_0000`",
+      "summary": "At night, `proc_0049_0000` skips the copy that would replace the active MSG name with `$BUSIN00`. The inherited `$SIDES01.MSG` card-0 text therefore remains visible over `XNMAIN.PIC`. The same owner then publishes the ten state-`0014h` callback and action cells. Those handlers are not the `proc_0046_1132` `$SIDES01` handlers: a displayed row is acted upon according to its coincident numeric ordinal in the state-`0014h` table.\n\nThe mismatch can make a label describe one destination while its action goes somewhere else. It appears to be a missing night-resource replacement rather than intentional content, but runtime confirmation of the exact presentation and several selections is still required before classifying it as a confirmed defect. The rewrite must not use the displayed document name as dispatch authority or silently substitute `$BUSIN00` text."
+    },
+    {
+      "id": "DL-ORIG-GAME-0015",
+      "title": "`$SIDES01` grove rare outcome hard-codes nighttime history after advancing time",
+      "status": "byte-confirmed original asymmetry; defect classification pending",
+      "affected": "`$SIDES01.MSG` card 0 row 7 rare action outcome",
+      "disposition": "typed fail-closed; no speculative repair",
+      "original_units": "`proc_0046_1132`; `proc_0046_1866`",
+      "summary": "Both action outcomes call `proc_0029_54D8(0001h)`. The ordinary outcome then calls `proc_0029_563A` and publishes state `0021h` by day or `0022h` by night. The rare outcome does not call the classifier: it always writes `DS:E7D8h=0022h` before publishing state `003Ch`, even when its one-hour advance ends in daytime.\n\nThe retained value may be intentional history for the unresolved state-003Ch owner rather than a defect. Until that destination owner is decoded or a controlled runtime capture proves how it consumes `E7D8h`, the rewrite must not replace the fixed value with a day/night classification. The selected ordinary grove route is independently certified, while this rare branch remains fail-closed."
+    },
+    {
+      "id": "DL-ORIG-GAME-0016",
+      "title": "Equal negative location-score bounds randomly subtract one or two",
+      "status": "byte-confirmed original arithmetic oddity; defect classification pending",
+      "affected": "`$CITYG06.MSG` card 0 row 2",
+      "disposition": "replicated faithfully",
+      "original_units": "`proc_0029_19D0`; resident RNG wrapper `resident_0000_0C70`",
+      "summary": "The adjustment owner computes the second RNG range as `abs(upper)-abs(lower)`. Equal bounds therefore pass zero. The original RNG wrapper uses divisor 2 for both range 0 and range 1, so `RNG(0000h)` returns either 0 or 1. With lower and upper both `-1`, an accepted score gate therefore subtracts either one or two points. A rejected gate still consumes only its `RNG(0064h)` draw and changes nothing.\n\nThis may be a deliberate general RNG convention rather than a gameplay bug. Do not normalize the overnight loss to a fixed value without broader caller analysis. The reconstruction preserves the byte-proven result and RNG order."
+    }
+  ],
+  "dormant": [
+    {
+      "title": "`$MILCR00` card 0 row 0 — Soldier's Road",
+      "classification": "authored_latent_lane",
+      "text": "`...Soldier's Road.`",
+      "owner": "`proc_0049_2E2C`",
+      "effect": "",
+      "disposition": "remain hidden; no clean/SDL route",
+      "boundary": "alternate `EB0Ah` publication/callback route at `ovl_0049:3052`",
+      "summary": "The latent action calls selector `0021h`, uses signed parity to present card 1 or 2, opens the exact Arms Outfitter transaction `proc_0029_21AA(0001h,DS:58A4h,00FFh,0400h)`, advances two hours, writes state `0017h`, and retains the existing audio cue. A controlled experiment changed only the publication byte and confirmed both parity branches and the complete continuation. That experiment proves internal coherence, not natural reachability."
+    },
+    {
+      "title": "`$BLACK01` card 0 row 4 — guard the guild block",
+      "classification": "authored_no_effect_stub",
+      "text": "`...guard the guild block.`",
+      "owner": "`proc_0063_0000`",
+      "effect": "callback returns `FFFFh:FFFEh`; action is a one-byte no-effect `RETF`; no audio call",
+      "disposition": "remain hidden",
+      "boundary": "no alternate publisher is proven",
+      "summary": "The real prose is present, but forcing publication cannot reveal a completed gameplay lane because the selected action has no observable effect."
+    },
+    {
+      "title": "`$BLACK01` card 0 rows 5–8 — literal placeholders",
+      "classification": "literal_placeholder",
+      "text": "literal rows `5`, `6`, `7`, and `8`",
+      "owner": "`proc_0063_0000`",
+      "effect": "every callback and action is a one-byte no-effect `RETF`; no audio call",
+      "disposition": "remain hidden",
+      "boundary": "",
+      "summary": "Evidence for row 4 and rows 5–8: `evidence/reconstruction/darklands_483_07/msg/MSG_BLACK00_BLACK01_OWNER_DECODE_20260816.md`."
+    },
+    {
+      "title": "`$SPECI00` card 0 rows 3–8 — hidden information stubs",
+      "classification": "row 3 authored_no_effect_stub; rows 4–8 literal_placeholder",
+      "text": "row 3 `...there are some interesting rumors flying around...`; rows 4–8 `...info 4.` through `...info 8.`",
+      "owner": "`proc_0069_175A`",
+      "effect": "every selected local action is a no-op; no audio gateway exists in the owner",
+      "disposition": "remain hidden",
+      "boundary": "no alternate publisher is proven",
+      "summary": ""
+    },
+    {
+      "title": "`$COUNC00` card 0 row 5 — weapons training",
+      "classification": "authored_latent_lane",
+      "text": "`...inquire about weapons training.`",
+      "owner": "`proc_0054_1A78`",
+      "effect": "",
+      "disposition": "remain hidden; raw latent owners only",
+      "boundary": "a distinct original publisher for row 5 has not been proved",
+      "summary": "The latent action advances one hour, tests `RNG(100) <= threshold`, creates five kind-`0028h` training events and card 12 on success or adjusts local score and presents card 13 on refusal, then creates a kind-`0041h` cooldown and returns to the day/night city square. It contains no audio gateway. The dynamic displayed price and fixed per-event fee words also differ; that oddity is tracked separately in `docs/KNOWN_ORIGINAL_BUGS.md`."
+    },
+    {
+      "title": "`$COUNC00` card 0 rows 6–7 — literal placeholders with latent exits",
+      "classification": "literal_placeholder",
+      "text": "literal rows `6` and `7`",
+      "owner": "`proc_0054_1A78`",
+      "effect": "present `$COUNC00` card 0 mode 0; `proc_0029_05C8(0)`; write state `0004h` / `$CITYE00`; retain audio",
+      "disposition": "remain hidden; no clean/SDL route",
+      "boundary": "no distinct owner publishing either control word is proven",
+      "summary": "Row 6's callback returns the ordinary no-check sentinel. Row 7 instead returns `AX=100` and the selected slot in `DX`, but its action ignores that stack argument. The complete latent actions make these more than inert stubs; their literal labels and permanent suppression still classify them as unfinished placeholders rather than functioning cut choices."
+    },
+    {
+      "title": "`$URBAN01` card 0 orphan controller slot 9",
+      "classification": "orphan_controller_slot",
+      "text": "none; card 0 ends at source row 8",
+      "owner": "`proc_0051_12F0`",
+      "effect": "card 0 mode 0; zero-hour calendar/event service; state `0004h` / `$CITYE00`; inherited audio retained",
+      "disposition": "remain absent; no tenth clean/SDL choice",
+      "boundary": "no distinct original publisher for the orphan slot is proven",
+      "summary": "This is not a hidden source row: the MSG resource has only nine rows. The owner appears to retain a ten-slot template whose final callback/action pair would provide a coherent exit if forced. The latent code cannot authorize a route without a corresponding original publisher."
+    }
+  ],
+  "reported_groups": [
+    {
+      "title": "Historical defects fixed before 483.07",
+      "source_heading": "Historical defects not applicable to faithful 483.07 behavior",
+      "entries": [
+        {
+          "id": "",
+          "report": "Quest-blocking memory leak in early retail builds",
+          "status": "historical_fixed_by_483_07",
+          "confidence": "official",
+          "note": "Designer testimony associates it with original releases; fixed during the stabilization cycle."
+        },
+        {
+          "id": "",
+          "report": "Save corruption caused by the same early memory defect",
+          "status": "historical_fixed_by_483_07",
+          "confidence": "official",
+          "note": "Do not conflate with the distinct unsafe-location save rollback acknowledged in 483.07."
+        },
+        {
+          "id": "",
+          "report": "Broad 483.04/05/051 machine-compatibility failures",
+          "status": "historical_fixed_by_483_07",
+          "confidence": "official but nonspecific",
+          "note": "Primarily addressed by 483.06."
+        },
+        {
+          "id": "",
+          "report": "Earlier save/load unreliability",
+          "status": "historical_fixed_by_483_07",
+          "confidence": "official but nonspecific",
+          "note": "483.07 substantially improved it; this does not disprove the surviving rollback behavior below."
+        },
+        {
+          "id": "",
+          "report": "Graz exit/progression-state problem",
+          "status": "historical_fixed_by_483_07",
+          "confidence": "official",
+          "note": "Fixed in 483.07, though old saves could retain the bad state."
+        },
+        {
+          "id": "",
+          "report": "Roland music plus DMA digital-audio regression",
+          "status": "platform_or_documentation",
+          "confidence": "official",
+          "note": "Present in the 483.07 distribution and fixed by the separate March 1993 DRKSND driver update; not a core MSG/gameplay rule."
+        },
+        {
+          "id": "",
+          "report": "High-reputation merchant buy/resell arbitrage",
+          "status": "historical_fixed_by_483_07",
+          "confidence": "strong player comparison",
+          "note": "Yahoo #9494 recalls the original as probably 483.04 and reports the exploit absent after upgrading to 483.07. The exact first fixed version is unknown. Test preserved binaries at reputation 99/100/101/120/150; do not reconstruct this as final-version commerce behavior."
+        }
+      ]
+    },
+    {
+      "title": "Officially reported surviving 483.07 issues",
+      "source_heading": "Officially reported surviving 483.07 issues",
+      "entries": [
+        {
+          "id": "RPT-SAVE-0001",
+          "report": "Saving while complex transient event state is being committed can restore an earlier state or time.",
+          "status": "official_483_07_report",
+          "confidence": "official",
+          "note": "Save controller, temporary-to-persistent event transfer, and restore boundary."
+        },
+        {
+          "id": "RPT-PALETTE-0001",
+          "report": "Character battlefield colors can become corrupted, appear in a later battle, and persist in a save.",
+          "status": "official_483_07_report",
+          "confidence": "official; trigger unknown",
+          "note": "Character palette mutation, battle-entry publication, and save serialization."
+        },
+        {
+          "id": "RPT-FILES-0001",
+          "report": "Character generation depends on `SAVES\\DEFAULT`; deleting it disables creation.",
+          "status": "official_483_07_report",
+          "confidence": "official",
+          "note": "Startup/party-creation resource dependency. The rewrite already deliberately loads the default save, but the original failure relation is not yet a known-bug entry."
+        },
+        {
+          "id": "RPT-LOAD-0001",
+          "report": "The in-game Load dialog cannot be cancelled once opened.",
+          "status": "official_483_07_report",
+          "confidence": "official",
+          "note": "Universal menu/load controller and its input dispatch."
+        },
+        {
+          "id": "RPT-PLATFORM-0001",
+          "report": "Some disk controllers fail during the opening and two later cinematics; `/Q` bypasses animations.",
+          "status": "platform_or_documentation",
+          "confidence": "official, hardware-sensitive",
+          "note": "Typed platform boundary only if a game-observable dependency requires it. Do not emulate obsolete controller failure."
+        }
+      ]
+    },
+    {
+      "title": "Inventory and numeric boundaries",
+      "source_heading": "Inventory and numeric boundary reports",
+      "entries": [
+        {
+          "id": "RPT-INV-0001",
+          "report": "More than approximately 64 distinct inventory records can cause silent item loss.",
+          "status": "reported_483_07",
+          "confidence": "strong",
+          "note": "63/64/65 records across loot, transfer, purchase, save, and reload. Distinguish failure to insert from later serialization loss."
+        },
+        {
+          "id": "RPT-INV-0002",
+          "report": "A stack quantity is structurally bounded by one byte; behavior of an attempted quantity 256 remains unknown.",
+          "status": "reported_483_07",
+          "confidence": "strong structure, runtime overflow unverified",
+          "note": "Test quantities 254/255 plus insertion, merge, split, transfer, consumption, and save/load. Do not state wrap, loss, or corruption without reproduction."
+        },
+        {
+          "id": "RPT-INV-0003",
+          "report": "Aggregate inventory above 255 was proposed as a palette-corruption trigger.",
+          "status": "reported_483_07",
+          "confidence": "weak/conflicted",
+          "note": "A character has only 64 record slots; the claim may conflate stack quantity, aggregate objects, inn indexing, or an unrelated palette copy defect. It is not an established trigger for `RPT-PALETTE-0001`."
+        },
+        {
+          "id": "RPT-INN-0001",
+          "report": "More than 255 items stored at an inn may be lost on retrieval.",
+          "status": "reported_483_07",
+          "confidence": "moderate",
+          "note": "Inn-storage quantity/record layouts at 254/255/256 and retrieval compaction."
+        },
+        {
+          "id": "RPT-INN-0002",
+          "report": "Inn storage and enemy cloth drops stopped working in one long-running world; moving the party to a fresh world restored storage.",
+          "status": "reported_483_07",
+          "confidence": "moderate; one detailed 2025 case",
+          "note": "Investigate world/event-table corruption or exhaustion separately from party records. Copying the old four-byte world RNG seed happened after storage was repaired and is not evidence that the seed caused or fixed the defect. “Storing cloth causes it” remains unsupported."
+        },
+        {
+          "id": "RPT-NUM-0001",
+          "report": "Attributes or temporarily boosted skills above 99 can behave incorrectly.",
+          "status": "reported_483_07",
+          "confidence": "moderate",
+          "note": "Values 98/99/100 and expiration/reapplication paths; do not assume a common cause across fields."
+        }
+      ]
+    },
+    {
+      "title": "Data and gameplay reports",
+      "source_heading": "Deterministic data and gameplay reports",
+      "entries": [
+        {
+          "id": "RPT-ALCH-0001",
+          "report": "Alchemical vendors appear to select only the first 22 of 66 quality-specific formula records.",
+          "status": "reported_483_07",
+          "confidence": "strong; Groups.io #9863",
+          "note": "Merchant formula table bound/index and random formula-trade path. The report concerns vendor selection, not total formula availability through trading or special sources. Test indices 21/22/23/65 for alchemists, universities, and overland monasteries."
+        },
+        {
+          "id": "RPT-SAINT-0001",
+          "report": "Paul the Apostle and Paul the Simple have swapped or contradictory effect associations.",
+          "status": "reported_483_07",
+          "confidence": "strong",
+          "note": "`DARKLAND.SNT` records, selector table, descriptions, and invoked effect vectors."
+        },
+        {
+          "id": "RPT-SAINT-0002",
+          "report": "Overlapping attribute blessings can leave two expiration events and subtract twice.",
+          "status": "reported_483_07",
+          "confidence": "moderate; exact v7 status disputed",
+          "note": "Blessing replacement plus both expiration-event records, tested in both expiration orders. Keep distinct from equipment modifiers that announce expiration but remain active."
+        },
+        {
+          "id": "RPT-SAINT-0003",
+          "report": "A flail skill blessing can apply twice when a flail is equipped.",
+          "status": "reported_483_07",
+          "confidence": "moderate/strong",
+          "note": "Saint effect loop and equipped weapon category branch."
+        },
+        {
+          "id": "RPT-EQUIP-0001",
+          "report": "Equipment-affecting potion/saint modifiers may announce expiration while their armor, weapon, or fire-resistance fields remain active.",
+          "status": "reported_483_07",
+          "confidence": "strong; repeated 2025/2026 reports plus identified save fields",
+          "note": "Modifier-event creation, persistent armor/weapon/fire fields, equipment publication, expiration consumer, and save/reload. Reports specifically include Firewall, St. Polycarp, Deadly Blade, Greatpower, and Strongedge."
+        },
+        {
+          "id": "RPT-EQUIP-0002",
+          "report": "Reapplying an equipment modifier can recalculate unrelated equipment.",
+          "status": "reported_483_07",
+          "confidence": "moderate",
+          "note": "Reapplication dispatcher and all rewritten equipment fields."
+        },
+        {
+          "id": "RPT-EQUIP-0003",
+          "report": "Greatpower appears to affect the armed weapon regardless of documented category.",
+          "status": "reported_483_07",
+          "confidence": "moderate",
+          "note": "Effect category predicate; may instead be a documentation mismatch."
+        },
+        {
+          "id": "RPT-EQUIP-0004",
+          "report": "Overlapping temporary stat effects can expire incorrectly and leave a permanent reduction below the original value.",
+          "status": "reported_483_07",
+          "confidence": "moderate; one expert 2026 report",
+          "note": "Test saint then potion and potion then saint, both expiration orders, and save/reload while both are active. Do not merge with `RPT-EQUIP-0001`: the visible failure and possibly the owner chain differ."
+        },
+        {
+          "id": "RPT-RELIC-0001",
+          "report": "Battlefield-chest relic weapons are forced to quality 35 despite authored qualities.",
+          "status": "reported_483_07",
+          "confidence": "strong",
+          "note": "Chest-generation item construction and relic definition quality."
+        },
+        {
+          "id": "RPT-RELIC-0002",
+          "report": "Relics may not improve associated saint prayers.",
+          "status": "reported_483_07",
+          "confidence": "tentative",
+          "note": "Prayer threshold inputs for ordinary and greater relics; absence across all paths is not yet proven."
+        },
+        {
+          "id": "RPT-EVENT-0001",
+          "report": "High Sabbat can default to invalid “Jan 0” and map coordinates 0,0.",
+          "status": "reported_483_07",
+          "confidence": "strong",
+          "note": "Event initialization and failure/default record writes."
+        },
+        {
+          "id": "RPT-EVENT-0002",
+          "report": "High Sabbat generation fails beyond 31 December 1499.",
+          "status": "reported_483_07",
+          "confidence": "strong",
+          "note": "Calendar comparison and event generator around year 1500."
+        },
+        {
+          "id": "RPT-CHURCH-0001",
+          "report": "Confession time can become zero near local reputation 130 and negative above it.",
+          "status": "reported_version_unresolved",
+          "confidence": "moderate; Yahoo #9553",
+          "note": "Church owner arithmetic at reputation 128--132 and higher; observe the signed calendar-helper argument exactly. The report names no executable version."
+        },
+        {
+          "id": "RPT-CHURCH-0002",
+          "report": "Tithing was reported to omit the final party member when restoring Divine Favor.",
+          "status": "reported_483_07",
+          "confidence": "disputed",
+          "note": "The mined archive instead observed the Virtue increase on every eligible party member. Retain only as a boundary-test lead for parties of one through five pending exact loop inspection."
+        },
+        {
+          "id": "RPT-BALANCE-0001",
+          "report": "Sufficient cash and Religion make Virtue gains from the church donation predictable and repeatable.",
+          "status": "mechanic_or_presentation",
+          "confidence": "strong mechanic, defect status unsupported",
+          "note": "The church takes 10% of party cash: 6,001 pf on hand produces a 601-pf donation, reported sufficient for an eligible Religion-30 character. Decode the rule; repeatability alone does not make it a bug."
+        },
+        {
+          "id": "RPT-COMBAT-0001",
+          "report": "Pause while aiming, choose Flee without a destination, then resume to release repeated missiles through the melee animation.",
+          "status": "reported_version_unresolved",
+          "confidence": "strong; Yahoo #9455 independently reproduced",
+          "note": "Combat action state for bows, firearms, and thrown weapons. Separately observe animation, pending projectile, cooldown, original target, and target-death cleanup. Potions reportedly do not share the same autofire state."
+        },
+        {
+          "id": "RPT-MERCHANT-0001",
+          "report": "Guild/smith specialization can fail for nighttime inventories.",
+          "status": "reported_483_07",
+          "confidence": "strong",
+          "note": "Day/night merchant catalogue predicate and specialization masks."
+        },
+        {
+          "id": "RPT-ARMOR-0001",
+          "report": "Damage to one equipped armor copy can affect every identical stacked copy.",
+          "status": "reported_483_07",
+          "confidence": "strong",
+          "note": "Inventory aliasing/stack mutation, equipped-record identity, and damage write target."
+        },
+        {
+          "id": "RPT-QUEST-0001",
+          "report": "A fortress/Feste ruler can issue a raubritter quest but fail to recognize completion or pay the reward, unlike a Rathaus.",
+          "status": "reported_version_unresolved",
+          "confidence": "moderate/strong; corroborated 2017 observations",
+          "note": "Compare identical targets and simultaneous commissions from Rathaus, Feste, guild, Fugger, and Hanse issuers; inspect completion flags, reward owner, and reputation effects."
+        },
+        {
+          "id": "RPT-QUEST-0002",
+          "report": "A clerk's “come back tomorrow” appointment may establish no usable follow-up state.",
+          "status": "reported_version_unresolved",
+          "confidence": "moderate/low",
+          "note": "Separate the in-game appointment/event state from limitations of the third-party quest viewer mentioned in the same report."
+        },
+        {
+          "id": "RPT-WILDHUNT-0001",
+          "report": "World generation may choose a Wild Hunt banishing saint that is unobtainable anywhere in that world.",
+          "status": "reported_483_07",
+          "confidence": "moderate; one expert report",
+          "note": "Enumerate generated saint availability against every Hunt requirement. Random selection itself is intended; only an unavailable, ineffective, or uncleared requirement is suspect."
+        },
+        {
+          "id": "RPT-STONE-0001",
+          "report": "An attempted Philosopher's Stone upgrade can fail repeatedly without explaining that the university's Stone is not better.",
+          "status": "mechanic_or_presentation",
+          "confidence": "moderate",
+          "note": "Separate legitimate world generation with no superior Stone from the missing comparison feedback. Do not classify it as a broken success roll without operand evidence."
+        }
+      ]
+    },
+    {
+      "title": "Potion and description mismatches",
+      "source_heading": "Potion behavior and description mismatches",
+      "entries": [
+        {
+          "id": "RPT-POTION-0001",
+          "report": "New-wind grants temporary Endurance rather than restoring lost Endurance as described.",
+          "status": "reported_483_07",
+          "confidence": "moderate",
+          "note": "Potion effect vector, timed event, and description record."
+        },
+        {
+          "id": "RPT-POTION-0002",
+          "report": "Black Cloud changes no displayed Stealth/Perception and instead serves event concealment.",
+          "status": "reported_483_07",
+          "confidence": "moderate",
+          "note": "Item availability contexts, event consumer, and effect vector."
+        },
+        {
+          "id": "RPT-POTION-0003",
+          "report": "Sunburst ignores range and physical obstruction while applying facing/arc logic.",
+          "status": "reported_483_07",
+          "confidence": "moderate",
+          "note": "Combat target enumeration, arc predicate, distance, and line-of-sight calls."
+        },
+        {
+          "id": "RPT-POTION-0004",
+          "report": "Greatpower category, expiration, and reapplication behavior contradicts documentation.",
+          "status": "reported_483_07",
+          "confidence": "moderate",
+          "note": "Cross-reference `RPT-EQUIP-0001..0003`; do not create duplicate runtime policies."
+        }
+      ]
+    },
+    {
+      "title": "Tentative runtime and content reports",
+      "source_heading": "Tentative runtime and content reports",
+      "entries": [
+        {
+          "id": "RPT-WORLDMAP-0001",
+          "report": "Travel map can freeze or scroll continuously.",
+          "status": "reported_483_07",
+          "confidence": "tentative",
+          "note": "World-map input and scroll controller; first exclude DOSBox/host input behavior."
+        },
+        {
+          "id": "RPT-COMBAT-0002",
+          "report": "A wilderness battle can begin without enemies.",
+          "status": "reported_483_07",
+          "confidence": "tentative",
+          "note": "Encounter participant publication and zero-enemy continuation."
+        },
+        {
+          "id": "RPT-MINE-0001",
+          "report": "Mine Problem III parley can produce an empty screen.",
+          "status": "reported_483_07",
+          "confidence": "tentative",
+          "note": "Quest event/card selection and active visual source."
+        },
+        {
+          "id": "RPT-INITI-0001",
+          "report": "The “Initial Card for Testing Only” card can appear during the main plot.",
+          "status": "reported_483_07",
+          "confidence": "tentative",
+          "note": "`$INITI00` caller/owner and event-card index. Existing research must be consulted before reopening this target."
+        },
+        {
+          "id": "RPT-ROSTER-0001",
+          "report": "Female or alchemist inn recruits can receive an incorrect sprite/color.",
+          "status": "reported_483_07",
+          "confidence": "tentative",
+          "note": "Recruit template, appearance fields, palette selection, and save publication."
+        },
+        {
+          "id": "RPT-CALENDAR-0001",
+          "report": "A fresh GOG game reportedly rolled from 28 July 1400 back to 1 July, repeatedly invoked copy protection, and published the first High Sabbat as “Jan 0.”",
+          "status": "reported_483_07",
+          "confidence": "moderate incident, low causal confidence; Yahoo #9692",
+          "note": "Treat as a possible linked initialization/state-loss cluster, not proof that every Jan-0 event shares one cause. Exercise custom-party starts from April through August 1400 while observing calendar, protection state, event initialization, and quest reset."
+        }
+      ]
+    },
+    {
+      "title": "Forensic save signatures",
+      "source_heading": "Forensic save signatures",
+      "entries": [
+        {
+          "id": "RPT-PALETTE-0002",
+          "report": "In two damaged final-era saves, the party color block was displaced by exactly one 16-bit word; its trailing bytes overwrote the beginning of character record 0. Repositioning the block repaired both saves.",
+          "status": "forensic_final_era",
+          "confidence": "very strong signature; trigger unknown; Groups.io #9968",
+          "note": "Byte-diff the party header and first character record across 4-to-5 recruitment, dismissal, temporary absence/imprisonment, death, inventory mutation, and intervening saves. Do not claim that party size or inventory quantity is the trigger until reproduced."
+        }
+      ]
+    },
+    {
+      "title": "Documentation, platform issues, and deliberate mechanics",
+      "source_heading": "Documentation and deliberate limitations",
+      "entries": [
+        {
+          "id": "",
+          "report": "Printed map says “Freiberg im Breisgau” instead of Freiburg",
+          "status": "platform_or_documentation",
+          "confidence": "",
+          "note": "Artwork/manual error, not a world-data defect if the game records are correct."
+        },
+        {
+          "id": "",
+          "report": "Manual describes a Hall of Fame that is absent",
+          "status": "platform_or_documentation",
+          "confidence": "",
+          "note": "Abandoned or incorrectly documented feature, not an executable bug."
+        },
+        {
+          "id": "",
+          "report": "Battlefield saving is restricted to particular cleared locations",
+          "status": "platform_or_documentation",
+          "confidence": "",
+          "note": "Deliberate rule unless original evidence exposes a separate failure."
+        },
+        {
+          "id": "",
+          "report": "Modern fullscreen, mouse, audio, or filesystem failures",
+          "status": "platform_or_documentation",
+          "confidence": "",
+          "note": "Reproduce under the original environment or trace into original behavior before cataloguing as a game defect."
+        },
+        {
+          "id": "",
+          "report": "A purchased formula belongs to the purchasing character; a traded formula goes to the current leader",
+          "status": "mechanic_or_presentation",
+          "confidence": "",
+          "note": "Character-owned formula knowledge is intentional according to the archive. The collective-looking interface communicates ownership poorly."
+        },
+        {
+          "id": "",
+          "report": "The main-quest fortress monastery disappears after an attempt",
+          "status": "mechanic_or_presentation",
+          "confidence": "",
+          "note": "Reported to reappear after a later Sabbat. Record a defect only if the intended lifecycle fails to respawn it."
+        },
+        {
+          "id": "",
+          "report": "Tarnhelm interaction causes the party to “crash through the floor”",
+          "status": "mechanic_or_presentation",
+          "confidence": "",
+          "note": "This is a scripted trap, not a software crash. Purifying the tomb, including through Transformation, is part of the intended route."
+        },
+        {
+          "id": "",
+          "report": "Different Wild Hunts require different randomly selected saints",
+          "status": "mechanic_or_presentation",
+          "confidence": "",
+          "note": "Random choice is intended. Investigate only unavailable saints, ineffective valid saints, or a Hunt that fails to clear after success."
+        },
+        {
+          "id": "",
+          "report": "Protection prompts occur at every map event after editing a save",
+          "status": "platform_or_documentation",
+          "confidence": "",
+          "note": "Yahoo #9643 explicitly ties this case to Jugglindan's editor. Keep separate from the fresh-GOG calendar/protection incident in `RPT-CALENDAR-0001`."
+        }
+      ]
+    }
+  ]
+}
