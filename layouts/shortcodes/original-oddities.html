@@ -1,4 +1,4 @@
-{{- $data := index hugo.Data "original_oddities" -}}
+{{- $data := index .Site.Data "original_oddities" -}}
 <div class="drp-bug-reference" data-bug-catalog>
   <div class="drp-bug-snapshot">
     <div><strong>{{ $data.counts.byte_confirmed }}</strong><span>byte-confirmed entries</span></div>
