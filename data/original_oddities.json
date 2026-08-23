@@ -1,25 +1,25 @@
 {
   "schema": "darklands.original-oddities.public.v1",
-  "source_commit": "9065b551a0da5f3b3496f524ea9e94e4a1abb35c",
+  "source_commit": "777f59a85e0361dd4c6690fbacfccf5c55cd08da",
   "source_commit_date": "2026-08-23",
   "source_files": [
     {
       "path": "docs/KNOWN_ORIGINAL_BUGS.md",
-      "sha256": "5fd7c0d30df19506a88bf921fe94de5e72a1765dd8e3bfd6d5fbcf387eae07a6"
+      "sha256": "cb6dd1a00df6d1d98ccca952207f908af79d64c27b7d20400bfe4fe62dd71b33"
     },
     {
       "path": "docs/DORMANT_ORIGINAL_BRANCHES.md",
-      "sha256": "a2349bbf275b9623562834bbeda2c8eacf033a86dbec43f64bca208ac5bbc631"
+      "sha256": "6b567604b8da27f19158c1eb4389e9990299c88335eeff2bfe7498191cf68c41"
     },
     {
       "path": "docs/research/DARKLANDS_483_07_REPORTED_BUG_CATALOGUE.md",
-      "sha256": "618930c174679686f1a28578ab33805e72eabcee47a1890a1b0f6f179d695260"
+      "sha256": "28c3669c2caab313e4bcfc43d652eb755213fea827a7cbaec9da4ba8a9490e24"
     }
   ],
   "counts": {
-    "byte_confirmed": 17,
+    "byte_confirmed": 20,
     "dormant_groups": 7,
-    "reported_leads": 60
+    "reported_leads": 62
   },
   "known": [
     {
@@ -174,6 +174,33 @@
       "disposition": "replicated faithfully",
       "original_units": "`proc_0029_19D0`; resident RNG wrapper `resident_0000_0C70`",
       "summary": "The adjustment owner computes the second RNG range as `abs(upper)-abs(lower)`. Equal bounds therefore pass zero. The original RNG wrapper uses divisor 2 for both range 0 and range 1, so `RNG(0000h)` returns either 0 or 1. With lower and upper both `-1`, an accepted score gate therefore subtracts either one or two points. A rejected gate still consumes only its `RNG(0064h)` draw and changes nothing.\n\nThis may be a deliberate general RNG convention rather than a gameplay bug. Do not normalize the overnight loss to a fixed value without broader caller analysis. The reconstruction preserves the byte-proven result and RNG order."
+    },
+    {
+      "id": "DL-ORIG-GAME-0017",
+      "title": "`$OTHER00` contains six permanently dormant placeholder rows",
+      "status": "byte-confirmed dormant-content oddity; defect classification pending",
+      "affected": "`$OTHER00.MSG` card 0 rows 2 through 7",
+      "disposition": "omitted exactly as published by the original owner",
+      "original_units": "`proc_0075_0000`",
+      "summary": "The extracted MSG payload gives encoded rows 2 through 7 only the literal texts `2` through `7`. The owner initializes all six corresponding control bytes to zero and never enables them. Latent action entries still exist and each would perform a zero-hour calendar call before publishing state `0062h`, but the ordinary controller cannot select them.\n\nThis looks like unfinished reserved content, although it could be an intentional fixed-size table. The rewrite must neither expose the placeholder rows nor infer destinations from their latent actions. If a different owner or external writer is later proven to publish those controls, this entry must be updated rather than silently removed."
+    },
+    {
+      "id": "DL-ORIG-GAME-0018",
+      "title": "Named-home name tables contain trailing entries outside their RNG bounds",
+      "status": "byte-confirmed data-table oddity; defect classification pending",
+      "affected": "`$OTHER00.MSG` card 0 `$NamedOneName` and `$NamedTwoName` substitutions",
+      "disposition": "preserve the original RNG bounds; do not expose trailing entries",
+      "original_units": "`proc_0029_5CC4`",
+      "summary": "Selector `0001h` uses RNG bound `0058h`, making exactly 88 consecutive female first-name strings selectable. The same contiguous resource area continues with `Suzanne` and `Viktoria`, but neither can be selected through this owner. Selector `0002h` similarly uses bound `0010h` over exactly 16 family-name strings; the immediately trailing `Welser` entry is outside the draw.\n\nThis may be deliberate shared-table packing rather than a defect, and no claim is made that these names were intended for the two `$OTHER00` substitutions. The rewrite must retain the byte-proven bounds and must not broaden the pools merely because additional valid strings are adjacent. A future caller that selects the trailing entries would revise this classification."
+    },
+    {
+      "id": "DL-ORIG-GAME-0019",
+      "title": "The shipped city-revolt family contains permanently unpublished entry lanes",
+      "status": "byte-confirmed dormant-content oddity at the entry owners; whole-family and earlier-version defect classifications pending",
+      "affected": "",
+      "disposition": "proven-unpublished rows remain hidden; substantive family remains fail-closed at unresolved owners",
+      "original_units": "`proc_0048_0000`; `proc_0048_0D6E`; downstream family owners not yet fully mapped",
+      "summary": "The 483.07 data ships nineteen consecutive `$REVOLxx` resources with 230 cards. Their prose forms a large, coherent revolution/counter-revolution quest covering political investigation, recruitment, arrests and rescues, timed summons, crowds, marches, sieges, relief forces, and both rebel and government victories. This is substantially more authored content than the three family resources currently encountered by the reconstructed city route.\n\nThe complete daytime entry owner initializes rows 5–8 to zero and never publishes them. Row 5 is the substantive Force-entry choice; rows 6–8 are blank placeholders. The complete nighttime owner likewise leaves rows 5–8 at zero, where they are literal numeric placeholders. Callback/action table cells exist for these zero-state rows, but their latent effects remain an explicit decode boundary. Table existence cannot make a row selectable."
     }
   ],
   "dormant": [
@@ -632,6 +659,20 @@
           "status": "reported_483_07",
           "confidence": "moderate incident, low causal confidence; Yahoo #9692",
           "note": "Treat as a possible linked initialization/state-loss cluster, not proof that every Jan-0 event shares one cause. Exercise custom-party starts from April through August 1400 while observing calendar, protection state, event initialization, and quest reset."
+        },
+        {
+          "id": "RPT-REVOL-0001",
+          "report": "`$REVOL00` conditionally opens on card 5 rather than card 0 when byte `DS:5835h` is nonzero, although that byte sits between the initialized `$Revol00` and `$Revol01` resource strings and has no direct absolute writer in the current 135-overlay materialization.",
+          "status": "byte_confirmed_read_producer_unresolved",
+          "confidence": "strong read/card relation; low defect confidence",
+          "note": "Identify every indirect producer or alias of `DS:5835h`, the intended lifecycle of card 5, and a controlled original transition with the byte zero and nonzero. Do not call the card dormant or expose it unconditionally meanwhile."
+        },
+        {
+          "id": "RPT-REVOL-0002",
+          "report": "The nineteen-resource, 230-card city-revolt family may have been more fully connected in an earlier Darklands release and become partly or wholly dormant by 483.07.",
+          "status": "historical_version_hypothesis",
+          "confidence": "strong shipped-content evidence; no version-difference proof",
+          "note": "Acquire an authenticated earlier executable and matching MSGFILES; compare hashes, resources, state/event producers, dispatch owners, publication writes and `DS:5835h`; demonstrate natural unpatched entry in both versions before calling this a regression. Current 483.07 bytes prove only specific unpublished `$REVOL00/$REVOL01` rows, not whole-family dormancy."
         }
       ]
     },
