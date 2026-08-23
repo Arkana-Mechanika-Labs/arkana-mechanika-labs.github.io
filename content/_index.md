@@ -88,8 +88,8 @@ Accuracy comes before apparent completeness. Every implemented route is tied bac
 
 <div class="drp-screenshots drp-screenshots-current">
   <figure class="drp-screenshot">
-    <a href="/images/devlogs/060/selec01-SDL.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/devlogs/060/selec01-SDL.png" alt="Classic Darklands presentation in the native SDL development host, showing the original indexed city-gate interface and choices" loading="lazy" />
+    <a href="/images/classic-mainst.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/classic-mainst.png" alt="Classic Darklands presentation showing the original indexed Main Street scene in Magdeburg" loading="lazy" />
     </a>
     <figcaption><strong>Classic:</strong> the exact original indexed surface, including its picture, message card, text, choices, and party panel, presented by the native SDL development host.</figcaption>
   </figure>
