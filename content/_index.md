@@ -1,19 +1,20 @@
 ---
 title: Darklands Restoration Project
+description: A faithful native C# reconstruction of MicroProse's 1992 RPG, rebuilt from original code and data with evidence-backed verification.
 toc: false
 width: wide
 ---
 
 <div class="drp-hero">
   <div class="drp-hero-copy">
-    <div class="drp-hero-eyebrow">Arkana Mechanika Labs</div>
-    <p class="drp-hero-tagline">Reverse Engineering the Classic 1992 DOS RPG</p>
-    <p class="drp-hero-subtitle">Bringing MicroProse's 1992 masterpiece to the modern world through AI-assisted reverse engineering and deep format documentation</p>
-    <div class="drp-hero-status">⚡ Phase 1 complete &nbsp;·&nbsp; Phase 2 active &nbsp;·&nbsp; Key file formats documented</div>
+    <div class="drp-hero-eyebrow">Arkana Mechanika Studios</div>
+    <p class="drp-hero-tagline">Rebuilding the classic 1992 DOS RPG for modern systems</p>
+    <p class="drp-hero-subtitle">Darklands is being reconstructed as a faithful native C# engine: original behaviour, original data, and a modern host—without turning uncertain reverse-engineering guesses into gameplay.</p>
+    <div class="drp-hero-status">C# rewrite active &nbsp;·&nbsp; Runnable SDL host &nbsp;·&nbsp; City gameplay expanding</div>
     <div class="drp-hero-buttons">
-      <a href="/posts/" class="drp-btn drp-btn-primary">Read the Devlogs</a>
+      <a href="#showcase" class="drp-btn drp-btn-primary">Watch the Showcase</a>
+      <a href="/posts/" class="drp-btn drp-btn-outline">Read the Devlogs</a>
       <a href="/formats/" class="drp-btn drp-btn-outline">Explore File Formats</a>
-      <a href="/tools/" class="drp-btn drp-btn-outline">Explore the Tools</a>
     </div>
   </div>
   <div class="drp-hero-art">
@@ -31,104 +32,126 @@ width: wide
 
 ## The Project
 
-Darklands is a 1992 MicroProse RPG set in a gritty, historically grounded medieval Germany, no elves, no high fantasy, just Raubritters, saints, alchemists, and the very real fear of dying of plague before you reach Nürnberg. It is one of the most ambitious RPGs of its era, and it has only ever been playable through DOS emulation.
+Darklands is MicroProse's ambitious 1992 role-playing game set in a grounded, folkloric medieval Germany: robber knights, saints, alchemy, political intrigue, and danger on every road. The original release was built for 16-bit DOS and today is normally played through emulation.
 
-The goal here is to change that. The project works in three phases: map the executable, understand it deeply, then rewrite it function by function into native C#, with the same game logic, same data files, same experience, running natively on modern hardware without a DOS emulator.
+The restoration project is rebuilding that game in modern C# from the original version 483.07 executable and data files. This is not a loose remake and it is no longer only an analysis project. A working development application now runs the reconstructed opening sequence, reaches the original main menu, creates the Quickstart party, enters the selected city, and continues through a growing set of city interactions.
 
-An AI agent (Codex) drives the analysis autonomously, session after session: naming functions, mapping data structures, and building a comprehensive knowledge base of how the game actually works.
+Accuracy comes before apparent completeness. Every implemented route is tied back to original bytes, independently reviewed structure and data flow, and runtime verification. When a branch or side effect is not yet proven, the engine stops at a named boundary instead of inventing what Darklands probably did.
 
-**Toolchain:** Ghidra for static disassembly &nbsp;·&nbsp; patched DOSBox-X for guided interactive runtime sessions &nbsp;·&nbsp; Codex as the AI reasoning engine
+<div class="drp-current-note">
+  <strong>Current release status</strong>
+  <p>This is an active development reconstruction, not a finished replacement game. The runnable host requires legally obtained original Darklands data. Unsupported routes remain deliberately fail-closed while their original behaviour is recovered.</p>
+</div>
 
-<div class="drp-screenshots">
+<section id="showcase" class="drp-showcase" aria-labelledby="showcase-title">
+  <div class="drp-section-kicker">Presentation #01</div>
+  <h2 id="showcase-title">See the reconstructed engine in motion</h2>
+  <p>This project showcase follows the current restoration from the original presentation into the native development host and its reconstructed gameplay.</p>
+  <div class="drp-video-frame">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/CrwcEszBJcc"
+      title="Darklands Restoration Project - Presentation #01"
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <p class="drp-video-link"><a href="https://youtu.be/CrwcEszBJcc" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></p>
+</section>
+
+---
+
+## Where the Restoration Stands
+
+<div class="drp-progress-grid">
+  <article class="drp-progress-card">
+    <span class="drp-progress-label">Playable route</span>
+    <h3>From startup into the city</h3>
+    <p>The .NET 10 development host reproduces the banner and synchronized intro, publishes the real start screen, executes Quickstart, presents the party cards, and reaches reconstructed city gameplay through original resources and certified decisions.</p>
+  </article>
+  <article class="drp-progress-card">
+    <span class="drp-progress-label">Gameplay</span>
+    <h3>City life is taking shape</h3>
+    <p>Current work reaches city streets and a growing collection of destinations and actions, including merchants, residences, alchemy, churches, markets, crafts, docks, groves, party screens, and other urban systems. Coverage is route-by-route, not a claim that every city branch is complete.</p>
+  </article>
+  <article class="drp-progress-card">
+    <span class="drp-progress-label">Presentation</span>
+    <h3>Classic and Enhanced Faithful</h3>
+    <p>Classic preserves the exact indexed presentation at modern window sizes. The bounded Enhanced Faithful path can combine restored high-resolution scenery with the original interactive card, text, choices, and party panel, falling back atomically when a scene is unsupported.</p>
+  </article>
+  <article class="drp-progress-card">
+    <span class="drp-progress-label">Preservation</span>
+    <h3>Knowledge becomes durable evidence</h3>
+    <p>Original code units, data formats, state effects, oddities, and unresolved boundaries are recorded and tested. The project has decoded graphics, animation, audio, text, saves, world data, events, and many of the mechanisms that connect them.</p>
+  </article>
+</div>
+
+<div class="drp-screenshots drp-screenshots-current">
   <figure class="drp-screenshot">
-    <img src="/images/dashboard.png" alt="The dos-re-agent dashboard showing game_main_loop decompiled alongside live agent tool calls" />
-    <figcaption>The dos-re-agent dashboard , named function list on the left, Ghidra decompilation in the centre, live agent tool calls at the bottom. The agent is reading <code>game_main_loop</code> and following cross-references to understand the state machine.</figcaption>
+    <a href="/images/devlogs/064/MainStreet.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/devlogs/064/MainStreet.png" alt="Enhanced Faithful Darklands Main Street with restored high-resolution scenery and the original interactive interface" loading="lazy" />
+    </a>
+    <figcaption>Enhanced Faithful: restored scenery behind the original message card, choices, and party panel. This is an optional, bounded presentation path—not a replacement for the faithful Classic renderer.</figcaption>
   </figure>
   <figure class="drp-screenshot">
-    <img src="/images/dosbox_capture.png" alt="Custom DOSBox-X running Darklands on the world map with the debug socket active and register state visible" />
-    <figcaption>The runtime side: custom patched DOSBox-X halted mid-session on the world map. The debug socket reads <code>DS:[0x7d10]</code> (dispatch table segment) and dumps the full 99-entry state handler table , all entries pointing into the same RTLink overlay segment.</figcaption>
+    <a href="/images/devlogs/064/CitySquare.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/devlogs/064/CitySquare.png" alt="Enhanced Faithful Darklands city square with the original interactive user interface" loading="lazy" />
+    </a>
+    <figcaption>The same reconstructed game state can be presented through the permanent Classic reference view or an enhanced host without changing gameplay decisions.</figcaption>
   </figure>
 </div>
 
 ---
 
-## The Three Phases
+## How Reconstruction Works
 
-<div class="drp-phases">
+The old three-phase roadmap has been replaced by a continuous, evidence-first workflow. Analysis and implementation now advance together one original code path at a time.
 
-  <div class="drp-phase">
-    <div class="drp-phase-header">
-      <span class="drp-phase-number">Phase 1</span>
-      <h3 class="drp-phase-title">Mapping the Executable</h3>
-      <span class="drp-phase-badge complete">Complete</span>
-    </div>
-    <div class="drp-phase-body">
-      <p>Before anything can be rewritten, every function needs a name. The AI agent worked through all 388 functions across 14 code segments, naming each one by analysing Ghidra pseudocode. The naming pass produced a segment map covering decompressors, a pack file reader, a renderer, and CRT-layer functions whose Borland origins show through in coding patterns, though these are static identifications, not runtime proofs.</p>
-      <p>The systems that have been runtime-validated are the ones that matter most: the <strong>custom record-driven loader</strong> (an RTLink-derived overlay system that packs the game's entire code into DARKLAND.EXE itself, with its stub table confirmed at <code>0x1b465–0x1b52d</code>) and the <strong>99-state game loop</strong> dispatched via a far function pointer table, with the dispatch mechanism confirmed live at <code>0x13cd1</code>.</p>
-      <p>Runtime validation runs on a custom patched DOSBox-X instance: the agent sets breakpoints and captures register and memory state while a human pilot navigates the graphical menus. That hybrid workflow carried Phase 1 across the finish line and is now the primary tool for Phase 2.</p>
-    </div>
-  </div>
+<ol class="drp-pipeline">
+  <li><span>01</span><div><strong>Start with the original</strong><p>Original version 483.07 bytes, assembly, resources, and observed machine state define the behaviour to recover.</p></div></li>
+  <li><span>02</span><div><strong>Review structure and data flow</strong><p>Focused Ghidra analysis is checked against an independent Reko decompilation so disagreements are visible before implementation.</p></div></li>
+  <li><span>03</span><div><strong>Certify the exact unit</strong><p>Darklays binds ownership, call targets, branches, memory effects, and evidence freshness to the specific original routine or selected path.</p></div></li>
+  <li><span>04</span><div><strong>Rebuild the whole observable path</strong><p>The C# implementation preserves controllers, handlers, helpers, state effects, presentation, audio, time, acknowledgement, and destination settling—not only the endpoint.</p></div></li>
+  <li><span>05</span><div><strong>Verify against the running game</strong><p>Autoprobe and the patched DOSBox-X runtime compare the reconstructed route with the original executable at focused observation boundaries.</p></div></li>
+</ol>
 
-  <div class="drp-phase">
-    <div class="drp-phase-header">
-      <span class="drp-phase-number">Phase 2</span>
-      <h3 class="drp-phase-title">Deep Analysis</h3>
-      <span class="drp-phase-badge in-progress">In Progress</span>
-    </div>
-    <div class="drp-phase-body">
-      <p>Having a name for every function is only the beginning. Phase 2 goes inside each subsystem to understand exactly what it does: how data structures are laid out in memory and on disk, how algorithms work, how the game state machine transitions between its 99 states.</p>
-      <p>On the disassembly side: the <strong>add-to-party overlay</strong> has been traced end-to-end through four layers: RTLink stub → far dispatcher (<code>15DF:0329</code>) → setup wrapper (<code>15DF:0348</code>) → slot writer (<code>15DF:0D59</code>) → UI finalization, all runtime-confirmed. The <strong>Create New World</strong> overlay worker is characterised: a four-slot reuse cache, a counted variable-length record blob at <code>DS:A895</code>, and slot/UI initialization. The <strong>setup/menu selector text</strong> system is a template engine with $-token substitution and jump-table dispatch. The <strong>loader resolver records</strong> (0x12-byte format) are decoded. The <strong>character hot-slot layout</strong> (<code>DS:0x9C00</code>, stride 0x80, in-party flag at <code>+0x69</code>) and the <strong>RNG</strong> (LCG, seed at <code>0x7B20</code>) are confirmed.</p>
-      <p>On the format side: save files, the CAT archive system, world data (locations, cities, enemies, items, saints, alchemy), the wilderness map (328×932 RLE hex grid), the PAN animated sequence format, DGT audio, bitmap fonts, and dialog trees are all documented. Several formats remain undocumented. Everything documented is browsable in the <a href="/tools/dark">DARK tool</a>.</p>
-      <p>Still in progress: the full character struct base, save/load function mapping, and complete state handler identification across all 99 game states.</p>
-    </div>
-  </div>
-
-  <div class="drp-phase">
-    <div class="drp-phase-header">
-      <span class="drp-phase-number">Phase 3</span>
-      <h3 class="drp-phase-title">C# Rewrite via Spice86</h3>
-      <span class="drp-phase-badge planned">Planned</span>
-    </div>
-    <div class="drp-phase-body">
-      <p>Phase 3 has not started yet. It begins once Phase 2 has produced sufficient coverage of the game's core systems. The planned approach uses <a href="https://github.com/OpenRakis/Spice86">Spice86</a>, a reverse engineering framework for 16-bit real-mode x86 programs. Its key capability: the original DOS executable runs <em>alongside</em> C# override functions in a hybrid execution model. You replace one function at a time, verify it behaves identically, and move on to the next. The game remains fully playable throughout.</p>
-      <p>This is exactly how Cryo's 1992 Dune game was reverse engineered in the <a href="https://openrakis.github.io/Cryogenic/">Cryogenic</a> project. Phase 3 will apply the same approach to Darklands: each system fully mapped in Phase 2 becomes a C# override, validated against the real executable.</p>
-    </div>
-  </div>
-
-</div>
+<p class="drp-toolchain"><strong>Current toolchain:</strong> original Darklands 483.07 bytes and data &nbsp;·&nbsp; Ghidra &nbsp;·&nbsp; Reko &nbsp;·&nbsp; Darklays &nbsp;·&nbsp; patched DOSBox-X and Autoprobe &nbsp;·&nbsp; C# / .NET 10 &nbsp;·&nbsp; SDL2</p>
 
 ---
 
-## Project Goals
+## What the Project Is Building
 
 <div class="drp-goals">
   <div class="drp-goal">
-    <h3>Understand the Engine</h3>
-    <p>Deep dive into the inner workings of Darklands, uncovering how MicroProse implemented combat, alchemy, travel, RTLink overlays, and a living world in 16-bit DOS.</p>
+    <h3>A Faithful Native Engine</h3>
+    <p>Reconstruct original Darklands behaviour in readable, testable C# while preserving its decisions, data, timing, presentation, and known oddities.</p>
   </div>
   <div class="drp-goal">
-    <h3>Incremental Rewriting</h3>
-    <p>Gradually replace x86 assembly routines with clean, documented C# code, one function at a time, maintaining 100% behavioral compatibility with the original executable throughout.</p>
+    <h3>A Permanent Classic Reference</h3>
+    <p>Keep the original 320×200 indexed look available as the exact reference presentation, scaled cleanly on modern displays.</p>
   </div>
   <div class="drp-goal">
-    <h3>Document Everything</h3>
-    <p>Create comprehensive documentation of game mechanics, data structures, file formats, and algorithms, preserving this knowledge for developers and gaming historians.</p>
+    <h3>Optional Modern Presentation</h3>
+    <p>Allow frontends and restored artwork to improve presentation without moving gameplay authority out of the reconstructed engine.</p>
   </div>
   <div class="drp-goal">
-    <h3>Preserve Gaming History</h3>
-    <p>Ensure this landmark RPG remains playable on modern systems and provide a foundation for future enhancements, modding, and community ports.</p>
-  </div>
-  <div class="drp-goal">
-    <h3>AI-Assisted Analysis</h3>
-    <p>Demonstrate what is possible when an AI agent drives reverse engineering, autonomous function naming, pattern recognition, and structured knowledge extraction at scale.</p>
-  </div>
-  <div class="drp-goal">
-    <h3>Native Cross-Platform</h3>
-    <p>Leverage .NET's cross-platform capabilities to run Darklands natively on Windows, macOS, and Linux: no DOSBox, no emulation layer required.</p>
+    <h3>Open Technical Documentation</h3>
+    <p>Publish practical knowledge of file formats, algorithms, data structures, original bugs, and reconstruction methods for preservation and research.</p>
   </div>
 </div>
 
 ---
+
+## Follow the Work
+
+The devlogs document the restoration as it happens, including both visible milestones and the less glamorous evidence work that makes those milestones trustworthy.
+
+<div class="drp-follow-actions">
+  <a href="/posts/" class="drp-btn drp-btn-primary">Browse the Devlogs</a>
+  <a href="/tools/" class="drp-btn drp-btn-outline">Project Tools</a>
+  <a href="/faq/" class="drp-btn drp-btn-outline">Read the FAQ</a>
+</div>
 
 <div class="drp-cta">
   <p class="drp-contact">Questions or contributions: <a href="mailto:arkana.mechanika.studios@gmail.com">arkana.mechanika.studios@gmail.com</a></p>
