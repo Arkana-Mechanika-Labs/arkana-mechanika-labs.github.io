@@ -492,8 +492,9 @@
 }
 
 .drp-screenshots-current img {
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  background: #050403;
 }
 
 .drp-pipeline {

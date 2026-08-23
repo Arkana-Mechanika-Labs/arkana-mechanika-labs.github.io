@@ -89,24 +89,22 @@ Accuracy comes before apparent completeness. Every implemented route is tied bac
 
 <div class="drp-screenshots drp-screenshots-current">
   <figure class="drp-screenshot">
+    <a href="/images/devlogs/060/selec01-SDL.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/devlogs/060/selec01-SDL.png" alt="Classic Darklands presentation in the native SDL development host, showing the original indexed city-gate interface and choices" loading="lazy" />
+    </a>
+    <figcaption><strong>Classic:</strong> the exact original indexed surface, including its picture, message card, text, choices, and party panel, presented by the native SDL development host.</figcaption>
+  </figure>
+  <figure class="drp-screenshot">
     <a href="/images/devlogs/064/MainStreet.png" target="_blank" rel="noopener noreferrer">
       <img src="/images/devlogs/064/MainStreet.png" alt="Enhanced Faithful Darklands Main Street with restored high-resolution scenery and the original interactive interface" loading="lazy" />
     </a>
-    <figcaption>Enhanced Faithful: restored scenery behind the original message card, choices, and party panel. This is an optional, bounded presentation path—not a replacement for the faithful Classic renderer.</figcaption>
-  </figure>
-  <figure class="drp-screenshot">
-    <a href="/images/devlogs/064/CitySquare.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/devlogs/064/CitySquare.png" alt="Enhanced Faithful Darklands city square with the original interactive user interface" loading="lazy" />
-    </a>
-    <figcaption>The same reconstructed game state can be presented through the permanent Classic reference view or an enhanced host without changing gameplay decisions.</figcaption>
+    <figcaption><strong>Enhanced Faithful:</strong> restored high-resolution scenery behind the original message card, choices, and party panel. It is an optional presentation path with complete Classic fallback.</figcaption>
   </figure>
 </div>
 
 ---
 
 ## How Reconstruction Works
-
-The old three-phase roadmap has been replaced by a continuous, evidence-first workflow. Analysis and implementation now advance together one original code path at a time.
 
 <ol class="drp-pipeline">
   <li><span>01</span><div><strong>Start with the original</strong><p>Original version 483.07 bytes, assembly, resources, and observed machine state define the behaviour to recover.</p></div></li>
