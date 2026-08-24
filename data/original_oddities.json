@@ -1,15 +1,15 @@
 {
   "schema": "darklands.original-oddities.public.v1",
-  "source_commit": "777f59a85e0361dd4c6690fbacfccf5c55cd08da",
-  "source_commit_date": "2026-08-23",
+  "source_commit": "bae23a99be6a5f689e1f4279b6d048aea52e724b",
+  "source_commit_date": "2026-08-24",
   "source_files": [
     {
       "path": "docs/KNOWN_ORIGINAL_BUGS.md",
-      "sha256": "cb6dd1a00df6d1d98ccca952207f908af79d64c27b7d20400bfe4fe62dd71b33"
+      "sha256": "f86661a77b1258227a2fbbe1576f50d7d1b61b1889894d82ef1edcd6e5b1d0e1"
     },
     {
       "path": "docs/DORMANT_ORIGINAL_BRANCHES.md",
-      "sha256": "6b567604b8da27f19158c1eb4389e9990299c88335eeff2bfe7498191cf68c41"
+      "sha256": "c3099d1ffd4d0e747c76b7e93edbeb11679019dde10a24da8ba5f18cc3a13dd0"
     },
     {
       "path": "docs/research/DARKLANDS_483_07_REPORTED_BUG_CATALOGUE.md",
@@ -17,7 +17,7 @@
     }
   ],
   "counts": {
-    "byte_confirmed": 20,
+    "byte_confirmed": 22,
     "dormant_groups": 7,
     "reported_leads": 62
   },
@@ -199,8 +199,26 @@
       "status": "byte-confirmed dormant-content oddity at the entry owners; whole-family and earlier-version defect classifications pending",
       "affected": "",
       "disposition": "proven-unpublished rows remain hidden; substantive family remains fail-closed at unresolved owners",
-      "original_units": "`proc_0048_0000`; `proc_0048_0D6E`; downstream family owners not yet fully mapped",
+      "original_units": "`proc_0048_0000`; `proc_0048_0D6E`; `proc_0073_0000`; downstream family owners not yet fully mapped",
       "summary": "The 483.07 data ships nineteen consecutive `$REVOLxx` resources with 230 cards. Their prose forms a large, coherent revolution/counter-revolution quest covering political investigation, recruitment, arrests and rescues, timed summons, crowds, marches, sieges, relief forces, and both rebel and government victories. This is substantially more authored content than the three family resources currently encountered by the reconstructed city route.\n\nThe complete daytime entry owner initializes rows 5–8 to zero and never publishes them. Row 5 is the substantive Force-entry choice; rows 6–8 are blank placeholders. The complete nighttime owner likewise leaves rows 5–8 at zero, where they are literal numeric placeholders. Callback/action table cells exist for these zero-state rows, but their latent effects remain an explicit decode boundary. Table existence cannot make a row selectable."
+    },
+    {
+      "id": "DL-ORIG-GAME-0020",
+      "title": "`$REVOL00` row 0 can repeat its surveillance card",
+      "status": "byte-confirmed presentation oddity; defect classification pending",
+      "affected": "`$REVOL00.MSG` card 0 row 0 successful action outcomes",
+      "disposition": "typed fail-closed; no speculative deduplication",
+      "original_units": "`proc_0048_03D6`",
+      "summary": "After a successful signed RNG check, nonzero `DS:E3D0h` publishes cards 2 and 12 before the selector-`0029h` result is considered. The selector then always publishes card 2 again followed by card 3 when its result equals `0002h`, or card 4 otherwise. The two exact nonzero-lane sequences are therefore `2,12,2,3` and `2,12,2,4`; card 2 appears twice. The zero lane omits the prefix and publishes only `2,3` or `2,4`.\n\nThe repeated card may be deliberate recap after the lane-specific card 12, or it may be an original presentation bug. Do not collapse, reorder, or deduplicate the sequence without evidence from another original version. In particular, card 12 depends only on nonzero `DS:E3D0h`, while the choice of card 3 versus card 4 depends only on the selector result; neither predicate may be substituted for the other."
+    },
+    {
+      "id": "DL-ORIG-GAME-0021",
+      "title": "`$REVOL00` row 1 repeats an identical event query",
+      "status": "byte-confirmed redundant-query oddity; defect classification pending",
+      "affected": "`$REVOL00.MSG` card 0 encoded row 1, signed RNG-success lane",
+      "disposition": "raw owner only; replicate ordering if the clean route is later authorized",
+      "original_units": "`proc_0048_0506`; `proc_0029_3742`",
+      "summary": "After the one-hour calendar call and signed RNG check select the complementary lane, the owner calls `proc_0029_3742(0002h,0000h,current-city)` once. If the result is `FFFFh` while `DS:E3D0h` is zero, it immediately takes the no-card state-`0079h` tail. Every other case calls the same helper again with the same three words. A second result of `0001h` suppresses card 5 only when `DS:E3D0h` is nonzero; otherwise the owner publishes card 5 and state `0074h`.\n\nThe selected helper scans the same live kind-`001Ch` event records and writes the selected slot index to `DS:E3CEh`; it does not mutate the matched record. Consequently the second result is ordinarily identical to the first, and the second scan appears redundant. It may be compiler output from two separately authored selector predicates, intentional refresh of `DS:E3CEh`, or an unfinished design in which another operation once separated the calls. Exact bytes do not prove which explanation is correct."
     }
   ],
   "dormant": [
