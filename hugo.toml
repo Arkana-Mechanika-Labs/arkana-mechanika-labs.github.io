@@ -50,3 +50,7 @@ enableRobotsTXT = true
     name = "Links"
     url = "/links/"
     weight = 29
+  [[menu.main]]
+    name = "RPG Combat Toolkit ↗"
+    url = "https://arkana-mechanika-studios.github.io/"
+    weight = 35
