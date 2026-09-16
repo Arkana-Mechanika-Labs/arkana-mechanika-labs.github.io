@@ -7,6 +7,7 @@ width: wide
 Session-by-session notes from the Darklands reverse engineering project. Each entry covers one or more analysis sessions, what the AI agent found, how it found it, and what it means for the eventual C# port.
 
 {{< cards >}}
+  {{< card link="072-the-battlefield-starts-moving" title="Devlog #072 - The battlefield starts moving" icon="book-open" subtitle="September 16, 2026. Real gameplay footage: movement orders, arrows, melee recovery, and the first falling guard." >}}
   {{< card link="071-before-the-battlefield-appears" title="Devlog #071 - Before the battlefield appears" icon="book-open" subtitle="September 11, 2026. From attacking the city guards to the preparations behind the first combat frame." >}}
   {{< card link="070-one-hour-several-hidden-decisions" title="Devlog #070 - One hour, several hidden decisions" icon="book-open" subtitle="September 8, 2026. Why reproducing the clock is not enough to reproduce the game." >}}
   {{< card link="069-behind-the-sanctuary-door" title="Devlog #069 - Behind the sanctuary door" icon="book-open" subtitle="September 7, 2026. Waiting for daylight, negotiating with the guards, and finding a way out." >}}
