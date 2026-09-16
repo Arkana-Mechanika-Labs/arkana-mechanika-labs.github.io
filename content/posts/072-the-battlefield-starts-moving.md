@@ -17,7 +17,7 @@ The normal Quickstart route reaches the battlefield. Party members can receive m
 
 The entry milestone has been merged into the engine; the continuing combat work remains on the active development branch. There is still a substantial distance between these supported exchanges and a complete battle with an outcome and a return to the adventure. What has changed is how much of that journey now runs as one connected system. <!-- Source: status; https://github.com/Arkana-Mechanika-Studios/darklands-engine/pull/46 -->
 
-*The clips below are silent, consecutive frame exports from the reconstructed gameplay controller and renderer, not desktop recordings. They retain the original proportions and presentation timing, with crisp 3× scaling to 960×600. Use the player controls to pause or view fullscreen. Captured from combat revision [`bd3b8da2`](https://github.com/Arkana-Mechanika-Studios/darklands-engine/commit/bd3b8da2a8913563419163a39afc8f0e1fc89a63).*
+*The clips below show gameplay from the controller and renderer used by our SDL host, exported as silent video. Use the player controls to pause or view fullscreen.*
 
 ## From the city gate to the battlefield
 
