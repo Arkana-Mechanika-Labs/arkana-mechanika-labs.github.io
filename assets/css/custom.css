@@ -547,6 +547,32 @@
   margin: 1.4rem 0 0;
 }
 
+.drp-community-callout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin: 1.5rem 0 2rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--drp-surface-border);
+  border-radius: 8px;
+  background: linear-gradient(110deg, rgba(185, 148, 87, 0.13), rgba(178, 86, 67, 0.08));
+}
+
+.drp-community-callout strong {
+  display: block;
+  font-size: 1.1rem;
+}
+
+.drp-community-callout p {
+  margin: 0.3rem 0 0;
+  color: var(--drp-muted);
+}
+
+.drp-community-callout .drp-btn {
+  flex-shrink: 0;
+}
+
 /* --------------------------------------------------
    RESPONSIVE
    -------------------------------------------------- */
@@ -590,6 +616,13 @@
     align-items: stretch;
   }
   .drp-follow-actions .drp-btn {
+    text-align: center;
+  }
+  .drp-community-callout {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .drp-community-callout .drp-btn {
     text-align: center;
   }
 }

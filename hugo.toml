@@ -35,6 +35,10 @@ enableRobotsTXT = true
     url = "/posts/"
     weight = 10
   [[menu.main]]
+    name = "Join Discord ↗"
+    url = "https://discord.gg/HjzWvmHhqZ"
+    weight = 15
+  [[menu.main]]
     name = "File Formats"
     url = "/formats/"
     weight = 20

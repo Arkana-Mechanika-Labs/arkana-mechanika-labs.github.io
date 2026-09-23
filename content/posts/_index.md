@@ -6,6 +6,14 @@ width: wide
 
 Session-by-session notes from the Darklands reverse engineering project. Each entry covers one or more analysis sessions, what the AI agent found, how it found it, and what it means for the eventual C# port.
 
+<div class="drp-community-callout">
+  <div>
+    <strong>Join the Darklands restoration community</strong>
+    <p>Discuss new devlogs, share feedback, and follow the reconstruction with other Darklands fans.</p>
+  </div>
+  <a href="https://discord.gg/HjzWvmHhqZ" class="drp-btn drp-btn-primary" target="_blank" rel="noopener noreferrer">Join the Discord ↗</a>
+</div>
+
 {{< cards >}}
   {{< card link="073-when-the-rulebook-and-the-code-disagree" title="Devlog #073 - When the rulebook and the code disagree" icon="book-open" subtitle="September 23, 2026. Original combat arithmetic differs from several printed rules for armour, tactics, and damage." >}}
   {{< card link="074-what-darklands-means-by-difficulty" title="Devlog #074 - What Darklands means by difficulty" icon="book-open" subtitle="September 23, 2026. The original code links difficulty to withheld advice, enemy assessments, skill gains, fame rewards, and save metadata." >}}
