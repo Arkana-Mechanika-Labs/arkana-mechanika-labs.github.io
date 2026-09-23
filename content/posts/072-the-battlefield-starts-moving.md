@@ -1,5 +1,8 @@
 ---
 title: "Devlog #072 - The battlefield starts moving"
+params:
+  images:
+    - /devlogs/072/first-falling-guard.png
 date: 2026-09-16
 description: "From normal battlefield entry to movement, arrows, melee engagement, recovery, and the first falling guard: the latest progress in reconstructing Darklands combat."
 draft: false

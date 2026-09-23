@@ -16,6 +16,7 @@ enableRobotsTXT = true
 
 [params]
   description = "A faithful native C# reconstruction of MicroProse Darklands (1992), rebuilt from original code and data with evidence-backed verification."
+  images = ["/images/classic-mainst.png"]
 
   [params.theme]
     default = "dark"
@@ -39,22 +40,36 @@ enableRobotsTXT = true
     url = "https://discord.gg/HjzWvmHhqZ"
     weight = 15
   [[menu.main]]
-    name = "File Formats"
-    url = "/formats/"
+    identifier = "resources"
+    name = "Explore"
     weight = 20
   [[menu.main]]
-    name = "FAQ"
-    url = "/faq/"
-    weight = 25
+    name = "File Formats"
+    url = "/formats/"
+    parent = "resources"
+    weight = 10
   [[menu.main]]
     name = "Tools"
     url = "/tools/"
-    weight = 27
+    parent = "resources"
+    weight = 20
+  [[menu.main]]
+    name = "How We Restore It"
+    url = "/method/"
+    parent = "resources"
+    weight = 30
+  [[menu.main]]
+    name = "FAQ"
+    url = "/faq/"
+    parent = "resources"
+    weight = 40
   [[menu.main]]
     name = "Links"
     url = "/links/"
-    weight = 29
+    parent = "resources"
+    weight = 50
   [[menu.main]]
     name = "RPG Combat Toolkit ↗"
     url = "https://arkana-mechanika-studios.github.io/"
-    weight = 35
+    parent = "resources"
+    weight = 60

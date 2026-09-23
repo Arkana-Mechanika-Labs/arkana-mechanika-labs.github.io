@@ -1,5 +1,8 @@
 ---
 title: "Devlog #074 - What Darklands means by difficulty"
+params:
+  images:
+    - /devlogs/074/enemy-information-branches.png
 description: "Tracing Basic, Standard and Expert through the original executable reveals hidden combat information, larger rewards, and an unresolved discrepancy in the manual."
 summary: "Expert hides assessments rather than simply making enemies stronger. We followed the difficulty byte through menus, combat information, skill gains, fame, and save metadata."
 date: 2026-09-23

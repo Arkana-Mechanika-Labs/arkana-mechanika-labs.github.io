@@ -3,6 +3,9 @@ title: Darklands Restoration Project
 description: A faithful native C# reconstruction of MicroProse's 1992 RPG, rebuilt from original code and data with evidence-backed verification.
 toc: false
 width: wide
+params:
+  images:
+    - /images/classic-mainst.png
 ---
 
 <div class="drp-hero">
@@ -17,13 +20,11 @@ width: wide
     </div>
   </div>
   <div class="drp-hero-art">
-    <div class="drp-hero-cover-frame">
-      <img
-        src="/images/darklands-cover.jpg"
-        alt="Darklands original box cover"
-        class="drp-hero-cover"
-      />
-    </div>
+    <figure class="drp-hero-game-frame">
+      <img src="/images/classic-mainst.png" alt="The restored Darklands engine showing Main Street in Magdeburg" class="drp-hero-game" />
+      <figcaption>Magdeburg Main Street in the development build</figcaption>
+    </figure>
+    <img src="/images/darklands-cover.jpg" alt="Original Darklands box art" class="drp-hero-box-art" />
   </div>
 </div>
 
@@ -59,82 +60,25 @@ Darklands is gradually coming back to life. We're restoring the places, encounte
 
 ---
 
-## Where the Restoration Stands
+## Explore the Restoration
 
-<div class="drp-progress-grid">
-  <article class="drp-progress-card">
-    <span class="drp-progress-label">Startup and city</span>
-    <h3>From the opening into city life</h3>
-    <p>The .NET 10 development host reproduces the opening, executes Quickstart, and reaches supported city streets and destinations, including merchants, churches, docks, groves, and party screens. Coverage remains route-by-route.</p>
-  </article>
-  <article class="drp-progress-card">
-    <span class="drp-progress-label">Combat gameplay</span>
-    <h3>A fight is unfolding</h3>
-    <p>The published guard-encounter milestone connects battlefield entry, movement orders, arrows, melee exchanges, damage, and the first falling guard. <a href="/posts/072-the-battlefield-starts-moving/">See the captured gameplay.</a> Complete battle outcomes remain unfinished.</p>
-  </article>
-  <article class="drp-progress-card">
-    <span class="drp-progress-label">Presentation</span>
-    <h3>Classic and Enhanced Faithful</h3>
-    <p>Classic preserves the exact indexed presentation at modern window sizes. The bounded Enhanced Faithful path can combine restored high-resolution scenery with the original interactive card, text, choices, and party panel, falling back atomically when a scene is unsupported.</p>
-  </article>
-  <article class="drp-progress-card">
-    <span class="drp-progress-label">Preservation</span>
-    <h3>Knowledge becomes durable evidence</h3>
-    <p>Original code units, data formats, state effects, oddities, and unresolved boundaries are recorded and tested. The project has decoded graphics, animation, audio, text, saves, world data, events, and many of the mechanisms that connect them.</p>
-  </article>
-</div>
-
-<div class="drp-screenshots drp-screenshots-current">
-  <figure class="drp-screenshot">
-    <a href="/images/classic-mainst.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/classic-mainst.png" alt="Classic Darklands presentation showing the original indexed Main Street scene in Magdeburg" loading="lazy" />
-    </a>
-    <figcaption><strong>Classic:</strong> the exact original indexed surface, including its picture, message card, text, choices, and party panel, presented by the native SDL development host.</figcaption>
-  </figure>
-  <figure class="drp-screenshot">
-    <a href="/images/devlogs/064/MainStreet.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/devlogs/064/MainStreet.png" alt="Enhanced Faithful Darklands Main Street with restored high-resolution scenery and the original interactive interface" loading="lazy" />
-    </a>
-    <figcaption><strong>Enhanced Faithful:</strong> restored high-resolution scenery behind the original message card, choices, and party panel. It is an optional presentation path with complete Classic fallback.</figcaption>
-  </figure>
+<div class="drp-story-grid">
+  <a class="drp-story-card" href="/posts/046-main-street-opens-up/"><img src="/images/classic-mainst.png" alt="Darklands Main Street in Magdeburg" loading="lazy" /><span class="drp-section-kicker">City life</span><strong>Walk the streets again</strong><span>Follow the restored paths through city life.</span></a>
+  <a class="drp-story-card" href="/posts/072-the-battlefield-starts-moving/"><img src="/devlogs/072/first-falling-guard.png" alt="The reconstructed guard encounter on a battlefield" loading="lazy" /><span class="drp-section-kicker">Combat</span><strong>Watch a fight unfold</strong><span>Movement, arrows, and melee in a captured encounter.</span></a>
+  <a class="drp-story-card" href="/posts/064-one-game-two-ways-to-see-it/"><img src="/images/devlogs/064/MainStreet.png" alt="Enhanced Faithful presentation of the Main Street scene" loading="lazy" /><span class="drp-section-kicker">Presentation</span><strong>One game, two ways to see it</strong><span>Explore the original look and an optional restored scene.</span></a>
 </div>
 
 ---
 
-## How Reconstruction Works
+## How We Restore It
 
-<ol class="drp-pipeline">
-  <li><span>01</span><div><strong>Start with the original</strong><p>Original version 483.07 bytes, assembly, resources, and observed machine state define the behaviour to recover.</p></div></li>
-  <li><span>02</span><div><strong>Review structure and data flow</strong><p>Focused Ghidra analysis is checked against an independent Reko decompilation so disagreements are visible before implementation.</p></div></li>
-  <li><span>03</span><div><strong>Certify the exact unit</strong><p>Darklays binds ownership, call targets, branches, memory effects, and evidence freshness to the specific original routine or selected path.</p></div></li>
-  <li><span>04</span><div><strong>Rebuild the whole observable path</strong><p>The C# implementation preserves controllers, handlers, helpers, state effects, presentation, audio, time, acknowledgement, and destination settling—not only the endpoint.</p></div></li>
-  <li><span>05</span><div><strong>Verify against the running game</strong><p>Autoprobe and the patched DOSBox-X runtime compare the reconstructed route with the original executable at focused observation boundaries.</p></div></li>
-</ol>
-
-<p class="drp-toolchain"><strong>Current toolchain:</strong> original Darklands 483.07 bytes and data &nbsp;·&nbsp; Ghidra &nbsp;·&nbsp; Reko &nbsp;·&nbsp; Darklays &nbsp;·&nbsp; patched DOSBox-X and Autoprobe &nbsp;·&nbsp; C# / .NET 10 &nbsp;·&nbsp; SDL2</p>
+We compare the new engine with the original game as we rebuild it. That work is documented for readers who want to see the research behind each milestone. <a href="/method/">Read about the reconstruction method →</a>
 
 ---
 
-## What the Project Is Building
+## What Comes Next
 
-<div class="drp-goals">
-  <div class="drp-goal">
-    <h3>A Faithful Native Engine</h3>
-    <p>Reconstruct original Darklands behaviour in readable, testable C# while preserving its decisions, data, timing, presentation, and known oddities.</p>
-  </div>
-  <div class="drp-goal">
-    <h3>A Permanent Classic Reference</h3>
-    <p>Keep the original 320×200 indexed look available as the exact reference presentation, scaled cleanly on modern displays.</p>
-  </div>
-  <div class="drp-goal">
-    <h3>Optional Modern Presentation</h3>
-    <p>Allow frontends and restored artwork to improve presentation without moving gameplay authority out of the reconstructed engine.</p>
-  </div>
-  <div class="drp-goal">
-    <h3>Open Technical Documentation</h3>
-    <p>Publish practical knowledge of file formats, algorithms, data structures, original bugs, and reconstruction methods for preservation and research.</p>
-  </div>
-</div>
+The team is bringing more of the original adventure into the development build, one verified route at a time. Classic presentation remains the reference, with restored artwork available where it has been completed. Follow the [devlogs](/posts/) for the latest progress and open questions.
 
 ---
 
