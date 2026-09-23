@@ -1,5 +1,8 @@
 ---
 title: "Devlog #073 - When the rulebook and the code disagree"
+params:
+  images:
+    - /devlogs/073/armour-equality.png
 description: "Checking Darklands' combat calculations against the manual, the clue book, and the original 483.07 executable."
 summary: "A division by two where the clue book says three led us into a wider comparison of armour, equipment quality, tactics, and attack timing."
 date: 2026-09-23
