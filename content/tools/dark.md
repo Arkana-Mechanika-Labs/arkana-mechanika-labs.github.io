@@ -4,17 +4,17 @@ toc: true
 width: normal
 ---
 
-DARK is a desktop workbench that brings together Darklands' file formats in a single application. Point it at a game installation and every data file becomes accessible from one interface - no additional tools, no command-line setup, no emulation required.
+DARK is a desktop workbench that brings together Darklands' file formats in a single application. Point it at a game installation and supported game files become accessible from one interface - no additional tools, no command-line setup, no emulation required.
 
 **[Download DARK from GitHub Releases](https://github.com/Arkana-Mechanika-Labs/DARK/releases)**
 
-The current public build is `v0.9b3`. Unzip and run `DARK.exe`. Requires a Darklands installation - point the tool at your game folder on first launch.
+Download the current Windows package from GitHub Releases, unzip it, and run `DARK.exe`. Requires a Darklands installation - point the tool at your game folder on first launch.
 
 ---
 
 ## Built on Community Work
 
-Most of Darklands' file formats were documented years ago by a small group of dedicated researchers, primarily working in and around the Darklands Yahoo Group. Merle, Joel "Quadko" McIntyre, M. Gutsohn (Nurnberg project), and others spent real time reversing binary structures, writing format specifications, and building tools - largely without automated help, largely because they cared about the game. Those XML specifications are preserved in [Wendigo's Darklands repository](https://github.com/vvendigo/Darklands) ([wendigo.online-siesta.com/darklands](https://wendigo.online-siesta.com/darklands/)) and remain the reference source for most of what DARK understands. For anything game-side - mechanics, items, locations, lore - [darklands.net](https://www.darklands.net) by Matt Wirkkala is the place to go.
+Most of Darklands' file formats were documented years ago by a small group of dedicated researchers, primarily working in and around the Darklands Yahoo Group. Merle, Joel "Quadko" McIntyre, M. Gutsohn (Nurnberg project), and others spent real time reversing binary structures, writing format specifications, and building tools - largely without automated help, largely because they cared about the game. Those XML specifications are preserved in [Wendigo's Darklands repository](https://github.com/vvendigo/Darklands) ([wendigo.online-siesta.com/darklands](https://wendigo.online-siesta.com/darklands/)) and remain the reference source for most of what DARK understands. For anything game-side - mechanics, items, locations, lore - [darklands.net](http://www.darklands.net) by Matt Wirkkala is the place to go.
 
 That community also produced tools: save editors, archive extractors, map viewers. Some still work perfectly. Some have grown harder to run on modern systems. They were always separate - one application to edit a save, another to look inside a catalog, something else for images.
 
@@ -132,6 +132,8 @@ After loading a game folder, DARK can run a validation pass across the world dat
 
 ## Changelog
 
+Selected earlier milestones are listed below. The [full changelog](https://github.com/Arkana-Mechanika-Labs/DARK/blob/main/CHANGELOG.md) covers later releases.
+
 ### v0.9b3
 
 - Added decoded `PAN` sequence support with embedded-palette playback, frame stepping, contact sheets, and frame export.
@@ -144,14 +146,12 @@ After loading a game folder, DARK can run a validation pass across the world dat
 - Added direct CAT entry routing into the appropriate DARK tools.
 - Added in-editor validation badges, issue navigation, and per-record issue markers.
 
-For the full source-side history, see the [DARK changelog on GitHub](https://github.com/Arkana-Mechanika-Labs/DARK/blob/main/CHANGELOG.md).
-
 ---
 
 ## Download
 
 **[DARK on GitHub Releases](https://github.com/Arkana-Mechanika-Labs/DARK/releases)**
 
-The current public build is `v0.9b3`. Download the latest Windows package from the Releases page, unzip it, and run `DARK.exe`.
+Download the current Windows package from the Releases page, unzip it, and run `DARK.exe`.
 
 DARK is a community project, developed alongside the reverse engineering work documented in the [devlogs](/posts/).

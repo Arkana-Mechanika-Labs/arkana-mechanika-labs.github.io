@@ -84,7 +84,7 @@ width: normal
         <span style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#b99457;">Disassembler / Decompiler</span>
       </div>
       <div style="font-weight:700;font-size:1.06rem;margin-bottom:.45rem;">Ghidra</div>
-      <p style="margin:0;color:#bcae95;line-height:1.65;font-size:.93rem;">NSA's open-source reverse engineering suite and the primary analysis tool for this project. The Codex decompiler plugin substantially improves 16-bit x86 output quality over the built-in decompiler.</p>
+      <p style="margin:0;color:#bcae95;line-height:1.65;font-size:.93rem;">The primary structural workbench for focused analysis of original 483.07 code. Its control flow, call sites, and decompilation are checked against the original bytes and an independent Reko review.</p>
     </div>
   </a>
 
@@ -95,7 +95,7 @@ width: normal
         <span style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#b99457;">Emulator / Debugger</span>
       </div>
       <div style="font-weight:700;font-size:1.06rem;margin-bottom:.45rem;">DOSBox-X</div>
-      <p style="margin:0;color:#bcae95;line-height:1.65;font-size:.93rem;">DOSBox fork with a proper GDB stub, INT 21h call logging, real-mode debugger, and memory-watch support. Far more useful for RE work than vanilla DOSBox. Pairs naturally with Ghidra for runtime-to-static correlation.</p>
+      <p style="margin:0;color:#bcae95;line-height:1.65;font-size:.93rem;">DOS emulator and debugger used to observe the original game. The restoration also uses project-specific DOSBox-X patches and Autoprobe for focused runtime capture and comparison.</p>
     </div>
   </a>
 
@@ -106,7 +106,7 @@ width: normal
         <span style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#b99457;">Hybrid Emulator</span>
       </div>
       <div style="font-weight:700;font-size:1.06rem;margin-bottom:.45rem;">Spice86</div>
-      <p style="margin:0;color:#bcae95;line-height:1.65;font-size:.93rem;">C# framework for progressive x86-to-managed-code replacement. Instruments the original binary, generates a C# skeleton that runs identically, then lets you replace functions one by one. The Phase 3 target for this project.</p>
+      <p style="margin:0;color:#bcae95;line-height:1.65;font-size:.93rem;">A C# x86 emulation and reverse-engineering framework that influenced early project research. The active restoration engine is a separate evidence-backed C# rewrite of original code units.</p>
     </div>
   </a>
 
@@ -132,14 +132,14 @@ width: normal
     </div>
   </a>
 
-  <a href="https://github.com/open-watcom/open-watcom-v2" style="display:block;text-decoration:none;border:1px solid rgba(185,148,87,.22);border-radius:14px;background:rgba(36,22,16,.46);box-shadow:0 16px 45px rgba(0,0,0,.16);overflow:hidden;">
+  <a href="https://github.com/uxmal/reko" style="display:block;text-decoration:none;border:1px solid rgba(185,148,87,.22);border-radius:14px;background:rgba(36,22,16,.46);box-shadow:0 16px 45px rgba(0,0,0,.16);overflow:hidden;">
     <div style="padding:1rem 1.05rem 1.1rem;">
       <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem;">
         <span style="display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:rgba(185,148,87,.16);color:#ddb97b;font-size:.72rem;padding:.22rem .55rem;">TOOL</span>
-        <span style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#b99457;">Compiler / Reference</span>
+        <span style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#b99457;">Independent Decompiler</span>
       </div>
-      <div style="font-weight:700;font-size:1.06rem;margin-bottom:.45rem;">Open Watcom C/C++</div>
-      <p style="margin:0;color:#bcae95;line-height:1.65;font-size:.93rem;">Many DOS-era games — including MicroProse titles — were compiled with Watcom C. Knowing its calling conventions, name mangling, and register usage patterns substantially improves Ghidra's function signature recovery.</p>
+      <div style="font-weight:700;font-size:1.06rem;margin-bottom:.45rem;">Reko</div>
+      <p style="margin:0;color:#bcae95;line-height:1.65;font-size:.93rem;">Independent decompilation and data-flow review for focused original-code units. Material differences from Ghidra are resolved against assembly and observed execution before implementation.</p>
     </div>
   </a>
 

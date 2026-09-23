@@ -33,19 +33,19 @@ width: wide
 
 Darklands is MicroProse's ambitious 1992 role-playing game set in a grounded, folkloric medieval Germany: robber knights, saints, alchemy, political intrigue, and danger on every road. The original release was built for 16-bit DOS and today is normally played through emulation.
 
-The restoration project is rebuilding that game in modern C# from the original version 483.07 executable and data files. This is not a loose remake and it is no longer only an analysis project. A working development application now runs the reconstructed opening sequence, reaches the original main menu, creates the Quickstart party, enters the selected city, and continues through a growing set of city interactions.
+The restoration project is rebuilding that game in modern C# from the original version 483.07 executable and data files. A working development application now runs the opening, Quickstart, supported city interactions, and part of a guard encounter on a generated battlefield. The [latest published combat milestone](/posts/072-the-battlefield-starts-moving/) includes movement orders, arrows, melee exchanges, and a falling guard.
 
 Accuracy comes before apparent completeness. Every implemented route is tied back to original bytes, independently reviewed structure and data flow, and runtime verification. When a branch or side effect is not yet proven, the engine stops at a named boundary instead of inventing what Darklands probably did.
 
 <div class="drp-current-note">
   <strong>Current release status</strong>
-  <p>This is an active development reconstruction, not a finished replacement game. The runnable host requires legally obtained original Darklands data. Unsupported routes remain deliberately fail-closed while their original behaviour is recovered.</p>
+  <p>This is an active development reconstruction, not a finished replacement game. Complete battles, their outcomes, and many other routes remain under development. The runnable host requires legally obtained original Darklands data. Unsupported routes remain deliberately fail-closed while their original behaviour is recovered.</p>
 </div>
 
 <section id="showcase" class="drp-showcase" aria-labelledby="showcase-title">
   <div class="drp-section-kicker">Presentation #01</div>
   <h2 id="showcase-title">See the reconstructed engine in motion</h2>
-  <p>This project showcase follows the current restoration from the original presentation into the native development host and its reconstructed gameplay.</p>
+  <p>This presentation follows the restoration from the original opening into the native development host. The <a href="/posts/">devlogs</a> show later gameplay milestones.</p>
   <div class="drp-video-frame">
     <iframe
       src="https://www.youtube-nocookie.com/embed/CrwcEszBJcc"
@@ -65,14 +65,14 @@ Accuracy comes before apparent completeness. Every implemented route is tied bac
 
 <div class="drp-progress-grid">
   <article class="drp-progress-card">
-    <span class="drp-progress-label">Playable route</span>
-    <h3>From startup into the city</h3>
-    <p>The .NET 10 development host reproduces the banner and synchronized intro, publishes the real start screen, executes Quickstart, presents the party cards, and reaches reconstructed city gameplay through original resources and certified decisions.</p>
+    <span class="drp-progress-label">Startup and city</span>
+    <h3>From the opening into city life</h3>
+    <p>The .NET 10 development host reproduces the opening, executes Quickstart, and reaches supported city streets and destinations, including merchants, churches, docks, groves, and party screens. Coverage remains route-by-route.</p>
   </article>
   <article class="drp-progress-card">
-    <span class="drp-progress-label">Gameplay</span>
-    <h3>City life is taking shape</h3>
-    <p>Current work reaches city streets and a growing collection of destinations and actions, including merchants, residences, alchemy, churches, markets, crafts, docks, groves, party screens, and other urban systems. Coverage is route-by-route, not a claim that every city branch is complete.</p>
+    <span class="drp-progress-label">Combat gameplay</span>
+    <h3>A fight is unfolding</h3>
+    <p>The published guard-encounter milestone connects battlefield entry, movement orders, arrows, melee exchanges, damage, and the first falling guard. <a href="/posts/072-the-battlefield-starts-moving/">See the captured gameplay.</a> Complete battle outcomes remain unfinished.</p>
   </article>
   <article class="drp-progress-card">
     <span class="drp-progress-label">Presentation</span>
