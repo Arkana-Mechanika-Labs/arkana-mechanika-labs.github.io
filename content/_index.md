@@ -33,13 +33,11 @@ width: wide
 
 Darklands is MicroProse's ambitious 1992 role-playing game set in a grounded, folkloric medieval Germany: robber knights, saints, alchemy, political intrigue, and danger on every road. The original release was built for 16-bit DOS and today is normally played through emulation.
 
-The restoration project is rebuilding that game in modern C# from the original version 483.07 executable and data files. A working development application now runs the opening, Quickstart, supported city interactions, and part of a guard encounter on a generated battlefield. The [latest published combat milestone](/posts/072-the-battlefield-starts-moving/) includes movement orders, arrows, melee exchanges, and a falling guard.
-
-Accuracy comes before apparent completeness. Every implemented route is tied back to original bytes, independently reviewed structure and data flow, and runtime verification. When a branch or side effect is not yet proven, the engine stops at a named boundary instead of inventing what Darklands probably did.
+Darklands is gradually coming back to life. We're restoring the places, encounters, and choices that made the original adventure distinctive, while bringing it to modern systems. [Follow the devlogs](/posts/) to see what has returned and what comes next.
 
 <div class="drp-current-note">
-  <strong>Current release status</strong>
-  <p>This is an active development reconstruction, not a finished replacement game. Complete battles, their outcomes, and many other routes remain under development. The runnable host requires legally obtained original Darklands data. Unsupported routes remain deliberately fail-closed while their original behaviour is recovered.</p>
+  <strong>Project status</strong>
+  <p>The restoration is still in development. Some places and encounters are unfinished, and running the development version requires your own copy of the original Darklands game data.</p>
 </div>
 
 <section id="showcase" class="drp-showcase" aria-labelledby="showcase-title">
