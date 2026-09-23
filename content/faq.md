@@ -4,66 +4,34 @@ toc: true
 width: normal
 ---
 
-Common questions about the project , including the hard ones.
+Answers about the restoration as it works today. Earlier devlogs preserve what was known at the time; the [latest posts](/posts/) show how the project has changed.
 
----
+## How do you check AI-assisted findings?
 
-## "AI hallucinates. You can't trust any of this."
+An early investigation misidentified `0x1873a` as a party routine when it was a Borland C runtime file routine. [Devlog #006](/posts/006-corrections-and-character-layout/) records the correction. That mistake is why a plausible name or decompiler result is never enough to authorize game behavior.
 
-Fair criticism, and we've already seen it happen. In session 6, the agent misidentified `0x1873a` as `party_add_member` when it's actually `crt_fdopen` , the Borland C runtime file-open function. It caught the mistake itself in a later session by going deeper into the code.
+The original 483.07 bytes and observed execution are the reference. Focused Ghidra analysis and independent Reko review expose structure and disagreements. Darklays records exact ownership, branches, effects, and evidence freshness. The C# path is compared with original instruction results and, where available, complete runtime routes. Unresolved behavior stays behind an explicit boundary.
 
-Every finding is cross-referenced against the community KB and tracked with timestamps and reasoning. The devlogs are honest about corrections when they happen. This isn't a black box producing unverified output, it's an AI assistant doing first-pass analysis that gets reviewed, corrected, and documented. The same is true of any junior RE analyst.
+## What does AI contribute beyond Ghidra?
 
----
+Ghidra and Reko are analysis tools; neither tells us by itself which behavior belongs in the restoration. AI-assisted work helps trace callers, compare the two decompilers, organize evidence, implement bounded original code units, and find the next missing dependency. The primary task owner reviews the evidence and decides what can be claimed or shipped.
 
-## "Ghidra already does the heavy lifting. What's the AI actually adding?"
+## How are Darklands' overlays handled?
 
-Ghidra gives you disassembly and decompilation. What it gives you after running on `DARKLAND.EXE` is 388 functions named `FUN_130b_096a` and a pile of `DAT_` globals. Turning that into `game_main_loop`, `lzss_decompress`, `resource_table_lookup`, and 379 other meaningful names, and understanding how they connect, is the actual work.
+The executable uses a record-driven loader, relocation machinery, and resident resolution paths. The project can materialize selected original code for focused analysis and trace the overlay behavior needed by supported routes. [Devlog #029](/posts/029-digging-up-overlays/) explains an early step in that work. An overlay name or reachable call is not proof that every branch or side effect is understood.
 
-The AI does what a human RE analyst would do: read decompiled output, recognise patterns, name things, and build a map of the system. It just does it faster and doesn't get bored.
+## Didn't the community already document Darklands?
 
----
+Community research provides essential file-format knowledge. We build on those specifications and credit their authors in the [format reference](/formats/). The executable also makes decisions about menus, time, combat, events, resources, and presentation that file layouts alone cannot answer. Recovering those decisions is the restoration's additional work.
 
-## "You're not reverse engineering it, the AI is. You're just watching."
+## Is the C# version playable now?
 
-The toolchain, the Ghidra bridge, the GDB/QEMU integration, the context management, the resume system, the knowledge base, was designed and built by a human. The findings are interpreted, corrected, and prioritised by a human. The AI is the analyst; the human is the lead.
+There is a working .NET 10 development host. It runs the opening, Quickstart, supported city routes, and a growing part of a guard encounter with movement, ranged attacks, and melee. It is not a finished replacement game: many routes and complete battle outcomes remain under development. The host requires legally obtained original Darklands data. [Devlog #072](/posts/072-the-battlefield-starts-moving/) shows the latest published connected combat milestone.
 
-This is how most serious RE work is done: in teams, with tools, with review. The AI happens to be a very fast reader of decompiled C.
+## Why C#?
 
----
+The goal is a readable, testable rewrite of original behavior. C# lets the project model original code units and their effects explicitly while running a native .NET host. Spice86 influenced early research, but the active engine follows evidence-backed C# mechanisms and an SDL presentation layer; it is not a generated Spice86 skeleton. The original executable, not the choice of language, defines the behavior to reproduce.
 
-## "RTLink overlays make 16-bit real-mode basically impossible to decompile cleanly."
+## How can I follow or help?
 
-We mapped the RTLink overlay system in Phase 1. The overlay manager lives in segments `19c0h` and `1d14h`. The trampoline that calls into overlays (`rtlink_call_overlay`) pushes a 6-byte frame onto a dedicated call stack at `DAT_19c0_09d6`, and the overlay loader handles both disk and EMS-backed segments. We understand the load and unload cycle, the EMS page mapping, and how the game's overlay file is self-backed inside `DARKLAND.EXE` itself. The internal relocation algorithm is partially mapped but not yet fully decompiled.
-
-It was a significant challenge: Ghidra doesn't handle RTLink out of the box, but the system is understood well enough to continue.
-
----
-
-## "The community KB already documented everything important."
-
-The KB documents the file formats on disk: save files, catalog entries, sprite headers, location data. It doesn't document anything about how the executable works internally: the state machine (99 states, `0x29` to `0x62`), the combat calculation logic, the overlay scheduling, the in-memory character layout, the RNG implementation, or the rendering pipeline.
-
-The KB is the foundation. This project is the next layer.
-
----
-
-## "A C# reimplementation will never be accurate enough to be playable."
-
-The Spice86 approach doesn't start from scratch. It instruments the original binary, generates a C# skeleton that runs identically to the original, then replaces functions one by one with clean implementations. The bar for each replacement is binary-identical behaviour, not approximation.
-
-Projects like [Devilution](https://github.com/diasurgical/devilution) (Diablo 1) and [OpenMW](https://openmw.org) have shown this is achievable. It's slow. It may take years. "Never accurate enough" isn't the risk, time and resources are.
-
----
-
-## "Why C#? A real reimplementation would be in C."
-
-[Spice86](https://github.com/OpenRCT2/Spice86) is a C# framework built specifically for this approach: it provides the x86 memory model, the DOS interrupt layer, and the scaffolding for incremental function replacement. Using it means not reinventing all of that infrastructure.
-
-The language is a tool, not a statement.
-
----
-
-## "This will die like every other fan RE project."
-
-Probably the hardest question, because it's often true. The honest answer: the analysis work has value independent of the reimplementation. Every named function, every mapped struct, every documented subsystem is useful even if the C# port never ships. Merle and Qadko's file format work has been useful to this project twenty years later. The goal is to leave something that lasts, whatever form it takes.
+Read the [devlogs](/posts/), inspect the [engine source](https://github.com/Arkana-Mechanika-Studios/darklands-engine), or [join the restoration Discord](https://discord.gg/HjzWvmHhqZ) to discuss findings and give feedback. The site keeps historical posts available, including corrections, so the research trail remains visible.

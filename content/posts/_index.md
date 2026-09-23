@@ -4,7 +4,7 @@ toc: false
 width: wide
 ---
 
-Session-by-session notes from the Darklands reverse engineering project. Each entry covers one or more analysis sessions, what the AI agent found, how it found it, and what it means for the eventual C# port.
+Session-by-session notes from the Darklands reverse engineering project. Each entry records what was known when it was published; later evidence and corrections may supersede older posts. Start with the newest entries for the current picture.
 
 <div class="drp-community-callout">
   <div>
