@@ -11,9 +11,9 @@ width: wide
     <p class="drp-hero-tagline">Rebuilding the classic 1992 DOS RPG for modern systems</p>
     <p class="drp-hero-subtitle">A faithful C# reconstruction bringing Darklands to modern systems while preserving the gameplay, data, and atmosphere of the 1992 original.</p>
     <div class="drp-hero-buttons">
-      <a href="#showcase" class="drp-btn drp-btn-primary">Watch the Showcase</a>
+      <a href="https://discord.gg/HjzWvmHhqZ" class="drp-btn drp-btn-primary" target="_blank" rel="noopener noreferrer">Join the Discord ↗</a>
+      <a href="#showcase" class="drp-btn drp-btn-outline">Watch the Showcase</a>
       <a href="/posts/" class="drp-btn drp-btn-outline">Read the Devlogs</a>
-      <a href="/formats/" class="drp-btn drp-btn-outline">Explore File Formats</a>
     </div>
   </div>
   <div class="drp-hero-art">
@@ -145,7 +145,8 @@ Accuracy comes before apparent completeness. Every implemented route is tied bac
 The devlogs document the restoration as it happens, including both visible milestones and the less glamorous evidence work that makes those milestones trustworthy.
 
 <div class="drp-follow-actions">
-  <a href="/posts/" class="drp-btn drp-btn-primary">Browse the Devlogs</a>
+  <a href="https://discord.gg/HjzWvmHhqZ" class="drp-btn drp-btn-primary" target="_blank" rel="noopener noreferrer">Join the Discord ↗</a>
+  <a href="/posts/" class="drp-btn drp-btn-outline">Browse the Devlogs</a>
   <a href="/tools/" class="drp-btn drp-btn-outline">Project Tools</a>
   <a href="/faq/" class="drp-btn drp-btn-outline">Read the FAQ</a>
 </div>
