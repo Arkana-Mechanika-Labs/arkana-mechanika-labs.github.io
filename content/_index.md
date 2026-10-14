@@ -42,20 +42,39 @@ Darklands is gradually coming back to life. We're restoring the places, encounte
 </div>
 
 <section id="showcase" class="drp-showcase" aria-labelledby="showcase-title">
-  <div class="drp-section-kicker">Presentation #01</div>
+  <div class="drp-section-kicker">Presentations</div>
   <h2 id="showcase-title">See the reconstructed engine in motion</h2>
-  <p>This presentation follows the restoration from the original opening into the native development host. The <a href="/posts/">devlogs</a> show later gameplay milestones.</p>
-  <div class="drp-video-frame">
-    <iframe
-      src="https://www.youtube-nocookie.com/embed/CrwcEszBJcc"
-      title="Darklands Restoration Project - Presentation #01"
-      loading="lazy"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen>
-    </iframe>
+  <p>Each presentation follows the restoration running in the native development host. The <a href="/posts/">devlogs</a> cover every milestone in between.</p>
+  <div class="drp-video-grid">
+    <figure class="drp-video">
+      <figcaption><span class="drp-section-kicker">Presentation #02 · New</span><strong>Beyond the City Walls</strong><span>Monastery and sanctuary, the first battlefield, computed dungeons, the world map and the first wilderness encounter.</span></figcaption>
+      <div class="drp-video-frame">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/wnP9VwCIHuo"
+          title="Darklands Restoration Project - Presentation #02: Beyond the City Walls"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <p class="drp-video-link"><a href="https://youtu.be/wnP9VwCIHuo" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></p>
+    </figure>
+    <figure class="drp-video">
+      <figcaption><span class="drp-section-kicker">Presentation #01</span><strong>Rebuilding Darklands in C#</strong><span>From the original opening into the city: character screens, the Inn, merchants, day and night, and boat travel.</span></figcaption>
+      <div class="drp-video-frame">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/CrwcEszBJcc"
+          title="Darklands Restoration Project - Presentation #01"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <p class="drp-video-link"><a href="https://youtu.be/CrwcEszBJcc" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></p>
+    </figure>
   </div>
-  <p class="drp-video-link"><a href="https://youtu.be/CrwcEszBJcc" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></p>
 </section>
 
 ---
