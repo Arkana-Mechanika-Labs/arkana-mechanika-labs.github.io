@@ -81,9 +81,7 @@ Beyond that lie the questions that matter most:
 
 ## Was it more complete in an earlier version?
 
-It is tempting to conclude that the quest worked in an earlier release and was disconnected later. Some things point that way: the size and coherence of the text, choice tables kept intact for options that are never offered, and stages that depend on timed events. We keep that idea as a **hypothesis**, not a finding. All our analysis so far uses the final 483.07 release, and to test it we would need an earlier executable together with its matching `MSGFILES` folder.
-
-**If you own an early Darklands release**, especially original 1992 floppies, we would love to hear which version it is. Our [Discord](https://discord.gg/HjzWvmHhqZ) is the best place to reach us.
+It is tempting to conclude that the quest worked in an earlier release and was disconnected later. Some things point that way: the size and coherence of the text, choice tables kept intact for options that are never offered, and stages that depend on timed events. We keep that idea as a **hypothesis**, not a finding. All the analysis in this post uses the final 483.07 release. Testing the idea means comparing the revolt code and its `MSGFILES` against earlier versions of the game, and that comparison has not been done yet.
 
 ## What this means for the restoration
 
