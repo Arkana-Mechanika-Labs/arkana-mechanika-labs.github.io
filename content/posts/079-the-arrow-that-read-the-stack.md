@@ -186,7 +186,7 @@ This is not an error in our translation. Native disassembly of the unchanged 483
 
 The overshoot is not a fixed tolerance. Its size depends on the shot's length and the course of the search. In a constructed case with a nearby wall, the same logic overshoots by **11** units. Neither the arrow sprite's 7 × 7 drawing area nor the separate impact offset explains it, since nothing in the code connects either one to this last half-step.
 
-We have entered this as a **byte-confirmed oddity and possible defect** in our original-bug register, with its classification still pending. The routine clearly searches for obstacles, which suggests the end point is meant to be clear. But "roughly the right distance" is a plausible goal for a 1992 game too. A miss that lands a few units inside a wall causes no damage here and is invisible at 320 × 200. The bytes show what happens. They cannot tell us whether anyone cared.
+We have entered this in our original-bug register as **confirmed original behaviour and a possible gameplay defect**. The routine clearly searches for obstacles, which suggests the end point is meant to be clear. But "roughly the right distance" is a plausible goal for a 1992 game too. A miss that lands a few units inside a wall causes no damage here and is invisible at 320 × 200. The bytes show what happens. They cannot tell us whether anyone cared.
 
 ## Our correction exposed the second anomaly
 
@@ -203,9 +203,9 @@ So we compared three possible end-point rules on the same captured battlefield:
 | Test the final step; if blocked, use the last clear point | (962,103) | 5 | Clear |
 | Step through the path to the first obstruction | (989,106) | 362 | Clear, 1 unit short |
 
-The first alternative is the simplest, but it also shortens shots that had nothing in their way. The last is the most precise and costs about ninety times as many tests. The middle option adds a single test, keeps each final step that really is clear, and otherwise falls back to a point already known to be clear. If we decide that missed arrows must end in open space, that is the rule we would choose.
+The first alternative is the simplest, but it also shortens shots that had nothing in their way. The last is the most precise and costs about ninety times as many tests. The middle option adds a single test, keeps each final step that really is clear, and otherwise falls back to a point already known to be clear. Of the three, it was the one we preferred.
 
-That is a design decision for the project. It is not something we recovered from the original. Any of these rules can change when an arrow arrives, and with it later random draws and outcomes, so it needs an explicit decision and has not been adopted.
+That is a design decision for the project. It is not something we recovered from the original. Any of these rules can change when an arrow arrives, and with it later random draws and outcomes. For now we have decided **not** to adopt any of them: the original final step is deliberately kept, and the question is tracked as an open issue to revisit when projectile visuals and combat are polished.
 
 ## What this says about the method
 
@@ -214,12 +214,14 @@ That is a design decision for the project. It is not something we recovered from
 - **Each claim has a confidence level.** Every finding is recorded as one of three things: confirmed fact (bytes and traces), strong inference (an accidental stale read) or unresolved (the programmer's intent). Where we did not know, we wrote that down.
 - **Each experiment answered one question.** One showed that an interrupt *could* reach those stack words. Another showed that it *did*, and that the values survived until they were read. A third asked whether it changed the outcome. It did not, and we reported that.
 - **Evidence is pinned.** The executable, disassembly database, emulator build, save states and captured event streams are identified by SHA-256 hashes, and independent reviewers checked each stage. Anyone repeating the geometry check against the same capture should get the same exact fractions.
-- **Bugs are recorded, not quietly fixed.** Neither anomaly has been silently repaired. A strict reconstruction, a corrected mode and a mod can each make a different choice, and each choice stays visible.
+- **Bugs are recorded, not quietly fixed.** Neither anomaly has been silently repaired. The correction we adopted is limited to one documented call path, the anomaly we kept is documented as kept, and the original-code comparisons remain strict.
 
 ## Where things stand
 
-- **The stale clipping read:** high-confidence defect. Our correction has been validated in the tested domain and has completed a naturally reached projectile flight. It is **not** enabled in the playable build, where the strict reconstruction still stops at that point.
-- **The untested final step:** byte-confirmed, with its classification pending. If we adopt a "misses end in open space" rule, testing the final step with a last-clear fallback is our preferred option.
+- **The stale clipping read:** high-confidence defect. Our correction is now **enabled** in restoration gameplay, but only for this missed-projectile path. Every other caller of the clipping routine, and every comparison against the original code, stays strict. The full engine test suite (12,215 tests) passes with it. We have not yet recorded a fresh natural missed shot with the integrated build.
+- **The untested final step:** confirmed original behaviour and a possible defect. It is **deliberately kept as the original does it** for now, so a missed arrow can still finish a few units inside a wall. Testing the final step with a last-clear fallback remains our preferred fix if we change that.
 - **Still open:** the original intent behind both routines, a related stale read on a different ranged-attack path, and another strict stop that occurs later in the same fight.
 
-None of this is enabled in the game yet. The next step is a design decision: adopt the clipping correction alone and document the overshoot, or adopt it together with an end-point rule.
+Both anomalies are listed on our [Original Bugs & Oddities](/formats/original-bugs-and-oddities/) page as `DL-ORIG-GAME-0036` and `DL-ORIG-GAME-0037`.
+
+We chose the clipping correction on its own and kept the overshoot visible, rather than letting one fix carry the other along with it.

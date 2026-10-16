@@ -1,27 +1,99 @@
 {
   "schema": "darklands.original-oddities.public.v1",
-  "source_commit": "bae23a99be6a5f689e1f4279b6d048aea52e724b",
-  "source_commit_date": "2026-08-24",
+  "source_commit": "6b68df844409a8a59e108da137046fb0ccaedc47",
+  "source_commit_date": "2026-10-16",
   "source_files": [
     {
       "path": "docs/KNOWN_ORIGINAL_BUGS.md",
-      "sha256": "f86661a77b1258227a2fbbe1576f50d7d1b61b1889894d82ef1edcd6e5b1d0e1"
+      "sha256": "e77409a446eeda73783f74a676bf0bf22b68bfad67523b09ebec60a00e35c4b8"
     },
     {
       "path": "docs/DORMANT_ORIGINAL_BRANCHES.md",
-      "sha256": "c3099d1ffd4d0e747c76b7e93edbeb11679019dde10a24da8ba5f18cc3a13dd0"
+      "sha256": "a32a84bb4b99458863cd5db587c0610f852457f07de3a67fbc3c4b1fa8e9e7a1"
     },
     {
       "path": "docs/research/DARKLANDS_483_07_REPORTED_BUG_CATALOGUE.md",
-      "sha256": "28c3669c2caab313e4bcfc43d652eb755213fea827a7cbaec9da4ba8a9490e24"
+      "sha256": "3c1ffc5d6f6ab5f25c3b03e86127aa37f0f0a7960a52e7ccb7dddd487f6c9f02"
     }
   ],
   "counts": {
-    "byte_confirmed": 22,
-    "dormant_groups": 7,
+    "byte_confirmed": 38,
+    "dormant_groups": 8,
     "reported_leads": 62
   },
   "known": [
+    {
+      "id": "DL-ORIG-GAME-0035",
+      "title": "TACANIM terminal lookup consumes inherited size words",
+      "status": "",
+      "affected": "",
+      "disposition": "",
+      "original_units": "",
+      "summary": "Status: byte-confirmed behavior; possible original bug, defect classification pending. R25 owner `[0A84,0BE4)` (original EXE `[54DA4,54F04)`, SHA256 `70DDC4CBF52145D75ED347ACDD294CFE139CED4EFA6B49ACF38B226336C7AA02`) checks FILE+6 bit10 at0AC8, ignores fread's result after0AD7, and compares the partially overwritten fourteen-byte local record at0AE7. A mismatch loops back to the flag test; initially terminal FILE state skips read and compare. Close0AF4 precedes size reads atBP-12h/-10h/-0Eh and their ordered reservations. Thus absent or short unmatched TACANIM records can use inherited allocation size bytes, rather than returning a lookup failure. No failed-open/read owner result is inferred from this behavior.\n\nThis appears anomalous because resource absence can affect allocation sizes through unrelated stack history. An upstream guaranteed matching record or restricted resource contract may explain ordinary safety; neither licenses zeroing the inherited words. Rewrite disposition: replicate in isolated Lane-A research with explicit inherited scratch/FILE inputs; production unchanged. Unbound bytes stop at their first actual consumer, preserving close and any earlier reservation publication. Native open/read error-state continuation remains an explicit typed stop. The campaign's controlled original comparison and tests are linked in [the current report](research/COMBAT_READER_STARTUP_CLOSURE_CAMPAIGN.md). Controlled malformed-resource inputs do not establish natural reachability."
+    },
+    {
+      "id": "DL-ORIG-GAME-0034",
+      "title": "item-feature scratch shuffle does not select the item",
+      "status": "byte-confirmed redundant shuffle; defect classification pending",
+      "affected": "",
+      "disposition": "",
+      "original_units": "`0007:4076`, item-bearing feature-record population",
+      "summary": "After swapping scratch-pool entries, the routine reloads the draw index at `421E`, not a pool value. Dispatch permits repeated entries; the pool has no observable influence on selection. The semantic compiler removes its scratch writes but retains saved-draw dispatch, decreasing bounds and the four-item stop. DKSAVE8's complete feature records and publication RNG falsify a shuffled pool interpretation. Repeats could be intentional: a defect verdict needs an established inventory policy and controlled original examples of repetition. Original EXE SHA is `90138ae88acf66ad765e96c0465c1a4aa11eb09b74f365ed18c0f01beb9a86c2`; `4076..42D8` SHA is `2085b40986256f1310dfc835341b892e67fc31135d300118b3bb0194a5c56d60`."
+    },
+    {
+      "id": "DL-ORIG-GAME-0033",
+      "title": "connector detail probes start at the far rectangle bound",
+      "status": "byte-confirmed far-bound arithmetic; defect classification pending",
+      "affected": "",
+      "disposition": "",
+      "original_units": "`0007:0698`, post-raster kind-seven detail",
+      "summary": "A horizontal connector probes `lastColumn + draw(width) - 1` at its first row; a vertical one probes `lastRow + draw(height) - 1` at its first column. A result above one can modify a cell beyond the connector if its selected outward bit is present. An interior random coordinate from the near bound changes behavior. A neighboring-face decoration could explain this arithmetic. A defect verdict needs the original operands, outward bit and later rendered detail for a result above one, including a near-grid-limit case. The full-floor differential and focused far-bound test preserve the operation; clipping is not authorized. Slice `0698..0B3E` is pinned by `tools/verify_record7_semantic_cells.py` to SHA `9b703ddb821df93af14d291b240ccaa591377c72831f90a265aee3a119150a6b`."
+    },
+    {
+      "id": "DL-ORIG-GAME-0032",
+      "title": "visibility accepts some zero-extent rectangles",
+      "status": "byte-confirmed asymmetric predicate; defect classification pending",
+      "affected": "",
+      "disposition": "",
+      "original_units": "`proc_0014_9C8C`, called at `0014:7236` by `proc_0014_719E`",
+      "summary": "The predicate tests a nonpositive extent only after adjusting a negative origin. A nonnegative origin bypasses that rejection. With x/y/width/height all zero and descriptor limits 259/199, the original returns AX=1. Negative origins whose adjusted extent is nonpositive instead return AX=0. The signed comparisons and the original 16-bit SUB/NEG/INC correction must not be replaced with a blanket zero-size rejection or unbounded arithmetic.\n\nThis can be a conservative visibility test rather than a defect: the result only admits later drawing, and a subsequent clipping/drawing stage can reject an empty rectangle. The currently selected 719E producer adds eight to nonnegative signed-byte sprite extents, so its visibility dimensions are 8..135; this checkpoint does not show a naturally reached zero-extent case. A defect verdict needs a proven original producer of the unusual arguments and observation through the downstream drawing/marker continuation."
+    },
+    {
+      "id": "DL-ORIG-GAME-0031",
+      "title": "guard-result return retains the gate owner's entry predicates",
+      "status": "byte-confirmed internal-loop behavior; defect classification and repeated-battle impact pending",
+      "affected": "",
+      "disposition": "",
+      "original_units": "`proc_0058_0E24`, `proc_0058_17DA`",
+      "summary": "After retreat or defeat, `17DA` restores the city resources, applies one or zero hours of maintenance, stores state `003Ah`, and creates the kind `0011h` event. Returning through `0FEB..1009` then republishes the seven existing `EE76..EE82` row states. It does not recapture `EE74` from the location record or re-evaluate inventory/saint availability. Navigation history `A88D` survives. The original caller/return execution and listings are retained in `combat/guard_acknowledgement_20260918/` under the reconstruction evidence tree.\n\nThis is potentially surprising because combat has changed the live party and location reputation. It might expose an option whose underlying item has been consumed, or retain an earlier reputation on another action. The selected action may independently validate that state, and a distinct publisher may refresh it; neither consequence is classified as an original defect yet. Controlled original repeated-action/combat executions must establish those consumers before broader claims. The rewrite preserves the proved loop, with regression tests for changed party knowledge and the saved reputation; it does not silently refresh them."
+    },
+    {
+      "id": "DL-ORIG-GAME-0030",
+      "title": "guards activation retains a byte through enemy conversion",
+      "status": "byte-confirmed retained-data behavior; defect classification and later-combat effect pending",
+      "affected": "",
+      "disposition": "",
+      "original_units": "`proc_0024_0000`, `proc_0020_0000`, `proc_0025_0000`, `proc_0014_5EB4`",
+      "summary": "The selected guards path retains activation record field29 rather than constructing a new enemy value for it. Original `0024:0095` copies all30 record bytes; conversion leaves the corresponding byte in its output backing, and enemy construction propagates it to actor records. Ordinary whole-record copies then carry it into the collision-query workspace. This may be harmless unused storage, intentional retained data, or incomplete initialization; the later consumer contract is not established.\n\nControlled original controller runs with the retained value12h,00h andFFh reach `0014:030C` with identical instruction sequences, store locations/order, palette and complete pixel pages. The enemy file differs at exactly byte30; seven final memory bytes differ, including the five enemy fields. These are not byte-identical outputs. Original `0014:A492` writes the actor field on a monster branch, but its existence does not establish every later lifetime or justify a rewrite default. The selected first-frame effect is understood; ordinary later-combat reachability and defect classification remain pending."
+    },
+    {
+      "id": "DL-ORIG-GAME-0029",
+      "title": "pending damage uses signed caps and wrapped vitality bytes",
+      "status": "byte-confirmed arithmetic oddity; gameplay reachability and defect classification pending",
+      "affected": "",
+      "disposition": "",
+      "original_units": "`proc_0014_AE1E`, record 14, `AE1E..AECF`",
+      "summary": "The endurance cap compares the pending byte as signed, so values `80h..FFh` are not capped to 42. Both vitality subtractions wrap to a byte before a new signed comparison against zero. For example, strength 100 minus pending strength `FFh` leaves strength 101 and does not select death. Treating that pending byte as an unbounded positive damage amount would give a different result. The raw behavior is certain; whether ordinary combat can publish these inputs and whether this is a defect remain separate questions.\n\nThe original-instruction corpus covers these boundaries. The reconstruction must retain the exact byte operations. Evidence and reproduction: `evidence/reconstruction/darklands_483_07/combat/pending_owner_20260907/abi-review.md`."
+    },
+    {
+      "id": "DL-ORIG-GAME-0028",
+      "title": "retracted `$PHYSI00` no-wound/card mismatch",
+      "status": "disproved 2026-08-29; retained as correction history",
+      "affected": "",
+      "disposition": "no bug policy; owner remains fail-closed pending certification",
+      "original_units": "`proc_0089_0000`; `proc_0089_0264`",
+      "summary": "The original candidate was caused by a data-identity error, not an original game defect. `proc_0089_0000:000Bh` loads `DS:61F2h`. A live state-`00B4h` capture proves that address contains `$NunsH00\\0`, while `$PhysI00\\0` is at `DS:58B4h` and is referenced by the distinct state-`0018h` `proc_0050_0000` owner. The active resource and card were independently read as `E3D4h=\"$NunsH00\"` and `E959h=0008h`.\n\nUnder the corrected resource, `proc_0089_0264` is coherent: when every active member is less than five Strength points below maximum, the convent owner can show `$NUNSH00` card 3, which says the party is substantially better and must leave. The supposed bad-reputation physician refusal belongs to another MSG resource and was never selected by this owner. No reputation substitution or original-bug compatibility policy is warranted."
+    },
     {
       "id": "DL-ORIG-GAME-0012",
       "title": "`$URBAN01` retains an orphan tenth exit slot beyond its encoded rows",
@@ -219,6 +291,78 @@
       "disposition": "raw owner only; replicate ordering if the clean route is later authorized",
       "original_units": "`proc_0048_0506`; `proc_0029_3742`",
       "summary": "After the one-hour calendar call and signed RNG check select the complementary lane, the owner calls `proc_0029_3742(0002h,0000h,current-city)` once. If the result is `FFFFh` while `DS:E3D0h` is zero, it immediately takes the no-card state-`0079h` tail. Every other case calls the same helper again with the same three words. A second result of `0001h` suppresses card 5 only when `DS:E3D0h` is nonzero; otherwise the owner publishes card 5 and state `0074h`.\n\nThe selected helper scans the same live kind-`001Ch` event records and writes the selected slot index to `DS:E3CEh`; it does not mutate the matched record. Consequently the second result is ordinarily identical to the first, and the second scan appears redundant. It may be compiler output from two separately authored selector predicates, intentional refresh of `DS:E3CEh`, or an unfinished design in which another operation once separated the calls. Exact bytes do not prove which explanation is correct."
+    },
+    {
+      "id": "DL-ORIG-GAME-0022",
+      "title": "`$CITYC01` altar-boy action retains two uninitialized daytime arms",
+      "status": "byte-confirmed unreachable-arm oddity; defect classification pending",
+      "affected": "`$CITYC01.MSG` card 0 row 1, `...talk to the altar boy.`",
+      "disposition": "naturally reachable nighttime arms only; uninitialized arms remain fail-closed",
+      "original_units": "`proc_0057_0D32`",
+      "summary": "The owner allocates a two-byte stack local with `ENTER 0002h,0000h` and does not initialize it. Hour buckets 4 and 5, corresponding to 09:00..14:59, both jump to `0D6Ah`, load that local into `CX`, and would use it as the token for `proc_0029_1FB8` selector 3.\n\nThe defect is latent on the natural route. `$CITYC01` is the nighttime church state and is selected only outside 05:00..18:59, so its altar-boy action can reach only buckets 0, 1, 2, and 7. The stock city-size domain reduces those arms to the well-defined `Matins`, `Prime`, and `Compline` outcomes. No host default may be supplied for the uninitialized daytime value, and a developer time mutation must not be treated as original reachability evidence."
+    },
+    {
+      "id": "DL-ORIG-GAME-0023",
+      "title": "Day and night Mass use radically different Divine Favor formulas",
+      "status": "byte-confirmed gameplay oddity; defect classification pending",
+      "affected": "`$CITYC00.MSG` and `$CITYC01.MSG` card 0 row 0, attend Mass",
+      "disposition": "preserve both exact formulas and log their computed and applied effects",
+      "original_units": "`proc_0057_0214`; `proc_0057_0B6A`",
+      "summary": "The daytime owner computes the current-Divine-Favor delta as `abs(signed Religion)/8 + signed Speak Latin % 35 + 1`. The nighttime owner instead computes `signed Religion/60 + signed Speak Latin/40 + 1`. Both then pass the result through the same effect-aware current-field cap. This is not a display-only difference: ordinary daytime values can produce much larger gains, and an already capped character can show a nonzero computed delta but an applied delta of zero.\n\nThe separate instruction sequences and independent Ghidra/Reko witnesses make the discrepancy byte-confirmed, but do not establish whether it was an intentional difference between the two church owners or a copied/formula bug. Do not normalize the formulas. A defect verdict requires authenticated earlier version evidence or another original source explaining the intended rule."
+    },
+    {
+      "id": "DL-ORIG-GAME-0024",
+      "title": "Asking the guard captain can consume zero hours",
+      "status": "byte-confirmed calendar oddity; defect classification pending",
+      "affected": "`$SANCT00.MSG` card 0 row 3, seek word from the captain of the city guard",
+      "disposition": "preserve the exact `0..2`-hour result; the former empty-picture blocker was an evidence error and does not apply to this route",
+      "original_units": "`proc_0076_0822`",
+      "summary": "After displaying and acknowledging the reputation-selected guard reply, the owner calls `resident_0000_0C70(0003h)` exactly once and passes its result unchanged to `proc_0029_54D8`. The random helper's established contract returns `0`, `1`, or `2`, so asking for the captain's reply can consume no game time at all. The calendar owner still executes in the zero case, including its ordered party/event maintenance and clock sampling.\n\nThis may intentionally represent an immediate reply, or it may be an off-by-one duration bug where one through three hours was intended. The bytes do not decide intent. Do not add one, reroll zero, or skip the zero-elapsed calendar call. A defect verdict requires an authenticated version comparison or original design evidence."
+    },
+    {
+      "id": "DL-ORIG-GAME-0026",
+      "title": "Sanctuary extreme-surrender tail retains an unreachable shorter duration arm",
+      "status": "byte-confirmed control-flow oddity; defect classification pending",
+      "affected": "`$SANCT00.MSG` card 0 row 2 with signed local reputation at most `-75`",
+      "disposition": "extreme route remains fail-closed; preserve the comparison in any future raw owner",
+      "original_units": "`proc_0076_0694`",
+      "summary": "The common extreme-surrender tail compares the signed local-reputation word again and schedules a kind-`0011h` event for `00F0h` hours when the value is at most `-75`, otherwise for `0078h` hours. But the only canonical control-flow edge reaching that tail has already required the same word to be at most `-75` at `06DEh`; reputation greater than `-75` takes the ordinary surrender route and returns FAR at `06DCh`. The `0078h` arm is therefore unreachable from the function entry under unchanged memory.\n\nThis may be harmless compiler residue, a remnant of an earlier threshold, or evidence that an omitted callback once changed the word. Current bytes show no intervening write to `DS:EE74h`. Do not simplify the comparison in the raw reconstruction or expose the shorter duration as a random alternative. A defect verdict requires an authenticated earlier executable or proof of reentrant mutation not present in the current direct call graph."
+    },
+    {
+      "id": "DL-ORIG-GAME-0027",
+      "title": "Authored sanctuary-pressure cards have no proven publisher",
+      "status": "shipped-content oddity; publisher and defect classification pending",
+      "affected": "extended sanctuary stay / escalating priest warnings / forced departure",
+      "disposition": "do not expose; no exact original publisher is certified",
+      "original_units": "",
+      "summary": "The shipped resource contains a coherent five-card pressure sequence, but the complete state-`0081h` owner never presents those ordinals. The only direct static `$SANCT00` resource-CString reference in the current materialized overlay corpus is the owner at `ovl_0076:043Ch`; its selected actions present cards 0–3 and 9–12 only. Nearby card-4/5/6 calls belong to a different state-`0083h` resource owner and are not sanctuary evidence.\n\nThis is not yet a byte-proven dormant branch. A dynamically retained resource or indirect publisher has not been globally disproved. The card prose and the kind-`0011h` event scheduled by extreme surrender are insufficient to bind a publisher: that event profile is callback-free in the currently certified scheduler path. Do not synthesize a timed sequence, reuse another resource's card ordinals, or expose card 8 as the normal sanctuary menu."
+    },
+    {
+      "id": "DL-ORIG-GAME-0036",
+      "title": "F284 can consume interrupt-frame residue as clipping coordinates",
+      "status": "HIGH-CONFIDENCE DEFECT (PR206 outcome B); byte-confirmed uninitialized-on-path read and DOSBox-X variability; complete private contract remains unresolved",
+      "affected": "retained mode10 simple_encounter, ORIGINAL-REPLAY/HARNESS; no tactical-exploration or SDL seed7099 generalization",
+      "disposition": "",
+      "original_units": "",
+      "summary": "On the established horizontal clipping path, F284 pushes `[BP-2]` and `[BP-4]` without first assigning them on that invocation's path. Earlier EF3C stores can leave the inherited point `(8,19)` at the later frame's FC56/FC58. The 16 October machine experiment observes a real scheduled IRQ0 during MGRAPHIC:047F at SS:SP=3A3D:FC5A replacing those words with CS/FLAGS `(4A65h,7217h)`. Continuous watch evidence closes survival to the original read. The outcode changes 9→6; both remain outside, the first F284 return stays zero and the projectile still publishes `(754,133)`. This strengthens the likely-defect interpretation without establishing historical frequency or changed gameplay in this experiment.\n\nPrior controlled coordinate perturbations establish that inside versus outside can affect the destination; they are separate evidence, not natural IRQ outcomes. The original intent or an invariant across all relevant callers could still change the interpretation. An independent machine replication and a naturally produced consequential clipping difference remain open. No diagnostic point or compatibility fallback is authorized, and no new production behavior requires a test in this research-only update."
+    },
+    {
+      "id": "DL-ORIG-GAME-0037",
+      "title": "Missed-projectile search publishes an unverified terminal step",
+      "status": "CONFIRMED ORIGINAL IMPLEMENTATION BEHAVIOR / POSSIBLE GAMEPLAY DEFECT — CORRECTION DEFERRED BY OWNER",
+      "affected": "",
+      "disposition": "",
+      "original_units": "",
+      "summary": "The original reduced-step clear branch adds its newly halved deltas to the endpoint, then exits without another EF3C query. The all-clear bounded exit and blocked exhaustion also store an unqueried adjustment. Original skill restoration precedes destination stores, and the caller publishes the row count afterward. This is distinct from DL-ORIG-GAME-0036's inherited clipping-point dependence.\n\nThe genuine PR209 H capture correctly tests `(962,103)` clear but then publishes `(995,107)`, crossing actual wall `[990,992]×[95,112]`. The final point is3 X units past its right edge, approximately3.025 units along the straight proposed ray. The existing missed-shot movement/render path reaches it, draws the ordinary arrow with status129 and removes it without damage or another wall check. That consequence is natural experimental C#/SDL evidence, not execution of the original DOS game on the same battlefield."
+    },
+    {
+      "id": "DL-ORIG-GAME-0025",
+      "title": "Retracted sanctuary escape-chance oddity",
+      "status": "disproven reconstruction incident; not an original bug",
+      "affected": "`$SANCT00.MSG` card 0 row 4, try to sneak out",
+      "disposition": "execute both certified outcomes: card 10 escapes to the day/night side street; card 9 advances one hour and restores the sanctuary; month rollover remains typed fail-closed",
+      "original_units": "`proc_0029_1446`; `proc_0076_095E`; `proc_0076_08AC`",
+      "summary": "The callback selects the active party member with the lowest signed sum of raw fields `000Fh` and `0010h` (Stealth and Streetwise), clamps that sum to `10..99`, and supplies it as the action threshold. The action draws `RNG(0064h)`. The exact `CMP AX,[BP+06h] / JLE` relation sends a roll less than or equal to the threshold to card 10; card 10 says the party quietly escapes through the graveyard and then publishes the day/night side-street state. A greater roll sends the party to card 9, whose text says a member stumbles, the guards sound the alarm, and the party retreats into the church.\n\nThe earlier entry reversed those card meanings by associating card 10 with the adjacent prison text, which is actually card 11 and belongs to surrender. Direct inspection of the extracted `$SANCT00.MSG` resource plus a product test that asserts card 10's successful-escape text disproves the alleged oddity. Keep this retracted entry as a durable incident guard: numeric adjacency, picture-name intuition, and remembered result prose are not card-semantic authority. Do not reverse the original comparison."
     }
   ],
   "dormant": [
@@ -291,6 +435,16 @@
       "disposition": "remain absent; no tenth clean/SDL choice",
       "boundary": "no distinct original publisher for the orphan slot is proven",
       "summary": "This is not a hidden source row: the MSG resource has only nine rows. The owner appears to retain a ten-slot template whose final callback/action pair would provide a coherent exit if forced. The latent code cannot authorize a route without a corresponding original publisher."
+    },
+    {
+      "title": "`$CITYM00` cards 0/5 rows 5, 6, and 7 — card-dependent authored lanes",
+      "classification": "authored_latent_lane",
+      "text": "card 0: quiet prayer/discreet investigation; card 5: discuss your task with the abbot",
+      "owner": "`proc_0057_0F72`",
+      "effect": "selected text copy; `DS:E48Ah <- DS:A88Dh`; loop if history is `0036h`, otherwise dynamic predecessor redispatch",
+      "disposition": "remain hidden; raw latent owners only",
+      "boundary": "no distinct original publisher for row 7 is proven",
+      "summary": "The complete latent path performs no calendar, RNG, event, inventory, party, character, picture/palette, or audio operation. `DS:A88Dh` is live history, not a fixed destination. The two cards assign different prose to the same ordinal, so neither wording can justify inventing a quest transition."
     }
   ],
   "reported_groups": [
