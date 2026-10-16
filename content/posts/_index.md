@@ -6,7 +6,7 @@ sidebar:
   hide: true
 params:
   images:
-    - /devlogs/078/back-streets.png
+    - /devlogs/079/arrow-final-frame.png
 ---
 
 Session-by-session notes from the Darklands reverse engineering project. Each entry records what was known when it was published; later evidence and corrections may supersede older posts. Start with the newest entries for the current picture.
@@ -22,9 +22,9 @@ Session-by-session notes from the Darklands reverse engineering project. Each en
 ## Recent Devlogs
 
 <div class="drp-featured-grid">
+  <a class="drp-featured-card" href="/posts/079-the-arrow-that-read-the-stack/"><img src="/devlogs/079/arrow-final-frame.png" alt="A missed arrow at its end point beside the east wall" loading="lazy" /><span>Devlog #079 · October 16, 2026</span><strong>The arrow that read the stack</strong><small>Two anomalies in the original missile code, found by refusing to guess.</small></a>
   <a class="drp-featured-card" href="/posts/078-the-revolution-in-the-back-streets/"><img src="/devlogs/078/back-streets.png" alt="The back streets card in Steyr" loading="lazy" /><span>Devlog #078 · October 15, 2026</span><strong>The revolution in the back streets</strong><small>A hidden political quest, and how much of it the game can still reach.</small></a>
   <a class="drp-featured-card" href="/posts/077-two-areas-one-battle/"><img src="/devlogs/077/dungeon-stairs.png" alt="A party member arriving in the second area of a computed dungeon" loading="lazy" /><span>Devlog #077 · October 15, 2026</span><strong>Two areas, one battle</strong><small>Stairs mid-fight, and a battle that keeps running off-screen.</small></a>
-  <a class="drp-featured-card" href="/posts/076-a-failed-sneak-at-the-gate/"><img src="/devlogs/076/gate-sneak-challenge.png" alt="The guarded gate of Steyr with the sneak option" loading="lazy" /><span>Devlog #076 · October 15, 2026</span><strong>A failed sneak at the gate</strong><small>From one bad roll to a prison cell.</small></a>
 </div>
 
 ## Full Archive
@@ -36,6 +36,7 @@ Browse every devlog by month.
 ### October 2026
 
 {{< cards >}}
+{{< card link="079-the-arrow-that-read-the-stack" title="Devlog #079 - The arrow that read the stack" icon="book-open" subtitle="October 16, 2026. A clipping routine that reads coordinates it never wrote, a timer interrupt that can overwrite them, and a missed arrow that ends up inside a wall." >}}
 {{< card link="078-the-revolution-in-the-back-streets" title="Devlog #078 - The revolution in the back streets" icon="book-open" subtitle="October 15, 2026. Nineteen files of a hidden political quest: the doorway the game still opens, what is provably hidden, and where the trail goes cold." >}}
 {{< card link="077-two-areas-one-battle" title="Devlog #077 - Two areas, one battle" icon="book-open" subtitle="October 15, 2026. A computed three-area dungeon: stairs in the middle of a fight, and a scheduler that keeps both areas alive." >}}
 {{< card link="076-a-failed-sneak-at-the-gate" title="Devlog #076 - A failed sneak at the gate" icon="book-open" subtitle="October 15, 2026. The guarded gate card, a party-wide sneak roll, the chase, what surrender takes, and the priest." >}}
