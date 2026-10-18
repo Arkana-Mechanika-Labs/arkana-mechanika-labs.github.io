@@ -69,6 +69,12 @@ def main():
     commit = subprocess.run(['git', '-C', args.repo, 'rev-parse', 'HEAD'], capture_output=True, text=True, check=True).stdout.strip()
     date = subprocess.run(['git', '-C', args.repo, 'log', '-1', '--format=%cs'], capture_output=True, text=True, check=True).stdout.strip()
     version = subprocess.run(['git', '-C', args.repo, 'describe', '--tags', '--abbrev=0'], capture_output=True, text=True).stdout.strip()
+    if version:
+        # A commit after the release tag is shown as the tag plus the number of commits since it (v0.9.0+1).
+        since = subprocess.run(['git', '-C', args.repo, 'rev-list', '--count', f'{version}..HEAD'],
+                               capture_output=True, text=True, check=True).stdout.strip()
+        if since != '0':
+            version += '+' + since
 
     with open(os.path.join(registers, 'original_bugs.csv'), encoding='utf-8') as f:
         bug_rows = list(csv.DictReader(f))
