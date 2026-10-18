@@ -45,7 +45,7 @@ The first release.
 - Windowed at any size or full screen; a commented settings file; F12 screenshots; F11 developer console.
 - Every rule rewritten from the original program and checked against it; the known differences and the original bugs kept on purpose are listed in the repository's `docs/faithfulness`.
 
-SHA-256 of the zip: `37210ac1723abbe66aa0b709f55b0869dcd330ea470bcd87a617b631d03ba724`
+SHA-256 of the zip: `5455c82c80939a7b74487fbd34041b10793c044470adc1c8d43acedd34b66e46`
 
 ## Source code
 
