@@ -1,0 +1,11 @@
+{{- /* The re-check of one carried-over entry (see tools/carried-over-verdicts.json). */ -}}
+<div class="drp-verdict">
+  <p class="drp-verdict-note">{{ .note | markdownify }}</p>
+  {{- if or .register .source .original }}
+  <p class="drp-verdict-refs">
+    {{- with .register }}<span><strong>{{ if eq $.verdict "covered" }}Register{{ else }}Related{{ end }}:</strong> {{ range $i, $r := . }}{{ if $i }}, {{ end }}<a href="{{ $r.href }}"{{ if not (hasPrefix $r.href "#") }} target="_blank" rel="noopener noreferrer"{{ end }}><code>{{ $r.id }}</code></a>{{ end }}</span>{{ end }}
+    {{- with .source }}<span><strong>Source:</strong> {{ range $i, $s := . }}{{ if $i }}, {{ end }}<a href="{{ $s.href }}" target="_blank" rel="noopener noreferrer"><code>{{ $s.code }}</code></a>{{ end }}</span>{{ end }}
+    {{- with .original }}<span><strong>Original:</strong> <code>{{ . }}</code></span>{{ end }}
+  </p>
+  {{- end }}
+</div>

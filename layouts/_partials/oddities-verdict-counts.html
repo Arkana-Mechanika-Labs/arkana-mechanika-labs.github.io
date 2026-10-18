@@ -1,0 +1,8 @@
+{{- /* How the carried-over entries came out of the re-check. */ -}}
+<ul class="drp-verdict-counts">
+  <li class="drp-verdict--covered"><strong>{{ .covered }}</strong> in the registers or noted in the code</li>
+  <li class="drp-verdict--confirmed-missing"><strong>{{ index . "confirmed-missing" }}</strong> confirmed in the code, register entry proposed</li>
+  <li class="drp-verdict--not-in-48307"><strong>{{ index . "not-in-483.07" }}</strong> not a bug of 483.07</li>
+  <li class="drp-verdict--open"><strong>{{ .open }}</strong> still open</li>
+</ul>
+<p class="drp-verdict-counts-scope">Counts cover the reported leads and the earlier findings together.</p>

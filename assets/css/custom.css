@@ -1375,6 +1375,109 @@ details[open] > summary .drp-bug-chevron {
   color: var(--drp-brass);
 }
 
+/* Verdicts of the re-check of the carried-over entries. */
+.drp-verdict--covered { --drp-verdict: #b99457; }
+.drp-verdict--confirmed-missing { --drp-verdict: #c9805f; }
+.drp-verdict--not-in-48307 { --drp-verdict: #7f9a7a; }
+.drp-verdict--open { --drp-verdict: #8298b5; }
+
+.drp-reported-entry[class*="drp-verdict--"] {
+  border-left: 3px solid var(--drp-verdict);
+}
+
+.drp-bug-entry--reported[class*="drp-verdict--"] {
+  border-left: 3px solid var(--drp-verdict);
+}
+
+.drp-verdict-badge {
+  display: inline-block;
+  margin-top: 0.15rem;
+  color: var(--drp-verdict) !important;
+  font-family: inherit;
+  font-size: 0.62rem !important;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.drp-verdict {
+  margin: 0.6rem 0 0;
+  padding: 0.55rem 0.7rem;
+  border-radius: 5px;
+  background: rgba(185, 148, 87, 0.05);
+}
+
+.drp-bug-entry-body .drp-verdict {
+  margin-top: 1rem;
+}
+
+.drp-verdict p {
+  margin: 0;
+  color: var(--drp-ink);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.drp-verdict .drp-verdict-refs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.9rem;
+  margin-top: 0.4rem;
+  color: var(--drp-muted);
+  font-size: 0.7rem;
+}
+
+.drp-verdict-refs strong,
+.drp-reported-entry > p.drp-reported-then strong {
+  color: var(--drp-brass);
+}
+
+.drp-verdict-refs code {
+  font-size: 0.68rem;
+  overflow-wrap: anywhere;
+}
+
+.drp-earlier-heading {
+  margin: 1.1rem 0 0 !important;
+  color: var(--drp-brass) !important;
+  font-size: 0.62rem !important;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.drp-verdict-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.7rem 0 0 !important;
+  padding: 0 !important;
+  list-style: none;
+}
+
+.drp-verdict-counts li {
+  margin: 0 !important;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--drp-verdict);
+  border-radius: 99px;
+  color: var(--drp-muted);
+  font-size: 0.72rem;
+}
+
+.drp-verdict-counts li strong {
+  color: var(--drp-verdict);
+}
+
+.drp-bug-tier-heading p.drp-verdict-counts-scope {
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+}
+
+html:not(.dark) .drp-verdict--covered { --drp-verdict: #7a5c1e; }
+html:not(.dark) .drp-verdict--confirmed-missing { --drp-verdict: #9a4f2e; }
+html:not(.dark) .drp-verdict--not-in-48307 { --drp-verdict: #46653f; }
+html:not(.dark) .drp-verdict--open { --drp-verdict: #405b7a; }
+
 .drp-bug-sync {
   margin: 3rem 0 1rem;
   scroll-margin-top: 5rem;
