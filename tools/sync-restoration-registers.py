@@ -58,7 +58,8 @@ def title_of(note: str) -> str:
 def main():
     here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     ap = argparse.ArgumentParser()
-    ap.add_argument('--repo', default=os.environ.get('DARKLANDS_RESTORATION', r'E:\Projects\darklands-clean'))
+    ap.add_argument('--repo', default=os.environ.get('DARKLANDS_RESTORATION') or os.path.join(
+        os.environ.get('DARKLANDS_ROOT') or os.path.dirname(here), 'code'))  # the project's code folder, beside website
     ap.add_argument('--previous', default=os.path.join(here, 'data', 'original_oddities.json'))
     ap.add_argument('--out', default=os.path.join(here, 'data', 'original_oddities.json'))
     ap.add_argument('--verdicts', default=os.path.join(here, 'tools', 'carried-over-verdicts.json'))
