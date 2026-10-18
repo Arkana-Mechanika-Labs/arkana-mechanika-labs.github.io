@@ -1,16 +1,18 @@
 {{- $data := index .Site.Data "original_oddities" -}}
 {{- $repo := $data.source_repository -}}
+{{- $parts := split $data.source_version "+" -}}
+{{- $version := cond (gt (len $parts) 1) (printf "%s + %s commits" (index $parts 0) (index $parts 1)) $data.source_version -}}
 <div class="drp-bug-reference" data-bug-catalog>
   {{- $carried := $data.counts.carried_over -}}
   <div class="drp-bug-snapshot">
     <div><strong>{{ $data.counts.reproduced }}</strong><span>original bugs reproduced</span></div>
     <div><strong>{{ $data.counts.dormant_total }}</strong><span>hidden branches recorded</span></div>
     <div><strong>{{ $data.counts.reported_leads }}</strong><span>reported leads</span></div>
-    <div><strong>{{ $data.source_version }}</strong><span>source version ({{ $data.source_commit_date }})</span></div>
+    <div><strong>{{ $version }}</strong><span>source version ({{ $data.source_commit_date }})</span></div>
   </div>
 
   <div class="drp-bug-legend" aria-label="Section legend">
-    <div><span class="drp-bug-dot confirmed"></span><strong>Reproduced</strong><p>A bug of the original that the restoration keeps on purpose, checked against the original program.</p></div>
+    <div><span class="drp-bug-dot confirmed"></span><strong>Reproduced</strong><p>A bug of the original that the restoration keeps for now, checked against the original program.</p></div>
     <div><span class="drp-bug-dot dormant"></span><strong>Hidden</strong><p>A branch present in the original that the game never reaches; the restoration keeps it hidden too.</p></div>
     <div><span class="drp-bug-dot reported"></span><strong>Reported</strong><p>A report from players or documentation, kept as a lead until it is checked against the original.</p></div>
   </div>
@@ -35,7 +37,7 @@
   <section class="drp-bug-tier" id="reproduced-original-bugs" data-bug-section>
     <div class="drp-bug-tier-heading">
       <span class="drp-bug-tier-number">01</span>
-      <div><h2>Original bugs the restoration reproduces</h2><p>Each of these is a defect of the original program that version {{ $data.source_version }} keeps on purpose, because it is part of how Darklands plays. Where a fix exists in the code it is off by default; the faithful game is the reference.</p></div>
+      <div><h2>Original bugs the restoration reproduces</h2><p>Each of these is a defect of the original program. For this first release the restoration keeps them, so that what you play is the original game; they will be fixed one by one. Where a fix already exists in the code it is off by default.</p></div>
     </div>
     <div class="drp-bug-list">
       {{- range $data.reproduced }}
@@ -48,7 +50,7 @@
         </summary>
         <div class="drp-bug-entry-body">
           <dl>
-            <div><dt>Status</dt><dd>Reproduced in {{ $data.source_version }}{{ with .fix }}; a fix exists in the code (<code>{{ . }}</code>, off by default){{ end }}</dd></div>
+            <div><dt>Status</dt><dd>Reproduced in {{ $version }}{{ with .fix }}; a fix exists in the code (<code>{{ . }}</code>, off by default){{ end }}</dd></div>
             <div><dt>In the original</dt><dd><code>{{ .original }}</code></dd></div>
             <div><dt>In the source</dt><dd><a href="{{ $repo }}/blob/{{ $data.source_commit }}/{{ index (split .code ":") 0 }}#L{{ index (split (index (split .code ":") 1) " ") 0 }}" target="_blank" rel="noopener noreferrer"><code>{{ .code }}</code></a></dd></div>
             <div><dt>Register entry</dt><dd><code>{{ .id }}</code></dd></div>
@@ -144,7 +146,7 @@
 
   <section class="drp-bug-sync" id="catalogue-synchronization">
     <h2>Source</h2>
-    <p>Sections 01 and 02 are generated from the faithfulness registers of <a href="{{ $repo }}" target="_blank" rel="noopener noreferrer">darklands-restoration</a> {{ $data.source_version }} (commit <code>{{ substr $data.source_commit 0 12 }}</code>, {{ $data.source_commit_date }}): <code>docs/faithfulness/original_bugs.csv</code> and <code>dormant.csv</code>. The registers in the repository are authoritative. Refresh with <code>python tools/sync-restoration-registers.py --repo &lt;checkout&gt;</code>.</p>
+    <p>Sections 01 and 02 are generated from the faithfulness registers of <a href="{{ $repo }}" target="_blank" rel="noopener noreferrer">darklands-restoration</a> {{ $version }} (commit <code>{{ substr $data.source_commit 0 12 }}</code>, {{ $data.source_commit_date }}): <code>docs/faithfulness/original_bugs.csv</code> and <code>dormant.csv</code>. The registers in the repository are authoritative. Refresh with <code>python tools/sync-restoration-registers.py --repo &lt;checkout&gt;</code>.</p>
   </section>
 </div>
 
