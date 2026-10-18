@@ -1,13 +1,13 @@
 ---
 title: Original Bugs & Oddities
-description: A synchronized reference to byte-confirmed Darklands 483.07 defects, anomalous behavior, dormant original branches, and reported research leads.
+description: The bugs of Darklands 483.07 that the restoration reproduces, the hidden branches of the original, and reported leads.
 weight: 2
 toc: false
 width: wide
 ---
 
-Darklands contains genuine defects, surprising rules, internally inconsistent behavior, and authored routes that its ordinary owners never publish. This reference keeps those findings distinct from bugs introduced by the restoration.
+Darklands has genuine defects, surprising rules, and texts and choices its players never see. The restoration keeps them all, because they are part of the game; this page collects them.
 
-The evidence label matters. **Byte-confirmed** entries are established from the original 483.07 executable. **Dormant branches** are proven hidden in their complete ordinary owner. **Reported leads** are investigation targets only: they may be real defects, older-version behavior, deliberate mechanics, platform problems, or documentation errors.
+The **reproduced bugs** and the count of **hidden branches** come from the restoration's own registers, where each entry is checked against the original program and cites its place in it. The **reported leads** are reports from players and documentation, kept as leads until they are checked; the **earlier findings** come from the earlier development and are being reconciled.
 
 {{< original-oddities >}}
