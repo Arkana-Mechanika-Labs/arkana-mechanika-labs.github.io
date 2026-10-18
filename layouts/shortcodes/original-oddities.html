@@ -90,7 +90,7 @@
   <section class="drp-bug-tier" id="reported-leads" data-bug-section>
     <div class="drp-bug-tier-heading">
       <span class="drp-bug-tier-number">03</span>
-      <div><h2>Reported leads</h2><p>Reports from players, designers and documentation, collected during the earlier development. Each was re-checked against version {{ $data.checked_against }} and carries its verdict: already in the restoration's registers, confirmed and proposed for a register, not a bug of 483.07 (with the reason), or still open. A lead that is still open is not a confirmed bug of 483.07.</p>{{ partial "oddities-verdict-counts.html" $carried }}</div>
+      <div><h2>Reported leads</h2><p>Reports from players, designers and documentation, collected during the earlier development. Each was re-checked against version {{ $data.checked_against }} and carries its verdict: in the restoration's registers (or noted in its code),{{ if gt (index $carried "confirmed-missing") 0 }} confirmed in the code and proposed for a register,{{ end }} not a bug of 483.07 (with the reason), or still open. A lead that is still open is not a confirmed bug of 483.07.</p>{{ partial "oddities-verdict-counts.html" $carried }}</div>
     </div>
     <div class="drp-reported-groups">
       {{- range $data.reported_groups }}

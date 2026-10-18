@@ -1,5 +1,5 @@
 {
-  "checked_against": "v0.9.0",
+  "checked_against": "v0.9.0+4",
   "checked": "2026-10-18",
   "entries": {
     "Quest-blocking memory leak in early retail builds": {
@@ -86,14 +86,17 @@
       "note": "The figure colours are kept per party slot (R136+0x33FC, 5 x 24 bytes) and saved with the game. That table lies directly after the battle floor image (R136+0x0000, 0x33FC bytes) in the same data segment, so a write past the floor image would change it; no such write has been identified, and the trigger is unknown."
     },
     "RPT-FILES-0001": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "D-66e575",
+        "D-66bf7d"
+      ],
       "source": [
         "src/Darklands.Presentation/CharacterCreationScreen.cs:105",
         "src/Darklands.Simulation/NewGame.cs:30"
       ],
       "original": "R037+0x4184",
-      "note": "Both Create Characters and Quickstart load the default save (R037+0x4184), which opens SAVES\\DEFAULT without testing whether the open succeeded and then copies its roster into charactr.tmp through that handle, using a record count read from it. The restoration does not read the file (the default records come from DefaultParty), and no register entry records the difference."
+      "note": "Both Create Characters and Quickstart load the default save (R037+0x4184), which opens SAVES\\DEFAULT without testing whether the open succeeded and then copies its roster into charactr.tmp through that handle, using a record count read from it."
     },
     "RPT-LOAD-0001": {
       "verdict": "covered",
@@ -142,7 +145,7 @@
       "register": [],
       "source": [
         "src/Darklands.Core/Battles/Tactics/TacticalBattle.cs:395",
-        "src/Darklands.Presentation/Battles/BattleScreen.cs:752"
+        "src/Darklands.Presentation/Battles/BattleScreen.cs:756"
       ],
       "original": "R014+0x0000",
       "note": "A deliberate rule: Save Game is offered in a battle only on a battlefield that persists, not in the keep, and outside real combat (a flag set by R014+0x0000)."
@@ -160,7 +163,7 @@
       "reason_kind": "mechanic",
       "register": [],
       "source": [
-        "src/Darklands.Cards/Scripts/S064/AlchemistFormulaSeller.cs:104",
+        "src/Darklands.Cards/Scripts/S064/AlchemistFormulaSeller.cs:107",
         "src/Darklands.Cards/Scripts/S066/AlchemistsShop.cs:283"
       ],
       "original": "R064+0x31DC; R066+0x13BC",
@@ -213,15 +216,18 @@
       "note": "Tied to a third-party save editor. The game asks the protection question on entering the map only while event 0x63 has not been started, and then records that event for 0x3E80 hours (R030+0x0000); a save whose event list was altered, or left without a free slot, can bring the question back each time. The question itself is not asked in the restoration (D-f4c0e9)."
     },
     "RPT-INV-0001": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-fd421f",
+        "B-2cf199"
+      ],
       "source": [
         "src/Darklands.Core/Characters/Pack.cs:59",
         "src/Darklands.Core/Rules/Inventory.cs:195",
         "src/Darklands.Core/Rules/Trading.cs:325",
-        "src/Darklands.Core/Rules/Trading.cs:336",
+        "src/Darklands.Core/Rules/Trading.cs:339",
         "src/Darklands.Core/Rules/Storing.cs:67",
-        "src/Darklands.Core/Rules/Storing.cs:71",
+        "src/Darklands.Core/Rules/Storing.cs:73",
         "src/Darklands.Core/OriginalBehaviour.cs:30",
         "src/Darklands.Core/Rules/PackRules.cs:53"
       ],
@@ -229,12 +235,14 @@
       "note": "A pack holds 64 stacks; adding a 65th stack that joins no existing stack is silently refused (R031+0x4A04). Buying (R032+0x0F60) charges the price before the add and taking an item from an inn store (R035+0x0A46) removes it from the store before the add, and neither screen tests for a full pack, so the item is lost. Loot moved into a full pack is already listed in the OriginalBehaviour remarks; transfers between members test for room first, and a save keeps all 64 entries, so the loss is at insertion, not in serialization."
     },
     "RPT-INV-0002": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-e080d4"
+      ],
       "source": [
         "src/Darklands.Core/Rules/Inventory.cs:234",
         "src/Darklands.Core/Battles/Tactics/LootStore.cs:146",
-        "src/Darklands.Core/Battles/Tactics/LootStore.cs:154",
+        "src/Darklands.Core/Battles/Tactics/LootStore.cs:156",
         "src/Darklands.Core/Battles/Tactics/TacticalBattle.Loot.cs:46",
         "src/Darklands.Core/Rules/Storing.cs:24",
         "src/Darklands.Core/OriginalBehaviour.cs:29"
@@ -283,23 +291,20 @@
       "note": "The code has a mechanism by which inn storage in one long-running world breaks while a fresh world works: the store file only grows (a store emptied and given up stays in it), its header has room for a limited number of store offsets, and when a known store is written back the rewrite assumes a header under 128 bytes. Both defects are registered as divergences of the file layout (D-40780d, D-4277ec), so the restoration does not reproduce them. They do not explain the enemy cloth drops in the same report, and the link to that one case is not proven."
     },
     "RPT-NUM-0001": {
-      "verdict": "confirmed-missing",
+      "verdict": "covered",
       "register": [
-        "B-2ffc47",
-        "B-8b2837",
-        "B-c14d7c",
-        "B-024865"
+        "B-6eb045"
       ],
       "source": [
         "src/Darklands.Core/Rules/MemberRules.cs:142",
         "src/Darklands.Core/Rules/MemberRules.cs:274",
-        "src/Darklands.Core/Rules/MemberRules.cs:319",
-        "src/Darklands.Core/Rules/MemberRules.cs:320",
+        "src/Darklands.Core/Rules/MemberRules.cs:324",
+        "src/Darklands.Core/Rules/MemberRules.cs:325",
         "src/Darklands.Core/Events/EventExpiry.cs:144",
         "src/Darklands.Core/Rules/MemberRules.cs:125"
       ],
       "original": "R029+0x4C04; R029+0x0A72; R029+0x448A; R029+0x4E0C",
-      "note": "Attributes and skills are kept in 1..99 and 0..99 by the routines that change them, so values above 99 arise only through an attribute maximum set without its limit (B-2ffc47) or outside the game. A temporary attribute boost (R029+0x4C04) is recorded in full but added through the 1..99 clamp and the cap of maximum plus largest boost (R029+0x0A72), while its expiry takes the full amount back (R029+0x448A): a boost cut on the way up, near 99 or on top of a larger boost already running, lowers the attribute for good. Whole-party boosts are registered separately (B-8b2837, B-c14d7c, B-024865); single-member skill boosts are capped to 99 before recording and are symmetric."
+      "note": "Attributes and skills are kept in 1..99 and 0..99 by the routines that change them, so values above 99 arise only through an attribute maximum set without its limit (B-2ffc47) or outside the game. A temporary attribute boost (R029+0x4C04) is recorded in full but added through the 1..99 clamp and the cap of maximum plus largest boost (R029+0x0A72), while its expiry takes the full amount back (R029+0x448A): a boost cut on the way up, near 99 or on top of a larger boost already running, lowers the attribute for good (B-f134d1). Whole-party boosts are registered separately (B-8b2837, B-c14d7c, B-024865); single-member skill boosts are capped to 99 before recording and are symmetric."
     },
     "RPT-WORLDMAP-0001": {
       "verdict": "open",
@@ -394,66 +399,75 @@
       "note": "The save routine (R037+0x2ACE) writes the party size, the character count, the five slot ids, the figure codes (20 bytes) and the 0x78-byte colour block one after the other, then each character record, flushing before every record write; read as ported, it cannot place the colour block one word late while leaving the records in place, and the loader (R037+0x8ED4) reads the same fixed layout. The source of the displacement in the two saves is therefore not found in the save code; a byte comparison of saves around recruitment, dismissal, imprisonment and death in the original is still needed."
     },
     "RPT-ALCH-0001": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-10641a"
+      ],
       "source": [
-        "src/Darklands.Cards/Scripts/S064/AlchemistFormulaSeller.cs:73",
+        "src/Darklands.Cards/Scripts/S064/AlchemistFormulaSeller.cs:76",
         "src/Darklands.Cards/Scripts/S064/AlchemistFormulaSeller.cs:17"
       ],
       "original": "R064+0x2D38",
       "note": "The formula seller (card 0x53, reached from alchemists' shops, universities and the abbot's clerk) offers formula (city number + 100/103/106/109) mod 22. Only formula records 0..21 (the potions 0x5F..0x66, all three grades) are ever for sale, and records 22..65 never are. The alchemists' formula exchange in R066 draws from all 66."
     },
     "RPT-SAINT-0001": {
-      "verdict": "confirmed-missing",
+      "verdict": "covered",
       "register": [
+        "B-148934",
         "Z-9318d7"
       ],
       "source": [
         "src/Darklands.Core/Rules/SaintBook.cs:631",
-        "src/Darklands.Core/Rules/SaintBook.cs:633",
+        "src/Darklands.Core/Rules/SaintBook.cs:638",
         "src/Darklands.Core/Rules/SaintBook.cs:372"
       ],
       "original": "R039+0x7C6A; R039+0x7D0C; R039+0x9578; saint_fns R136+0xAFC7",
       "note": "The saint table gives St.Paul (105) the function R039+0x7C6A. Its help (Strength and Endurance restored, half the Intelligence lost) and its feast day (day 66) are what DARKLAND.SNT describes for St.Paul the Simple. St.Paul the Simple (106) gets R039+0x7D0C, whose help repeats St.Thomas Aquinas's (R039+0x8B58). The help the text describes for St.Paul (Endurance, Charisma, Latin, Speak Common, Read/Write, a little Strength) is R039+0x9578, which no saint number reaches. Z-9318d7 records only that it is unreachable."
     },
     "RPT-SAINT-0002": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-6eb045"
+      ],
       "source": [
         "src/Darklands.Core/Rules/MemberRules.cs:274",
-        "src/Darklands.Core/Rules/MemberRules.cs:310",
+        "src/Darklands.Core/Rules/MemberRules.cs:315",
         "src/Darklands.Core/Rules/MemberRules.cs:125",
         "src/Darklands.Core/Events/EventExpiry.cs:143"
       ],
       "original": "R029+0x4C04; R029+0x0A72; R029+0x4E0C; R029+0x448A",
-      "note": "Each attribute blessing or potion records its own boost event, and nothing is replaced. A second boost while the first is in force records its points minus the excess over the maximum. But the attribute routine (R029+0x4E0C) caps the attribute at the maximum plus the largest single boost, so part of the recorded amount is never added. Both events later subtract what they recorded, which leaves the attribute below where it started. The mechanism is the same as RPT-EQUIP-0004, and one proposed register entry covers both."
+      "note": "Each attribute blessing or potion records its own boost event, and nothing is replaced. A second boost while the first is in force records its points minus the excess over the maximum. But the attribute routine (R029+0x4E0C) caps the attribute at the maximum plus the largest single boost, so part of the recorded amount is never added. Both events later subtract what they recorded, which leaves the attribute below where it started. The mechanism is the same as RPT-EQUIP-0004, and one register entry covers both."
     },
     "RPT-SAINT-0003": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-bf6543"
+      ],
       "source": [
-        "src/Darklands.Core/Rules/SaintBook.cs:673",
-        "src/Darklands.Core/Rules/MemberRules.cs:402"
+        "src/Darklands.Core/Rules/SaintBook.cs:685",
+        "src/Darklands.Core/Rules/MemberRules.cs:407"
       ],
       "original": "R039+0x8A88; R029+0x0792",
       "note": "St.Theodore Tiro's help (R039+0x8A88) raises the skills of the equipped weapons (R029+0x0792), then raises Flail Weapons on its own. A member with a flail in hand therefore gets two Flail boosts (two events, both undone at expiry). DARKLAND.SNT describes him as raising Charisma, all weapon skills and Riding; the code gives no Riding and adds Endurance. St.Charity (R039+0x31FA) raises Flail only once."
     },
     "RPT-EQUIP-0001": {
-      "verdict": "confirmed-missing",
+      "verdict": "covered",
       "register": [
+        "B-d0b264",
+        "B-44772a",
         "B-23a975"
       ],
       "source": [
         "src/Darklands.Core/Rules/PotionEffects.cs:71",
         "src/Darklands.Core/Rules/PotionEffects.cs:93",
-        "src/Darklands.Core/Rules/PotionEffects.cs:119",
+        "src/Darklands.Core/Rules/PotionEffects.cs:121",
         "src/Darklands.Core/Rules/SaintBook.cs:269",
         "src/Darklands.Core/Events/EventExpiry.cs:133",
         "src/Darklands.Presentation/CharacterSheetScreen.cs:1022",
         "src/Darklands.Core/OriginalBehaviour.cs:18"
       ],
       "original": "R031+0x43B2; R029+0x4D24; R029+0x448A; R039 charm saints (St.Polycarp and others)",
-      "note": "Deadly Blade, Strongedge and Great Power add to the member's weapon bonus byte (+0x34) and record a kind 0x4A event. When that event ends, the sheet's \"Enhc/Bless\" mark goes away. The expiry handler (R029+0x448A) only undoes kinds 0x48 and 0x49, so the bonus stays; this is listed in the OriginalBehaviour remarks, with no register id. Hardarmor and Firewall (+0x41, +0x10) and the charm saints such as St.Polycarp record no event at all. Nothing in the game clears these bytes, which are saved with the member and read in every battle. That part has no register entry."
+      "note": "Deadly Blade, Strongedge and Great Power add to the member's weapon bonus byte (+0x34) and record a kind 0x4A event. When that event ends, the sheet's \"Enhc/Bless\" mark goes away.Hardarmor and Firewall (+0x41, +0x10) and the charm saints such as St.Polycarp record no event at all. Nothing in the game clears these bytes, which are saved with the member and read in every battle."
     },
     "RPT-EQUIP-0002": {
       "verdict": "open",
@@ -470,7 +484,7 @@
       "note": "There is no reapplication routine: each potion or saint writes the shared bytes directly. Other fields change only through carries and overwrites. Great Power and Strongedge add into the weapon byte and can carry into the damage nibble (noted in the OriginalBehaviour remarks). Hardarmor and St.Dunstan/St.Patrick add to the low nibble of +0x41, which can carry into the Firewall count. The charm saints overwrite the high nibble, and St.Polycarp overwrites the Firewall strength. The report's wording does not make clear which of these it means."
     },
     "RPT-EQUIP-0003": {
-      "verdict": "confirmed-missing",
+      "verdict": "not-in-483.07",
       "register": [
         "B-23a975"
       ],
@@ -479,41 +493,47 @@
         "src/Darklands.Core/Battles/Attacks.cs:339"
       ],
       "original": "R031+0x43B2; R014+0xAC08",
-      "note": "Neither the potion code nor the hit code tests the weapon's kind. Great Power adds 14/22/30 to the member's weapon bonus byte (+0x34), and the hit routine (R014+0xAC08) applies that byte to every attack. The manual limits Great Power to impact weapons, flails and handguns and describes it as a quality increase. Deadly Blade and Strongedge are likewise documented for certain weapon kinds but apply to all. B-23a975 covers only the event type that Great Power records."
+      "note": "Neither the potion code nor the hit code tests the weapon's kind: Great Power adds 14/22/30 to the member's weapon bonus byte (+0x34), and the hit routine (R014+0xAC08) applies that byte to every attack. The manual limits Great Power to impact weapons, flails and handguns (and Deadly Blade and Strongedge to certain kinds); the program never did, so this is a difference between the manual and the program rather than a defect of 483.07. B-23a975 covers the event type that Great Power records.",
+      "reason_kind": "documentation"
     },
     "RPT-EQUIP-0004": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-6eb045"
+      ],
       "source": [
-        "src/Darklands.Core/Rules/MemberRules.cs:310",
+        "src/Darklands.Core/Rules/MemberRules.cs:315",
         "src/Darklands.Core/Rules/MemberRules.cs:125",
         "src/Darklands.Core/Rules/MemberRules.cs:142",
-        "src/Darklands.Core/Events/EventLog.cs:471",
+        "src/Darklands.Core/Events/EventLog.cs:474",
         "src/Darklands.Core/Events/EventExpiry.cs:143"
       ],
       "original": "R029+0x4C04; R029+0x0A72; R029+0x4E0C; R029+0x448A",
       "note": "The temporary boost (R029+0x4C04) reduces a second boost by the attribute's excess over its maximum and records the rest, as if the attribute could reach the maximum plus all boosts. The attribute routine caps it at the maximum plus the largest single boost (R029+0x4E0C). Example: with a maximum of 30, a +10 saint raises the attribute to 40; a +15 potion then records 5 but adds nothing; when both end, the attribute falls to 25. Saints and potions use the same routine, so this happens in either order."
     },
     "RPT-RELIC-0001": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-ab0e37"
+      ],
       "source": [
         "src/Darklands.Core/Battles/Generation/FortressBattlefield.cs:746",
-        "src/Darklands.Core/Battles/Generation/FortressBattlefield.cs:764",
-        "src/Darklands.Core/Battles/Generation/FortressBattlefield.cs:784"
+        "src/Darklands.Core/Battles/Generation/FortressBattlefield.cs:766",
+        "src/Darklands.Core/Battles/Generation/FortressBattlefield.cs:786"
       ],
       "original": "R011+0x096A (room 14); R011+0x16D2; R011+0x1794",
       "note": "Room 14 of the Templar fortress puts three different random items from 0x96..0xAB (the relics, including the relic weapons) into its loot groups. Each is written with quality 35 (0x23) and type byte 0x9F, not with the item's own quality (50..85 for the relic weapons) or its type from DARKLAND.LST."
     },
     "RPT-RELIC-0002": {
-      "verdict": "confirmed-missing",
+      "verdict": "not-in-483.07",
       "register": [],
       "source": [
         "src/Darklands.Core/Rules/Saints.cs:75",
         "src/Darklands.Core/Rules/SaintPrayer.cs:73"
       ],
       "original": "R039+0x1FA0; R034+0x022C; R029+0x20C6; R029+0x2116",
-      "note": "The prayer chance depends only on the praying member's Virtue, the Divine Favor offered and the saint's own constants. R039+0x1FA0 takes a bonus argument, but all 136 saint functions pass 0. Neither the prayer screen nor the chance routines look at items, so carrying a relic does not change any prayer."
+      "note": "The prayer chance depends only on the praying member's Virtue, the Divine Favor offered and the saint's own constants. R039+0x1FA0 takes a bonus argument, but all 136 saint functions pass 0. Neither the prayer screen nor the chance routines look at items, so carrying a relic does not change any prayer. Only the documentation suggests otherwise, so this is recorded as a difference between the manual and the program.",
+      "reason_kind": "documentation"
     },
     "RPT-EVENT-0001": {
       "verdict": "open",
@@ -531,22 +551,26 @@
       "note": "The sabbat's date and site come from a started fact (tag 1, type 4). When none exists, the date query returns day 0 of the year, printed as January 0, and the site query returns -1. The original then reads locations[-1] for the place (D-09b57b); the restoration prints nothing there. The fact is created when the sabbat quest starts (new game or the monthly check) and is renewed each time a sabbat begins, so the code does not show what removes it in play."
     },
     "RPT-EVENT-0002": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-8f44e7"
+      ],
       "source": [
         "src/Darklands.Core/Events/EventLog.cs:23",
-        "src/Darklands.Core/Events/EventLog.cs:79",
+        "src/Darklands.Core/Events/EventLog.cs:82",
         "src/Darklands.Core/Events/EventExpiry.cs:15",
         "src/Darklands.Core/Rules/Quests.cs:169"
       ],
       "original": "R029+0x2C4E; R029+0x3F30; R039+0x1B0C",
-      "note": "An event created to last 'forever' (9999 hours) is given the fixed end 23:00 on 31 December 1499 (R029+0x2C4E), and the expiry pass (R029+0x3F30) ends it on 1 January 1500. The witches' sabbat quest (R039+0x1B0C) is such an event: when it ends, its facts are cleared, including the planned next sabbat. A sabbat quest started after that date already has an end in the past and expires at the next expiry pass, so no further sabbats are planned. The same limit applies to every other 'forever' event. The restoration reproduces this and explains it in EventLog.cs, but no register entry records it."
+      "note": "An event created to last 'forever' (9999 hours) is given the fixed end 23:00 on 31 December 1499 (R029+0x2C4E), and the expiry pass (R029+0x3F30) ends it on 1 January 1500. The witches' sabbat quest (R039+0x1B0C) is such an event: when it ends, its facts are cleared, including the planned next sabbat. A sabbat quest started after that date already has an end in the past and expires at the next expiry pass, so no further sabbats are planned. The same limit applies to every other 'forever' event."
     },
     "RPT-CHURCH-0001": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-4d8935"
+      ],
       "source": [
-        "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:148",
+        "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:151",
         "src/Darklands.Core/Time/Calendar.cs:15",
         "src/Darklands.Core/Rules/Quests.cs:44"
       ],
@@ -559,8 +583,8 @@
         "B-f30456"
       ],
       "source": [
-        "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:205",
-        "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:212"
+        "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:208",
+        "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:215"
       ],
       "original": "R057+0x067C",
       "note": "Tithing first serves the 'member' whose number is the party's best Religion value (B-f30456), and this counts as one of the party-size visits. Normally that value is above the last member number. The loop then wraps to member 0 and visits only members 0 to n-2, so the last member gets no Divine Favor; in a party of one, nobody does. The register entry covers the cause."
@@ -570,8 +594,8 @@
       "reason_kind": "mechanic",
       "register": [],
       "source": [
-        "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:209",
-        "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:241"
+        "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:212",
+        "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:244"
       ],
       "original": "R057+0x067C",
       "note": "The church takes a tenth of the money. When that gift is over 600 pfennigs (so a purse of at least 6,010 pf), every member's Virtue rises by a thirtieth of his Religion (R057+0x067C). Religion 30 gives +1, and below 30 gives nothing. No event or cool-down limits repeats, so the gain is as repeatable as the code intends. The 16-bit purse quirks (B-42f89c and the signed low word of the tenth) are separate."
@@ -590,18 +614,22 @@
       "note": "Choosing Flee (R016+0x156E) sets the member's flee bit at once. When order mode ends with no spot chosen (R014+0xBCA8), the member keeps its current action and target. If the cursor still names the old target, the default (hand) weapon is readied while the action stays a missile action. A member with the flee bit set is skipped by the automatic engage and fight-back passes (R014+0xFADC, R014+0xFC50), and only arriving at a destination clears the bit. This could explain a shooter that keeps firing, with the melee weapon readied, but the repeated release itself has not been traced. A runtime test in 483.07 is needed: pause while aiming a bow, choose Flee, resume without clicking a spot, and watch the action word, the readied weapon and the reload timer."
     },
     "RPT-MERCHANT-0001": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-dac2b0"
+      ],
       "source": [
-        "src/Darklands.Cards/Scripts/S065/BowyersGuildAtNight.cs:85",
+        "src/Darklands.Cards/Scripts/S065/BowyersGuildAtNight.cs:87",
         "src/Darklands.Cards/Scripts/S065/BowyersGuild.cs:105"
       ],
       "original": "R065+0x21BC; R065+0x0F18",
       "note": "By day the bowyers' guild opens its shop (shop 5) with the missile-weapon categories 0x30 / 0x83C (R065+0x0F18). Woken at night, it opens the same shop with 0xFF / 0x400 (R065+0x21BC), the mask the blacksmiths', swordsmiths' and armorers' cards use. So at night the bowyers offer hand weapons and other smith goods instead of their own. The other guilds use the same mask by day and by night."
     },
     "RPT-ARMOR-0001": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-8e79e5"
+      ],
       "source": [
         "src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs:676",
         "src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs:478",
@@ -611,23 +639,30 @@
       "note": "Equipped armour is held as a type and quality only. When the armour-eating cloud (kind 4, R019+0x0300) wears it down, R019+0x0968 lowers the quality of the first pack stack with that type and quality. Identical pieces share one stack (R031+0x4A04 joins equal code, type and quality), so every spare copy in that stack is worn down with the one being worn."
     },
     "RPT-QUEST-0001": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-169e5e"
+      ],
       "source": [
         "src/Darklands.Cards/Scripts/S050/FortressByDay.cs:38",
-        "src/Darklands.Cards/Scripts/S050/FortressByDay.cs:102",
-        "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:238",
+        "src/Darklands.Cards/Scripts/S050/FortressByDay.cs:103",
+        "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:240",
         "src/Darklands.Cards/Scripts/S048/CitySquareByDay.cs:40"
       ],
       "original": "R050+0x1CEE; R050+0x21F8; R050+0x24E0; R054+0x1D08",
       "note": "The fortress offers audiences and service only in a city without a town hall (location query 0x18 = 0, R050+0x1CEE). Its commission is recorded under the same owner (0x0A) as the town hall's. Only the town hall card (R054+0x1D08) looks for a resolved commission and pays it (city size x 7 groschen). The fortress card has no such check, and a city without a town hall hides that option on the square. So a fortress commission is never paid in money. The standing and reward written when the quest resolves (R029+0x3E06) still apply. The reward card (R080+0x038C) even has a case for the fortress card (0x1B) that is never reached."
     },
     "RPT-QUEST-0002": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-86c8e5",
+        "B-227a55",
+        "Z-c3c497",
+        "Z-798fad"
+      ],
       "source": [
-        "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:389",
-        "src/Darklands.Cards/Scripts/S050/FortressByDay.cs:211",
+        "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:393",
+        "src/Darklands.Cards/Scripts/S050/FortressByDay.cs:219",
         "src/Darklands.Core/Events/EventExpiry.cs:24",
         "src/Darklands.Core/Events/EventExpiry.cs:60"
       ],
@@ -662,7 +697,7 @@
       "reason_kind": "documentation",
       "register": [],
       "source": [
-        "src/Darklands.Core/Rules/PotionEffects.cs:105",
+        "src/Darklands.Core/Rules/PotionEffects.cs:107",
         "src/Darklands.Core/Rules/MemberRules.cs:274"
       ],
       "original": "R031+0x43B2; R029+0x4C04",
@@ -673,7 +708,7 @@
       "reason_kind": "documentation",
       "register": [],
       "source": [
-        "src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs:801",
+        "src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs:803",
         "src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs:430",
         "src/Darklands.Core/Rules/PotionEffects.cs:36"
       ],
@@ -728,35 +763,39 @@
       "note": "When a chest is filled, the routine swaps entries of a 16-entry table but then picks the item by the raw roll, so the table has no effect and the same item can be chosen more than once (up to four stacks). Recorded as dormant code (Z-d0f3c7)."
     },
     "DL-ORIG-GAME-0033": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-c90740"
+      ],
       "source": [
-        "src/Darklands.Core/Battles/Generation/CastleGenerator.Walls.cs:155",
-        "src/Darklands.Core/Battles/Generation/CastleGenerator.Walls.cs:164"
+        "src/Darklands.Core/Battles/Generation/CastleGenerator.Walls.cs:158",
+        "src/Darklands.Core/Battles/Generation/CastleGenerator.Walls.cs:167"
       ],
       "original": "R007+0x0698",
-      "note": "For a corridor, the castle generator picks the cell for a wall decoration as the far end plus a roll (x = last column + roll - 1, or y = last row + roll - 1), not the near end plus a roll. Only a roll of 1 lands on the corridor itself; other rolls test, and may mark, cells beyond it. The restoration reproduces this without a register entry."
+      "note": "For a corridor, the castle generator picks the cell for a wall decoration as the far end plus a roll (x = last column + roll - 1, or y = last row + roll - 1), not the near end plus a roll. Only a roll of 1 lands on the corridor itself; other rolls test, and may mark, cells beyond it."
     },
     "DL-ORIG-GAME-0032": {
       "verdict": "not-in-483.07",
       "reason_kind": "code-refutes",
       "register": [],
       "source": [
-        "src/Darklands.Presentation/Battles/BattleScreen.cs:450"
+        "src/Darklands.Presentation/Battles/BattleScreen.cs:454"
       ],
       "original": "R014+0x9C8C",
       "note": "The view test does reject a nonpositive width or height only after clipping a negative origin, but its only caller passes the sprite box grown by 8 pixels each way, so width and height are always at least 8. The zero-extent case does not arise in the game."
     },
     "DL-ORIG-GAME-0031": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-0818ac"
+      ],
       "source": [
         "src/Darklands.Cards/Scripts/S058/LeavingByTheGate.cs:33",
         "src/Darklands.Cards/Scripts/S058/LeavingByTheGate.cs:39",
-        "src/Darklands.Cards/Scripts/S058/LeavingByTheGate.cs:292"
+        "src/Darklands.Cards/Scripts/S058/LeavingByTheGate.cs:296"
       ],
       "original": "R058+0x0E24; R058+0x17DA",
-      "note": "At the city gate the card reads the party's standing and the potion/saint availability once, on entry. After a fight that leaves the party at the gate (results 2 and 3), the menu is offered again with those entry values, and a second fight sets the standing to the entry value minus 40 again instead of lowering it further. The restoration reproduces this without a register entry."
+      "note": "At the city gate the card reads the party's standing and the potion/saint availability once, on entry. After a fight that leaves the party at the gate (results 2 and 3), the menu is offered again with those entry values, and a second fight sets the standing to the entry value minus 40 again instead of lowering it further."
     },
     "DL-ORIG-GAME-0030": {
       "verdict": "open",
@@ -841,7 +880,7 @@
       "source": [
         "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:98",
         "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:101",
-        "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:538"
+        "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:542"
       ],
       "original": "R054+0x2C4C; R054+0x2C6A; R054+0x2CA2; R054+0x2CC0",
       "note": "Rows 6 and 7 of $COUNC00 (whose text is just '6' and '7') are never enabled; both actions show the first text, pass no time and go to card 4. Recorded as dormant (Z-21ab87, Z-9f11da, Z-0880d0)."
@@ -855,8 +894,8 @@
       ],
       "source": [
         "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:94",
-        "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:194",
-        "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:506"
+        "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:196",
+        "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:510"
       ],
       "original": "R054+0x2B8C; R054+0x29F8",
       "note": "The council hall's weapons-training row is never enabled, although its chance and action are complete (five training events, a price named, or a standing loss when refused). Recorded as dormant (Z-a901ed, Z-67029d, Z-622af1). The price the hidden action names is computed from the city, while the five training events carry fixed fees of 50 and 25."
@@ -873,37 +912,43 @@
       "note": "In the merchant screen Ctrl+F1..F5 changes the party leader and redraws only the party panel, then falls through into the Purchase/Sell list switch; prices on screen are not recomputed. Documented in OriginalBehaviour remarks and at BarterScreen.cs:370, no register id."
     },
     "DL-ORIG-GAME-0001": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-fd421f"
+      ],
       "source": [
-        "src/Darklands.Core/Rules/Trading.cs:335",
-        "src/Darklands.Core/Rules/Trading.cs:336",
+        "src/Darklands.Core/Rules/Trading.cs:338",
+        "src/Darklands.Core/Rules/Trading.cs:339",
         "src/Darklands.Core/Rules/Inventory.cs:230",
         "src/Darklands.Core/Characters/Pack.cs:59"
       ],
       "original": "R032+0x0F60; R029+0x5090; R031+0x4A04",
-      "note": "Buying from a merchant takes the money first and then adds the item. If the member's pack already holds 64 stacks and none can take the item, nothing is added and the money is not returned. The restoration reproduces this without a register entry."
+      "note": "Buying from a merchant takes the money first and then adds the item. If the member's pack already holds 64 stacks and none can take the item, nothing is added and the money is not returned."
     },
     "DL-ORIG-GAME-0002": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-e95c32"
+      ],
       "source": [
-        "src/Darklands.Cards/Scripts/S051/InnByDay.cs:177",
+        "src/Darklands.Cards/Scripts/S051/InnByDay.cs:181",
         "src/Darklands.Core/Rules/PartyQueries.cs:237"
       ],
       "original": "R051+0x0EE0; R029+0x1326",
       "note": "At the inn's stables the card shows text 1 when every present member is able and owns a mount, and text 7 otherwise. Only text 7 adds that the stablemaster asks whether any of the party's mounts are for sale, so the question appears when the party may have no mounts at all and is left out when everyone has one. The trading screen that follows is the same in both cases."
     },
     "DL-ORIG-GAME-0003": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-fa0f93"
+      ],
       "source": [
         "src/Darklands.Cards/Scripts/S071/AffairsElsewhere.cs:53",
         "src/Darklands.Cards/Scripts/S071/AffairsElsewhere.cs:73",
-        "src/Darklands.Cards/Scripts/S071/AffairsElsewhere.cs:75"
+        "src/Darklands.Cards/Scripts/S071/AffairsElsewhere.cs:76"
       ],
       "original": "R071+0x15A4",
-      "note": "In the news of affairs elsewhere, the 'nothing of interest' text (3) is shown in a city when neither the robber-knight nor the mine quest runs, but outside a city only while the mine quest runs: the wilderness branch tests the mine quest without the negation. The restoration reproduces and comments this (AffairsElsewhere.cs:73), but it has no register id."
+      "note": "In the news of affairs elsewhere, the 'nothing of interest' text (3) is shown in a city when neither the robber-knight nor the mine quest runs, but outside a city only while the mine quest runs: the wilderness branch tests the mine quest without the negation. The restoration reproduces and comments this (AffairsElsewhere."
     },
     "DL-ORIG-GAME-0009": {
       "verdict": "covered",
@@ -919,21 +964,26 @@
       "note": "The robber-knight offer card ($Raubi00, card 0x90) looks up its quest event and uses the slot without checking for 'not found'; the reward card (0x91) does the same. The restoration uses 0 instead of reading through the stray pointer (D-b167a7, D-b83f90)."
     },
     "DL-ORIG-GAME-0011": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-23f155"
+      ],
       "source": [
         "src/Darklands.Cards/Scripts/S077/VillageSchulz.cs:113",
         "src/Darklands.Cards/Scripts/S077/VillageSchulz.cs:114"
       ],
       "original": "R077+0x1958",
-      "note": "With local standing of 50 or more and a full party (five members), asking the Schulz for help shows text 6 (he drops a florin into your hand) but adds no money. The same text after the low-standing fame roll does add one florin. The restoration reproduces this with a plain remark, not a register entry."
+      "note": "With local standing of 50 or more and a full party (five members), asking the Schulz for help shows text 6 (he drops a florin into your hand) but adds no money. The same text after the low-standing fame roll does add one florin."
     },
     "DL-ORIG-GAME-0010": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-166488",
+        "B-132edf"
+      ],
       "source": [
         "src/Darklands.Cards/Scripts/S080/RobberKnightTaskRewarded.cs:48",
-        "src/Darklands.Cards/Scripts/S080/RobberKnightTaskRewarded.cs:56",
+        "src/Darklands.Cards/Scripts/S080/RobberKnightTaskRewarded.cs:57",
         "src/Darklands.Cards/Scripts/S080/RobberKnightTaskOffered.cs:30"
       ],
       "original": "R080+0x038C",
@@ -962,17 +1012,19 @@
       "note": "The business-district card (0x14), reached from the night side street, loads its own $Busin00 texts by day and by night; only the picture differs. Its labels and actions therefore match, and no $SIDES01 text is left over its menu."
     },
     "DL-ORIG-GAME-0015": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-ed73b9"
+      ],
       "source": [
         "src/Darklands.Cards/Scripts/S046/SideStreetAtNight.cs:100",
-        "src/Darklands.Cards/Scripts/S046/SideStreetAtNight.cs:101"
+        "src/Darklands.Cards/Scripts/S046/SideStreetAtNight.cs:103"
       ],
       "original": "R046+0x1866",
-      "note": "On the night side street, choosing the grove (row 7) and meeting trouble on the way sets the place to return to after the night encounter to the night grove (0x22) unconditionally, although the hour has already passed and may now be daytime. The ordinary arrival and the day side street choose the day or night grove by the clock. The restoration keeps this with a plain remark, not a register entry."
+      "note": "On the night side street, choosing the grove (row 7) and meeting trouble on the way sets the place to return to after the night encounter to the night grove (0x22) unconditionally, although the hour has already passed and may now be daytime. The ordinary arrival and the day side street choose the day or night grove by the clock."
     },
     "DL-ORIG-GAME-0016": {
-      "verdict": "confirmed-missing",
+      "verdict": "not-in-483.07",
       "register": [],
       "source": [
         "src/Darklands.Core/Rules/LocationRules.cs:45",
@@ -980,7 +1032,8 @@
         "src/Darklands.Cards/Scripts/S052/GroveAtNight_CityG06.cs:54"
       ],
       "original": "R029+0x19D0",
-      "note": "The standing change draws a random number below |b| - |a|, and the random helper treats a range below 2 as 2. So a change with equal bounds, such as (-1, -1) for camping in the grove overnight, (-5, -5) or (4, 4), moves the standing by |a| or |a|+1, not by exactly |a|; a range of width 1, such as (1, 2), behaves the same. The restoration reproduces the arithmetic (documented on the random helper in MscRandom.cs) but has no register entry for the effect on standing changes."
+      "note": "The standing change draws a random number below |b| - |a|, and the random helper treats a range below 2 as 2. So a change with equal bounds, such as (-1, -1) for camping in the grove overnight, (-5, -5) or (4, 4), moves the standing by |a| or |a|+1, not by exactly |a|; a range of width 1, such as (1, 2), behaves the same. The restoration reproduces the arithmetic (documented on the random helper in MscRandom.cs); the rule works as written, so it is kept as a rule of the game, not a bug.",
+      "reason_kind": "mechanic"
     },
     "DL-ORIG-GAME-0017": {
       "verdict": "covered",
@@ -994,13 +1047,15 @@
       "note": "Rows 2 to 7 of $OTHER00 (the literal placeholders 2 to 7) are never offered; their handlers would end the game (card 0x62). Recorded as dormant."
     },
     "DL-ORIG-GAME-0018": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "Z-1b902d"
+      ],
       "source": [
-        "src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs:43",
-        "src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs:44",
         "src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs:45",
-        "src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs:46"
+        "src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs:46",
+        "src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs:47",
+        "src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs:48"
       ],
       "original": "R029+0x5CC4",
       "note": "The random-name draw uses counts 108, 88, 146 and 16 for its four name tables, but each table in the EXE holds more entries than that: two more first names (Wiprecht, Wolfgang), two more women's names (Suzanne, Viktoria), one more surname (of Zähringen) and one more merchant family (Welser). These trailing names can never be drawn. The restoration reads the same counts but does not record the unused entries."
@@ -1021,20 +1076,22 @@
       "note": "The never-enabled rows of the revolt house are recorded as dormant: by day row 5 (storm the house) and rows 6 to 8, at night rows 5 to 8. The rest of the revolt family is not unpublished: all nineteen resources $Revol00 to $Revol18 are used by cards in the restoration."
     },
     "DL-ORIG-GAME-0020": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "B-b4fddb"
+      ],
       "source": [
         "src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs:163"
       ],
       "original": "R048+0x03D6",
-      "note": "Gathering gossip at the second faction's house shows texts 2 and 12, then text 2 again with text 3 or 4, because the original has no else between the two blocks. The restoration reproduces the repeat with a plain remark, not a register entry."
+      "note": "Gathering gossip at the second faction's house shows texts 2 and 12, then text 2 again with text 3 or 4, because the original has no else between the two blocks."
     },
     "DL-ORIG-GAME-0021": {
       "verdict": "not-in-483.07",
       "reason_kind": "code-refutes",
       "register": [],
       "source": [
-        "src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs:212"
+        "src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs:213"
       ],
       "original": "R048+0x0506",
       "note": "The second query is the compiled form of one condition, (fact == -1 and first house) or (fact == 1 and second house): it reads the same city fact again and changes nothing, so there is no behaviour difference. The restoration reads the fact once with the same result."
@@ -1066,7 +1123,7 @@
       "reason_kind": "mechanic",
       "register": [],
       "source": [
-        "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:116"
+        "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:118"
       ],
       "original": "R076+0x0822",
       "note": "Asking the captain of the guard passes a random 0 to 2 hours. Zero-hour actions are common in the card scripts (many options pass 0 hours), so a reply that takes no time is within the design; the restoration reproduces it."
@@ -1077,20 +1134,22 @@
         "Z-ce9f89"
       ],
       "source": [
-        "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:107",
-        "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:108"
+        "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:109",
+        "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:110"
       ],
       "original": "R076+0x0694",
       "note": "The 120-hour arm of the ban set after an extreme surrender is unreachable, since only a party at -75 or worse gets there; recorded as dormant."
     },
     "DL-ORIG-GAME-0027": {
-      "verdict": "confirmed-missing",
-      "register": [],
+      "verdict": "covered",
+      "register": [
+        "U-bcac07"
+      ],
       "source": [
-        "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:12"
+        "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:14"
       ],
       "original": "R076+0x0430",
-      "note": "$SANCT00 holds texts that the sanctuary card never shows: text 4 (a second sanctuary menu), texts 5 to 8 (the priest's growing pressure to leave, ending in a forced departure with its own menu) and text 12 (a failed escape that ends in capture). The card shows only texts 0 to 3 and 9 to 11, and it is the only user of $SANCT00. No register records the unused texts."
+      "note": "$SANCT00 holds texts that the sanctuary card never shows: text 4 (a second sanctuary menu), texts 5 to 8 (the priest's growing pressure to leave, ending in a forced departure with its own menu) and text 12 (a failed escape that ends in capture). The card shows only texts 0 to 3 and 9 to 11, and it is the only user of $SANCT00."
     },
     "DL-ORIG-GAME-0036": {
       "verdict": "covered",
@@ -1105,21 +1164,21 @@
       "note": "In the segment-against-box clip test, when neither the bottom nor the top edge applies, the original uses an uninitialised intersection point (whatever the stack holds). The restoration keeps the previous clip point instead and records this as a divergence."
     },
     "DL-ORIG-GAME-0037": {
-      "verdict": "confirmed-missing",
+      "verdict": "open",
       "register": [],
       "source": [
         "src/Darklands.Core/Battles/Tactics/TacticalBattle.Missiles.cs:176",
         "src/Darklands.Core/Battles/Tactics/TacticalBattle.Missiles.cs:177"
       ],
       "original": "R018+0x02BE",
-      "note": "When a missed missile is extended past its target, the last halved step is added after the final clear test and the loop can end without testing again, so the arrow can come to rest a few units past a wall. The restoration keeps this and names it in a source remark, but no register entry records it."
+      "note": "The restoration's port of the missed-missile extension (R018+0x02BE) adds the last halved step after the final clear test, so an arrow could come to rest a few units past a wall; the port keeps this and names it in a source remark. The loop has not yet been traced in the original itself, so the finding stays open until it is."
     },
     "DL-ORIG-GAME-0025": {
       "verdict": "not-in-483.07",
       "reason_kind": "retracted",
       "register": [],
       "source": [
-        "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:130"
+        "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:132"
       ],
       "original": "R076+0x08AC",
       "note": "Retracted. A roll at or under the party's lowest Stealth plus Streetwise (10 to 99) gives text 10, the escape through the graveyard to the side street; a higher roll gives text 9, the stumble and retreat into the church after one hour. The card texts match their outcomes."
