@@ -28,6 +28,16 @@ params:
   </div>
 </div>
 
+<section class="drp-showcase" id="release-video">
+  <span class="drp-section-kicker">Release video</span>
+  <h2>Darklands Restoration Project 0.9.0</h2>
+  <p>Four and a half minutes of version 0.9.0: character creation, the cities, a night ambush and a real-time battle, the world map and the camp, and what comes next.</p>
+  <div class="drp-video-frame">
+    <iframe src="https://www.youtube-nocookie.com/embed/jaFP2INDo88" title="Darklands Restoration Project 0.9.0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+  <p class="drp-video-link"><a href="https://youtu.be/jaFP2INDo88" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></p>
+</section>
+
 ---
 
 ## The Project
@@ -64,7 +74,7 @@ The original's surprising rules and genuine defects are collected in [Bugs & Odd
 
 ## Follow the Work
 
-News about releases goes to the [news](/news/). The devlogs written during the earlier development are kept in the [archives](/archives/).
+News about releases goes to the [news](/news/). The devlogs and the presentation videos of the earlier development are kept in the [archives](/archives/).
 
 <div class="drp-follow-actions">
   <a href="/download/" class="drp-btn drp-btn-primary">Download 0.9.0</a>

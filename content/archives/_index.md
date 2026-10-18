@@ -12,7 +12,9 @@ The restoration's earlier development, up to the 0.9.0 release, kept for the rec
 {{< card link="earlier-method" title="The earlier method" icon="cog" subtitle="The toolchain of the earlier development: Ghidra, Reko, Darklays, Autoprobe and DOSBox-X." >}}
 {{< /cards >}}
 
-## Presentations
+## Earlier presentations
+
+The two presentations made during the development, before the first release. The [0.9.0 release video](/#release-video) is on the home page.
 
 <div class="drp-video-grid">
   <figure class="drp-video">
