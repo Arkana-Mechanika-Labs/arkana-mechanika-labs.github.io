@@ -15,8 +15,8 @@ enableRobotsTXT = true
     noClasses = false
 
 [params]
-  description = "A faithful native C# reconstruction of MicroProse Darklands (1992), rebuilt from original code and data with evidence-backed verification."
-  images = ["/images/classic-mainst.png"]
+  description = "MicroProse's Darklands (1992) rebuilt in C# to run on today's Windows and to play exactly like the original. Version 0.9.0 is out."
+  images = ["/images/0.9.0/city.png"]
 
   [params.theme]
     default = "dark"
@@ -32,9 +32,17 @@ enableRobotsTXT = true
 
 [menu]
   [[menu.main]]
-    name = "Devlogs"
-    url = "/posts/"
+    name = "Download"
+    url = "/download/"
+    weight = 5
+  [[menu.main]]
+    name = "News"
+    url = "/news/"
     weight = 10
+  [[menu.main]]
+    name = "Bugs & Oddities"
+    url = "/formats/original-bugs-and-oddities/"
+    weight = 12
   [[menu.main]]
     name = "Join Discord ↗"
     url = "https://discord.gg/HjzWvmHhqZ"
@@ -44,18 +52,18 @@ enableRobotsTXT = true
     name = "Explore"
     weight = 20
   [[menu.main]]
-    name = "File Formats"
-    url = "/formats/"
+    name = "How It Is Made"
+    url = "/method/"
     parent = "resources"
     weight = 10
   [[menu.main]]
-    name = "Tools"
-    url = "/tools/"
+    name = "File Formats"
+    url = "/formats/"
     parent = "resources"
     weight = 20
   [[menu.main]]
-    name = "How We Restore It"
-    url = "/method/"
+    name = "Tools"
+    url = "/tools/"
     parent = "resources"
     weight = 30
   [[menu.main]]
@@ -68,6 +76,11 @@ enableRobotsTXT = true
     url = "/links/"
     parent = "resources"
     weight = 50
+  [[menu.main]]
+    name = "Archives"
+    url = "/archives/"
+    parent = "resources"
+    weight = 60
   [[menu.main]]
     name = "RPG Combat Toolkit ↗"
     url = "https://arkana-mechanika-studios.github.io/"

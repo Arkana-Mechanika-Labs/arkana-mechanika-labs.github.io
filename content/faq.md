@@ -4,34 +4,66 @@ toc: true
 width: normal
 ---
 
-Answers about the restoration as it works today. Earlier devlogs preserve what was known at the time; the [latest posts](/posts/) show how the project has changed.
+## Playing
 
-## How do you check AI-assisted findings?
+### Is it playable?
 
-An early investigation misidentified `0x1873a` as a party routine when it was a Borland C runtime file routine. [Devlog #006](/posts/006-corrections-and-character-layout/) records the correction. That mistake is why a plausible name or decompiler result is never enough to authorize game behavior.
+Yes. Version 0.9.0 plays the whole game: character creation, cities, inns and shops, guilds, banks and churches, the world map and its encounters, real-time battles, camping, saints and alchemy, saving and loading. [Download it here](/download/). Version 1.0 will follow once the remaining faithfulness checks are finished.
 
-The original 483.07 bytes and observed execution are the reference. Focused Ghidra analysis and independent Reko review expose structure and disagreements. Darklays records exact ownership, branches, effects, and evidence freshness. The C# path is compared with original instruction results and, where available, complete runtime routes. Unresolved behavior stays behind an explicit boundary.
+### Do I need the original game?
 
-## What does AI contribute beyond Ghidra?
+Yes, your own copy of Darklands 483.07, for example the GOG or Steam release. Nothing from the game is included: the program reads your installation, and finds a GOG or Steam copy by itself.
 
-Ghidra and Reko are analysis tools; neither tells us by itself which behavior belongs in the restoration. AI-assisted work helps trace callers, compare the two decompilers, organize evidence, implement bounded original code units, and find the next missing dependency. The primary task owner reviews the evidence and decides what can be claimed or shipped.
+### What do I need to run it?
 
-## How are Darklands' overlays handled?
+Windows x64. No .NET installation and no DOSBox: unpack the zip and start `DarklandsRP.exe`.
 
-The executable uses a record-driven loader, relocation machinery, and resident resolution paths. The project can materialize selected original code for focused analysis and trace the overlay behavior needed by supported routes. [Devlog #029](/posts/029-digging-up-overlays/) explains an early step in that work. An overlay name or reachable call is not proof that every branch or side effect is understood.
+### Does it play like the original?
 
-## Didn't the community already document Darklands?
+That is the point. Every rule is rewritten from the original program and checked against it, the screens, music and sound are the original's, and even the original's bugs are kept, because they are part of Darklands. What knowingly differs is listed openly, and the oddities are collected in [Bugs & Oddities](/formats/original-bugs-and-oddities/).
 
-Community research provides essential file-format knowledge. We build on those specifications and credit their authors in the [format reference](/formats/). The executable also makes decisions about menus, time, combat, events, resources, and presentation that file layouts alone cannot answer. Recovering those decisions is the restoration's additional work.
+### Can I use my old saved games?
 
-## Is the C# version playable now?
+Yes. Saves go to the game's own `SAVES` folder, shared with the original both ways.
 
-There is a working .NET 10 development host. It runs the opening, Quickstart, supported city routes, and a growing part of a guard encounter with movement, ranged attacks, and melee. It is not a finished replacement game: many routes and complete battle outcomes remain under development. The host requires legally obtained original Darklands data. [Devlog #072](/posts/072-the-battlefield-starts-moving/) shows the latest published connected combat milestone.
+### What about the MT-32 music?
 
-## Why C#?
+Put your MT-32 or CM-32L ROM files in the `MT32_ROMS` folder next to the program; the game's own Roland driver then plays through an MT-32 emulation. Without them the Sound Blaster Pro's FM music plays. AdLib and Sound Blaster are always available.
 
-The goal is a readable, testable rewrite of original behavior. C# lets the project model original code units and their effects explicitly while running a native .NET host. Spice86 influenced early research, but the active engine follows evidence-backed C# mechanisms and an SDL presentation layer; it is not a generated Spice86 skeleton. The original executable, not the choice of language, defines the behavior to reproduce.
+### Can I play in a bigger window, or full screen?
 
-## How can I follow or help?
+Yes: `darklands.settings.json`, created next to the program on the first run, sets the window scale, any resolution, or full screen, and also the sound card and more.
 
-Read the [devlogs](/posts/), inspect the [engine source](https://github.com/Arkana-Mechanika-Studios/darklands-engine), or [join the restoration Discord](https://discord.gg/HjzWvmHhqZ) to discuss findings and give feedback. The site keeps historical posts available, including corrections, so the research trail remains visible.
+### Where do I report a bug?
+
+On the [Discord](https://discord.gg/HjzWvmHhqZ), or as an issue on [GitHub](https://github.com/Arkana-Mechanika-Studios/darklands-restoration).
+
+## The project
+
+### Is it a remake or an emulator?
+
+Neither. It is a reimplementation: the original's game logic rewritten in C#, rule by rule, and run natively. The screens, music and sound are produced from your copy of the game.
+
+### How do you know it is faithful?
+
+The original program's own functions run in an emulated processor, from your copy of the game, next to the C# on the same inputs — tens of thousands of cases — and every card of the game runs against its original. Every deliberate difference, every original bug kept, and every open question is listed with its reason. [How it is made](/method/) explains more.
+
+### Is the source code available?
+
+Yes, on GitHub: [Arkana-Mechanika-Studios/darklands-restoration](https://github.com/Arkana-Mechanika-Studios/darklands-restoration). The game logic is kept apart from graphics, sound and input, so other hosts can be built on the same core; each piece of code cites the place in the original program it reproduces.
+
+### Why C#?
+
+The goal is a readable, testable rewrite of the original's behaviour that runs natively. C# lets each rule be written clearly, tested quickly and checked against the original; the original program, not the choice of language, defines the behaviour.
+
+### How is AI used?
+
+AI assistance helped read the original program, write the C#, and build the checks. Nothing is taken on trust: what the C# does is compared with what the original program does, and the open questions are listed rather than guessed.
+
+### Didn't the community already document Darklands?
+
+Community research documented the file formats, and the [format reference](/formats/) builds on it and credits its authors. The program itself also decides how menus, time, combat, events and encounters work, which the file formats alone cannot answer; recovering those decisions is the restoration's additional work.
+
+### Where are the old devlogs?
+
+In the [archives](/archives/), with the earlier presentations and method. They record what was known at the time; later findings may supersede them.

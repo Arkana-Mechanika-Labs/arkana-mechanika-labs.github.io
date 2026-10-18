@@ -1,371 +1,555 @@
 {
-  "schema": "darklands.original-oddities.public.v1",
-  "source_commit": "6b68df844409a8a59e108da137046fb0ccaedc47",
-  "source_commit_date": "2026-10-16",
-  "source_files": [
-    {
-      "path": "docs/KNOWN_ORIGINAL_BUGS.md",
-      "sha256": "e77409a446eeda73783f74a676bf0bf22b68bfad67523b09ebec60a00e35c4b8"
-    },
-    {
-      "path": "docs/DORMANT_ORIGINAL_BRANCHES.md",
-      "sha256": "a32a84bb4b99458863cd5db587c0610f852457f07de3a67fbc3c4b1fa8e9e7a1"
-    },
-    {
-      "path": "docs/research/DARKLANDS_483_07_REPORTED_BUG_CATALOGUE.md",
-      "sha256": "3c1ffc5d6f6ab5f25c3b03e86127aa37f0f0a7960a52e7ccb7dddd487f6c9f02"
-    }
-  ],
+  "schema": "darklands.original-oddities.public.v2",
+  "source_repository": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration",
+  "source_commit": "6e20bd16c90392637fed94d3a687a8d33401531f",
+  "source_commit_date": "2026-10-18",
+  "source_version": "v0.9.0",
+  "generated": "2026-10-18",
   "counts": {
-    "byte_confirmed": 38,
-    "dormant_groups": 8,
-    "reported_leads": 62
+    "reproduced": 56,
+    "reproduced_with_fix": 22,
+    "dormant_total": 854,
+    "dormant_curated": 8,
+    "reported_leads": 62,
+    "earlier_findings": 38
   },
-  "known": [
+  "reproduced": [
     {
-      "id": "DL-ORIG-GAME-0035",
-      "title": "TACANIM terminal lookup consumes inherited size words",
-      "status": "",
-      "affected": "",
-      "disposition": "",
-      "original_units": "",
-      "summary": "Status: byte-confirmed behavior; possible original bug, defect classification pending. R25 owner `[0A84,0BE4)` (original EXE `[54DA4,54F04)`, SHA256 `70DDC4CBF52145D75ED347ACDD294CFE139CED4EFA6B49ACF38B226336C7AA02`) checks FILE+6 bit10 at0AC8, ignores fread's result after0AD7, and compares the partially overwritten fourteen-byte local record at0AE7. A mismatch loops back to the flag test; initially terminal FILE state skips read and compare. Close0AF4 precedes size reads atBP-12h/-10h/-0Eh and their ordered reservations. Thus absent or short unmatched TACANIM records can use inherited allocation size bytes, rather than returning a lookup failure. No failed-open/read owner result is inferred from this behavior.\n\nThis appears anomalous because resource absence can affect allocation sizes through unrelated stack history. An upstream guaranteed matching record or restricted resource contract may explain ordinary safety; neither licenses zeroing the inherited words. Rewrite disposition: replicate in isolated Lane-A research with explicit inherited scratch/FILE inputs; production unchanged. Unbound bytes stop at their first actual consumer, preserving close and any earlier reservation publication. Native open/read error-state continuation remains an explicit typed stop. The campaign's controlled original comparison and tests are linked in [the current report](research/COMBAT_READER_STARTUP_CLOSURE_CAMPAIGN.md). Controlled malformed-resource inputs do not establish natural reachability."
+      "id": "B-a044f7",
+      "title": "The original removes an empty group by shifting the later groups down but keeps testing the same (stale,...",
+      "area": "Battles",
+      "original": "R004+0x1D90",
+      "code": "src/Darklands.Core/Battles/BattlefieldForces.cs:666 (BattlefieldForces.FixGroups)",
+      "fix": "FixEnemyGroupCompaction",
+      "summary": "the original removes an empty group by shifting the later groups down but keeps testing the same (stale, zero) counter, so every group after the first empty one is removed too."
     },
     {
-      "id": "DL-ORIG-GAME-0034",
-      "title": "item-feature scratch shuffle does not select the item",
-      "status": "byte-confirmed redundant shuffle; defect classification pending",
-      "affected": "",
-      "disposition": "",
-      "original_units": "`0007:4076`, item-bearing feature-record population",
-      "summary": "After swapping scratch-pool entries, the routine reloads the draw index at `421E`, not a pool value. Dispatch permits repeated entries; the pool has no observable influence on selection. The semantic compiler removes its scratch writes but retains saved-draw dispatch, decreasing bounds and the four-item stop. DKSAVE8's complete feature records and publication RNG falsify a shuffled pool interpretation. Repeats could be intentional: a defect verdict needs an established inventory policy and controlled original examples of repetition. Original EXE SHA is `90138ae88acf66ad765e96c0465c1a4aa11eb09b74f365ed18c0f01beb9a86c2`; `4076..42D8` SHA is `2085b40986256f1310dfc835341b892e67fc31135d300118b3bb0194a5c56d60`."
+      "id": "B-8fdd39",
+      "title": "The original draws until the room differs from the gate room, which never happens when the only room it...",
+      "area": "Battles",
+      "original": "R007+0x1D78",
+      "code": "src/Darklands.Core/Battles/Generation/CastleGenerator.Forces.cs:149 (CastleGenerator.PlaceParty)",
+      "fix": "",
+      "summary": "the original draws until the room differs from the gate room, which never happens when the only room it can draw is the gate room (the game then freezes; the emulated original does not return for seed 49955, lore 3, cleared 28, specs (46,4,2) (60,6,8) (41,5,3))."
     },
     {
-      "id": "DL-ORIG-GAME-0033",
-      "title": "connector detail probes start at the far rectangle bound",
-      "status": "byte-confirmed far-bound arithmetic; defect classification pending",
-      "affected": "",
-      "disposition": "",
-      "original_units": "`0007:0698`, post-raster kind-seven detail",
-      "summary": "A horizontal connector probes `lastColumn + draw(width) - 1` at its first row; a vertical one probes `lastRow + draw(height) - 1` at its first column. A result above one can modify a cell beyond the connector if its selected outward bit is present. An interior random coordinate from the near bound changes behavior. A neighboring-face decoration could explain this arithmetic. A defect verdict needs the original operands, outward bit and later rendered detail for a result above one, including a near-grid-limit case. The full-floor differential and focused far-bound test preserve the operation; clipping is not authorized. Slice `0698..0B3E` is pinned by `tools/verify_record7_semantic_cells.py` to SHA `9b703ddb821df93af14d291b240ccaa591377c72831f90a265aee3a119150a6b`."
+      "id": "B-3cc78a",
+      "title": "The loop runs to the count inclusive, so the slot after the last cloud (an old cloud's copy, or zeros) is...",
+      "area": "Battles",
+      "original": "R014+0x10672",
+      "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs:891 (EffectField.LineCrossesCloud)",
+      "fix": "FixCloudLineOneTooMany",
+      "summary": "the loop runs to the count inclusive, so the slot after the last cloud (an old cloud's copy, or zeros) is tested too (OriginalBehaviour.FixCloudLineOneTooMany stops at the last cloud)."
     },
     {
-      "id": "DL-ORIG-GAME-0032",
-      "title": "visibility accepts some zero-extent rectangles",
-      "status": "byte-confirmed asymmetric predicate; defect classification pending",
-      "affected": "",
-      "disposition": "",
-      "original_units": "`proc_0014_9C8C`, called at `0014:7236` by `proc_0014_719E`",
-      "summary": "The predicate tests a nonpositive extent only after adjusting a negative origin. A nonnegative origin bypasses that rejection. With x/y/width/height all zero and descriptor limits 259/199, the original returns AX=1. Negative origins whose adjusted extent is nonpositive instead return AX=0. The signed comparisons and the original 16-bit SUB/NEG/INC correction must not be replaced with a blanket zero-size rejection or unbounded arithmetic.\n\nThis can be a conservative visibility test rather than a defect: the result only admits later drawing, and a subsequent clipping/drawing stage can reject an empty rectangle. The currently selected 719E producer adds eight to nonnegative signed-byte sprite extents, so its visibility dimensions are 8..135; this checkpoint does not show a naturally reached zero-extent case. A defect verdict needs a proven original producer of the unusual arguments and observation through the downstream drawing/marker continuation."
+      "id": "B-bfb04e",
+      "title": "A missed box reloads the line from the saved words, which are the stack residue until a box was hit",
+      "area": "Battles",
+      "original": "R014+0x10672",
+      "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs:893 (EffectField.LineCrossesCloud)",
+      "fix": "FixCloudLineOneTooMany",
+      "summary": "a missed box reloads the line from the saved words, which are the stack residue until a box was hit: the clouds after it are tested against that line (3, 17405)-(state words), not a → t. Kept."
     },
     {
-      "id": "DL-ORIG-GAME-0031",
-      "title": "guard-result return retains the gate owner's entry predicates",
-      "status": "byte-confirmed internal-loop behavior; defect classification and repeated-battle impact pending",
-      "affected": "",
-      "disposition": "",
-      "original_units": "`proc_0058_0E24`, `proc_0058_17DA`",
-      "summary": "After retreat or defeat, `17DA` restores the city resources, applies one or zero hours of maintenance, stores state `003Ah`, and creates the kind `0011h` event. Returning through `0FEB..1009` then republishes the seven existing `EE76..EE82` row states. It does not recapture `EE74` from the location record or re-evaluate inventory/saint availability. Navigation history `A88D` survives. The original caller/return execution and listings are retained in `combat/guard_acknowledgement_20260918/` under the reconstruction evidence tree.\n\nThis is potentially surprising because combat has changed the live party and location reputation. It might expose an option whose underlying item has been consumed, or retain an earlier reputation on another action. The selected action may independently validate that state, and a distinct publisher may refresh it; neither consequence is classified as an original defect yet. Controlled original repeated-action/combat executions must establish those consumers before broader claims. The rewrite preserves the proved loop, with regression tests for changed party knowledge and the saved reputation; it does not silently refresh them."
+      "id": "B-2ac103",
+      "title": "At −40 or below the original draws improve_roll(v, −3, −9) and drops the result, so the standing stays as...",
+      "area": "Cards and encounters",
+      "original": "R072+0x17D6",
+      "code": "src/Darklands.Cards/Scripts/S072/BeforeTheCityWalls.cs:162 (BeforeTheCityWalls.Disgrace)",
+      "fix": "",
+      "summary": "at −40 or below the original draws improve_roll(v, −3, −9) and drops the result, so the standing stays as it is (the draw is still made)."
     },
     {
-      "id": "DL-ORIG-GAME-0030",
-      "title": "guards activation retains a byte through enemy conversion",
-      "status": "byte-confirmed retained-data behavior; defect classification and later-combat effect pending",
-      "affected": "",
-      "disposition": "",
-      "original_units": "`proc_0024_0000`, `proc_0020_0000`, `proc_0025_0000`, `proc_0014_5EB4`",
-      "summary": "The selected guards path retains activation record field29 rather than constructing a new enemy value for it. Original `0024:0095` copies all30 record bytes; conversion leaves the corresponding byte in its output backing, and enemy construction propagates it to actor records. Ordinary whole-record copies then carry it into the collision-query workspace. This may be harmless unused storage, intentional retained data, or incomplete initialization; the later consumer contract is not established.\n\nControlled original controller runs with the retained value12h,00h andFFh reach `0014:030C` with identical instruction sequences, store locations/order, palette and complete pixel pages. The enemy file differs at exactly byte30; seven final memory bytes differ, including the five enemy fields. These are not byte-identical outputs. Original `0014:A492` writes the actor field on a monster branch, but its existence does not establish every later lifetime or justify a rewrite default. The selected first-frame effect is understood; ordinary later-combat reachability and defect classification remain pending."
+      "id": "B-759d5e",
+      "title": "The original adds rand(10)+8 Endurance and rand(6)+6 Strength although text 6 says everyone is hurt (the...",
+      "area": "Cards and encounters",
+      "original": "R130+0x107E",
+      "code": "src/Darklands.Cards/Scripts/S130/CavernOfFireAndHail.cs:102 (CavernOfFireAndHail.CreepAcrossUnderArmour)",
+      "fix": "",
+      "summary": "the original adds rand(10)+8 Endurance and rand(6)+6 Strength although text 6 says everyone is hurt (the prayer's path subtracts the same kind of amounts); kept as the original does it (no OriginalBehaviour flag yet)."
     },
     {
-      "id": "DL-ORIG-GAME-0029",
-      "title": "pending damage uses signed caps and wrapped vitality bytes",
-      "status": "byte-confirmed arithmetic oddity; gameplay reachability and defect classification pending",
-      "affected": "",
-      "disposition": "",
-      "original_units": "`proc_0014_AE1E`, record 14, `AE1E..AECF`",
-      "summary": "The endurance cap compares the pending byte as signed, so values `80h..FFh` are not capped to 42. Both vitality subtractions wrap to a byte before a new signed comparison against zero. For example, strength 100 minus pending strength `FFh` leaves strength 101 and does not select death. Treating that pending byte as an unbounded positive damage amount would give a different result. The raw behavior is certain; whether ordinary combat can publish these inputs and whether this is a defect remain separate questions.\n\nThe original-instruction corpus covers these boundaries. The reconstruction must retain the exact byte operations. Evidence and reproduction: `evidence/reconstruction/darklands_483_07/combat/pending_owner_20260907/abi-review.md`."
+      "id": "B-f30456",
+      "title": "Party_max_skill(8) returns the skill value, which the original then uses as a member number",
+      "area": "Cards and encounters",
+      "original": "R057+0x0956;R057+0x0948",
+      "code": "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:205 (CityChurchByDay.GiveATenth)",
+      "fix": "",
+      "summary": "party_max_skill(8) returns the skill value, which the original then uses as a member number."
     },
     {
-      "id": "DL-ORIG-GAME-0028",
-      "title": "retracted `$PHYSI00` no-wound/card mismatch",
-      "status": "disproved 2026-08-29; retained as correction history",
-      "affected": "",
-      "disposition": "no bug policy; owner remains fail-closed pending certification",
-      "original_units": "`proc_0089_0000`; `proc_0089_0264`",
-      "summary": "The original candidate was caused by a data-identity error, not an original game defect. `proc_0089_0000:000Bh` loads `DS:61F2h`. A live state-`00B4h` capture proves that address contains `$NunsH00\\0`, while `$PhysI00\\0` is at `DS:58B4h` and is referenced by the distinct state-`0018h` `proc_0050_0000` owner. The active resource and card were independently read as `E3D4h=\"$NunsH00\"` and `E959h=0008h`.\n\nUnder the corrected resource, `proc_0089_0264` is coherent: when every active member is less than five Strength points below maximum, the convent owner can show `$NUNSH00` card 3, which says the party is substantially better and must leave. The supposed bad-reputation physician refusal belongs to another MSG resource and was never selected by this owner. No reputation substitution or original-bug compatibility policy is warranted."
+      "id": "B-42f89c",
+      "title": "Only the low word of the purse in pfennigs is tested (unsigned)",
+      "area": "Cards and encounters",
+      "original": "R057+0x0000",
+      "code": "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:39 (CityChurchByDay.Run)",
+      "fix": "",
+      "summary": "only the low word of the purse in pfennigs is tested (unsigned): a rich party whose low word is under 10 cannot give."
     },
     {
-      "id": "DL-ORIG-GAME-0012",
-      "title": "`$URBAN01` retains an orphan tenth exit slot beyond its encoded rows",
-      "status": "byte-confirmed dormant original oddity; defect classification pending",
-      "affected": "no encoded input; `$URBAN01.MSG` card 0 ends at row 8 while the owner allocates slot 9",
-      "disposition": "`pending` (remain absent)",
-      "original_units": "`proc_0051_12F0`; `proc_0051_1B12`",
-      "summary": "The night-inn owner publishes ten controller bytes and ten callback/action cells even though `$URBAN01` card 0 contains only nine source rows. The tenth control is permanently zero, so the generic controller cannot return ordinal 9. Nevertheless, its latent action is coherent: it presents card 0 in mode 0, runs the zero-hour calendar/event service, and publishes state `0004h`, the ordinary `$CITYE00` family. It contains no audio gateway.\n\nThis may be harmless fixed-width template residue, an abandoned tenth choice, or an accidentally omitted resource row. The rewrite keeps it absent. The latent destination must not be exposed unless a distinct original publisher is proved or an explicit enhanced-mode policy is adopted separately from faithful behavior."
+      "id": "B-418c61",
+      "title": "See the summary",
+      "area": "Cards and encounters",
+      "original": "R089+0x0C08",
+      "code": "src/Darklands.Cards/Scripts/S089/CityLordsReward.cs:92 (CityLordsReward.LearnTheFormula)",
+      "fix": "",
+      "summary": "see the summary; the formula table's byte is set to 7 (bits 0-2: the group's three formulas)."
     },
     {
-      "id": "DL-ORIG-GAME-0008",
-      "title": "`$HANSE01` owner publishes the shared `$HANSE00` card corpus",
-      "status": "byte-confirmed resource-identity oddity; likely deliberate reuse, defect classification pending",
-      "affected": "state `0047h`, Hanseatic League office at night",
-      "disposition": "`replicate`; keep owner identity and selectable document identity distinct",
-      "original_units": "`proc_0061_2278`",
-      "summary": "`$HANSE01.MSG` contains one rowless card describing the nighttime Hanseatic League office. Nevertheless, the state-`0047h` owner publishes ten selectable rows and later card 6 from the thirteen-card `$HANSE00.MSG` corpus. The resource basename copied at owner entry, exact controller publication, and extracted MSG corpus all agree; this is not a missing `$HANSE01` extraction.\n\nThe arrangement may be intentional day/night resource reuse rather than a defect. It is recorded because conflating owner and card-document identity causes unresolved-token failures and misleading row bindings. Clean code keeps `$HANSE01.MSG` as the owner resource and `$HANSE00.MSG` as the displayed card document. Tests must reject any future attempt to treat `$HANSE01.MSG` as the selectable multi-card document."
+      "id": "B-ee49f7",
+      "title": "The original looks for a saint nobody in the party knows, starting from the city's own, but has no return...",
+      "area": "Cards and encounters",
+      "original": "R089+0x0C5C",
+      "code": "src/Darklands.Cards/Scripts/S089/CityLordsReward.cs:35 (CityLordsReward.Run)",
+      "fix": "",
+      "summary": "the original looks for a saint nobody in the party knows, starting from the city's own, but has no return statement: AX holds the last member_bit answer, 0 (checked against asm). So saint 0. (If the party knew all 136 saints the search would never end.)"
     },
     {
-      "id": "DL-ORIG-GAME-0005",
-      "title": "`$MILCR00` contains a coherent but unpublished Soldier's Road",
-      "status": "byte-confirmed dormant original oddity; defect classification pending",
-      "affected": "`$MILCR00.MSG` card-0 encoded row 0, Soldier's Road",
-      "disposition": "`pending` (remain hidden)",
-      "original_units": "`proc_0049_2E2C`; `proc_0049_315C`; `proc_0049_310E`",
-      "summary": "The complete ordinary owner writes row 0's publication state to zero and never enables it. Nevertheless, its callback and local action form a coherent lane: signed selector parity chooses card 1 or 2, the Arms Outfitter opens, two hours pass, state returns to `$MILCR00`, and the existing audio cue is retained. A controlled forced-publication experiment confirmed both latent branches without establishing natural reachability.\n\nThis may be deliberately cut content, an unfinished alternate publisher, or an accidental omission. The rewrite keeps it hidden. Proving a distinct original publisher through the unresolved alternate dispatch would explain the apparent anomaly; absent that proof, neither the complete latent code nor the runtime experiment authorizes exposing it."
+      "id": "B-83f56d",
+      "title": "\"menu_slot = 2\" and \"p_6 = 0x64\" overwrite the chosen potion and the chance (the parameter is volatile), a...",
+      "area": "Cards and encounters",
+      "original": "R055+0x1136",
+      "code": "src/Darklands.Cards/Scripts/S055/CityWallSallyPort.cs:106 (CityWallSallyPort.BlastWithPotion)",
+      "fix": "",
+      "summary": "\"menu_slot = 2\" and \"p_6 = 0x64\" overwrite the chosen potion and the chance (the parameter is volatile), a left-over test cheat; the failure branch can never run (the draw is 0..99 against 100) but still draws."
     },
     {
-      "id": "DL-ORIG-GAME-0006",
-      "title": "`$BLACK01` authors a hidden guild-guard row whose action does nothing",
-      "status": "byte-confirmed dormant original oddity; defect classification pending",
-      "affected": "`$BLACK01.MSG` card-0 encoded row 4, `guard the guild block`",
-      "disposition": "`pending` (remain hidden)",
-      "original_units": "`proc_0063_0000`; `proc_0063_0966`; `proc_0063_0964`",
-      "summary": "The owner permanently leaves row 4 unpublished despite substantive prose in the resource. Its callback returns the ordinary no-check sentinel, but its local action is only a one-byte `RETF` and produces no gameplay, presentation, calendar, or audio effect. Neighboring rows 5 through 8 are explicit literal placeholders and are catalogued separately rather than treated as completed content.\n\nThis may be an intentional stub or an abandoned feature rather than a defect. The rewrite keeps it hidden; a future reclassification requires either a distinct original publisher/action or external design evidence that explains the stub without overriding the byte-proven faithful behavior."
+      "id": "B-0c78c7",
+      "title": "The original passes the highest Strength VALUE (DS:8DFC) where the member NUMBER belongs, both in the...",
+      "area": "Cards and encounters",
+      "original": "R055+0x12EC",
+      "code": "src/Darklands.Cards/Scripts/S055/CityWallSallyPort.cs:77 (CityWallSallyPort.ForceChance)",
+      "fix": "",
+      "summary": "the original passes the highest Strength VALUE (DS:8DFC) where the member NUMBER belongs, both in the Strength lookup and as the member the hint is about; the Strength of that slot is what counts (almost always an empty slot here: 0)."
     },
     {
-      "id": "DL-ORIG-GAME-0007",
-      "title": "`$COUNC00` literal placeholder rows retain substantive exit actions",
-      "status": "byte-confirmed dormant original oddity; defect classification pending",
-      "affected": "`$COUNC00.MSG` card-0 encoded rows 6 and 7, literal texts `6` and `7`",
-      "disposition": "`pending` (remain hidden)",
-      "original_units": "`proc_0054_1A78`; `proc_0054_2C4C`; `proc_0054_2C6A`; `proc_0054_2CA2`; `proc_0054_2CC0`",
-      "summary": "The complete owner permanently suppresses both literal placeholder rows, but each retains a callback and a substantive action. The two action bodies are byte-identical: they present council card 0, invoke the zero-hour helper, and publish state `0004h` / ordinary `$CITYE00`. Row 7 additionally returns a selected-character threshold pair from its callback even though the action does not consume that argument. No audio gateway occurs.\n\nThis could be compiler/template residue, deliberately abandoned exits, or an unfinished pair of choices. The rewrite keeps both rows hidden and does not convert their latent destination into a useful route. A distinct original publisher would be required to explain the apparent anomaly and reopen their classification."
+      "id": "B-edab45",
+      "title": "Compares each member with DS:582A instead of the running minimum",
+      "area": "Cards and encounters",
+      "original": "R047+0x2BC2;R047+0x2BA4",
+      "code": "src/Darklands.Cards/Scripts/S047/CityWallsByNight.cs:146 (CityWallsByNight.EveryoneChance)",
+      "fix": "",
+      "summary": "compares each member with DS:582A instead of the running minimum."
     },
     {
-      "id": "DL-ORIG-GAME-0004",
-      "title": "`$COUNC00` contains a complete but hidden weapons-training route",
-      "status": "byte-confirmed dormant original oddity; defect classification pending",
-      "affected": "`$COUNC00.MSG` card-0 encoded row 5, `...inquire about weapons training.`",
-      "disposition": "`pending` (remain hidden)",
-      "original_units": "`proc_0054_1A78`; `proc_0054_2B8C`; `proc_0054_29F8`",
-      "summary": "The council owner leaves row 5's publication state at zero, so the generic controller cannot select it. This is despite a complete callback/action path that would negotiate guard training, create five kind-`0028h` training events, display success/refusal cards 12/13, create a kind-`0041h` cooldown, and return to the day/night city square.\n\nThe latent action also formats a dynamic displayed price, while the five training records contain one fixed 50-pfennig fee and four fixed 25-pfennig fees. Because the parent makes the route unreachable, controlled normal runtime cannot establish whether the hidden publication and price/fee mismatch are abandoned content, an accidental omission, or an unfinished feature."
+      "id": "B-79145e",
+      "title": "The arrival finds the best climber with a local maximum but never stores his value, so the grapple...",
+      "area": "Cards and encounters",
+      "original": "R047+0x20C0",
+      "code": "src/Darklands.Cards/Scripts/S047/CityWallsByNight.cs:33 (CityWallsByNight._climbing)",
+      "fix": "",
+      "summary": "the arrival finds the best climber with a local maximum but never stores his value, so the grapple option's chance is a stale value from the last time everybody climbed (0 at first)."
     },
     {
-      "id": "DL-ORIG-UI-0001",
-      "title": "Ctrl+F leader shortcut corrupts merchant UI state",
-      "status": "byte-confirmed original defect/quirk",
-      "affected": "Ctrl+F1 through Ctrl+F5 while the Goods Merchant controller is active",
-      "disposition": "`disable`",
-      "original_units": "`proc_0043_33C6`; `proc_0032_0000`; `proc_0032_0F60`; `proc_0032_076C`; `proc_0032_078E`",
-      "summary": "The generic extended-key dispatcher maps BIOS words `5E00h..6200h` to party slots 0..4, writes the chosen leader to byte `DS:907Bh`, and repaints the party panel. That is consistent with the quick-reference card's “define leader” description.\n\nThe nested merchant controller intercepts the same keys. It validates the chosen active party slot, writes `DS:907Bh`, and repaints only the party panel. It does not call the full merchant redraw at `proc_0032_078E`, does not update the merchant transaction target at `DS:884Eh`, and does not recompose the displayed barterer text, inventory lists, or prices. Execution then falls through into `ovl_0032:160F..1763`, the same block used to switch Purchase and Sell, which flips the active list and redraws the two controls with their enabled/disabled colors."
+      "id": "B-ba6123",
+      "title": "Practices everybody (who −2) once per able member, as the original does",
+      "area": "Cards and encounters",
+      "original": "R053+0x191E",
+      "code": "src/Darklands.Cards/Scripts/S053/ClothmakersStreet_Cloth00.cs:373 (ClothmakersStreet_Cloth00.SneakIn)",
+      "fix": "",
+      "summary": "practices everybody (who −2) once per able member, as the original does."
     },
     {
-      "id": "DL-ORIG-GAME-0001",
-      "title": "Merchant charges for an item that a full inventory cannot accept",
-      "status": "byte-confirmed original defect/quirk",
-      "affected": "Purchase with 40h occupied inventory records and no compatible stack that can accept quantity 01h",
-      "disposition": "`replicate`",
-      "original_units": "`proc_0032_0F60`; `proc_0029_5090`; `proc_0031_4A04`; `proc_0032_1770`",
-      "summary": "The Goods Merchant Purchase arm checks affordability, calculates its payment price, and calls `proc_0029_5090` to subtract that price from the three-word party purse before calling `proc_0031_4A04` to insert the item. The inventory owner first tries to merge the item into an exact code/type/quality stack. If no compatible stack accepts the additional quantity, it may append a new six-byte record only while the inventory count is below `40h`.\n\nAt count `40h`, a failed merge returns the unchanged count without inserting the purchased item. The Purchase caller does not test that return for failure and does not refund the earlier purse subtraction; it stores the returned count and redraws the held-item list through `proc_0032_1770`. The resulting observable behavior is therefore:"
+      "id": "B-a73a8e",
+      "title": "The hint shows R136+0x8690+0x1E5F (\"You need a missile weapon\") where \"Not enough money\" was surely meant",
+      "area": "Cards and encounters",
+      "original": "R051+0x2E16;R051+0x2DF8",
+      "code": "src/Darklands.Cards/Scripts/S051/Docks.cs:152 (Docks.PassageHint)",
+      "fix": "",
+      "summary": "the hint shows R136+0x8690+0x1E5F (\"You need a missile weapon\") where \"Not enough money\" was surely meant."
     },
     {
-      "id": "DL-ORIG-GAME-0002",
-      "title": "Stablemaster mount predicate selects counterintuitive card text",
-      "status": "byte-confirmed original anomaly; defect classification needs controlled runtime confirmation",
-      "affected": "`$URBAN00` card 0 row 3, “visit the stables”",
-      "disposition": "`replicate`",
-      "original_units": "`proc_0051_0EE0`; `proc_0029_1326` selector `0005h`",
-      "summary": "The original action calls `proc_0029_1326(0005h)` and displays `$URBAN00` card 1 when the result is nonzero, otherwise card 7. Selector `0005h` returns nonzero only when every active party record owns a nonzero-quantity item whose definition word at `+20h` intersects mount flag `2000h`. Therefore:\n\nBoth cards say that boarding is included in the inn charge and introduce the Stablemaster's available horses and mules. Card 7 alone adds that the Stablemaster asks whether any of the party's mounts are for sale. This is counterintuitive: the extra sale inquiry appears even when nobody owns a mount, while it is omitted when every active member owns one. The same shared merchant controller follows either card and allows selling in both cases."
+      "id": "B-556a53",
+      "title": "No take_item here",
+      "area": "Cards and encounters",
+      "original": "R053+0x0C36;R053+0x0C72;R053+0x0CAE;R053+0x0CEA",
+      "code": "src/Darklands.Cards/Scripts/S053/Footpads.cs:248 (Footpads.ThrowAPotion)",
+      "fix": "",
+      "summary": "no take_item here: the potion stays in the pack."
     },
     {
-      "id": "DL-ORIG-GAME-0003",
-      "title": "`$AFFAI00` fallback reverses its value-000Ch condition by location mode",
-      "status": "byte-confirmed original anomaly; defect classification needs controlled runtime confirmation",
-      "affected": "`$CITYN00` card 0 row 1, “inquire about empire affairs,” when no value-0002h event selects a location-specific card",
-      "disposition": "`replicate` for the certified indexed-location route; coordinate-mode clean projection remains `pending` and fail-closed",
-      "original_units": "`proc_0071_15A4`; `proc_0029_360C`; `resident_06A1_2FE8`",
-      "summary": "The owner accepts either an indexed current location in `DS:907Eh` or the sentinel `FFFFh`, which selects the coordinate pair at `DS:E3D0h:E3D2h`. After the shared value-0004h prefix and the location-specific value-0002h search fail to choose a final card, the two modes test a due value-000Ch event with opposite fallback results:\n\nThus, with no due value-0002h, value-0004h, or value-000Ch event, an indexed location displays `$AFFAI00` card 3 while the coordinate fallback displays no final card. With only value-000Ch due, the indexed route displays the card-17 prefix and no final card, while the coordinate route displays card 17 followed by card 3. Exact bytes, Ghidra, and independent Reko output agree on this asymmetry. Raw owner tests preserve both sides, including negative cases that prevent the coordinate arm from inheriting the intuitive indexed fallback."
+      "id": "B-d962b2",
+      "title": "The case has no break",
+      "area": "Cards and encounters",
+      "original": "R057+0x1F22",
+      "code": "src/Darklands.Cards/Scripts/S057/HandbillThugs_Polit01.cs:300 (HandbillThugs_Polit01.Fight)",
+      "fix": "",
+      "summary": "the case has no break; it fights the group of the main street and then, falling through, the group of the side street too, and only the second result counts."
     },
     {
-      "id": "DL-ORIG-GAME-0009",
-      "title": "`$RAUBI00` assumes a differently keyed quest event exists",
-      "status": "confirmed original publisher/consumer mismatch with platform-memory-dependent unchecked continuation",
-      "affected": "state `0090h`, `$RAUBI00` robber-knight quest offer",
-      "disposition": "`pending`; fail closed when the event is absent",
-      "original_units": "`proc_0061_260A`; `proc_0039_10B6`; `proc_0080_0000`; `proc_0029_3B62`",
-      "summary": "The owner searches for kind `0008h` with `field1A=DS:E896h` and `field28=0003h`. It stores the returned slot but never compares it with the `FFFFh` not-found sentinel. Instead it immediately multiplies the slot by four, indexes the event-pointer table, reads event field `+00h`, and passes that word to `proc_0029_0DB4`.\n\nIf every legal state-`0090h` publisher has already created this exact record, the omission is a harmless original invariant. If state `0090h` can be reached without it, the `FFFFh` index wraps and reads an unrelated pointer cell. The same unchecked pattern begins the paired state-`0091h` `proc_0080_038C` completion owner for its required kind-`0024h` record."
+      "id": "B-7bfead",
+      "title": "`rand_mod(100) == p` where every other card has `<=`; kept as the original has it",
+      "area": "Cards and encounters",
+      "original": "R114+0x0DCC",
+      "code": "src/Darklands.Cards/Scripts/S114/HussiteBand.cs:73 (HussiteBand.ClaimFriendship)",
+      "fix": "",
+      "summary": "`rand_mod(100) == p` where every other card has `<=`; kept as the original has it."
     },
     {
-      "id": "DL-ORIG-GAME-0011",
-      "title": "Full-party `$VILLA02` help displays a one-florin gift without adding money",
-      "status": "byte-confirmed original anomaly; defect classification needs controlled runtime confirmation",
-      "affected": "`$VILLA02.MSG` card 0 row 1, “ask for help,” with signed local reputation at least 50 and five occupied party slots",
-      "disposition": "`pending`; no natural clean `$VILLA02` route is authorized",
-      "original_units": "`proc_0077_15EC`; `proc_0077_1958`; `proc_0029_5040`",
-      "summary": "The action treats high local reputation as a guaranteed-recruitment tier. If fewer than five party slots are occupied, it shows card 4 and constructs the Schulz companion. If all five slots are occupied, it instead shows card 6, whose prose says that the Schulz drops one florin into the party's hand.\n\nThat full-party branch jumps directly to the common cooldown suffix and never calls `proc_0029_5040`; the purse is unchanged. The same card 6 is also used by the low-reputation fame-weighted success branch, but that separate branch does call `proc_0029_5040(DS:906Bh,0001h,0000h,0000h)` and therefore really adds one florin. Result-card identity is consequently insufficient to infer the money effect."
+      "id": "B-77a46d",
+      "title": "The line that is closed for lack of money is 1 (\"abandon the horses and crawl out through a sewer\"), not...",
+      "area": "Cards and encounters",
+      "original": "R058+0x2ED4",
+      "code": "src/Darklands.Cards/Scripts/S058/LeavingByTheWall.cs:74 (LeavingByTheWall.Run)",
+      "fix": "",
+      "summary": "the line that is closed for lack of money is 1 (\"abandon the horses and crawl out through a sewer\"), not the bribe line 2; kept as in the original."
     },
     {
-      "id": "DL-ORIG-GAME-0010",
-      "title": "`$RAUBI01` companion-departure prose ignores companion membership",
-      "status": "byte-confirmed original anomaly; actual upstream companion-removal behavior needs controlled runtime confirmation",
-      "affected": "robber-knight offer from the village Schulz or Hanse, followed by state `0091h` completion",
-      "disposition": "`pending`; no clean quest-completion projection is authorized",
-      "original_units": "`proc_0080_0000`; `proc_0080_038C`",
-      "summary": "The `$RAUBI00` offer allows the player to accept or decline a temporary Schulz companion for origin `0086h`, or a Hanse guard/knight for origin `0047h`. Both actions return through the same inherited origin value. Decline only writes `DS:E48Ah=DS:E7D8h`; it does not mark the quest event with a distinction later read by `$RAUBI01`.\n\nAt completion, `$RAUBI01` selects card 1 unconditionally for origin `0086h`. That card says the Schulz departs from the party. For origin `0047h`, the owner draws `RNG(2)` and selects card 6 on a nonzero result or card 7 on zero. Card 6 says the Hanse friend leaves and card 7 does not. The completion owner does not inspect party membership, does not inspect an acceptance flag, and contains no party/roster-removal call."
+      "id": "B-31b0d3",
+      "title": "The original makes $ChosenOneName the least agile member's Agility value (party_min_attr's result), not...",
+      "area": "Cards and encounters",
+      "original": "R071+0x02A8",
+      "code": "src/Darklands.Cards/Scripts/S071/NightInTheGuildLeadersHouse.cs:89 (NightInTheGuildLeadersHouse.RaiseTheHouse)",
+      "fix": "",
+      "summary": "the original makes $ChosenOneName the least agile member's Agility value (party_min_attr's result), not the member; a value past the party names nobody."
     },
     {
-      "id": "DL-ORIG-GAME-0013",
-      "title": "`$DOCKS01` describes chunks of ice through May",
-      "status": "byte-confirmed original seasonal oddity; defect classification pending",
-      "affected": "`$DOCKS01.MSG` card selection and swimming-row publication",
-      "disposition": "faithfully preserved",
-      "original_units": "`proc_0052_0000`",
-      "summary": "The owner reads the zero-based current month from `DS:00E4h`. It selects frozen-water card 1 and disables the two swimming variants when the signed month is at least 10 or at most 4: November through December and January through May. Only June through October selects ordinary card 0. The predicate does not read the current hour.\n\nCard 1 explicitly describes chunks of ice in the water, making its use through all of May geographically and seasonally surprising. This may be an intentional broad cold-water season rather than a defect, so the catalogue does not classify it as a confirmed bug. The faithful projection preserves the exact month boundary; it must not substitute a modernized climate rule."
+      "id": "B-65bf20",
+      "title": "The bribe line's flag is set from saints_usable() (meant for line 2, the prayer, which stays enabled)",
+      "area": "Cards and encounters",
+      "original": "R090+0x1366",
+      "code": "src/Darklands.Cards/Scripts/S090/RebelMarch.cs:50 (RebelMarch.Run)",
+      "fix": "",
+      "summary": "the bribe line's flag is set from saints_usable() (meant for line 2, the prayer, which stays enabled); it also overrides the 0 set just above for the far squads."
     },
     {
-      "id": "DL-ORIG-GAME-0014",
-      "title": "Night state `0014h` retains unrelated MSG labels under a different action table",
-      "status": "byte-confirmed original owner/resource mismatch; runtime presentation confirmation pending",
-      "affected": "`$SIDES01.MSG` card 0 row 5 ordinary success whose one-hour advance ends outside hours 5 through 18",
-      "disposition": "faithfully preserves the owner/resource split",
-      "original_units": "`proc_0046_1132`; `proc_0046_1734`; `proc_0049_0000`",
-      "summary": "At night, `proc_0049_0000` skips the copy that would replace the active MSG name with `$BUSIN00`. The inherited `$SIDES01.MSG` card-0 text therefore remains visible over `XNMAIN.PIC`. The same owner then publishes the ten state-`0014h` callback and action cells. Those handlers are not the `proc_0046_1132` `$SIDES01` handlers: a displayed row is acted upon according to its coincident numeric ordinal in the state-`0014h` table.\n\nThe mismatch can make a label describe one destination while its action goes somewhere else. It appears to be a missing night-resource replacement rather than intentional content, but runtime confirmation of the exact presentation and several selections is still required before classifying it as a confirmed defect. The rewrite must not use the displayed document name as dispatch authority or silently substitute `$BUSIN00` text."
+      "id": "B-9a79dc",
+      "title": "The standing rises by one on a failure too, as in the original",
+      "area": "Cards and encounters",
+      "original": "R048+0x113E",
+      "code": "src/Darklands.Cards/Scripts/S048/RevolutionHouseAtNight.cs:192 (RevolutionHouseAtNight.KnockAtTheBackDoor)",
+      "fix": "",
+      "summary": "the standing rises by one on a failure too, as in the original."
     },
     {
-      "id": "DL-ORIG-GAME-0015",
-      "title": "`$SIDES01` grove rare outcome hard-codes nighttime history after advancing time",
-      "status": "byte-confirmed original asymmetry; defect classification pending",
-      "affected": "`$SIDES01.MSG` card 0 row 7 rare action outcome",
-      "disposition": "typed fail-closed; no speculative repair",
-      "original_units": "`proc_0046_1132`; `proc_0046_1866`",
-      "summary": "Both action outcomes call `proc_0029_54D8(0001h)`. The ordinary outcome then calls `proc_0029_563A` and publishes state `0021h` by day or `0022h` by night. The rare outcome does not call the classifier: it always writes `DS:E7D8h=0022h` before publishing state `003Ch`, even when its one-hour advance ends in daytime.\n\nThe retained value may be intentional history for the unresolved state-003Ch owner rather than a defect. Until that destination owner is decoded or a controlled runtime capture proves how it consumes `E7D8h`, the rewrite must not replace the fixed value with a day/night classification. The selected ordinary grove route is independently certified, while this rare branch remains fail-closed."
+      "id": "B-86d79f",
+      "title": "The original copies \"Success is assured.\" but returns 0 instead of -1, so the hint shows a chance of 0...",
+      "area": "Cards and encounters",
+      "original": "R048+0x124E",
+      "code": "src/Darklands.Cards/Scripts/S048/RevolutionHouseAtNight.cs:153 (RevolutionHouseAtNight.KnockChance)",
+      "fix": "",
+      "summary": "the original copies \"Success is assured.\" but returns 0 instead of -1, so the hint shows a chance of 0 (and the member is whatever the register held)."
     },
     {
-      "id": "DL-ORIG-GAME-0016",
-      "title": "Equal negative location-score bounds randomly subtract one or two",
-      "status": "byte-confirmed original arithmetic oddity; defect classification pending",
-      "affected": "`$CITYG06.MSG` card 0 row 2",
-      "disposition": "replicated faithfully",
-      "original_units": "`proc_0029_19D0`; resident RNG wrapper `resident_0000_0C70`",
-      "summary": "The adjustment owner computes the second RNG range as `abs(upper)-abs(lower)`. Equal bounds therefore pass zero. The original RNG wrapper uses divisor 2 for both range 0 and range 1, so `RNG(0000h)` returns either 0 or 1. With lower and upper both `-1`, an accepted score gate therefore subtracts either one or two points. A rejected gate still consumes only its `RNG(0064h)` draw and changes nothing.\n\nThis may be a deliberate general RNG convention rather than a gameplay bug. Do not normalize the overnight loss to a fixed value without broader caller analysis. The reconstruction preserves the byte-proven result and RNG order."
+      "id": "B-82b312",
+      "title": "The pop-up handler returns -1 as the \"chance\", and the draw (0..99) is never at most -1",
+      "area": "Cards and encounters",
+      "original": "R048+0x1456",
+      "code": "src/Darklands.Cards/Scripts/S048/RevolutionHouseAtNight.cs:254 (RevolutionHouseAtNight.UseAPotion)",
+      "fix": "",
+      "summary": "the pop-up handler returns -1 as the \"chance\", and the draw (0..99) is never at most -1: the potion always fails (and, as twice the chance is below the draw, the party then goes to card 1)."
     },
     {
-      "id": "DL-ORIG-GAME-0017",
-      "title": "`$OTHER00` contains six permanently dormant placeholder rows",
-      "status": "byte-confirmed dormant-content oddity; defect classification pending",
-      "affected": "`$OTHER00.MSG` card 0 rows 2 through 7",
-      "disposition": "omitted exactly as published by the original owner",
-      "original_units": "`proc_0075_0000`",
-      "summary": "The extracted MSG payload gives encoded rows 2 through 7 only the literal texts `2` through `7`. The owner initializes all six corresponding control bytes to zero and never enables them. Latent action entries still exist and each would perform a zero-hour calendar call before publishing state `0062h`, but the ordinary controller cannot select them.\n\nThis looks like unfinished reserved content, although it could be an intentional fixed-size table. The rewrite must neither expose the placeholder rows nor infer destinations from their latent actions. If a different owner or external writer is later proven to publish those controls, this entry must be updated rather than silently removed."
+      "id": "B-0d7783",
+      "title": "The pop-up handler returns -1 as the \"chance\", and the draw (0..99) is never at most -1",
+      "area": "Cards and encounters",
+      "original": "R048+0x0916",
+      "code": "src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs:315 (RevolutionHouseByDay.UseAPotion)",
+      "fix": "",
+      "summary": "the pop-up handler returns -1 as the \"chance\", and the draw (0..99) is never at most -1: the potion always fails, the success branch below never runs."
     },
     {
-      "id": "DL-ORIG-GAME-0018",
-      "title": "Named-home name tables contain trailing entries outside their RNG bounds",
-      "status": "byte-confirmed data-table oddity; defect classification pending",
-      "affected": "`$OTHER00.MSG` card 0 `$NamedOneName` and `$NamedTwoName` substitutions",
-      "disposition": "preserve the original RNG bounds; do not expose trailing entries",
-      "original_units": "`proc_0029_5CC4`",
-      "summary": "Selector `0001h` uses RNG bound `0058h`, making exactly 88 consecutive female first-name strings selectable. The same contiguous resource area continues with `Suzanne` and `Viktoria`, but neither can be selected through this owner. Selector `0002h` similarly uses bound `0010h` over exactly 16 family-name strings; the immediately trailing `Welser` entry is outside the draw.\n\nThis may be deliberate shared-table packing rather than a defect, and no claim is made that these names were intended for the two `$OTHER00` substitutions. The rewrite must retain the byte-proven bounds and must not broaden the pools merely because additional valid strings are adjacent. A future caller that selects the trailing entries would revise this classification."
+      "id": "B-f2c259",
+      "title": "The original adds rand(10) Endurance although text 9 says many were bitten",
+      "area": "Cards and encounters",
+      "original": "R134+0x0550",
+      "code": "src/Darklands.Cards/Scripts/S134/SpiderWarehousePoster.cs:142 (SpiderWarehousePoster.EnterTheWarehouse)",
+      "fix": "",
+      "summary": "the original adds rand(10) Endurance although text 9 says many were bitten; kept as it is (no OriginalBehaviour flag for it)."
     },
     {
-      "id": "DL-ORIG-GAME-0019",
-      "title": "The shipped city-revolt family contains permanently unpublished entry lanes",
-      "status": "byte-confirmed dormant-content oddity at the entry owners; whole-family and earlier-version defect classifications pending",
-      "affected": "",
-      "disposition": "proven-unpublished rows remain hidden; substantive family remains fail-closed at unresolved owners",
-      "original_units": "`proc_0048_0000`; `proc_0048_0D6E`; `proc_0073_0000`; downstream family owners not yet fully mapped",
-      "summary": "The 483.07 data ships nineteen consecutive `$REVOLxx` resources with 230 cards. Their prose forms a large, coherent revolution/counter-revolution quest covering political investigation, recruitment, arrests and rescues, timed summons, crowds, marches, sieges, relief forces, and both rebel and government victories. This is substantially more authored content than the three family resources currently encountered by the reconstructed city route.\n\nThe complete daytime entry owner initializes rows 5–8 to zero and never publishes them. Row 5 is the substantive Force-entry choice; rows 6–8 are blank placeholders. The complete nighttime owner likewise leaves rows 5–8 at zero, where they are literal numeric placeholders. Callback/action table cells exist for these zero-state rows, but their latent effects remain an explicit decode boundary. Table existence cannot make a row selectable."
+      "id": "B-586670",
+      "title": "The offer's option lines are never switched on (R128+0x0806 cleared opt_on[] and the menu loop that copies...",
+      "area": "Cards and encounters",
+      "original": "R128+0x03B8",
+      "code": "src/Darklands.Cards/Scripts/S128/StrangerBringsAMob.cs:85 (StrangerBringsAMob.FightAWave)",
+      "fix": "",
+      "summary": "the offer's option lines are never switched on (R128+0x0806 cleared opt_on[] and the menu loop that copies the flags has not run yet), so the box offers nothing to choose."
     },
     {
-      "id": "DL-ORIG-GAME-0020",
-      "title": "`$REVOL00` row 0 can repeat its surveillance card",
-      "status": "byte-confirmed presentation oddity; defect classification pending",
-      "affected": "`$REVOL00.MSG` card 0 row 0 successful action outcomes",
-      "disposition": "typed fail-closed; no speculative deduplication",
-      "original_units": "`proc_0048_03D6`",
-      "summary": "After a successful signed RNG check, nonzero `DS:E3D0h` publishes cards 2 and 12 before the selector-`0029h` result is considered. The selector then always publishes card 2 again followed by card 3 when its result equals `0002h`, or card 4 otherwise. The two exact nonzero-lane sequences are therefore `2,12,2,3` and `2,12,2,4`; card 2 appears twice. The zero lane omits the prefix and publishes only `2,3` or `2,4`.\n\nThe repeated card may be deliberate recap after the lane-specific card 12, or it may be an original presentation bug. Do not collapse, reorder, or deduplicate the sequence without evidence from another original version. In particular, card 12 depends only on nonzero `DS:E3D0h`, while the choice of card 3 versus card 4 depends only on the selector result; neither predicate may be substituted for the other."
+      "id": "B-08a606",
+      "title": "The search tests formulas_known[m][n / 3] && 1 << n % 3 (logical, not bitwise)",
+      "area": "Cards and encounters",
+      "original": "R118+0x21DC",
+      "code": "src/Darklands.Cards/Scripts/S118/TemplarWritingDesk.cs:97 (TemplarWritingDesk.LearnAFormula)",
+      "fix": "",
+      "summary": "the search tests formulas_known[m][n / 3] && 1 << n % 3 (logical, not bitwise): it skips any n whose group of three has any formula known, not just n itself. If all groups do, the first n is learnt."
     },
     {
-      "id": "DL-ORIG-GAME-0021",
-      "title": "`$REVOL00` row 1 repeats an identical event query",
-      "status": "byte-confirmed redundant-query oddity; defect classification pending",
-      "affected": "`$REVOL00.MSG` card 0 encoded row 1, signed RNG-success lane",
-      "disposition": "raw owner only; replicate ordering if the clean route is later authorized",
-      "original_units": "`proc_0048_0506`; `proc_0029_3742`",
-      "summary": "After the one-hour calendar call and signed RNG check select the complementary lane, the owner calls `proc_0029_3742(0002h,0000h,current-city)` once. If the result is `FFFFh` while `DS:E3D0h` is zero, it immediately takes the no-card state-`0079h` tail. Every other case calls the same helper again with the same three words. A second result of `0001h` suppresses card 5 only when `DS:E3D0h` is nonzero; otherwise the owner publishes card 5 and state `0074h`.\n\nThe selected helper scans the same live kind-`001Ch` event records and writes the selected slot index to `DS:E3CEh`; it does not mutate the matched record. Consequently the second result is ordinarily identical to the first, and the second scan appears redundant. It may be compiler output from two separately authored selector predicates, intentional refresh of `DS:E3CEh`, or an unfinished design in which another operation once separated the calls. Exact bytes do not prove which explanation is correct."
+      "id": "B-19435f",
+      "title": "It tests item 0's flags",
+      "area": "Cards and encounters",
+      "original": "R084+0x0536",
+      "code": "src/Darklands.Cards/Scripts/S084/WolfPackOnTheTrail.cs:149 (WolfPackOnTheTrail.RidingChance)",
+      "fix": "",
+      "summary": "it tests item 0's flags."
     },
     {
-      "id": "DL-ORIG-GAME-0022",
-      "title": "`$CITYC01` altar-boy action retains two uninitialized daytime arms",
-      "status": "byte-confirmed unreachable-arm oddity; defect classification pending",
-      "affected": "`$CITYC01.MSG` card 0 row 1, `...talk to the altar boy.`",
-      "disposition": "naturally reachable nighttime arms only; uninitialized arms remain fail-closed",
-      "original_units": "`proc_0057_0D32`",
-      "summary": "The owner allocates a two-byte stack local with `ENTER 0002h,0000h` and does not initialize it. Hour buckets 4 and 5, corresponding to 09:00..14:59, both jump to `0D6Ah`, load that local into `CX`, and would use it as the token for `proc_0029_1FB8` selector 3.\n\nThe defect is latent on the natural route. `$CITYC01` is the nighttime church state and is selected only outside 05:00..18:59, so its altar-boy action can reach only buckets 0, 1, 2, and 7. The stock city-size domain reduces those arms to the well-defined `Matins`, `Prime`, and `Compline` outcomes. No host default may be supplied for the uninitialized daytime value, and a developer time mutation must not be treated as original reachability evidence."
+      "id": "B-024865",
+      "title": "Boosts given to the whole party are never taken back (FixEverybodyBoostsUndone)",
+      "area": "Events",
+      "original": "R029+0x448A",
+      "code": "src/Darklands.Core/Events/EventExpiry.cs:132 (EventExpiry.UndoBoost)",
+      "fix": "FixEverybodyBoostsUndone",
+      "summary": "boosts given to the whole party are never taken back (FixEverybodyBoostsUndone)."
     },
     {
-      "id": "DL-ORIG-GAME-0023",
-      "title": "Day and night Mass use radically different Divine Favor formulas",
-      "status": "byte-confirmed gameplay oddity; defect classification pending",
-      "affected": "`$CITYC00.MSG` and `$CITYC01.MSG` card 0 row 0, attend Mass",
-      "disposition": "preserve both exact formulas and log their computed and applied effects",
-      "original_units": "`proc_0057_0214`; `proc_0057_0B6A`",
-      "summary": "The daytime owner computes the current-Divine-Favor delta as `abs(signed Religion)/8 + signed Speak Latin % 35 + 1`. The nighttime owner instead computes `signed Religion/60 + signed Speak Latin/40 + 1`. Both then pass the result through the same effect-aware current-field cap. This is not a display-only difference: ordinary daytime values can produce much larger gains, and an already capped character can show a nonzero computed delta but an applied delta of zero.\n\nThe separate instruction sequences and independent Ghidra/Reko witnesses make the discrepancy byte-confirmed, but do not establish whether it was an intentional difference between the two church owners or a copied/formula bug. Do not normalize the formulas. A defect verdict requires authenticated earlier version evidence or another original source explaining the intended rule."
+      "id": "B-8d31a1",
+      "title": "The new event already holds the value before the op (FixNewEventAddDoubles)",
+      "area": "Events",
+      "original": "R029+0x2E74",
+      "code": "src/Darklands.Core/Events/EventLog.cs:161 (EventLog.Update)",
+      "fix": "FixNewEventAddDoubles",
+      "summary": "the new event already holds the value before the op (FixNewEventAddDoubles)."
     },
     {
-      "id": "DL-ORIG-GAME-0024",
-      "title": "Asking the guard captain can consume zero hours",
-      "status": "byte-confirmed calendar oddity; defect classification pending",
-      "affected": "`$SANCT00.MSG` card 0 row 3, seek word from the captain of the city guard",
-      "disposition": "preserve the exact `0..2`-hour result; the former empty-picture blocker was an evidence error and does not apply to this route",
-      "original_units": "`proc_0076_0822`",
-      "summary": "After displaying and acknowledging the reputation-selected guard reply, the owner calls `resident_0000_0C70(0003h)` exactly once and passes its result unchanged to `proc_0029_54D8`. The random helper's established contract returns `0`, `1`, or `2`, so asking for the captain's reply can consume no game time at all. The calendar owner still executes in the zero case, including its ordered party/event maintenance and clock sampling.\n\nThis may intentionally represent an immediate reply, or it may be an off-by-one duration bug where one through three hours was intended. The bytes do not decide intent. Do not add one, reroll zero, or skip the zero-elapsed calendar call. A defect verdict requires an authenticated version comparison or original design evidence."
+      "id": "B-9d2829",
+      "title": "All five ingredient slots are returned (FixUnbrewEmptyIngredientSlots)",
+      "area": "Rules",
+      "original": "R036+0x1EC2",
+      "code": "src/Darklands.Core/Rules/Brewing.cs:260 (Brewing.CallOff)",
+      "fix": "FixUnbrewEmptyIngredientSlots",
+      "summary": "all five ingredient slots are returned (FixUnbrewEmptyIngredientSlots)."
     },
     {
-      "id": "DL-ORIG-GAME-0026",
-      "title": "Sanctuary extreme-surrender tail retains an unreachable shorter duration arm",
-      "status": "byte-confirmed control-flow oddity; defect classification pending",
-      "affected": "`$SANCT00.MSG` card 0 row 2 with signed local reputation at most `-75`",
-      "disposition": "extreme route remains fail-closed; preserve the comparison in any future raw owner",
-      "original_units": "`proc_0076_0694`",
-      "summary": "The common extreme-surrender tail compares the signed local-reputation word again and schedules a kind-`0011h` event for `00F0h` hours when the value is at most `-75`, otherwise for `0078h` hours. But the only canonical control-flow edge reaching that tail has already required the same word to be at most `-75` at `06DEh`; reputation greater than `-75` takes the ordinary surrender route and returns FAR at `06DCh`. The `0078h` arm is therefore unreachable from the function entry under unchanged memory.\n\nThis may be harmless compiler residue, a remnant of an earlier threshold, or evidence that an omitted callback once changed the word. Current bytes show no intervening write to `DS:EE74h`. Do not simplify the comparison in the raw reconstruction or expose the shorter duration as a random alternative. A defect verdict requires an authenticated earlier executable or proof of reentrant mutation not present in the current direct call graph."
+      "id": "B-8a1b71",
+      "title": "The weapon-skill test reads +0x57, +0x5C, +0x59, +0x5A, +0x5B, +0x5D: Impact Weapons (+0x58) is not among them",
+      "area": "Rules",
+      "original": "R036+0x1B80",
+      "code": "src/Darklands.Core/Rules/CampStay.cs:473 (CampStay.GrowRisk)",
+      "fix": "",
+      "summary": "the weapon-skill test reads +0x57, +0x5C, +0x59, +0x5A, +0x5B, +0x5D: Impact Weapons (+0x58) is not among them."
     },
     {
-      "id": "DL-ORIG-GAME-0027",
-      "title": "Authored sanctuary-pressure cards have no proven publisher",
-      "status": "shipped-content oddity; publisher and defect classification pending",
-      "affected": "extended sanctuary stay / escalating priest warnings / forced departure",
-      "disposition": "do not expose; no exact original publisher is certified",
-      "original_units": "",
-      "summary": "The shipped resource contains a coherent five-card pressure sequence, but the complete state-`0081h` owner never presents those ordinals. The only direct static `$SANCT00` resource-CString reference in the current materialized overlay corpus is the owner at `ovl_0076:043Ch`; its selected actions present cards 0–3 and 9–12 only. Nearby card-4/5/6 calls belong to a different state-`0083h` resource owner and are not sanctuary evidence.\n\nThis is not yet a byte-proven dormant branch. A dynamically retained resource or indirect publisher has not been globally disproved. The card prose and the kind-`0011h` event scheduled by extreme surrender are insufficient to bind a publisher: that event profile is callback-free in the currently certified scheduler path. Do not synthesize a timed sequence, reuse another resource's card ordinals, or expose card 8 as the normal sanctuary menu."
+      "id": "B-459e15",
+      "title": "J counts every teacher event met, so rows are numbered by log position and the scan stops after \"count...",
+      "area": "Rules",
+      "original": "R036+0x1D24;R036+0x0082;R036+0x147A",
+      "code": "src/Darklands.Core/Rules/CampStay.cs:114 (CampStay.TeacherList)",
+      "fix": "",
+      "summary": "j counts every teacher event met, so rows are numbered by log position and the scan stops after \"count here\" events of any town."
     },
     {
-      "id": "DL-ORIG-GAME-0036",
-      "title": "F284 can consume interrupt-frame residue as clipping coordinates",
-      "status": "HIGH-CONFIDENCE DEFECT (PR206 outcome B); byte-confirmed uninitialized-on-path read and DOSBox-X variability; complete private contract remains unresolved",
-      "affected": "retained mode10 simple_encounter, ORIGINAL-REPLAY/HARNESS; no tactical-exploration or SDL seed7099 generalization",
-      "disposition": "",
-      "original_units": "",
-      "summary": "On the established horizontal clipping path, F284 pushes `[BP-2]` and `[BP-4]` without first assigning them on that invocation's path. Earlier EF3C stores can leave the inherited point `(8,19)` at the later frame's FC56/FC58. The 16 October machine experiment observes a real scheduled IRQ0 during MGRAPHIC:047F at SS:SP=3A3D:FC5A replacing those words with CS/FLAGS `(4A65h,7217h)`. Continuous watch evidence closes survival to the original read. The outcode changes 9→6; both remain outside, the first F284 return stays zero and the projectile still publishes `(754,133)`. This strengthens the likely-defect interpretation without establishing historical frequency or changed gameplay in this experiment.\n\nPrior controlled coordinate perturbations establish that inside versus outside can affect the destination; they are separate evidence, not natural IRQ outcomes. The original intent or an invariant across all relevant callers could still change the interpretation. An independent machine replication and a naturally produced consequential clipping difference remain open. No diagnostic point or compatibility fallback is authorized, and no new production behavior requires a test in this research-only update."
+      "id": "B-126118",
+      "title": "Esc from the childhood attributes goes back to the background list at age 15",
+      "area": "Rules",
+      "original": "R037+0x4664",
+      "code": "src/Darklands.Core/Characters/Creation/CharacterCreation.cs:274 (CharacterCreation.Back)",
+      "fix": "",
+      "summary": "Esc from the childhood attributes goes back to the background list at age 15; a background row then serves the adult occupation of that number (Recruit..Knight), as in the original."
     },
     {
-      "id": "DL-ORIG-GAME-0037",
-      "title": "Missed-projectile search publishes an unverified terminal step",
-      "status": "CONFIRMED ORIGINAL IMPLEMENTATION BEHAVIOR / POSSIBLE GAMEPLAY DEFECT — CORRECTION DEFERRED BY OWNER",
-      "affected": "",
-      "disposition": "",
-      "original_units": "",
-      "summary": "The original reduced-step clear branch adds its newly halved deltas to the endpoint, then exits without another EF3C query. The all-clear bounded exit and blocked exhaustion also store an unqueried adjustment. Original skill restoration precedes destination stores, and the caller publishes the row count afterward. This is distinct from DL-ORIG-GAME-0036's inherited clipping-point dependence.\n\nThe genuine PR209 H capture correctly tests `(962,103)` clear but then publishes `(995,107)`, crossing actual wall `[990,992]×[95,112]`. The final point is3 X units past its right edge, approximately3.025 units along the straight proposed ray. The existing missed-shot movement/render path reaches it, draws the ordinary arrow with status129 and removes it without damage or another wall check. That consequence is natural experimental C#/SDL evidence, not execution of the original DOS game on the same battlefield."
+      "id": "B-ea8f8b",
+      "title": "Loc_side_get/loc_side_set and side*_percent work on cur_loc, not the event's city (kept)",
+      "area": "Rules",
+      "original": "R029+0x4180",
+      "code": "src/Darklands.Core/Rules/CityPolitics.cs:214 (CityPolitics.DailyPolitics)",
+      "fix": "",
+      "summary": "loc_side_get/loc_side_set and side*_percent work on cur_loc, not the event's city (kept)."
     },
     {
-      "id": "DL-ORIG-GAME-0025",
-      "title": "Retracted sanctuary escape-chance oddity",
-      "status": "disproven reconstruction incident; not an original bug",
-      "affected": "`$SANCT00.MSG` card 0 row 4, try to sneak out",
-      "disposition": "execute both certified outcomes: card 10 escapes to the day/night side street; card 9 advances one hour and restores the sanctuary; month rollover remains typed fail-closed",
-      "original_units": "`proc_0029_1446`; `proc_0076_095E`; `proc_0076_08AC`",
-      "summary": "The callback selects the active party member with the lowest signed sum of raw fields `000Fh` and `0010h` (Stealth and Streetwise), clamps that sum to `10..99`, and supplies it as the action threshold. The action draws `RNG(0064h)`. The exact `CMP AX,[BP+06h] / JLE` relation sends a roll less than or equal to the threshold to card 10; card 10 says the party quietly escapes through the graveyard and then publishes the day/night side-street state. A greater roll sends the party to card 9, whose text says a member stumbles, the guards sound the alarm, and the party retreats into the church.\n\nThe earlier entry reversed those card meanings by associating card 10 with the adjacent prison text, which is actually card 11 and belongs to surrender. Direct inspection of the extracted `$SANCT00.MSG` resource plus a product test that asserts card 10's successful-escape text disproves the alleged oddity. Keep this retracted entry as a durable incident guard: numeric adjacency, picture-name intuition, and remembered result prose are not card-semantic authority. Do not reverse the original comparison."
+      "id": "B-074e99",
+      "title": "The second contents test is written `!cats2 & city.cats`, so a job with cats2 != 0 is never open",
+      "area": "Rules",
+      "original": "R036+0x197E",
+      "code": "src/Darklands.Core/Rules/DayJobs.cs:61 (DayJobs.static)",
+      "fix": "",
+      "summary": "the second contents test is written `!cats2 & city.cats`, so a job with cats2 != 0 is never open."
+    },
+    {
+      "id": "B-d5aab5",
+      "title": "The stack is joined and appended too (FixPartyItemsAddedTwice)",
+      "area": "Rules",
+      "original": "R031+0x4A04",
+      "code": "src/Darklands.Core/Rules/Inventory.cs:196 (Inventory.AddStack)",
+      "fix": "FixPartyItemsAddedTwice",
+      "summary": "(-2) the stack is joined and appended too (FixPartyItemsAddedTwice)."
+    },
+    {
+      "id": "B-b28ef4",
+      "title": "Item_defs[0]->flags is tested for every stack (FixItemQualityByFlags)",
+      "area": "Rules",
+      "original": "R031+0x5F6C",
+      "code": "src/Darklands.Core/Rules/Inventory.cs:134 (Inventory.BestQualityByFlags)",
+      "fix": "FixItemQualityByFlags",
+      "summary": "item_defs[0]->flags is tested for every stack (FixItemQualityByFlags)."
+    },
+    {
+      "id": "B-e458c5",
+      "title": "I starts at nitems (FixKeepItemsOffByOne)",
+      "area": "Rules",
+      "original": "R031+0x5308",
+      "code": "src/Darklands.Core/Rules/Inventory.cs:410 (Inventory.KeepEach)",
+      "fix": "FixKeepItemsOffByOne",
+      "summary": "i starts at nitems (FixKeepItemsOffByOne)."
+    },
+    {
+      "id": "B-55afd6",
+      "title": "Event_at(cur_loc, 0x13) has its arguments swapped (FixHostileUnrestTest)",
+      "area": "Rules",
+      "original": "R039+0x00BA",
+      "code": "src/Darklands.Core/Rules/LocationRules.cs:219 (LocationRules.Hostile)",
+      "fix": "FixHostileUnrestTest",
+      "summary": "event_at(cur_loc, 0x13) has its arguments swapped (FixHostileUnrestTest); the three tests short-circuit in this order."
+    },
+    {
+      "id": "B-42ba6c",
+      "title": "6 writes city_rec[0x66] and 11 city_rec[0x67] (FixShopSetSwap)",
+      "area": "Rules",
+      "original": "R029+0x1DFE",
+      "code": "src/Darklands.Core/Rules/LocationRules.cs:146 (LocationRules.Set)",
+      "fix": "FixRecordedListShift;FixShopSetSwap",
+      "summary": "6 writes city_rec[0x66] and 11 city_rec[0x67] (FixShopSetSwap); 37 overwrites every occupied slot (FixRecordedListShift)."
+    },
+    {
+      "id": "B-dc949d",
+      "title": "The second test reads party[leader] instead of party[i] (as in the source",
+      "area": "Rules",
+      "original": "R040+0x0000",
+      "code": "src/Darklands.Core/Rules/LootSharing.cs:34 (LootSharing.ReplaceFallenLeader)",
+      "fix": "",
+      "summary": "the second test reads party[leader] instead of party[i] (as in the source; loot_distribute is byte-matched): reproduced, no fix flag."
+    },
+    {
+      "id": "B-a84745",
+      "title": "`best_skill = i` sits outside the if (missing braces)",
+      "area": "Rules",
+      "original": "R029+0x01C0",
+      "code": "src/Darklands.Core/Rules/MemberRules.cs:81 (MemberRules.BestWeaponSkill)",
+      "fix": "FixBestWeaponSkillNumber",
+      "summary": "`best_skill = i` sits outside the if (missing braces): it ends as 6 (FixBestWeaponSkillNumber)."
+    },
+    {
+      "id": "B-8b2837",
+      "title": "A member above the boost ends the call and the reduced boost carries over (FixWholePartyBoosts)",
+      "area": "Rules",
+      "original": "R029+0x4C04",
+      "code": "src/Darklands.Core/Rules/MemberRules.cs:273 (MemberRules.RaiseAttributeTemporarily)",
+      "fix": "FixWholePartyBoosts",
+      "summary": "(-2) a member above the boost ends the call and the reduced boost carries over (FixWholePartyBoosts)."
+    },
+    {
+      "id": "B-c14d7c",
+      "title": "Member_skill(-2) and add_skill(-2) for each present member (FixWholePartyBoosts)",
+      "area": "Rules",
+      "original": "R029+0x4B08",
+      "code": "src/Darklands.Core/Rules/MemberRules.cs:333 (MemberRules.RaiseSkillTemporarily)",
+      "fix": "FixWholePartyBoosts",
+      "summary": "(-2) member_skill(-2) and add_skill(-2) for each present member (FixWholePartyBoosts)."
+    },
+    {
+      "id": "B-2ffc47",
+      "title": "The clamp's result is dropped and v is stored as a char (FixSetAttributeMaximumLimit)",
+      "area": "Rules",
+      "original": "R029+0x0B84",
+      "code": "src/Darklands.Core/Rules/MemberRules.cs:157 (MemberRules.SetAttributeMaximum)",
+      "fix": "FixSetAttributeMaximumLimit",
+      "summary": "the clamp's result is dropped and v is stored as a char (FixSetAttributeMaximumLimit)."
+    },
+    {
+      "id": "B-82a302",
+      "title": "Best_value = a * 2 (FixAttributeSums)",
+      "area": "Rules",
+      "original": "R029+0x179C",
+      "code": "src/Darklands.Core/Rules/PartyQueries.cs:158 (PartyQueries.MaxAttributeSum)",
+      "fix": "FixAttributeSums",
+      "summary": "best_value = a * 2 (FixAttributeSums); DS:9A44 is not written here."
+    },
+    {
+      "id": "B-014a8d",
+      "title": "Best_value = a * 2 (FixAttributeSums)",
+      "area": "Rules",
+      "original": "R029+0x1696",
+      "code": "src/Darklands.Core/Rules/PartyQueries.cs:126 (PartyQueries.MinAttributeSum)",
+      "fix": "FixAttributeSums",
+      "summary": "best_value = a * 2 (FixAttributeSums); it writes best_value, not DS:9C1D, and also DS:9A44."
+    },
+    {
+      "id": "B-3dcbd1",
+      "title": "Seed -2 gets party_seed twice (FixBattleSeed)",
+      "area": "Rules",
+      "original": "R029+0x2278",
+      "code": "src/Darklands.Core/Rules/PartyRules.cs:251 (PartyRules.BattleSeed)",
+      "fix": "FixBattleSeed",
+      "summary": "seed -2 gets party_seed twice (FixBattleSeed)."
+    },
+    {
+      "id": "B-23a975",
+      "title": "Strongedge and Great Power record the pack index as the bonus event's type (Deadly Blade records the...",
+      "area": "Rules",
+      "original": "R031+0x10AE;R031+0x43B2;R031+0x4CC4",
+      "code": "src/Darklands.Core/Rules/PotionEffects.cs:76 (PotionEffects.Drink)",
+      "fix": "",
+      "summary": "Strongedge and Great Power record the pack index as the bonus event's type (Deadly Blade records the potion code)."
+    },
+    {
+      "id": "B-82a169",
+      "title": "V - fame is stored (FixFameCost)",
+      "area": "Rules",
+      "original": "R039+0x1E90",
+      "code": "src/Darklands.Core/Rules/Practice.cs:78 (Practice.ChargeFame)",
+      "fix": "FixFameCost",
+      "summary": "v - fame is stored (FixFameCost)."
+    },
+    {
+      "id": "B-94efea",
+      "title": "\"learn the saint of this place\" (R056 19c4) and the teaching saints pass -1 and teach nobody...",
+      "area": "Rules",
+      "original": "R029+0x1302",
+      "code": "src/Darklands.Core/Rules/Saints.cs:55 (Saints.Learn)",
+      "fix": "FixSaintLearnedByLeader",
+      "summary": "\"learn the saint of this place\" (R056 19c4) and the teaching saints pass -1 and teach nobody (FixSaintLearnedByLeader)."
+    },
+    {
+      "id": "B-700b91",
+      "title": "The original compares its uninitialised size slot where cur_loc was meant (checked against asm 1D72",
+      "area": "Rules",
+      "original": "R032+0x1D18",
+      "code": "src/Darklands.Core/Rules/Trading.cs:251 (Trading.ShopHasItem)",
+      "fix": "FixShopStockSize",
+      "summary": "the original compares its uninitialised size slot where cur_loc was meant (checked against asm 1D72: mov dx,[bp-2]; cmp dx,5Ch; inc dx); OriginalBehaviour.FixShopStockSize uses the city size always."
+    },
+    {
+      "id": "B-14d327",
+      "title": "OriginalBehaviour.FixLoadScreenEscape - Esc on the load screen goes on with the emptied slots and no events",
+      "area": "Screens",
+      "original": "R037+0x8B76",
+      "code": "src/Darklands.Presentation/DarklandsGame.cs:232 (DarklandsGame.LoadInGame)",
+      "fix": "FixLoadScreenEscape",
+      "summary": "OriginalBehaviour.FixLoadScreenEscape - Esc on the load screen goes on with the emptied slots and no events."
     }
   ],
-  "dormant": [
+  "dormant_counts": [
+    {
+      "area": "Cards and encounters",
+      "count": 736
+    },
+    {
+      "area": "Battles",
+      "count": 63
+    },
+    {
+      "area": "Rules",
+      "count": 25
+    },
+    {
+      "area": "Screens",
+      "count": 24
+    },
+    {
+      "area": "Travel",
+      "count": 4
+    },
+    {
+      "area": "Events",
+      "count": 1
+    },
+    {
+      "area": "Sound",
+      "count": 1
+    }
+  ],
+  "dormant_curated": [
     {
       "title": "`$MILCR00` card 0 row 0 — Soldier's Road",
       "classification": "authored_latent_lane",
@@ -930,5 +1114,353 @@
         }
       ]
     }
-  ]
+  ],
+  "earlier_findings": [
+    {
+      "id": "DL-ORIG-GAME-0035",
+      "title": "TACANIM terminal lookup consumes inherited size words",
+      "status": "",
+      "affected": "",
+      "disposition": "",
+      "original_units": "",
+      "summary": "Status: byte-confirmed behavior; possible original bug, defect classification pending. R25 owner `[0A84,0BE4)` (original EXE `[54DA4,54F04)`, SHA256 `70DDC4CBF52145D75ED347ACDD294CFE139CED4EFA6B49ACF38B226336C7AA02`) checks FILE+6 bit10 at0AC8, ignores fread's result after0AD7, and compares the partially overwritten fourteen-byte local record at0AE7. A mismatch loops back to the flag test; initially terminal FILE state skips read and compare. Close0AF4 precedes size reads atBP-12h/-10h/-0Eh and their ordered reservations. Thus absent or short unmatched TACANIM records can use inherited allocation size bytes, rather than returning a lookup failure. No failed-open/read owner result is inferred from this behavior.\n\nThis appears anomalous because resource absence can affect allocation sizes through unrelated stack history. An upstream guaranteed matching record or restricted resource contract may explain ordinary safety; neither licenses zeroing the inherited words. Rewrite disposition: replicate in isolated Lane-A research with explicit inherited scratch/FILE inputs; production unchanged. Unbound bytes stop at their first actual consumer, preserving close and any earlier reservation publication. Native open/read error-state continuation remains an explicit typed stop. The campaign's controlled original comparison and tests are linked in [the current report](research/COMBAT_READER_STARTUP_CLOSURE_CAMPAIGN.md). Controlled malformed-resource inputs do not establish natural reachability."
+    },
+    {
+      "id": "DL-ORIG-GAME-0034",
+      "title": "item-feature scratch shuffle does not select the item",
+      "status": "byte-confirmed redundant shuffle; defect classification pending",
+      "affected": "",
+      "disposition": "",
+      "original_units": "`0007:4076`, item-bearing feature-record population",
+      "summary": "After swapping scratch-pool entries, the routine reloads the draw index at `421E`, not a pool value. Dispatch permits repeated entries; the pool has no observable influence on selection. The semantic compiler removes its scratch writes but retains saved-draw dispatch, decreasing bounds and the four-item stop. DKSAVE8's complete feature records and publication RNG falsify a shuffled pool interpretation. Repeats could be intentional: a defect verdict needs an established inventory policy and controlled original examples of repetition. Original EXE SHA is `90138ae88acf66ad765e96c0465c1a4aa11eb09b74f365ed18c0f01beb9a86c2`; `4076..42D8` SHA is `2085b40986256f1310dfc835341b892e67fc31135d300118b3bb0194a5c56d60`."
+    },
+    {
+      "id": "DL-ORIG-GAME-0033",
+      "title": "connector detail probes start at the far rectangle bound",
+      "status": "byte-confirmed far-bound arithmetic; defect classification pending",
+      "affected": "",
+      "disposition": "",
+      "original_units": "`0007:0698`, post-raster kind-seven detail",
+      "summary": "A horizontal connector probes `lastColumn + draw(width) - 1` at its first row; a vertical one probes `lastRow + draw(height) - 1` at its first column. A result above one can modify a cell beyond the connector if its selected outward bit is present. An interior random coordinate from the near bound changes behavior. A neighboring-face decoration could explain this arithmetic. A defect verdict needs the original operands, outward bit and later rendered detail for a result above one, including a near-grid-limit case. The full-floor differential and focused far-bound test preserve the operation; clipping is not authorized. Slice `0698..0B3E` is pinned by `tools/verify_record7_semantic_cells.py` to SHA `9b703ddb821df93af14d291b240ccaa591377c72831f90a265aee3a119150a6b`."
+    },
+    {
+      "id": "DL-ORIG-GAME-0032",
+      "title": "visibility accepts some zero-extent rectangles",
+      "status": "byte-confirmed asymmetric predicate; defect classification pending",
+      "affected": "",
+      "disposition": "",
+      "original_units": "`proc_0014_9C8C`, called at `0014:7236` by `proc_0014_719E`",
+      "summary": "The predicate tests a nonpositive extent only after adjusting a negative origin. A nonnegative origin bypasses that rejection. With x/y/width/height all zero and descriptor limits 259/199, the original returns AX=1. Negative origins whose adjusted extent is nonpositive instead return AX=0. The signed comparisons and the original 16-bit SUB/NEG/INC correction must not be replaced with a blanket zero-size rejection or unbounded arithmetic.\n\nThis can be a conservative visibility test rather than a defect: the result only admits later drawing, and a subsequent clipping/drawing stage can reject an empty rectangle. The currently selected 719E producer adds eight to nonnegative signed-byte sprite extents, so its visibility dimensions are 8..135; this checkpoint does not show a naturally reached zero-extent case. A defect verdict needs a proven original producer of the unusual arguments and observation through the downstream drawing/marker continuation."
+    },
+    {
+      "id": "DL-ORIG-GAME-0031",
+      "title": "guard-result return retains the gate owner's entry predicates",
+      "status": "byte-confirmed internal-loop behavior; defect classification and repeated-battle impact pending",
+      "affected": "",
+      "disposition": "",
+      "original_units": "`proc_0058_0E24`, `proc_0058_17DA`",
+      "summary": "After retreat or defeat, `17DA` restores the city resources, applies one or zero hours of maintenance, stores state `003Ah`, and creates the kind `0011h` event. Returning through `0FEB..1009` then republishes the seven existing `EE76..EE82` row states. It does not recapture `EE74` from the location record or re-evaluate inventory/saint availability. Navigation history `A88D` survives. The original caller/return execution and listings are retained in `combat/guard_acknowledgement_20260918/` under the reconstruction evidence tree.\n\nThis is potentially surprising because combat has changed the live party and location reputation. It might expose an option whose underlying item has been consumed, or retain an earlier reputation on another action. The selected action may independently validate that state, and a distinct publisher may refresh it; neither consequence is classified as an original defect yet. Controlled original repeated-action/combat executions must establish those consumers before broader claims. The rewrite preserves the proved loop, with regression tests for changed party knowledge and the saved reputation; it does not silently refresh them."
+    },
+    {
+      "id": "DL-ORIG-GAME-0030",
+      "title": "guards activation retains a byte through enemy conversion",
+      "status": "byte-confirmed retained-data behavior; defect classification and later-combat effect pending",
+      "affected": "",
+      "disposition": "",
+      "original_units": "`proc_0024_0000`, `proc_0020_0000`, `proc_0025_0000`, `proc_0014_5EB4`",
+      "summary": "The selected guards path retains activation record field29 rather than constructing a new enemy value for it. Original `0024:0095` copies all30 record bytes; conversion leaves the corresponding byte in its output backing, and enemy construction propagates it to actor records. Ordinary whole-record copies then carry it into the collision-query workspace. This may be harmless unused storage, intentional retained data, or incomplete initialization; the later consumer contract is not established.\n\nControlled original controller runs with the retained value12h,00h andFFh reach `0014:030C` with identical instruction sequences, store locations/order, palette and complete pixel pages. The enemy file differs at exactly byte30; seven final memory bytes differ, including the five enemy fields. These are not byte-identical outputs. Original `0014:A492` writes the actor field on a monster branch, but its existence does not establish every later lifetime or justify a rewrite default. The selected first-frame effect is understood; ordinary later-combat reachability and defect classification remain pending."
+    },
+    {
+      "id": "DL-ORIG-GAME-0029",
+      "title": "pending damage uses signed caps and wrapped vitality bytes",
+      "status": "byte-confirmed arithmetic oddity; gameplay reachability and defect classification pending",
+      "affected": "",
+      "disposition": "",
+      "original_units": "`proc_0014_AE1E`, record 14, `AE1E..AECF`",
+      "summary": "The endurance cap compares the pending byte as signed, so values `80h..FFh` are not capped to 42. Both vitality subtractions wrap to a byte before a new signed comparison against zero. For example, strength 100 minus pending strength `FFh` leaves strength 101 and does not select death. Treating that pending byte as an unbounded positive damage amount would give a different result. The raw behavior is certain; whether ordinary combat can publish these inputs and whether this is a defect remain separate questions.\n\nThe original-instruction corpus covers these boundaries. The reconstruction must retain the exact byte operations. Evidence and reproduction: `evidence/reconstruction/darklands_483_07/combat/pending_owner_20260907/abi-review.md`."
+    },
+    {
+      "id": "DL-ORIG-GAME-0028",
+      "title": "retracted `$PHYSI00` no-wound/card mismatch",
+      "status": "disproved 2026-08-29; retained as correction history",
+      "affected": "",
+      "disposition": "no bug policy; owner remains fail-closed pending certification",
+      "original_units": "`proc_0089_0000`; `proc_0089_0264`",
+      "summary": "The original candidate was caused by a data-identity error, not an original game defect. `proc_0089_0000:000Bh` loads `DS:61F2h`. A live state-`00B4h` capture proves that address contains `$NunsH00\\0`, while `$PhysI00\\0` is at `DS:58B4h` and is referenced by the distinct state-`0018h` `proc_0050_0000` owner. The active resource and card were independently read as `E3D4h=\"$NunsH00\"` and `E959h=0008h`.\n\nUnder the corrected resource, `proc_0089_0264` is coherent: when every active member is less than five Strength points below maximum, the convent owner can show `$NUNSH00` card 3, which says the party is substantially better and must leave. The supposed bad-reputation physician refusal belongs to another MSG resource and was never selected by this owner. No reputation substitution or original-bug compatibility policy is warranted."
+    },
+    {
+      "id": "DL-ORIG-GAME-0012",
+      "title": "`$URBAN01` retains an orphan tenth exit slot beyond its encoded rows",
+      "status": "byte-confirmed dormant original oddity; defect classification pending",
+      "affected": "no encoded input; `$URBAN01.MSG` card 0 ends at row 8 while the owner allocates slot 9",
+      "disposition": "`pending` (remain absent)",
+      "original_units": "`proc_0051_12F0`; `proc_0051_1B12`",
+      "summary": "The night-inn owner publishes ten controller bytes and ten callback/action cells even though `$URBAN01` card 0 contains only nine source rows. The tenth control is permanently zero, so the generic controller cannot return ordinal 9. Nevertheless, its latent action is coherent: it presents card 0 in mode 0, runs the zero-hour calendar/event service, and publishes state `0004h`, the ordinary `$CITYE00` family. It contains no audio gateway.\n\nThis may be harmless fixed-width template residue, an abandoned tenth choice, or an accidentally omitted resource row. The rewrite keeps it absent. The latent destination must not be exposed unless a distinct original publisher is proved or an explicit enhanced-mode policy is adopted separately from faithful behavior."
+    },
+    {
+      "id": "DL-ORIG-GAME-0008",
+      "title": "`$HANSE01` owner publishes the shared `$HANSE00` card corpus",
+      "status": "byte-confirmed resource-identity oddity; likely deliberate reuse, defect classification pending",
+      "affected": "state `0047h`, Hanseatic League office at night",
+      "disposition": "`replicate`; keep owner identity and selectable document identity distinct",
+      "original_units": "`proc_0061_2278`",
+      "summary": "`$HANSE01.MSG` contains one rowless card describing the nighttime Hanseatic League office. Nevertheless, the state-`0047h` owner publishes ten selectable rows and later card 6 from the thirteen-card `$HANSE00.MSG` corpus. The resource basename copied at owner entry, exact controller publication, and extracted MSG corpus all agree; this is not a missing `$HANSE01` extraction.\n\nThe arrangement may be intentional day/night resource reuse rather than a defect. It is recorded because conflating owner and card-document identity causes unresolved-token failures and misleading row bindings. Clean code keeps `$HANSE01.MSG` as the owner resource and `$HANSE00.MSG` as the displayed card document. Tests must reject any future attempt to treat `$HANSE01.MSG` as the selectable multi-card document."
+    },
+    {
+      "id": "DL-ORIG-GAME-0005",
+      "title": "`$MILCR00` contains a coherent but unpublished Soldier's Road",
+      "status": "byte-confirmed dormant original oddity; defect classification pending",
+      "affected": "`$MILCR00.MSG` card-0 encoded row 0, Soldier's Road",
+      "disposition": "`pending` (remain hidden)",
+      "original_units": "`proc_0049_2E2C`; `proc_0049_315C`; `proc_0049_310E`",
+      "summary": "The complete ordinary owner writes row 0's publication state to zero and never enables it. Nevertheless, its callback and local action form a coherent lane: signed selector parity chooses card 1 or 2, the Arms Outfitter opens, two hours pass, state returns to `$MILCR00`, and the existing audio cue is retained. A controlled forced-publication experiment confirmed both latent branches without establishing natural reachability.\n\nThis may be deliberately cut content, an unfinished alternate publisher, or an accidental omission. The rewrite keeps it hidden. Proving a distinct original publisher through the unresolved alternate dispatch would explain the apparent anomaly; absent that proof, neither the complete latent code nor the runtime experiment authorizes exposing it."
+    },
+    {
+      "id": "DL-ORIG-GAME-0006",
+      "title": "`$BLACK01` authors a hidden guild-guard row whose action does nothing",
+      "status": "byte-confirmed dormant original oddity; defect classification pending",
+      "affected": "`$BLACK01.MSG` card-0 encoded row 4, `guard the guild block`",
+      "disposition": "`pending` (remain hidden)",
+      "original_units": "`proc_0063_0000`; `proc_0063_0966`; `proc_0063_0964`",
+      "summary": "The owner permanently leaves row 4 unpublished despite substantive prose in the resource. Its callback returns the ordinary no-check sentinel, but its local action is only a one-byte `RETF` and produces no gameplay, presentation, calendar, or audio effect. Neighboring rows 5 through 8 are explicit literal placeholders and are catalogued separately rather than treated as completed content.\n\nThis may be an intentional stub or an abandoned feature rather than a defect. The rewrite keeps it hidden; a future reclassification requires either a distinct original publisher/action or external design evidence that explains the stub without overriding the byte-proven faithful behavior."
+    },
+    {
+      "id": "DL-ORIG-GAME-0007",
+      "title": "`$COUNC00` literal placeholder rows retain substantive exit actions",
+      "status": "byte-confirmed dormant original oddity; defect classification pending",
+      "affected": "`$COUNC00.MSG` card-0 encoded rows 6 and 7, literal texts `6` and `7`",
+      "disposition": "`pending` (remain hidden)",
+      "original_units": "`proc_0054_1A78`; `proc_0054_2C4C`; `proc_0054_2C6A`; `proc_0054_2CA2`; `proc_0054_2CC0`",
+      "summary": "The complete owner permanently suppresses both literal placeholder rows, but each retains a callback and a substantive action. The two action bodies are byte-identical: they present council card 0, invoke the zero-hour helper, and publish state `0004h` / ordinary `$CITYE00`. Row 7 additionally returns a selected-character threshold pair from its callback even though the action does not consume that argument. No audio gateway occurs.\n\nThis could be compiler/template residue, deliberately abandoned exits, or an unfinished pair of choices. The rewrite keeps both rows hidden and does not convert their latent destination into a useful route. A distinct original publisher would be required to explain the apparent anomaly and reopen their classification."
+    },
+    {
+      "id": "DL-ORIG-GAME-0004",
+      "title": "`$COUNC00` contains a complete but hidden weapons-training route",
+      "status": "byte-confirmed dormant original oddity; defect classification pending",
+      "affected": "`$COUNC00.MSG` card-0 encoded row 5, `...inquire about weapons training.`",
+      "disposition": "`pending` (remain hidden)",
+      "original_units": "`proc_0054_1A78`; `proc_0054_2B8C`; `proc_0054_29F8`",
+      "summary": "The council owner leaves row 5's publication state at zero, so the generic controller cannot select it. This is despite a complete callback/action path that would negotiate guard training, create five kind-`0028h` training events, display success/refusal cards 12/13, create a kind-`0041h` cooldown, and return to the day/night city square.\n\nThe latent action also formats a dynamic displayed price, while the five training records contain one fixed 50-pfennig fee and four fixed 25-pfennig fees. Because the parent makes the route unreachable, controlled normal runtime cannot establish whether the hidden publication and price/fee mismatch are abandoned content, an accidental omission, or an unfinished feature."
+    },
+    {
+      "id": "DL-ORIG-UI-0001",
+      "title": "Ctrl+F leader shortcut corrupts merchant UI state",
+      "status": "byte-confirmed original defect/quirk",
+      "affected": "Ctrl+F1 through Ctrl+F5 while the Goods Merchant controller is active",
+      "disposition": "`disable`",
+      "original_units": "`proc_0043_33C6`; `proc_0032_0000`; `proc_0032_0F60`; `proc_0032_076C`; `proc_0032_078E`",
+      "summary": "The generic extended-key dispatcher maps BIOS words `5E00h..6200h` to party slots 0..4, writes the chosen leader to byte `DS:907Bh`, and repaints the party panel. That is consistent with the quick-reference card's “define leader” description.\n\nThe nested merchant controller intercepts the same keys. It validates the chosen active party slot, writes `DS:907Bh`, and repaints only the party panel. It does not call the full merchant redraw at `proc_0032_078E`, does not update the merchant transaction target at `DS:884Eh`, and does not recompose the displayed barterer text, inventory lists, or prices. Execution then falls through into `ovl_0032:160F..1763`, the same block used to switch Purchase and Sell, which flips the active list and redraws the two controls with their enabled/disabled colors."
+    },
+    {
+      "id": "DL-ORIG-GAME-0001",
+      "title": "Merchant charges for an item that a full inventory cannot accept",
+      "status": "byte-confirmed original defect/quirk",
+      "affected": "Purchase with 40h occupied inventory records and no compatible stack that can accept quantity 01h",
+      "disposition": "`replicate`",
+      "original_units": "`proc_0032_0F60`; `proc_0029_5090`; `proc_0031_4A04`; `proc_0032_1770`",
+      "summary": "The Goods Merchant Purchase arm checks affordability, calculates its payment price, and calls `proc_0029_5090` to subtract that price from the three-word party purse before calling `proc_0031_4A04` to insert the item. The inventory owner first tries to merge the item into an exact code/type/quality stack. If no compatible stack accepts the additional quantity, it may append a new six-byte record only while the inventory count is below `40h`.\n\nAt count `40h`, a failed merge returns the unchanged count without inserting the purchased item. The Purchase caller does not test that return for failure and does not refund the earlier purse subtraction; it stores the returned count and redraws the held-item list through `proc_0032_1770`. The resulting observable behavior is therefore:"
+    },
+    {
+      "id": "DL-ORIG-GAME-0002",
+      "title": "Stablemaster mount predicate selects counterintuitive card text",
+      "status": "byte-confirmed original anomaly; defect classification needs controlled runtime confirmation",
+      "affected": "`$URBAN00` card 0 row 3, “visit the stables”",
+      "disposition": "`replicate`",
+      "original_units": "`proc_0051_0EE0`; `proc_0029_1326` selector `0005h`",
+      "summary": "The original action calls `proc_0029_1326(0005h)` and displays `$URBAN00` card 1 when the result is nonzero, otherwise card 7. Selector `0005h` returns nonzero only when every active party record owns a nonzero-quantity item whose definition word at `+20h` intersects mount flag `2000h`. Therefore:\n\nBoth cards say that boarding is included in the inn charge and introduce the Stablemaster's available horses and mules. Card 7 alone adds that the Stablemaster asks whether any of the party's mounts are for sale. This is counterintuitive: the extra sale inquiry appears even when nobody owns a mount, while it is omitted when every active member owns one. The same shared merchant controller follows either card and allows selling in both cases."
+    },
+    {
+      "id": "DL-ORIG-GAME-0003",
+      "title": "`$AFFAI00` fallback reverses its value-000Ch condition by location mode",
+      "status": "byte-confirmed original anomaly; defect classification needs controlled runtime confirmation",
+      "affected": "`$CITYN00` card 0 row 1, “inquire about empire affairs,” when no value-0002h event selects a location-specific card",
+      "disposition": "`replicate` for the certified indexed-location route; coordinate-mode clean projection remains `pending` and fail-closed",
+      "original_units": "`proc_0071_15A4`; `proc_0029_360C`; `resident_06A1_2FE8`",
+      "summary": "The owner accepts either an indexed current location in `DS:907Eh` or the sentinel `FFFFh`, which selects the coordinate pair at `DS:E3D0h:E3D2h`. After the shared value-0004h prefix and the location-specific value-0002h search fail to choose a final card, the two modes test a due value-000Ch event with opposite fallback results:\n\nThus, with no due value-0002h, value-0004h, or value-000Ch event, an indexed location displays `$AFFAI00` card 3 while the coordinate fallback displays no final card. With only value-000Ch due, the indexed route displays the card-17 prefix and no final card, while the coordinate route displays card 17 followed by card 3. Exact bytes, Ghidra, and independent Reko output agree on this asymmetry. Raw owner tests preserve both sides, including negative cases that prevent the coordinate arm from inheriting the intuitive indexed fallback."
+    },
+    {
+      "id": "DL-ORIG-GAME-0009",
+      "title": "`$RAUBI00` assumes a differently keyed quest event exists",
+      "status": "confirmed original publisher/consumer mismatch with platform-memory-dependent unchecked continuation",
+      "affected": "state `0090h`, `$RAUBI00` robber-knight quest offer",
+      "disposition": "`pending`; fail closed when the event is absent",
+      "original_units": "`proc_0061_260A`; `proc_0039_10B6`; `proc_0080_0000`; `proc_0029_3B62`",
+      "summary": "The owner searches for kind `0008h` with `field1A=DS:E896h` and `field28=0003h`. It stores the returned slot but never compares it with the `FFFFh` not-found sentinel. Instead it immediately multiplies the slot by four, indexes the event-pointer table, reads event field `+00h`, and passes that word to `proc_0029_0DB4`.\n\nIf every legal state-`0090h` publisher has already created this exact record, the omission is a harmless original invariant. If state `0090h` can be reached without it, the `FFFFh` index wraps and reads an unrelated pointer cell. The same unchecked pattern begins the paired state-`0091h` `proc_0080_038C` completion owner for its required kind-`0024h` record."
+    },
+    {
+      "id": "DL-ORIG-GAME-0011",
+      "title": "Full-party `$VILLA02` help displays a one-florin gift without adding money",
+      "status": "byte-confirmed original anomaly; defect classification needs controlled runtime confirmation",
+      "affected": "`$VILLA02.MSG` card 0 row 1, “ask for help,” with signed local reputation at least 50 and five occupied party slots",
+      "disposition": "`pending`; no natural clean `$VILLA02` route is authorized",
+      "original_units": "`proc_0077_15EC`; `proc_0077_1958`; `proc_0029_5040`",
+      "summary": "The action treats high local reputation as a guaranteed-recruitment tier. If fewer than five party slots are occupied, it shows card 4 and constructs the Schulz companion. If all five slots are occupied, it instead shows card 6, whose prose says that the Schulz drops one florin into the party's hand.\n\nThat full-party branch jumps directly to the common cooldown suffix and never calls `proc_0029_5040`; the purse is unchanged. The same card 6 is also used by the low-reputation fame-weighted success branch, but that separate branch does call `proc_0029_5040(DS:906Bh,0001h,0000h,0000h)` and therefore really adds one florin. Result-card identity is consequently insufficient to infer the money effect."
+    },
+    {
+      "id": "DL-ORIG-GAME-0010",
+      "title": "`$RAUBI01` companion-departure prose ignores companion membership",
+      "status": "byte-confirmed original anomaly; actual upstream companion-removal behavior needs controlled runtime confirmation",
+      "affected": "robber-knight offer from the village Schulz or Hanse, followed by state `0091h` completion",
+      "disposition": "`pending`; no clean quest-completion projection is authorized",
+      "original_units": "`proc_0080_0000`; `proc_0080_038C`",
+      "summary": "The `$RAUBI00` offer allows the player to accept or decline a temporary Schulz companion for origin `0086h`, or a Hanse guard/knight for origin `0047h`. Both actions return through the same inherited origin value. Decline only writes `DS:E48Ah=DS:E7D8h`; it does not mark the quest event with a distinction later read by `$RAUBI01`.\n\nAt completion, `$RAUBI01` selects card 1 unconditionally for origin `0086h`. That card says the Schulz departs from the party. For origin `0047h`, the owner draws `RNG(2)` and selects card 6 on a nonzero result or card 7 on zero. Card 6 says the Hanse friend leaves and card 7 does not. The completion owner does not inspect party membership, does not inspect an acceptance flag, and contains no party/roster-removal call."
+    },
+    {
+      "id": "DL-ORIG-GAME-0013",
+      "title": "`$DOCKS01` describes chunks of ice through May",
+      "status": "byte-confirmed original seasonal oddity; defect classification pending",
+      "affected": "`$DOCKS01.MSG` card selection and swimming-row publication",
+      "disposition": "faithfully preserved",
+      "original_units": "`proc_0052_0000`",
+      "summary": "The owner reads the zero-based current month from `DS:00E4h`. It selects frozen-water card 1 and disables the two swimming variants when the signed month is at least 10 or at most 4: November through December and January through May. Only June through October selects ordinary card 0. The predicate does not read the current hour.\n\nCard 1 explicitly describes chunks of ice in the water, making its use through all of May geographically and seasonally surprising. This may be an intentional broad cold-water season rather than a defect, so the catalogue does not classify it as a confirmed bug. The faithful projection preserves the exact month boundary; it must not substitute a modernized climate rule."
+    },
+    {
+      "id": "DL-ORIG-GAME-0014",
+      "title": "Night state `0014h` retains unrelated MSG labels under a different action table",
+      "status": "byte-confirmed original owner/resource mismatch; runtime presentation confirmation pending",
+      "affected": "`$SIDES01.MSG` card 0 row 5 ordinary success whose one-hour advance ends outside hours 5 through 18",
+      "disposition": "faithfully preserves the owner/resource split",
+      "original_units": "`proc_0046_1132`; `proc_0046_1734`; `proc_0049_0000`",
+      "summary": "At night, `proc_0049_0000` skips the copy that would replace the active MSG name with `$BUSIN00`. The inherited `$SIDES01.MSG` card-0 text therefore remains visible over `XNMAIN.PIC`. The same owner then publishes the ten state-`0014h` callback and action cells. Those handlers are not the `proc_0046_1132` `$SIDES01` handlers: a displayed row is acted upon according to its coincident numeric ordinal in the state-`0014h` table.\n\nThe mismatch can make a label describe one destination while its action goes somewhere else. It appears to be a missing night-resource replacement rather than intentional content, but runtime confirmation of the exact presentation and several selections is still required before classifying it as a confirmed defect. The rewrite must not use the displayed document name as dispatch authority or silently substitute `$BUSIN00` text."
+    },
+    {
+      "id": "DL-ORIG-GAME-0015",
+      "title": "`$SIDES01` grove rare outcome hard-codes nighttime history after advancing time",
+      "status": "byte-confirmed original asymmetry; defect classification pending",
+      "affected": "`$SIDES01.MSG` card 0 row 7 rare action outcome",
+      "disposition": "typed fail-closed; no speculative repair",
+      "original_units": "`proc_0046_1132`; `proc_0046_1866`",
+      "summary": "Both action outcomes call `proc_0029_54D8(0001h)`. The ordinary outcome then calls `proc_0029_563A` and publishes state `0021h` by day or `0022h` by night. The rare outcome does not call the classifier: it always writes `DS:E7D8h=0022h` before publishing state `003Ch`, even when its one-hour advance ends in daytime.\n\nThe retained value may be intentional history for the unresolved state-003Ch owner rather than a defect. Until that destination owner is decoded or a controlled runtime capture proves how it consumes `E7D8h`, the rewrite must not replace the fixed value with a day/night classification. The selected ordinary grove route is independently certified, while this rare branch remains fail-closed."
+    },
+    {
+      "id": "DL-ORIG-GAME-0016",
+      "title": "Equal negative location-score bounds randomly subtract one or two",
+      "status": "byte-confirmed original arithmetic oddity; defect classification pending",
+      "affected": "`$CITYG06.MSG` card 0 row 2",
+      "disposition": "replicated faithfully",
+      "original_units": "`proc_0029_19D0`; resident RNG wrapper `resident_0000_0C70`",
+      "summary": "The adjustment owner computes the second RNG range as `abs(upper)-abs(lower)`. Equal bounds therefore pass zero. The original RNG wrapper uses divisor 2 for both range 0 and range 1, so `RNG(0000h)` returns either 0 or 1. With lower and upper both `-1`, an accepted score gate therefore subtracts either one or two points. A rejected gate still consumes only its `RNG(0064h)` draw and changes nothing.\n\nThis may be a deliberate general RNG convention rather than a gameplay bug. Do not normalize the overnight loss to a fixed value without broader caller analysis. The reconstruction preserves the byte-proven result and RNG order."
+    },
+    {
+      "id": "DL-ORIG-GAME-0017",
+      "title": "`$OTHER00` contains six permanently dormant placeholder rows",
+      "status": "byte-confirmed dormant-content oddity; defect classification pending",
+      "affected": "`$OTHER00.MSG` card 0 rows 2 through 7",
+      "disposition": "omitted exactly as published by the original owner",
+      "original_units": "`proc_0075_0000`",
+      "summary": "The extracted MSG payload gives encoded rows 2 through 7 only the literal texts `2` through `7`. The owner initializes all six corresponding control bytes to zero and never enables them. Latent action entries still exist and each would perform a zero-hour calendar call before publishing state `0062h`, but the ordinary controller cannot select them.\n\nThis looks like unfinished reserved content, although it could be an intentional fixed-size table. The rewrite must neither expose the placeholder rows nor infer destinations from their latent actions. If a different owner or external writer is later proven to publish those controls, this entry must be updated rather than silently removed."
+    },
+    {
+      "id": "DL-ORIG-GAME-0018",
+      "title": "Named-home name tables contain trailing entries outside their RNG bounds",
+      "status": "byte-confirmed data-table oddity; defect classification pending",
+      "affected": "`$OTHER00.MSG` card 0 `$NamedOneName` and `$NamedTwoName` substitutions",
+      "disposition": "preserve the original RNG bounds; do not expose trailing entries",
+      "original_units": "`proc_0029_5CC4`",
+      "summary": "Selector `0001h` uses RNG bound `0058h`, making exactly 88 consecutive female first-name strings selectable. The same contiguous resource area continues with `Suzanne` and `Viktoria`, but neither can be selected through this owner. Selector `0002h` similarly uses bound `0010h` over exactly 16 family-name strings; the immediately trailing `Welser` entry is outside the draw.\n\nThis may be deliberate shared-table packing rather than a defect, and no claim is made that these names were intended for the two `$OTHER00` substitutions. The rewrite must retain the byte-proven bounds and must not broaden the pools merely because additional valid strings are adjacent. A future caller that selects the trailing entries would revise this classification."
+    },
+    {
+      "id": "DL-ORIG-GAME-0019",
+      "title": "The shipped city-revolt family contains permanently unpublished entry lanes",
+      "status": "byte-confirmed dormant-content oddity at the entry owners; whole-family and earlier-version defect classifications pending",
+      "affected": "",
+      "disposition": "proven-unpublished rows remain hidden; substantive family remains fail-closed at unresolved owners",
+      "original_units": "`proc_0048_0000`; `proc_0048_0D6E`; `proc_0073_0000`; downstream family owners not yet fully mapped",
+      "summary": "The 483.07 data ships nineteen consecutive `$REVOLxx` resources with 230 cards. Their prose forms a large, coherent revolution/counter-revolution quest covering political investigation, recruitment, arrests and rescues, timed summons, crowds, marches, sieges, relief forces, and both rebel and government victories. This is substantially more authored content than the three family resources currently encountered by the reconstructed city route.\n\nThe complete daytime entry owner initializes rows 5–8 to zero and never publishes them. Row 5 is the substantive Force-entry choice; rows 6–8 are blank placeholders. The complete nighttime owner likewise leaves rows 5–8 at zero, where they are literal numeric placeholders. Callback/action table cells exist for these zero-state rows, but their latent effects remain an explicit decode boundary. Table existence cannot make a row selectable."
+    },
+    {
+      "id": "DL-ORIG-GAME-0020",
+      "title": "`$REVOL00` row 0 can repeat its surveillance card",
+      "status": "byte-confirmed presentation oddity; defect classification pending",
+      "affected": "`$REVOL00.MSG` card 0 row 0 successful action outcomes",
+      "disposition": "typed fail-closed; no speculative deduplication",
+      "original_units": "`proc_0048_03D6`",
+      "summary": "After a successful signed RNG check, nonzero `DS:E3D0h` publishes cards 2 and 12 before the selector-`0029h` result is considered. The selector then always publishes card 2 again followed by card 3 when its result equals `0002h`, or card 4 otherwise. The two exact nonzero-lane sequences are therefore `2,12,2,3` and `2,12,2,4`; card 2 appears twice. The zero lane omits the prefix and publishes only `2,3` or `2,4`.\n\nThe repeated card may be deliberate recap after the lane-specific card 12, or it may be an original presentation bug. Do not collapse, reorder, or deduplicate the sequence without evidence from another original version. In particular, card 12 depends only on nonzero `DS:E3D0h`, while the choice of card 3 versus card 4 depends only on the selector result; neither predicate may be substituted for the other."
+    },
+    {
+      "id": "DL-ORIG-GAME-0021",
+      "title": "`$REVOL00` row 1 repeats an identical event query",
+      "status": "byte-confirmed redundant-query oddity; defect classification pending",
+      "affected": "`$REVOL00.MSG` card 0 encoded row 1, signed RNG-success lane",
+      "disposition": "raw owner only; replicate ordering if the clean route is later authorized",
+      "original_units": "`proc_0048_0506`; `proc_0029_3742`",
+      "summary": "After the one-hour calendar call and signed RNG check select the complementary lane, the owner calls `proc_0029_3742(0002h,0000h,current-city)` once. If the result is `FFFFh` while `DS:E3D0h` is zero, it immediately takes the no-card state-`0079h` tail. Every other case calls the same helper again with the same three words. A second result of `0001h` suppresses card 5 only when `DS:E3D0h` is nonzero; otherwise the owner publishes card 5 and state `0074h`.\n\nThe selected helper scans the same live kind-`001Ch` event records and writes the selected slot index to `DS:E3CEh`; it does not mutate the matched record. Consequently the second result is ordinarily identical to the first, and the second scan appears redundant. It may be compiler output from two separately authored selector predicates, intentional refresh of `DS:E3CEh`, or an unfinished design in which another operation once separated the calls. Exact bytes do not prove which explanation is correct."
+    },
+    {
+      "id": "DL-ORIG-GAME-0022",
+      "title": "`$CITYC01` altar-boy action retains two uninitialized daytime arms",
+      "status": "byte-confirmed unreachable-arm oddity; defect classification pending",
+      "affected": "`$CITYC01.MSG` card 0 row 1, `...talk to the altar boy.`",
+      "disposition": "naturally reachable nighttime arms only; uninitialized arms remain fail-closed",
+      "original_units": "`proc_0057_0D32`",
+      "summary": "The owner allocates a two-byte stack local with `ENTER 0002h,0000h` and does not initialize it. Hour buckets 4 and 5, corresponding to 09:00..14:59, both jump to `0D6Ah`, load that local into `CX`, and would use it as the token for `proc_0029_1FB8` selector 3.\n\nThe defect is latent on the natural route. `$CITYC01` is the nighttime church state and is selected only outside 05:00..18:59, so its altar-boy action can reach only buckets 0, 1, 2, and 7. The stock city-size domain reduces those arms to the well-defined `Matins`, `Prime`, and `Compline` outcomes. No host default may be supplied for the uninitialized daytime value, and a developer time mutation must not be treated as original reachability evidence."
+    },
+    {
+      "id": "DL-ORIG-GAME-0023",
+      "title": "Day and night Mass use radically different Divine Favor formulas",
+      "status": "byte-confirmed gameplay oddity; defect classification pending",
+      "affected": "`$CITYC00.MSG` and `$CITYC01.MSG` card 0 row 0, attend Mass",
+      "disposition": "preserve both exact formulas and log their computed and applied effects",
+      "original_units": "`proc_0057_0214`; `proc_0057_0B6A`",
+      "summary": "The daytime owner computes the current-Divine-Favor delta as `abs(signed Religion)/8 + signed Speak Latin % 35 + 1`. The nighttime owner instead computes `signed Religion/60 + signed Speak Latin/40 + 1`. Both then pass the result through the same effect-aware current-field cap. This is not a display-only difference: ordinary daytime values can produce much larger gains, and an already capped character can show a nonzero computed delta but an applied delta of zero.\n\nThe separate instruction sequences and independent Ghidra/Reko witnesses make the discrepancy byte-confirmed, but do not establish whether it was an intentional difference between the two church owners or a copied/formula bug. Do not normalize the formulas. A defect verdict requires authenticated earlier version evidence or another original source explaining the intended rule."
+    },
+    {
+      "id": "DL-ORIG-GAME-0024",
+      "title": "Asking the guard captain can consume zero hours",
+      "status": "byte-confirmed calendar oddity; defect classification pending",
+      "affected": "`$SANCT00.MSG` card 0 row 3, seek word from the captain of the city guard",
+      "disposition": "preserve the exact `0..2`-hour result; the former empty-picture blocker was an evidence error and does not apply to this route",
+      "original_units": "`proc_0076_0822`",
+      "summary": "After displaying and acknowledging the reputation-selected guard reply, the owner calls `resident_0000_0C70(0003h)` exactly once and passes its result unchanged to `proc_0029_54D8`. The random helper's established contract returns `0`, `1`, or `2`, so asking for the captain's reply can consume no game time at all. The calendar owner still executes in the zero case, including its ordered party/event maintenance and clock sampling.\n\nThis may intentionally represent an immediate reply, or it may be an off-by-one duration bug where one through three hours was intended. The bytes do not decide intent. Do not add one, reroll zero, or skip the zero-elapsed calendar call. A defect verdict requires an authenticated version comparison or original design evidence."
+    },
+    {
+      "id": "DL-ORIG-GAME-0026",
+      "title": "Sanctuary extreme-surrender tail retains an unreachable shorter duration arm",
+      "status": "byte-confirmed control-flow oddity; defect classification pending",
+      "affected": "`$SANCT00.MSG` card 0 row 2 with signed local reputation at most `-75`",
+      "disposition": "extreme route remains fail-closed; preserve the comparison in any future raw owner",
+      "original_units": "`proc_0076_0694`",
+      "summary": "The common extreme-surrender tail compares the signed local-reputation word again and schedules a kind-`0011h` event for `00F0h` hours when the value is at most `-75`, otherwise for `0078h` hours. But the only canonical control-flow edge reaching that tail has already required the same word to be at most `-75` at `06DEh`; reputation greater than `-75` takes the ordinary surrender route and returns FAR at `06DCh`. The `0078h` arm is therefore unreachable from the function entry under unchanged memory.\n\nThis may be harmless compiler residue, a remnant of an earlier threshold, or evidence that an omitted callback once changed the word. Current bytes show no intervening write to `DS:EE74h`. Do not simplify the comparison in the raw reconstruction or expose the shorter duration as a random alternative. A defect verdict requires an authenticated earlier executable or proof of reentrant mutation not present in the current direct call graph."
+    },
+    {
+      "id": "DL-ORIG-GAME-0027",
+      "title": "Authored sanctuary-pressure cards have no proven publisher",
+      "status": "shipped-content oddity; publisher and defect classification pending",
+      "affected": "extended sanctuary stay / escalating priest warnings / forced departure",
+      "disposition": "do not expose; no exact original publisher is certified",
+      "original_units": "",
+      "summary": "The shipped resource contains a coherent five-card pressure sequence, but the complete state-`0081h` owner never presents those ordinals. The only direct static `$SANCT00` resource-CString reference in the current materialized overlay corpus is the owner at `ovl_0076:043Ch`; its selected actions present cards 0–3 and 9–12 only. Nearby card-4/5/6 calls belong to a different state-`0083h` resource owner and are not sanctuary evidence.\n\nThis is not yet a byte-proven dormant branch. A dynamically retained resource or indirect publisher has not been globally disproved. The card prose and the kind-`0011h` event scheduled by extreme surrender are insufficient to bind a publisher: that event profile is callback-free in the currently certified scheduler path. Do not synthesize a timed sequence, reuse another resource's card ordinals, or expose card 8 as the normal sanctuary menu."
+    },
+    {
+      "id": "DL-ORIG-GAME-0036",
+      "title": "F284 can consume interrupt-frame residue as clipping coordinates",
+      "status": "HIGH-CONFIDENCE DEFECT (PR206 outcome B); byte-confirmed uninitialized-on-path read and DOSBox-X variability; complete private contract remains unresolved",
+      "affected": "retained mode10 simple_encounter, ORIGINAL-REPLAY/HARNESS; no tactical-exploration or SDL seed7099 generalization",
+      "disposition": "",
+      "original_units": "",
+      "summary": "On the established horizontal clipping path, F284 pushes `[BP-2]` and `[BP-4]` without first assigning them on that invocation's path. Earlier EF3C stores can leave the inherited point `(8,19)` at the later frame's FC56/FC58. The 16 October machine experiment observes a real scheduled IRQ0 during MGRAPHIC:047F at SS:SP=3A3D:FC5A replacing those words with CS/FLAGS `(4A65h,7217h)`. Continuous watch evidence closes survival to the original read. The outcode changes 9→6; both remain outside, the first F284 return stays zero and the projectile still publishes `(754,133)`. This strengthens the likely-defect interpretation without establishing historical frequency or changed gameplay in this experiment.\n\nPrior controlled coordinate perturbations establish that inside versus outside can affect the destination; they are separate evidence, not natural IRQ outcomes. The original intent or an invariant across all relevant callers could still change the interpretation. An independent machine replication and a naturally produced consequential clipping difference remain open. No diagnostic point or compatibility fallback is authorized, and no new production behavior requires a test in this research-only update."
+    },
+    {
+      "id": "DL-ORIG-GAME-0037",
+      "title": "Missed-projectile search publishes an unverified terminal step",
+      "status": "CONFIRMED ORIGINAL IMPLEMENTATION BEHAVIOR / POSSIBLE GAMEPLAY DEFECT — CORRECTION DEFERRED BY OWNER",
+      "affected": "",
+      "disposition": "",
+      "original_units": "",
+      "summary": "The original reduced-step clear branch adds its newly halved deltas to the endpoint, then exits without another EF3C query. The all-clear bounded exit and blocked exhaustion also store an unqueried adjustment. Original skill restoration precedes destination stores, and the caller publishes the row count afterward. This is distinct from DL-ORIG-GAME-0036's inherited clipping-point dependence.\n\nThe genuine PR209 H capture correctly tests `(962,103)` clear but then publishes `(995,107)`, crossing actual wall `[990,992]×[95,112]`. The final point is3 X units past its right edge, approximately3.025 units along the straight proposed ray. The existing missed-shot movement/render path reaches it, draws the ordinary arrow with status129 and removes it without damage or another wall check. That consequence is natural experimental C#/SDL evidence, not execution of the original DOS game on the same battlefield."
+    },
+    {
+      "id": "DL-ORIG-GAME-0025",
+      "title": "Retracted sanctuary escape-chance oddity",
+      "status": "disproven reconstruction incident; not an original bug",
+      "affected": "`$SANCT00.MSG` card 0 row 4, try to sneak out",
+      "disposition": "execute both certified outcomes: card 10 escapes to the day/night side street; card 9 advances one hour and restores the sanctuary; month rollover remains typed fail-closed",
+      "original_units": "`proc_0029_1446`; `proc_0076_095E`; `proc_0076_08AC`",
+      "summary": "The callback selects the active party member with the lowest signed sum of raw fields `000Fh` and `0010h` (Stealth and Streetwise), clamps that sum to `10..99`, and supplies it as the action threshold. The action draws `RNG(0064h)`. The exact `CMP AX,[BP+06h] / JLE` relation sends a roll less than or equal to the threshold to card 10; card 10 says the party quietly escapes through the graveyard and then publishes the day/night side-street state. A greater roll sends the party to card 9, whose text says a member stumbles, the guards sound the alarm, and the party retreats into the church.\n\nThe earlier entry reversed those card meanings by associating card 10 with the adjacent prison text, which is actually card 11 and belongs to surrender. Direct inspection of the extracted `$SANCT00.MSG` resource plus a product test that asserts card 10's successful-escape text disproves the alleged oddity. Keep this retracted entry as a durable incident guard: numeric adjacency, picture-name intuition, and remembered result prose are not card-semantic authority. Do not reverse the original comparison."
+    }
+  ],
+  "earlier_source": {
+    "source_commit": "6b68df844409a8a59e108da137046fb0ccaedc47",
+    "source_commit_date": "2026-10-16"
+  }
 }

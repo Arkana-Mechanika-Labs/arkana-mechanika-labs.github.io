@@ -1,28 +1,28 @@
 ---
 title: Darklands Restoration Project
-description: A faithful native C# reconstruction of MicroProse's 1992 RPG, rebuilt from original code and data with evidence-backed verification.
+description: MicroProse's 1992 role-playing game Darklands, rebuilt in C# to run on today's Windows and to play exactly like the original. Version 0.9.0 is out.
 toc: false
 width: wide
 params:
   images:
-    - /images/classic-mainst.png
+    - /images/0.9.0/city.png
 ---
 
 <div class="drp-hero">
   <div class="drp-hero-copy">
     <div class="drp-hero-eyebrow">Arkana Mechanika Studios</div>
-    <p class="drp-hero-tagline">Rebuilding the classic 1992 DOS RPG for modern systems</p>
-    <p class="drp-hero-subtitle">A faithful C# reconstruction bringing Darklands to modern systems while preserving the gameplay, data, and atmosphere of the 1992 original.</p>
+    <p class="drp-hero-tagline">Darklands, rebuilt for today's Windows</p>
+    <p class="drp-hero-subtitle">MicroProse's 1992 role-playing game of saints, alchemy, witches and robber knights, running without DOSBox and playing exactly like the original. Version 0.9.0 is out.</p>
     <div class="drp-hero-buttons">
-      <a href="https://discord.gg/HjzWvmHhqZ" class="drp-btn drp-btn-primary" target="_blank" rel="noopener noreferrer">Join the Discord ↗</a>
-      <a href="#showcase" class="drp-btn drp-btn-outline">Watch the Showcase</a>
-      <a href="/posts/" class="drp-btn drp-btn-outline">Read the Devlogs</a>
+      <a href="/download/" class="drp-btn drp-btn-primary">Download 0.9.0</a>
+      <a href="https://discord.gg/HjzWvmHhqZ" class="drp-btn drp-btn-outline" target="_blank" rel="noopener noreferrer">Join the Discord ↗</a>
+      <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration" class="drp-btn drp-btn-outline" target="_blank" rel="noopener noreferrer">Source code ↗</a>
     </div>
   </div>
   <div class="drp-hero-art">
     <figure class="drp-hero-game-frame">
-      <img src="/images/classic-mainst.png" alt="The restored Darklands engine showing Main Street in Magdeburg" class="drp-hero-game" />
-      <figcaption>Magdeburg Main Street in the development build</figcaption>
+      <img src="/images/0.9.0/city.png" alt="An evening in a Gasthaus in Strassburg, the party swearing its oath" class="drp-hero-game" />
+      <figcaption>Version 0.9.0: a Gasthaus in Strassburg</figcaption>
     </figure>
     <img src="/images/darklands-cover.jpg" alt="Original Darklands box art" class="drp-hero-box-art" />
   </div>
@@ -32,83 +32,44 @@ params:
 
 ## The Project
 
-Darklands is MicroProse's ambitious 1992 role-playing game set in a grounded, folkloric medieval Germany: robber knights, saints, alchemy, political intrigue, and danger on every road. The original release was built for 16-bit DOS and today is normally played through emulation.
+Darklands is MicroProse's ambitious 1992 role-playing game set in a grounded, folkloric medieval Germany: robber knights, saints, alchemy, political intrigue, and danger on every road. It was made for 16-bit DOS and is normally played through emulation today.
 
-Darklands is gradually coming back to life. We're restoring the places, encounters, and choices that made the original adventure distinctive, while bringing it to modern systems. [Follow the devlogs](/posts/) to see what has returned and what comes next.
+The Darklands Restoration Project brings it back as a native program. This is not a remake and not an emulator: every rule of the original — combat, prices, saints, alchemy, the cards of every city and encounter, the generators of castles, mines and battlefields — has been rewritten from the original program and checked against it. The screens, the music and the sound are the original's, drawn and played from your own copy of the game.
 
 <div class="drp-current-note">
-  <strong>Project status</strong>
-  <p>The restoration is still in development. Some places and encounters are unfinished, and running the development version requires your own copy of the original Darklands game data.</p>
+  <strong>Version 0.9.0 is out</strong>
+  <p>The whole game plays: character creation, cities, inns and shops, guilds, banks and churches, the world map and its encounters, battles, camping, saints and alchemy, saving and loading. You need your own copy of Darklands (GOG or Steam). Version 1.0 will follow once the remaining faithfulness checks are finished. <a href="/download/">Get it →</a></p>
 </div>
 
-<section id="showcase" class="drp-showcase" aria-labelledby="showcase-title">
-  <div class="drp-section-kicker">Presentations</div>
-  <h2 id="showcase-title">See the reconstructed engine in motion</h2>
-  <p>Each presentation follows the restoration running in the native development host. The <a href="/posts/">devlogs</a> cover every milestone in between.</p>
-  <div class="drp-video-grid">
-    <figure class="drp-video">
-      <figcaption><span class="drp-section-kicker">Presentation #02 · New</span><strong>Beyond the City Walls</strong><span>Monastery and sanctuary, the first battlefield, computed dungeons, the world map and the first wilderness encounter.</span></figcaption>
-      <div class="drp-video-frame">
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/wnP9VwCIHuo"
-          title="Darklands Restoration Project - Presentation #02: Beyond the City Walls"
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen>
-        </iframe>
-      </div>
-      <p class="drp-video-link"><a href="https://youtu.be/wnP9VwCIHuo" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></p>
-    </figure>
-    <figure class="drp-video">
-      <figcaption><span class="drp-section-kicker">Presentation #01</span><strong>Rebuilding Darklands in C#</strong><span>From the original opening into the city: character screens, the Inn, merchants, day and night, and boat travel.</span></figcaption>
-      <div class="drp-video-frame">
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/CrwcEszBJcc"
-          title="Darklands Restoration Project - Presentation #01"
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen>
-        </iframe>
-      </div>
-      <p class="drp-video-link"><a href="https://youtu.be/CrwcEszBJcc" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></p>
-    </figure>
-  </div>
-</section>
-
----
-
-## Explore the Restoration
+## Version 0.9.0
 
 <div class="drp-story-grid">
-  <a class="drp-story-card" href="/posts/046-main-street-opens-up/"><img src="/images/classic-mainst.png" alt="Darklands Main Street in Magdeburg" loading="lazy" /><span class="drp-section-kicker">City life</span><strong>Walk the streets again</strong><span>Follow the restored paths through city life.</span></a>
-  <a class="drp-story-card" href="/posts/072-the-battlefield-starts-moving/"><img src="/devlogs/072/first-falling-guard.png" alt="The reconstructed guard encounter on a battlefield" loading="lazy" /><span class="drp-section-kicker">Combat</span><strong>Watch a fight unfold</strong><span>Movement, arrows, and melee in a captured encounter.</span></a>
-  <a class="drp-story-card" href="/posts/064-one-game-two-ways-to-see-it/"><img src="/images/devlogs/064/MainStreet.png" alt="Enhanced Faithful presentation of the Main Street scene" loading="lazy" /><span class="drp-section-kicker">Presentation</span><strong>One game, two ways to see it</strong><span>Explore the original look and an optional restored scene.</span></a>
+  <figure class="drp-story-card"><img src="/images/0.9.0/start-screen.png" alt="The start screen" loading="lazy" /><span class="drp-section-kicker">Start</span><strong>The original start screen</strong><span>Quickstart, a new world, or a saved game.</span></figure>
+  <figure class="drp-story-card"><img src="/images/0.9.0/world-map.png" alt="The world map" loading="lazy" /><span class="drp-section-kicker">Travel</span><strong>The world map</strong><span>Roads, towns, castles and what waits on the way.</span></figure>
+  <figure class="drp-story-card"><img src="/images/0.9.0/battle.png" alt="A battle" loading="lazy" /><span class="drp-section-kicker">Combat</span><strong>Real-time battles</strong><span>Pause, give orders, and watch the fight unfold.</span></figure>
+  <figure class="drp-story-card"><img src="/images/0.9.0/character-sheet.png" alt="A character sheet" loading="lazy" /><span class="drp-section-kicker">Party</span><strong>Characters and their gear</strong><span>Attributes, skills, saints and formulas.</span></figure>
+  <figure class="drp-story-card"><img src="/images/0.9.0/inn.png" alt="An inn's choices" loading="lazy" /><span class="drp-section-kicker">Cities</span><strong>Inns, guilds and streets</strong><span>Every card of every city, as the original wrote it.</span></figure>
+  <figure class="drp-story-card"><img src="/images/0.9.0/camp.png" alt="Camping in the wild" loading="lazy" /><span class="drp-section-kicker">Time</span><strong>Camping and the hourglass</strong><span>Rest, pray, brew potions, and watch the days pass.</span></figure>
 </div>
 
 ---
 
-## How We Restore It
+## How it is made
 
-We compare the new engine with the original game as we rebuild it. That work is documented for readers who want to see the research behind each milestone. <a href="/method/">Read about the reconstruction method →</a>
+The game logic is a C# reimplementation of the original program, kept apart from graphics, sound and input. Each piece cites the place in the original it reproduces, and the rules are checked by running the original's own functions next to the C#: tens of thousands of cases, and every card of the game. What is knowingly different from the original, and which of its bugs are kept on purpose, is listed openly. <a href="/method/">Read how it is made →</a>
 
----
-
-## What Comes Next
-
-The team is bringing more of the original adventure into the development build, one verified route at a time. Classic presentation remains the reference, with restored artwork available where it has been completed. Follow the [devlogs](/posts/) for the latest progress and open questions.
+The original's surprising rules and genuine defects are collected in [Bugs & Oddities](/formats/original-bugs-and-oddities/).
 
 ---
 
 ## Follow the Work
 
-The devlogs document the restoration as it happens, including both visible milestones and the less glamorous evidence work that makes those milestones trustworthy.
+News about releases goes to the [news](/news/). The devlogs written during the earlier development are kept in the [archives](/archives/).
 
 <div class="drp-follow-actions">
-  <a href="https://discord.gg/HjzWvmHhqZ" class="drp-btn drp-btn-primary" target="_blank" rel="noopener noreferrer">Join the Discord ↗</a>
-  <a href="/posts/" class="drp-btn drp-btn-outline">Browse the Devlogs</a>
-  <a href="/tools/" class="drp-btn drp-btn-outline">Project Tools</a>
+  <a href="/download/" class="drp-btn drp-btn-primary">Download 0.9.0</a>
+  <a href="https://discord.gg/HjzWvmHhqZ" class="drp-btn drp-btn-outline" target="_blank" rel="noopener noreferrer">Join the Discord ↗</a>
+  <a href="/news/" class="drp-btn drp-btn-outline">News</a>
   <a href="/faq/" class="drp-btn drp-btn-outline">Read the FAQ</a>
 </div>
 

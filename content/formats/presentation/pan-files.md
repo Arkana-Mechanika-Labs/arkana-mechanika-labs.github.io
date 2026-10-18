@@ -319,4 +319,4 @@ and logical record ends. Pool slice SHA1 matches static: `07e6da286075f4bce05e2d
 
 **High.** Format fully decoded for static parsing and rendering. Corpus-validated across all 15
 assets and 2,068 frame records with zero mismatches. Runtime SHA1-verified at multiple frame
-boundaries in `OPENING8.PAN`. Documented in [devlog #028](/posts/028-the-pan-format-decoded/).
+boundaries in `OPENING8.PAN`. Documented in [devlog #028](/archives/devlogs/028-the-pan-format-decoded/).

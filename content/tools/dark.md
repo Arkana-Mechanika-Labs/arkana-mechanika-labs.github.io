@@ -118,7 +118,7 @@ The new **PAN Sequence Player** browses and plays decoded Darklands presentation
 
 ![PAN Sequence Player showing the Darklands title sequence](/images/dark_pan.png)
 
-Viewers for image bank formats such as `COMMONSP.IMG` and `BATTLEGR.IMG`, a standalone DRLE decompressor, and general-purpose hex viewers for data structures that are still being decoded remain available alongside the more mature tools. These surfaces are intended for ongoing format analysis work alongside the [reverse engineering project](/posts/).
+Viewers for image bank formats such as `COMMONSP.IMG` and `BATTLEGR.IMG`, a standalone DRLE decompressor, and general-purpose hex viewers for data structures that are still being decoded remain available alongside the more mature tools. These surfaces are intended for ongoing format analysis work alongside the [reverse engineering project](/archives/devlogs/).
 
 ![IMG Banks research viewer showing BATTLEGR.IMG in hex view](/images/dark_imgbanks.png)
 
@@ -154,4 +154,4 @@ Selected earlier milestones are listed below. The [full changelog](https://githu
 
 Download the current Windows package from the Releases page, unzip it, and run `DARK.exe`.
 
-DARK is a community project, developed alongside the reverse engineering work documented in the [devlogs](/posts/).
+DARK is a community project, developed alongside the reverse engineering work documented in the [devlogs](/archives/devlogs/).
