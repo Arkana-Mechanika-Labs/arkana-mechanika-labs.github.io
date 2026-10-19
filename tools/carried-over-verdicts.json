@@ -1099,13 +1099,13 @@
     "DL-ORIG-GAME-0022": {
       "verdict": "covered",
       "register": [
-        "U-b609a7"
+        "B-d361c3"
       ],
       "source": [
-        "src/Darklands.Cards/Scripts/S057/ChurchAtNight_CityC01.cs:159"
+        "src/Darklands.Cards/Scripts/S057/ChurchAtNight_CityC01.cs:162"
       ],
       "original": "R057+0x0D32",
-      "note": "Asking the altar boy in hour bands 4 and 5 (and above 7) names a stale stack word as the hour in the original; the restoration names the no-Mass hour and records this as uncertain. The night church is normally entered only at night, so these bands are hardly reached."
+      "note": "Asking the altar boy in hour bands 4 and 5 (and above 7) names a stale stack word as the hour in the original (-1, Matins: the hint's local left at the same address); the restoration reproduces it, FixChurchAltarBoyStaleHour fixes it. The night church is normally entered only at night, so these bands are hardly reached."
     },
     "DL-ORIG-GAME-0023": {
       "verdict": "not-in-483.07",
