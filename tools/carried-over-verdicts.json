@@ -279,15 +279,20 @@
       "verdict": "covered",
       "register": [
         "B-85e0e4",
-        "D-3a3c6c"
+        "B-3de49c",
+        "B-cf6bdb",
+        "D-856386",
+        "D-2a45ce"
       ],
       "source": [
-        "src/Darklands.Core/Items/ItemStores.cs:69",
-        "src/Darklands.Core/Items/ItemStores.cs:101",
-        "src/Darklands.Core/OriginalBehaviour.cs:62"
+        "src/Darklands.Core/Items/ItemStores.cs:110",
+        "src/Darklands.Core/Items/ItemStores.cs:111",
+        "src/Darklands.Core/Items/ItemStores.cs:132",
+        "src/Darklands.Core/OriginalBehaviour.cs:62",
+        "src/Darklands.Core/OriginalBehaviour.cs:71"
       ],
-      "original": "R035+0x1468; R035+0x04BC; R037+0x4184",
-      "note": "The code has a mechanism by which inn storage in one long-running world breaks while a fresh world works: the store file only grows (a store emptied and given up stays in it), its header has room for a limited number of store offsets, and when a known store is written back the rewrite lays the file out with a 101-byte header over the offsets of a 198-byte one, so the other stores are copied from the wrong place. The restoration reproduces this exactly in its faithful mode (registered as an original bug, B-85e0e4; the whole-game session cache-revisit agrees with the original), and fixes the rewrite by default in the player's game as a switchable data-safety fix (D-3a3c6c): the file keeps the layout of a new game and stays readable by the original. It does not explain the enemy cloth drops in the same report, and the link to that one case is not proven."
+      "original": "R035+0x1468; R035+0x1532; R035+0x15A2; R035+0x04BC; R037+0x4184",
+      "note": "The code has a mechanism by which inn storage in one long-running world breaks while a fresh world works: the store file only grows (a store emptied and given up stays in it); the append has no limit, so the 99th store's offset lands on the first store's bytes; and the rewrite of a known store finds the first store from the signed low byte of its offset and lays the file out with a 101-byte header over a 198-byte one, so the other stores are copied from the wrong place. The restoration reproduces all of this exactly in its faithful mode (registered as original bugs B-85e0e4, B-3de49c, B-cf6bdb; the whole-game session cache-revisit agrees with the original). In the player's game two switchable data-safety fixes are on by default (D-856386, D-2a45ce): the file is laid out compactly, as the original's own code reads and rewrites it without loss (up to 62 stores of 127 entries), and putting an item in when there is no more room is refused, the item staying in the pack. It does not explain the enemy cloth drops in the same report, and the link to that one case is not proven."
     },
     "RPT-NUM-0001": {
       "verdict": "covered",
