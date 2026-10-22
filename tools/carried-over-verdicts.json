@@ -1146,11 +1146,10 @@
     },
     "DL-ORIG-GAME-0027": {
       "verdict": "covered",
-      "register": [
-        "U-bcac07"
-      ],
+      "register": [],
       "source": [
-        "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:14"
+        "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:12",
+        "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:13"
       ],
       "original": "R076+0x0430",
       "note": "$SANCT00 holds texts that the sanctuary card never shows: text 4 (a second sanctuary menu), texts 5 to 8 (the priest's growing pressure to leave, ending in a forced departure with its own menu) and text 12 (a failed escape that ends in capture). The card shows only texts 0 to 3 and 9 to 11, and it is the only user of $SANCT00."
