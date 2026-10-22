@@ -278,17 +278,16 @@
     "RPT-INN-0002": {
       "verdict": "covered",
       "register": [
-        "D-40780d",
-        "D-4277ec"
+        "B-85e0e4",
+        "D-3a3c6c"
       ],
       "source": [
-        "src/Darklands.Persistence/CacheFile.cs:14",
-        "src/Darklands.Persistence/CacheFile.cs:68",
-        "src/Darklands.Core/Items/ItemStores.cs:44",
-        "src/Darklands.Core/OriginalBehaviour.cs:29"
+        "src/Darklands.Core/Items/ItemStores.cs:69",
+        "src/Darklands.Core/Items/ItemStores.cs:101",
+        "src/Darklands.Core/OriginalBehaviour.cs:62"
       ],
       "original": "R035+0x1468; R035+0x04BC; R037+0x4184",
-      "note": "The code has a mechanism by which inn storage in one long-running world breaks while a fresh world works: the store file only grows (a store emptied and given up stays in it), its header has room for a limited number of store offsets, and when a known store is written back the rewrite assumes a header under 128 bytes. Both defects are registered as divergences of the file layout (D-40780d, D-4277ec), so the restoration does not reproduce them. They do not explain the enemy cloth drops in the same report, and the link to that one case is not proven."
+      "note": "The code has a mechanism by which inn storage in one long-running world breaks while a fresh world works: the store file only grows (a store emptied and given up stays in it), its header has room for a limited number of store offsets, and when a known store is written back the rewrite lays the file out with a 101-byte header over the offsets of a 198-byte one, so the other stores are copied from the wrong place. The restoration reproduces this exactly in its faithful mode (registered as an original bug, B-85e0e4; the whole-game session cache-revisit agrees with the original), and fixes the rewrite by default in the player's game as a switchable data-safety fix (D-3a3c6c): the file keeps the layout of a new game and stays readable by the original. It does not explain the enemy cloth drops in the same report, and the link to that one case is not proven."
     },
     "RPT-NUM-0001": {
       "verdict": "covered",
