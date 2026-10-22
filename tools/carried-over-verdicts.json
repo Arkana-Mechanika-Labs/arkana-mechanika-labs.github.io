@@ -285,9 +285,9 @@
         "D-2a45ce"
       ],
       "source": [
-        "src/Darklands.Core/Items/ItemStores.cs:110",
-        "src/Darklands.Core/Items/ItemStores.cs:111",
-        "src/Darklands.Core/Items/ItemStores.cs:132",
+        "src/Darklands.Core/Items/ItemStores.cs:147",
+        "src/Darklands.Core/Items/ItemStores.cs:148",
+        "src/Darklands.Core/Items/ItemStores.cs:169",
         "src/Darklands.Core/OriginalBehaviour.cs:62",
         "src/Darklands.Core/OriginalBehaviour.cs:71"
       ],
