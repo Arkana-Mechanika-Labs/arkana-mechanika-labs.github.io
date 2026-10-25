@@ -207,7 +207,7 @@
       "verdict": "not-in-483.07",
       "reason_kind": "third-party-tool",
       "register": [
-        "D-f4c0e9"
+        "D-9c9eab"
       ],
       "source": [
         "src/Darklands.Presentation/DarklandsGame.cs:271"
@@ -364,7 +364,7 @@
     "RPT-CALENDAR-0001": {
       "verdict": "open",
       "register": [
-        "D-f4c0e9"
+        "D-9c9eab"
       ],
       "source": [
         "src/Darklands.Presentation/DarklandsGame.cs:271",
