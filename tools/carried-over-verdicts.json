@@ -1157,11 +1157,11 @@
     "DL-ORIG-GAME-0036": {
       "verdict": "covered",
       "register": [
-        "D-be2d59"
+        "D-fb3254"
       ],
       "source": [
-        "src/Darklands.Core/Battles/Tactics/BattleMap.cs:302",
-        "src/Darklands.Core/Battles/Tactics/BattleMap.cs:304"
+        "src/Darklands.Core/Battles/Tactics/BattleMap.cs:317",
+        "src/Darklands.Core/Battles/Tactics/BattleMap.cs:319"
       ],
       "original": "R014+0xF284",
       "note": "In the segment-against-box clip test, when neither the bottom nor the top edge applies, the original uses an uninitialised intersection point (whatever the stack holds). The restoration keeps the previous clip point instead and records this as a divergence."
