@@ -40,7 +40,7 @@ The full notes of each release are on [GitHub](https://github.com/Arkana-Mechani
 
 ### 0.9.5 — October 28, 2026
 
-A test build. Walking on the map with a held arrow key is smooth, as in DOSBox: the party keeps its facing and stops when you let go. In battles the mouse pointer hides while a message box waits, the party panel uses the original's font and shows "near a door" and the like, and a few sounds and small timings match the original. All 769 battles and whole-game sessions of the side-by-side comparison agree with the original, now including the sound and music requests.
+A new release. Walking on the map with a held arrow key is smooth, as in DOSBox: the party keeps its facing and stops when you let go. In battles the mouse pointer hides while a message box waits, the party panel uses the original's font and shows "near a door" and the like, and a few sounds and small timings match the original. All 769 battles and whole-game sessions of the side-by-side comparison agree with the original, now including the sound and music requests.
 
 SHA-256 of the zip: `eaad6d8d73db21d0bbaeb8c614e49b02e97e8a33f3ce2ffb9555c1061145525f`
 
