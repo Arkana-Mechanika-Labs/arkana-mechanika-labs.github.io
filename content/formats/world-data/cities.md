@@ -8,7 +8,7 @@ City-specific data: names for every location within each city, coordinates, dock
 {{< format-meta
   ext="<code>DARKLAND.CTY</code>"
   location="Game root"
-  endian="Mixed — <code>city_contents</code> word is big-endian; all other fields are little-endian"
+  endian="Little-endian throughout (the <code>city_contents</code> bit table is written with its two bytes swapped; see the byte-order note)"
   size="57,225 B — 1-byte count (92) + 92 × 622-byte city records"
   compression="None"
   magic="None — num_cities byte = 0x5C at 0x00"
@@ -17,7 +17,7 @@ City-specific data: names for every location within each city, coordinates, dock
 >}}
 
 {{< format-caution >}}
-**Partial.** Two name slots are not fully resolved: +0x18E (populated in 6 cities as `Munzenplatz` / German `Reichsmuenzstaette` — likely maps to `$imperialMint` variable, but not runtime-proven) and +0x1CE (gate/tower names; correlates with `city_contents` bit 0x2000 in 31/34 cases). The `city_contents` word must be treated as **big-endian** — earlier little-endian readings shift all flags and produce wrong results.
+**Partial.** Two name slots are not fully resolved: +0x18E (populated in 6 cities as `Munzenplatz` / German `Reichsmuenzstaette` — likely maps to `$imperialMint` variable, but not runtime-proven) and +0x1CE (gate/tower names; correlates with `city_contents` bit 0x2000 (Mask column) in 31/34 cases). The `city_contents` word is stored little-endian like every other field; its bit table below is written with the two bytes swapped (see the byte-order note there).
 {{< /format-caution >}}
 
 *Canonical source: `darkland.cty.xml` ([Wendigo's Darklands repo](https://github.com/vvendigo/Darklands))*
@@ -88,26 +88,26 @@ City order here is the definitive ordering; the full name is the best unique ide
 
 ### city_contents bitmask
 
-> **Byte-order note:** `city_contents` is stored as a **big-endian** 16-bit word in the file. Earlier little-endian interpretations shift the flags and produce the wrong mapping.
+> **Byte-order note:** `city_contents` is a 16-bit word stored little-endian in the file, like every other field: the first byte holds the low eight bits as the program reads the word. The *Mask* column below is written as if the two bytes were read high byte first (the first byte of the field is the high byte of the mask, so `0x8000` is bit 7 of the first byte). The *Program mask* column gives the same bit as the value of the little-endian word the program reads (the two bytes swapped). Both columns name the same bits of the same two bytes; only the reading order differs, so use one column consistently.
 
-| Mask | Flag | Meaning |
-|------|------|---------|
-| `0x8000` | `is_kloster` | Has a Kloster |
-| `0x4000` | `is_slums` | Has a slums district |
-| `0x2000` | *(unknown)* | Strongly correlates with the unknown name slot at `+0x1CE` |
-| `0x1000` | `is_cathedral` | Has a cathedral |
-| `0x0800` | *(constant)* | Set in all stock cities |
-| `0x0400` | `is_fortress` | Has a city fortress |
-| `0x0200` | `is_town_hall` | Has a town hall |
-| `0x0100` | `is_polit` | Has a political centre |
-| `0x0080` | *(constant)* | Zero in all stock cities |
-| `0x0040` | *(constant)* | Zero in all stock cities |
-| `0x0020` | *(constant)* | Zero in all stock cities |
-| `0x0010` | *(constant)* | Zero in all stock cities |
-| `0x0008` | `docks` | Has docks |
-| `0x0004` | *(unknown)* | Matches the second unknown name slot at `+0x18E` (`Munzenplatz`) exactly in the stock file |
-| `0x0002` | `is_pawnshop` | Has a Leihhaus (pawnshop) |
-| `0x0001` | `is_university` | Has a university |
+| Mask | Program mask | Flag | Meaning |
+|------|------|------|---------|
+| `0x8000` | `0x0080` | `is_kloster` | Has a Kloster |
+| `0x4000` | `0x0040` | `is_slums` | Has a slums district |
+| `0x2000` | `0x0020` | *(unknown)* | Strongly correlates with the unknown name slot at `+0x1CE` |
+| `0x1000` | `0x0010` | `is_cathedral` | Has a cathedral |
+| `0x0800` | `0x0008` | *(constant)* | Set in all stock cities |
+| `0x0400` | `0x0004` | `is_fortress` | Has a city fortress |
+| `0x0200` | `0x0002` | `is_town_hall` | Has a town hall |
+| `0x0100` | `0x0001` | `is_polit` | Has a political centre |
+| `0x0080` | `0x8000` | *(constant)* | Zero in all stock cities |
+| `0x0040` | `0x4000` | *(constant)* | Zero in all stock cities |
+| `0x0020` | `0x2000` | *(constant)* | Zero in all stock cities |
+| `0x0010` | `0x1000` | *(constant)* | Zero in all stock cities |
+| `0x0008` | `0x0800` | `docks` | Has docks |
+| `0x0004` | `0x0400` | *(unknown)* | Matches the second unknown name slot at `+0x18E` (`Munzenplatz`) exactly in the stock file |
+| `0x0002` | `0x0200` | `is_pawnshop` | Has a Leihhaus (pawnshop) |
+| `0x0001` | `0x0100` | `is_university` | Has a university |
 
 Validation notes from the KB:
 
