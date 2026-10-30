@@ -34,6 +34,10 @@ Put your MT-32 or CM-32L ROM files in the `MT32_ROMS` folder next to the program
 
 Yes: `darklands.settings.json`, created next to the program on the first run, sets the window scale, any resolution, or full screen, and also the sound card and more.
 
+### Is the old darklands.net FAQ still right?
+
+Mostly. [The Classic FAQ, Checked](/classic-faq/) goes through it section by section against the original program's rules, and gives the corrections and the exact figures.
+
 ### Where do I report a bug?
 
 On the [Discord](https://discord.gg/HjzWvmHhqZ), or as an issue on [GitHub](https://github.com/Arkana-Mechanika-Studios/darklands-restoration).
