@@ -1,6 +1,6 @@
 ---
 title: Darklands Restoration Project
-description: MicroProse's 1992 role-playing game Darklands, rebuilt in C# to run on today's Windows and to play exactly like the original. Version 0.9.0 is out.
+description: MicroProse's 1992 role-playing game Darklands, rebuilt in C# to run on today's Windows and to play exactly like the original. Version 0.9.6 is out.
 toc: false
 width: wide
 params:
@@ -12,9 +12,9 @@ params:
   <div class="drp-hero-copy">
     <div class="drp-hero-eyebrow">Arkana Mechanika Studios</div>
     <p class="drp-hero-tagline">Darklands, rebuilt for today's Windows</p>
-    <p class="drp-hero-subtitle">MicroProse's 1992 role-playing game of saints, alchemy, witches and robber knights, running without DOSBox and playing exactly like the original. Version 0.9.0 is out.</p>
+    <p class="drp-hero-subtitle">MicroProse's 1992 role-playing game of saints, alchemy, witches and robber knights, running without DOSBox and playing exactly like the original. Version 0.9.6 is out.</p>
     <div class="drp-hero-buttons">
-      <a href="/download/" class="drp-btn drp-btn-primary">Download 0.9.0</a>
+      <a href="/download/" class="drp-btn drp-btn-primary">Download 0.9.6</a>
       <a href="https://discord.gg/HjzWvmHhqZ" class="drp-btn drp-btn-outline" target="_blank" rel="noopener noreferrer">Join the Discord ↗</a>
       <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration" class="drp-btn drp-btn-outline" target="_blank" rel="noopener noreferrer">Source code ↗</a>
     </div>
@@ -47,11 +47,11 @@ Darklands is MicroProse's ambitious 1992 role-playing game set in a grounded, fo
 The Darklands Restoration Project brings it back as a native program. This is not a remake and not an emulator: every rule of the original — combat, prices, saints, alchemy, the cards of every city and encounter, the generators of castles, mines and battlefields — has been rewritten from the original program and checked against it. The screens, the music and the sound are the original's, drawn and played from your own copy of the game.
 
 <div class="drp-current-note">
-  <strong>Version 0.9.0 is out</strong>
+  <strong>Version 0.9.6 is out</strong>
   <p>The whole game plays: character creation, cities, inns and shops, guilds, banks and churches, the world map and its encounters, battles, camping, saints and alchemy, saving and loading. You need your own copy of Darklands (GOG or Steam). Version 1.0 will follow once the remaining faithfulness checks are finished. <a href="/download/">Get it →</a></p>
 </div>
 
-## Version 0.9.0
+## Version 0.9.6
 
 <div class="drp-story-grid">
   <figure class="drp-story-card"><img src="/images/0.9.0/start-screen.png" alt="The start screen" loading="lazy" /><span class="drp-section-kicker">Start</span><strong>The original start screen</strong><span>Quickstart, a new world, or a saved game.</span></figure>
@@ -77,7 +77,7 @@ The original's surprising rules and genuine defects are collected in [Bugs & Odd
 News about releases goes to the [news](/news/). The devlogs and the presentation videos of the earlier development are kept in the [archives](/archives/).
 
 <div class="drp-follow-actions">
-  <a href="/download/" class="drp-btn drp-btn-primary">Download 0.9.0</a>
+  <a href="/download/" class="drp-btn drp-btn-primary">Download 0.9.6</a>
   <a href="https://discord.gg/HjzWvmHhqZ" class="drp-btn drp-btn-outline" target="_blank" rel="noopener noreferrer">Join the Discord ↗</a>
   <a href="/news/" class="drp-btn drp-btn-outline">News</a>
   <a href="/faq/" class="drp-btn drp-btn-outline">Read the FAQ</a>

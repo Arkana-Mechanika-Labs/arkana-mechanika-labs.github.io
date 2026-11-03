@@ -8,7 +8,7 @@ width: normal
 
 ### Is it playable?
 
-Yes. Version 0.9.0 plays the whole game: character creation, cities, inns and shops, guilds, banks and churches, the world map and its encounters, real-time battles, camping, saints and alchemy, saving and loading. [Download it here](/download/). Version 1.0 will follow once the remaining faithfulness checks are finished.
+Yes. Version 0.9.6 plays the whole game: character creation, cities, inns and shops, guilds, banks and churches, the world map and its encounters, real-time battles, camping, saints and alchemy, saving and loading. [Download it here](/download/). Version 1.0 will follow once the remaining faithfulness checks are finished.
 
 ### Do I need the original game?
 
@@ -16,7 +16,7 @@ Yes, your own copy of Darklands 483.07, for example the GOG or Steam release. No
 
 ### What do I need to run it?
 
-Windows x64. No .NET installation and no DOSBox: unpack the zip and start `DarklandsRP.exe`.
+Windows x64. No .NET installation and no DOSBox: unpack the zip and start `DarklandsRP.exe`. An experimental build for Linux x64 and the Steam Deck is also available on the [download page](/download/).
 
 ### Does it play like the original?
 

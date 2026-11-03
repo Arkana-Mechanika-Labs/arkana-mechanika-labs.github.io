@@ -1,12 +1,13 @@
 ---
 title: Download
-description: Download the Darklands Restoration Project for Windows. Requires your own copy of Darklands.
+description: Download the Darklands Restoration Project for Windows, or for Linux and the Steam Deck (experimental). Requires your own copy of Darklands.
 toc: true
 width: normal
 ---
 
 <div class="drp-hero-buttons">
-  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v0.9.5/DarklandsRP-0.9.5-win-x64.zip" class="drp-btn drp-btn-primary">Download 0.9.5 for Windows (34 MB)</a>
+  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v0.9.6/DarklandsRP-0.9.6-win-x64.zip" class="drp-btn drp-btn-primary">Download 0.9.6 for Windows (34 MB)</a>
+  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v0.9.6/DarklandsRP-0.9.6-linux-x64.tar.gz" class="drp-btn drp-btn-outline">Linux and Steam Deck, experimental (33 MB)</a>
   <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases" class="drp-btn drp-btn-outline" target="_blank" rel="noopener noreferrer">All releases ↗</a>
 </div>
 
@@ -14,11 +15,15 @@ width: normal
 
 ## Getting started
 
-1. Download `DarklandsRP-0.9.5-win-x64.zip` and unpack it into a folder of its own. It holds `DarklandsRP.exe`, `SDL2.dll`, `libmt32emu.dll`, an empty `MT32_ROMS` folder, the licence, the third-party notices and the release notes.
+1. Download `DarklandsRP-0.9.6-win-x64.zip` and unpack it into a folder of its own. It holds `DarklandsRP.exe`, `SDL2.dll`, `libmt32emu.dll`, an empty `MT32_ROMS` folder, the licence, the third-party notices, the guides, an example mod and sound pack, and the release notes.
 2. Start `DarklandsRP.exe`. On the first run the launcher opens: it finds your Darklands by itself (GOG, Steam, or a folder next to it); check the game folder and the settings, then start the game. They are kept in `darklands.settings.json`. To open the launcher again later, hold Shift while starting.
 3. Play. It starts like the original: the banner, the opening, then the start screen.
 
-No .NET installation is needed. Windows x64 only for now.
+No .NET installation is needed.
+
+### Linux and the Steam Deck (experimental)
+
+`DarklandsRP-0.9.6-linux-x64.tar.gz` runs on Linux x64 and on the Steam Deck, in desktop mode or added to Steam as a non-Steam game. Unpack it with `tar` so that `DarklandsRP` stays executable, then start `./DarklandsRP`. It needs the system's SDL2 (`libSDL2-2.0.so.0`, already present on SteamOS), and finds the game in Steam's libraries (including the Deck's SD card), Heroic, GOG/Lutris and Wine prefixes. This build has been tested by the automated builds only; if something does not work, please report it with your distribution and what you saw.
 
 ## Music and sound
 
@@ -37,6 +42,12 @@ The keys and the mouse are the original's (Alt-S save, Alt-L load, Alt-P pause, 
 ## Release notes
 
 The full notes of each release are on [GitHub](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases).
+
+### 0.9.6 — November 2, 2026
+
+A new release, with four additions around the game: an experimental Linux and Steam Deck build, sound packs (your own OGG or WAV music and effects, chosen in the launcher), data mods with a card registry, and a command layer for scripts. It also brings the game closer to the original again: drawing as the 1992 game draws it (the cleaner drawing of 0.9.5 is a setting, `display.cleanDrawing`), battle colours and the party panel, keys typed during the hourglass, hot-key boxes and menus, and a handful of rare cards and rules. Your saved games carry over.
+
+SHA-256 of the Windows zip: `312030f696d799c8f53802cb5e682301e30d251aa83198c6139a2bdfeae0828c`; of the Linux archive: `994f4c80ab1f512403abdeb1f3bd14501e76b5c38bffea4b764ab7ee9369b9b0`
 
 ### 0.9.5 — October 28, 2026
 

@@ -15,7 +15,7 @@ enableRobotsTXT = true
     noClasses = false
 
 [params]
-  description = "MicroProse's Darklands (1992) rebuilt in C# to run on today's Windows and to play exactly like the original. Version 0.9.0 is out."
+  description = "MicroProse's Darklands (1992) rebuilt in C# to run on today's Windows and to play exactly like the original. Version 0.9.6 is out."
   images = ["/images/0.9.0/city.png"]
 
   [params.theme]
