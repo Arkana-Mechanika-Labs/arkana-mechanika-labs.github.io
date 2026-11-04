@@ -1,0 +1,15 @@
+{{- /* Darklands FAQ: a "back to the top" button that appears once the reader has scrolled down. */ -}}
+{{- if eq .context.Type "community-faq" }}
+<button type="button" id="dl-totop-button" class="dl-totop-button" aria-label="Back to the top of the page" hidden>&uarr;</button>
+<script>
+(function () {
+  var b = document.getElementById("dl-totop-button");
+  if (!b) return;
+  b.hidden = false;
+  function show() { b.classList.toggle("dl-shown", window.scrollY > 900); }
+  window.addEventListener("scroll", show, { passive: true });
+  show();
+  b.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+})();
+</script>
+{{- end }}

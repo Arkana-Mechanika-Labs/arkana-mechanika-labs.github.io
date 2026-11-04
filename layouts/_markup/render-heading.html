@@ -1,0 +1,13 @@
+{{- /* The theme's heading hook. In the Darklands FAQ each numbered entry (h2)
+       is preceded by a small link back to the top of the page. */ -}}
+{{- if and (eq .Level 2) (eq .Page.Type "community-faq") (eq .Page.Kind "page") -}}
+<p class="dl-totop"><a href="#faq-top">&uarr; Top</a></p>
+{{ end -}}
+<h{{ .Level }} {{- with .Attributes.class }} class="{{ . }}" {{- end }}>
+  {{- .Text | safeHTML -}}
+  {{- if gt .Level 1 -}}
+    <span class="hx:absolute hx:-mt-20" id="{{ .Anchor | safeURL }}"></span>
+    <a href="#{{ .Anchor | safeURL }}" class="subheading-anchor" aria-label="{{ (T "permalinkLabel") | default "Permalink for this section" }}"></a>
+  {{- end -}}
+</h{{ .Level }}>
+{{- /* Drop trailing newlines */ -}}

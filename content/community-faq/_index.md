@@ -4,6 +4,8 @@ description: "The players' FAQ for Darklands, version 4.0: the darklands.net FAQ
 draft: true
 toc: false
 width: normal
+cascade:
+  type: community-faq
 ---
 
 <p class="dl-colophon">Version 4.0, 2026<br><small>edited by Arkana Mechanika</small></p>
@@ -16,13 +18,7 @@ All figures are those of version 483.07, the last version MicroProse released. W
 
 ## Contents
 
-1. [Some Background Information](background/): the designer, MicroProse's announcement, where to find the game, sequels, owners, remakes, what was cut.
-2. [Technical Assistance](technical/): versions and patches, bugs, running the game today, saving and loading.
-3. [General Game Considerations](general/): characters, money, alchemy, saints, arms, cities, skills, fame, jobs, travel, fighting, retiring.
-4. [Specific Quests and Encounters](quests/): from pilgrims on the road to Baphomet.
-5. [Miscellaneous Tidbits](miscellany/): items, relics, places, cities, tips.
-6. [Summary of the Darklands Hint Book](hint-book/)
-7. [Revision History](revisions/)
+{{< faq-contents >}}
 
 ## Elsewhere on this site
 

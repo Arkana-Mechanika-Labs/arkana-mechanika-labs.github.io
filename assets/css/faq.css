@@ -227,3 +227,106 @@ article h1 {
   letter-spacing: 0.05em;
   color: var(--faq-rubric);
 }
+
+/* Navigation: the chapter's entries under its title */
+.content details.dl-entries {
+  margin: 0.5rem 0 2rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--faq-note-border);
+  border-left: 4px double var(--faq-note-border);
+  background: var(--faq-note-bg) !important;
+}
+.content details.dl-entries > summary {
+  cursor: pointer;
+  font-family: var(--faq-caps);
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  color: var(--faq-rubric);
+}
+.content details.dl-entries ul,
+.dl-contents ul {
+  list-style: none;
+  margin: 0.5rem 0 0.2rem;
+  padding-left: 0;
+  columns: 2 18rem;
+  column-gap: 2rem;
+}
+.content details.dl-entries li,
+.dl-contents li {
+  margin: 0.15rem 0;
+  break-inside: avoid;
+  font-size: 0.95rem;
+}
+
+/* Navigation: the full contents on the front page */
+.dl-contents-part {
+  margin: 1.4rem 0 1.8rem;
+}
+.content h3.dl-contents-title {
+  font-style: normal;
+  margin: 0 0 0.3rem;
+  font-size: 1.4rem;
+}
+.content h3.dl-contents-title::before {
+  content: none;
+}
+.content .dl-contents a,
+.content details.dl-entries a {
+  text-decoration: none;
+}
+.content .dl-contents a:hover,
+.content details.dl-entries a:hover {
+  text-decoration: underline;
+}
+
+/* Navigation: back to the top */
+.content p.dl-totop {
+  clear: both;
+  text-align: right;
+  font-size: 0.8rem;
+  margin: 2rem 0 -1.6rem;
+  font-family: var(--faq-caps);
+  letter-spacing: 0.04em;
+}
+.content p.dl-totop a {
+  color: var(--faq-muted);
+  text-decoration: none;
+}
+.content p.dl-totop a:hover {
+  color: var(--faq-rubric);
+}
+.content details.dl-entries + p.dl-totop {
+  display: none;
+}
+.content p.dl-totop-last {
+  margin: 3rem 0 0;
+  text-align: center;
+  font-size: 0.95rem;
+}
+#faq-top {
+  scroll-margin-top: 5rem;
+}
+.dl-totop-button {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 30;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 1px solid var(--faq-note-border);
+  background: var(--faq-note-bg);
+  color: var(--faq-rubric);
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.dl-totop-button.dl-shown {
+  opacity: 0.9;
+  pointer-events: auto;
+}
+.dl-totop-button[hidden] {
+  display: none;
+}
