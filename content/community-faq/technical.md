@@ -300,6 +300,10 @@ The difficulty level changes four things:
 
 ## 2.16 The manual and the clue book: which should I believe?
 
+{{< plate src="/images/faq/s2-book.png" alt="A thick red-bound book lying on a stone floor" side="right" size="small" pixel="true" >}}
+A book. Scene picture from the game (MicroProse, 1992).
+{{< /plate >}}
+
 The clue book, where they differ. The manual went to print well before the game was finished, and parts of it describe things that were cut. Hendrick, who wrote both, said on Steam in 2017 that where they conflict the clue book is the more accurate, since it could give the data and formulas the manual had no room for. The clue book has errors too: the game has St. Peter needing Virtue 58, not 53, for one (see [section 6](../hint-book/)).
 
 The GOG and Steam editions include the manual and, with GOG, the clue book and the map. Boxed copies of the clue book still turn up second-hand.

@@ -81,6 +81,10 @@ The ready-made party (Gretchen, Gunther, Hans and Ebhard) is four experienced ad
 
 ## 3.2 Money
 
+{{< plate src="/images/faq/s3-purse.png" alt="A money bag with gold coins spilled on the ground" side="right" size="small" pixel="true" >}}
+The purse shown at the banks and in the marketplace. Scene picture from the game (MicroProse, 1992).
+{{< /plate >}}
+
 From the manual:
 
 > Money is counted in three denominations: gold florins, silver groschen, and silver pfennigs. Because distribution of wealth and wages was so different, comparisons to modern currency is impossible. In general, florins were very valuable, but are used only for large transactions; groschen are fairly valuable and are in daily use; pfennigs are "small change," important only to the very poor.
@@ -429,6 +433,10 @@ Weapons never do, and ordinary blows don't wear armour either. Armour loses qual
 
 ## 3.6 Cities and Villages
 
+{{< plate src="/images/faq/s3-city-square.png" alt="A city square with half-timbered houses, a church and a fountain" side="right" pixel="true" >}}
+A city square. Scene picture from the game (MicroProse, 1992).
+{{< /plate >}}
+
 In cities, adventurers can find almost anything for a price. Larger cities usually have a greater selection and higher quality of items. Cities throughout the empire are often linked by roads or waterways and citizens relied on high city walls for protection from foreign armies. Within cities, players can find many common services such as inns, armories, guild halls and the such. However, just like in real life, not every city has every service available.
 
 {{< contributor "C. Michel Boucher" >}}
@@ -450,6 +458,10 @@ Leaving is free. Walking out costs nothing unless the city is hostile or in unre
 ### What does the night watch cost?
 
 <p class="dl-formula">Fine = (1 + city size + florins you carry − standing ÷ 50) pfennigs<br><small>for each character present</small></p>
+
+{{< plate src="/images/faq/s3-night-watch.png" alt="A watchman in white with a lantern and a drawn sword" side="right" size="small" pixel="true" >}}
+Challenged by the watch. Scene picture from the game (MicroProse, 1992).
+{{< /plate >}}
 
 The florins in your purse are part of the fine, so a rich party pays far more: four characters carrying 30 florins in a middle-sized town pay about 12 groschen. Put your money in a bank before you walk the streets at night. Paying costs an hour and nothing else. On the main street at night the watch stops you on 4 to 14 moves in 100, in the side streets on 1 to 8, more in towns with higher prices.
 
@@ -590,6 +602,10 @@ No miner ever joins the party, and the companions' terms are fixed: the Hanse kn
 
 ## 3.11 Travelling by Land
 
+{{< plate src="/images/faq/s3-approach.png" alt="A walled city seen at dusk across dark fields" side="right" pixel="true" >}}
+Approaching a city. Scene picture from the game (MicroProse, 1992).
+{{< /plate >}}
+
 {{< contributor "C. Michel Boucher" >}}
 In the beginning of the game, you will have to travel by land. Except for a few minor exceptions, this is the cheapest, but most time consuming way of travelling.
 
@@ -625,6 +641,10 @@ A party of four without horses pays about three groschen. Each port's ships go t
 It isn't luck: the arrival wharf offers to sail on to the next ports along the river, free, if a ship is leaving that day. To go ashore you can jump off among the reeds for nothing, pay the wharf toll (a couple of pfennigs per character), talk to the wharfmaster or sneak ashore at night.
 
 ## 3.13 Fighting Tactics
+
+{{< plate src="/images/faq/s3-melee.png" alt="A sketch of armoured men fighting with swords, shields and polearms" side="left" pixel="true" >}}
+A caravan under attack. Scene picture from the game (MicroProse, 1992).
+{{< /plate >}}
 
 {{< contributor "Alexander von Lünen" >}}
 This depends on your opponent. While town robbers and cutthroat-thieves may be just wiped away like nothing without any particular strategy, other foes may take a great deal of tactical considerations. First rule is, only hunt what you can kill. Be sure your characters can take care of themselves. If necessary, "train" them by searching out robbers in town. It might be a good idea to put your weaker characters in the first row or even let them fight alone if facing such "training fights". At stronger enemies, even when your party appears strong, you should use all your fighting skills. That means using missile-, bow-, and alchemical-weapons at long-distance and good weapons at mêlée. Use the full bandwidth of your Alchemist. Let him (her) throw potions at longer-distance and use healing potions on your seriously wounded party-members.
@@ -675,6 +695,10 @@ Most fights are sized by your party's "lore level", a rating from 1 to 10:
 The better your party, the larger the bands of robbers and the groups in the wilderness and the dungeons. A lone character or a pair meets smaller ones.
 
 ## 3.14 Enemies
+
+{{< plate src="/images/faq/s3-footpads.png" alt="Two burly robbers, one with a drawn sword" side="right" size="small" pixel="true" >}}
+Footpads. Scene picture from the game (MicroProse, 1992).
+{{< /plate >}}
 
 {{< contributor "C. Michel Boucher" >}}
 These characteristics vary a lot from one group to another, but I'm not sure what effect it actually has on combat.

@@ -9,6 +9,10 @@ width: normal
 
 ## 1.1 What do we know about Arnold Hendrick, designer of Darklands?
 
+{{< plate src="/images/faq/s1-inkwell.png" alt="A quill in an inkwell beside a stack of written pages" side="right" size="small" pixel="true" >}}
+Quill and pages, from a university library. Scene picture from the game (MicroProse, 1992).
+{{< /plate >}}
+
 Before he designed games for Microprose, Arnold Hendrick worked in board and miniatures games. From 1979 to 1982 he was publishing director of Heritage, where he ran the Dwarfstar Games line with Howard Barasch. Of note: Grav Armor (Dwarfstar), a tactical combat game, and Barbarian Prince (also Dwarfstar), a paragraph adventure boardgame, which won the 1981 Charles S. Roberts award for best fantasy board game. He was also involved in Trireme from Avalon Hill (Redesign and Development). After Heritage folded he worked at Coleco from 1983, and in 1985 he joined MicroProse, as, in his words, "the first non-programming designer at that company".
 
 Arnold Hendrick worked on a number of games for Microprose:

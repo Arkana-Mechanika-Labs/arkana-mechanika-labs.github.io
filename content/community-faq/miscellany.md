@@ -219,6 +219,10 @@ The table gives each city's size, its lord as the game names him (with the game'
 
 ## 5.5 Cathedrals and Universities
 
+{{< plate src="/images/faq/s5-church.png" alt="A church tower above the roofs of a city" side="right" size="small" pixel="true" >}}
+A city church. Scene picture from the game (MicroProse, 1992).
+{{< /plate >}}
+
 {{< contributor "C. Michel Boucher" >}}
 In Universities, you can combine most of the functions of some of the other learning institutions, the Kloster and the Alchemist. The University will allow you to learn about saints or purchase alchemical material (the physician also), and to upgrade your Philosopher's Stone. Furthermore, you can hire the services of a professor to teach the following subjects: Alchemy, Religion, Speak Latin, Read and Write and Healing. The first can also be obtained from an Alchemist, the middle three from a Kloster and the last from a Physician. Note that cities not listed here have neither a Cathedral nor a University.
 {{< /contributor >}}

@@ -27,6 +27,10 @@ No. About one band in seven (14 in 100) is bandits in disguise. Giving them food
 
 ## 4.2 Hermits
 
+{{< plate src="/images/faq/s4-hermit.png" alt="An old bearded man with a staff in a green landscape" side="right" size="small" pixel="true" >}}
+A hermit. Scene picture from the game (MicroProse, 1992).
+{{< /plate >}}
+
 {{< contributor "C. Michel Boucher" >}}
 If you're able to engage the virtuous hermit, he will give you instruction in the faith and/or in a saint.
 {{< /contributor >}}
@@ -91,6 +95,10 @@ A caravan deals in one kind of goods only, and which kind depends on where on th
 To travel along, you have to ask. The chance is half of: half the leader's Speak Common, plus the leader's Charisma, plus the party's average Virtue. The journey takes 2, 4, 6 or 8 days and ends safely at the nearest city, and every member gains Divine Favor (a fifth of Religion plus the number of days).
 
 ## 4.5 Knight enroute to Jousting Tournament
+
+{{< plate src="/images/faq/s4-joust.png" alt="A knight in armour on a white horse, lance raised with a pennant" side="left" size="small" pixel="true" >}}
+A knight on the road. Scene picture from the game (MicroProse, 1992).
+{{< /plate >}}
 
 {{< contributor "Dennis Ahr" >}}
 Do you want to beat that knight who challenges you to a joust or ride? Pray to Christoph (31) or George (23), defeat the knight, and improve your Riding.
@@ -241,6 +249,10 @@ Dwarves guard some passages with a riddle. The right answer opens the door and m
 
 ## 4.10 Solitary Women
 
+{{< plate src="/images/faq/s4-witch.png" alt="A pale woman in a dark cloak among the trees" side="right" size="small" pixel="true" >}}
+A witch at your mercy. Scene picture from the game (MicroProse, 1992).
+{{< /plate >}}
+
 {{< contributor "C. Michel Boucher" >}}
 There are two types of solitary women (both have wolves): a widow and a bona fide witch. The first one you must leave alone because any attempt to disrupt her will result in loss of Virtue. The second one, however, can be defeated and forced to reveal information about the witches' gatherings.
 {{< /contributor >}}
@@ -250,6 +262,10 @@ Which of the two lives in a hut depends on where the hut stands: on about every 
 A beaten witch offers five things for her life: roots of "unnatural strength", three alchemical formulas, the place of the next High Sabbat, the cult's calendar, or her penance. **Never take the strength**: the leader who eats the roots dies. The formulas are random and often land on the wrong party member or on a saint instead (see [3.3](../general/#33-alchemy)). Her penance trains Virtue and gives Divine Favor. Whatever you choose, sparing her calls the Wild Hunt down on the party (see [4.13](#413-wild-hunt)).
 
 ## 4.11 Satanic Villages
+
+{{< plate src="/images/faq/s4-cursed-village.png" alt="A village under a red sky with glaring eyes in the clouds" side="left" pixel="true" >}}
+A village under an evil spell. Scene picture from the game (MicroProse, 1992).
+{{< /plate >}}
 
 {{< contributor "C. Michel Boucher" >}}
 Villages are either good or bad. Generally it is possible to tell simply by speaking to the Schultz but the quickest way is to visit the church and go to confession. If the penance required is the sacrifice of a small animal, or while speaking to the priest he mentions two saints that don't exist in the list, you can then leave the church, speak to the Schultz and accuse his village of witchcraft, defeat the villagers in combat and learn the location and date of the next witches' meeting. Note that you may or may not be able to get there on time. If you can't, don't worry, there are quite a few during the year, as many as you will find villages to attack.
@@ -288,6 +304,10 @@ In the lair you can fight, or have your leader reason with the beast. Reasoning 
 Dennis Ahr's music change is not something the game's rules show; treat it as a player's impression.
 
 ## 4.13 Wild Hunt
+
+{{< plate src="/images/faq/s4-wild-hunt.png" alt="A horned huntsman in a blue cloak against a burning forest" side="right" pixel="true" >}}
+The Hunter of the Wild Hunt. Scene picture from the game (MicroProse, 1992).
+{{< /plate >}}
 
 Tales of the Wild Hunt are often whispered in hushed tones by aged adventurers. Hell's hunter and their hounds will not easily be denied their game, but they can be turned back.
 
@@ -504,6 +524,10 @@ It begins at midnight of that day, lasts two days, and is held at one of the ele
 Because of an original bug, the sabbat quest ends on New Year's Day 1500: from then on no sabbat is planned. If you mean to win the High Sabbat, do it before the end of 1499.
 
 ## 4.19 Tombs, the undead and purifying
+
+{{< plate src="/images/faq/s4-graveyard.png" alt="Gravestones and a crooked tree under a grey sky" side="right" size="small" pixel="true" >}}
+A village graveyard. Scene picture from the game (MicroProse, 1992).
+{{< /plate >}}
 
 Errands for city patrons (see [4.7](#47-recovering-items)) sometimes send the party to an item in a crypt beneath a ruined church, where the dead are not at rest. Getting in means moving the rubble or blasting it with a potion.
 
