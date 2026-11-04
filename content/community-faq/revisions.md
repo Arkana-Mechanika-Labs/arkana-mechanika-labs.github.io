@@ -67,7 +67,7 @@ width: normal
 
 ### Changes from v3.0 to v4.0 - November 2026
 
-Version 4.0 was edited by Arkana Mechanika for the Darklands Restoration Project, with the permission of the earlier authors. The game's rules were checked against the original program, version 483.07, which the restoration has read routine by routine. The new questions are those the players asked most often on the Darklands mailing list, on Steam and on Discord. Every entry of version 3.0 is kept under its old number. Signed notes keep their authors' own words. Where one was wrong, a wrong figure or word was changed in place, and the correction follows the note. [The Classic FAQ, Checked](/classic-faq/) gives the evidence for the main corrections.
+Version 4.0 was edited by Arkana Mechanika for the Darklands Restoration Project. The game's rules were checked against the original program, version 483.07, which the restoration has read routine by routine. The new questions are those the players asked most often on the Darklands mailing list, on Steam and on Discord. Every entry of version 3.0 is kept under its old number. Signed notes keep their authors' own words. Where one was wrong, a wrong figure or word was changed in place, and the correction follows the note. [The Classic FAQ, Checked](/classic-faq/) gives the evidence for the main corrections.
 
 **Throughout**
 
@@ -129,6 +129,6 @@ Version 4.0 was edited by Arkana Mechanika for the Darklands Restoration Project
 
 ## Credits
 
-Darklands FAQ © 1995–2002 C. Michel Boucher, Fred Farzanegan, Dennis Ahr and Alexander von Lünen, with Marilyn E. Burford and Garrett R. Le-Page; version 3.0 edited by Myles Q. Martinez and published on darklands.net by Matt Wirkkala. Contributors named in the text include Gui Terence Ang, Michael Nemeth, Mark Kundinger, Jerry Hagen and the members of the Darklands mailing list. The earlier versions' text is used here with the authors' permission. Version 4.0 (2026) was edited by Arkana Mechanika.
+Darklands FAQ © 1995–2002 C. Michel Boucher, Fred Farzanegan, Dennis Ahr and Alexander von Lünen, with Marilyn E. Burford and Garrett R. Le-Page; version 3.0 edited by Myles Q. Martinez and published on darklands.net by Matt Wirkkala. Contributors named in the text include Gui Terence Ang, Michael Nemeth, Mark Kundinger, Jerry Hagen and the members of the Darklands mailing list. Version 4.0 (2026) was edited by Arkana Mechanika.
 
 Darklands is a trademark of its owners. MicroProse, MPS Labs and Darklands were © 1991–1995 MicroProse, Inc.

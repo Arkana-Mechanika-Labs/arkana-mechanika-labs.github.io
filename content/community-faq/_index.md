@@ -8,7 +8,7 @@ width: normal
 
 <p class="dl-colophon">Version 4.0, 2026<br><small>edited by Arkana Mechanika</small></p>
 
-This is the Darklands FAQ, version 4.0. It continues the Darklands FAQ of C. Michel Boucher, Fred Farzanegan, Dennis Ahr and Alexander von Lünen, whose version 3.0 was edited by Myles Q. Martinez and published on Matt Wirkkala's darklands.net. Their text is used here with permission.
+This is the Darklands FAQ, version 4.0. It continues the Darklands FAQ of C. Michel Boucher, Fred Farzanegan, Dennis Ahr and Alexander von Lünen, whose version 3.0 was edited by Myles Q. Martinez and published on Matt Wirkkala's darklands.net.
 
 Version 3.0 was written from play, the manual and the hint book. Since then the Darklands Restoration Project has read the original program, version 483.07, routine by routine. So this edition can check what the earlier ones could only observe. Where version 3.0 was right, its text stands. Where it was wrong or out of date, it has been corrected, and the answers to the questions players have kept asking since 1996 have been added where they belong. Every entry of version 3.0 is still here, under its old number. [Section 7](revisions/) lists what changed.
 
