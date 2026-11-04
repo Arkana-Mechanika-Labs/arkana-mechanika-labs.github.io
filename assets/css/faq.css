@@ -193,3 +193,37 @@ article h1 {
   font-size: 1.1rem !important;
   color: var(--faq-muted);
 }
+
+/* Spoilers: a sealed fold */
+.content details {
+  background: var(--faq-note-bg) !important;
+  border: 1px dashed var(--faq-note-border);
+  border-radius: 3px !important;
+}
+.content details > summary strong {
+  font-family: var(--faq-serif);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--faq-brass);
+}
+.content details > summary:hover {
+  background: transparent !important;
+}
+.content details .dl-note {
+  background: transparent;
+}
+
+/* The edition line on the front page */
+.content p.dl-colophon {
+  font-family: var(--faq-serif);
+  font-size: 1.35rem;
+  text-align: center;
+  margin: 0.5rem 0 2rem;
+}
+.content p.dl-colophon small {
+  display: block;
+  font-family: var(--faq-caps);
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+  color: var(--faq-rubric);
+}
