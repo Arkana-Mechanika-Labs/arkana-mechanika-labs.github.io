@@ -330,3 +330,12 @@ article h1 {
 .dl-totop-button[hidden] {
   display: none;
 }
+
+/* Boxes beside a floated picture: keep them clear of it instead of running underneath */
+.dl-note,
+.content details,
+.content p.dl-formula,
+.content blockquote,
+.content pre {
+  display: flow-root;
+}
