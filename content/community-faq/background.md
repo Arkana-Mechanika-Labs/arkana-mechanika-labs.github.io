@@ -68,7 +68,7 @@ Arnold Hendrick died on 25 May 2020. His widow, Georgeann Hendrick, wrote to the
 
 ## 1.2 What did Microprose say about Darklands?
 
-{{< plate src="/images/faq/s1-nuremberg-1493.jpg" alt="Woodcut view of the walled city of Nuremberg with its castle and churches" side="right" >}}
+{{< plate src="/images/faq/s1-nuremberg-1493.jpg" alt="Woodcut view of the walled city of Nuremberg with its castle and churches" >}}
 Nuremberg, from Hartmann Schedel's *Liber chronicarum* (Nuremberg, 1493), woodcut by Michael Wolgemut and Wilhelm Pleydenwurff. Wikimedia Commons, public domain.
 {{< /plate >}}
 

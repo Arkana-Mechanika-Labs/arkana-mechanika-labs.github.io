@@ -331,13 +331,14 @@ article h1 {
   display: none;
 }
 
-/* Boxes beside a floated picture: keep them clear of it instead of running underneath */
+/* Boxes never sit beside a floated picture: they start below it, so a long box is never squeezed into a narrow column */
 .dl-note,
 .content details,
 .content p.dl-formula,
 .content blockquote,
 .content pre {
   display: flow-root;
+  clear: both;
 }
 
 /* A picture just before a note, spoiler, formula or table is set above it, centred, not beside it:
@@ -402,4 +403,9 @@ article h1 {
 }
 .content p.dl-totop a {
   color: var(--faq-muted);
+}
+
+/* A small picture set in the text column, not floated */
+.dl-plate-small:not(.dl-plate-left):not(.dl-plate-right) {
+  max-width: 340px;
 }

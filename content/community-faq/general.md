@@ -81,7 +81,7 @@ The ready-made party (Gretchen, Gunther, Hans and Ebhard) is four experienced ad
 
 ## 3.2 Money
 
-{{< plate src="/images/faq/s3-purse.png" alt="A money bag with gold coins spilled on the ground" side="right" size="small" pixel="true" >}}
+{{< plate src="/images/faq/s3-purse.png" alt="A money bag with gold coins spilled on the ground" size="small" pixel="true" >}}
 The purse shown at the banks and in the marketplace. Scene picture from the game (MicroProse, 1992).
 {{< /plate >}}
 
