@@ -352,3 +352,54 @@ article h1 {
     width: 40%;
   }
 }
+
+/* Colour: warm ink instead of the theme's cool grey, with rubrics in red and gold */
+:root {
+  --faq-text: #2b2118;
+  --faq-strong: #7d2e1e;
+}
+.dark {
+  --faq-text: #e6dac3;
+  --faq-strong: #e7c48a;
+}
+.content p,
+.content li,
+.content td,
+.content dd {
+  color: var(--faq-text);
+}
+.content strong {
+  color: var(--faq-strong);
+  font-weight: 600;
+}
+.content h2 .dl-num {
+  color: var(--faq-rubric);
+  margin-right: 0.15em;
+}
+.content ul > li::marker,
+.content ol > li::marker {
+  color: var(--faq-rubric);
+}
+.content p a,
+.content li a,
+.content td a {
+  color: var(--faq-brass);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--faq-rule);
+  text-underline-offset: 0.2em;
+}
+.content p a:hover,
+.content li a:hover,
+.content td a:hover {
+  color: var(--faq-rubric);
+  text-decoration-style: solid;
+}
+.content details.dl-entries a,
+.content .dl-contents a,
+.content p.dl-totop a {
+  text-decoration: none;
+}
+.content p.dl-totop a {
+  color: var(--faq-muted);
+}

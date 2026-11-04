@@ -4,7 +4,11 @@
 <p class="dl-totop"><a href="#faq-top">&uarr; Top</a></p>
 {{ end -}}
 <h{{ .Level }} {{- with .Attributes.class }} class="{{ . }}" {{- end }}>
-  {{- .Text | safeHTML -}}
+  {{- if and (eq .Level 2) (eq .Page.Type "community-faq") -}}
+    {{- replaceRE `^(\d+\.\d+)\s` `<span class="dl-num">$1</span> ` .Text | safeHTML -}}
+  {{- else -}}
+    {{- .Text | safeHTML -}}
+  {{- end -}}
   {{- if gt .Level 1 -}}
     <span class="hx:absolute hx:-mt-20" id="{{ .Anchor | safeURL }}"></span>
     <a href="#{{ .Anchor | safeURL }}" class="subheading-anchor" aria-label="{{ (T "permalinkLabel") | default "Permalink for this section" }}"></a>
