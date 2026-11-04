@@ -164,7 +164,7 @@ The manual's credits and its short account of how the game was made name the tea
 
 ## 1.6 Who owns Darklands now?
 
-MicroProse merged with Spectrum HoloByte in 1993, and Hasbro bought the company in 1998. Hasbro Interactive was sold to Infogrames in 2001, which later took the name Atari. When Atari's American companies went bankrupt in 2013, Darklands was among the minor titles sold to Tommo, Inc.; the court's sale order was entered on 25 July 2013. Tommo's Retroism label, with Nightdive Studios, put the game back on sale. Ziggurat Interactive has been its publisher since about 2019 and announced its GOG re-release in March 2020. No record of the step from Tommo to Ziggurat has turned up.
+MicroProse merged with Spectrum HoloByte in 1993, and Hasbro bought the company in 1998. At the end of 2000 Hasbro sold Hasbro Interactive to Infogrames, whose American arm took the name Atari in 2003. When Atari's American companies went bankrupt in 2013, Darklands was among the minor titles sold to Tommo, Inc.; the court's sale order was entered on 25 July 2013. Tommo's Retroism label, with Nightdive Studios, put the game back on sale. Ziggurat Interactive has been its publisher since about 2019 and announced its GOG re-release in March 2020. No record of the step from Tommo to Ziggurat has turned up.
 
 ## 1.7 Are there remakes or successors?
 
