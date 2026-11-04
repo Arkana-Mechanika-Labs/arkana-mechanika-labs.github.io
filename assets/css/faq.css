@@ -339,3 +339,16 @@ article h1 {
 .content pre {
   display: flow-root;
 }
+
+/* A picture just before a note, spoiler, formula or table is set above it, centred, not beside it:
+   a long box squeezed into a narrow column beside a picture reads badly. */
+@media (min-width: 900px) {
+  .dl-plate:has(+ .dl-note, + details, + p.dl-formula, + table, + blockquote) {
+    float: none;
+    width: 56%;
+    margin: 1.5rem auto 1.75rem;
+  }
+  .dl-plate-small:has(+ .dl-note, + details, + p.dl-formula, + table, + blockquote) {
+    width: 40%;
+  }
+}
