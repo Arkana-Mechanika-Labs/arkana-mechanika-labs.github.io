@@ -3,7 +3,7 @@
 {{- range .Page.Pages.ByWeight }}
   {{- $page := . }}
   <section class="dl-contents-part">
-    <h3 class="dl-contents-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    <h3 class="dl-contents-title"><a href="{{ .RelPermalink }}">{{ replaceRE `^(\d+)\s` `<span class="dl-num">$1</span> ` .Title | safeHTML }}</a></h3>
     {{- $entries := slice -}}
     {{- range .Fragments.Headings -}}
       {{- range .Headings -}}{{ $entries = $entries | append . }}{{- end -}}

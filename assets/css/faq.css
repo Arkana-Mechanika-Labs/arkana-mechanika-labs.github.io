@@ -409,3 +409,23 @@ article h1 {
 .dl-plate-small:not(.dl-plate-left):not(.dl-plate-right) {
   max-width: 340px;
 }
+
+/* Front-page contents: chapter titles in the heading ink with a red number, entries in gold below */
+.content .dl-contents h3.dl-contents-title a {
+  color: var(--faq-text);
+}
+.content .dl-contents h3.dl-contents-title a:hover {
+  color: var(--faq-rubric);
+  text-decoration: none;
+}
+.content .dl-contents h3.dl-contents-title .dl-num {
+  color: var(--faq-rubric);
+  margin-right: 0.2em;
+}
+.dl-contents-part {
+  padding-top: 0.2rem;
+  border-top: 1px solid var(--faq-rule);
+}
+.dl-contents-part:first-child {
+  border-top: 0;
+}
