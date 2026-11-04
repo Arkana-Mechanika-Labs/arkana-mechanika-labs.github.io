@@ -1,0 +1,195 @@
+/* The Darklands FAQ v4.0: a printed-book look, kept light.
+   Loaded only on /community-faq/ pages (layouts/_partials/custom/head-end.html). */
+
+:root {
+  --faq-ink: #2b2118;
+  --faq-muted: #6b5a45;
+  --faq-rubric: #9b3a26;
+  --faq-brass: #8a6a32;
+  --faq-rule: rgba(138, 106, 50, 0.35);
+  --faq-note-bg: #f6efe0;
+  --faq-note-border: #c9b17e;
+  --faq-plate-bg: #efe6d2;
+  --faq-row: rgba(138, 106, 50, 0.06);
+  --faq-serif: "IM Fell English", Georgia, "Times New Roman", serif;
+  --faq-caps: "IM Fell English SC", "IM Fell English", Georgia, serif;
+}
+
+.dark {
+  --faq-ink: #efe4ce;
+  --faq-muted: #bcae95;
+  --faq-rubric: #d0705a;
+  --faq-brass: #ddb97b;
+  --faq-rule: rgba(185, 148, 87, 0.3);
+  --faq-note-bg: rgba(46, 32, 22, 0.72);
+  --faq-note-border: rgba(185, 148, 87, 0.45);
+  --faq-plate-bg: rgba(20, 14, 10, 0.8);
+  --faq-row: rgba(185, 148, 87, 0.05);
+}
+
+/* Headings in a period face */
+article h1,
+.content h2,
+.content h3 {
+  font-family: var(--faq-serif);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+article h1 {
+  font-size: 2.6rem !important;
+  font-weight: 400 !important;
+}
+.content h2 {
+  font-size: 1.9rem;
+  border-bottom: 1px solid var(--faq-rule);
+  padding-bottom: 0.35rem;
+}
+.content h3 {
+  font-size: 1.35rem;
+  font-style: italic;
+  color: var(--faq-brass);
+}
+.content h3::before {
+  content: "\2767\00a0";  /* ❧ */
+  font-style: normal;
+  color: var(--faq-rubric);
+}
+
+/* A rubricated initial at the start of each numbered entry */
+.content h2 + p::first-letter,
+.content h2 + .dl-plate + p::first-letter {
+  float: left;
+  font-family: var(--faq-serif);
+  font-size: 3.4em;
+  line-height: 0.85;
+  padding: 0.08em 0.1em 0 0;
+  color: var(--faq-rubric);
+}
+
+/* Contributors' notes: a signed hand in the margin of the book */
+.dl-note {
+  position: relative;
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem 0.9rem 1.4rem;
+  background: var(--faq-note-bg);
+  border: 1px solid var(--faq-note-border);
+  border-left: 4px double var(--faq-note-border);
+  border-radius: 3px;
+}
+.dl-note-by {
+  font-family: var(--faq-caps);
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  color: var(--faq-rubric);
+  margin-bottom: 0.35rem;
+}
+.dl-note-by::before {
+  content: "\2766\00a0";  /* ❦ */
+  color: var(--faq-brass);
+}
+.dl-note-body > :first-child {
+  margin-top: 0;
+}
+.dl-note-body > :last-child {
+  margin-bottom: 0;
+}
+
+/* Framed pictures */
+.dl-plate {
+  margin: 1.75rem auto;
+  max-width: 640px;
+  padding: 6px;
+  background: var(--faq-plate-bg);
+  border: 1px solid var(--faq-note-border);
+  outline: 1px solid var(--faq-rule);
+  outline-offset: 3px;
+}
+.dl-plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 !important;
+}
+.dl-plate-pixel img {
+  image-rendering: pixelated;
+}
+.dl-plate figcaption {
+  font-family: var(--faq-serif);
+  font-style: italic;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: var(--faq-muted);
+  padding: 0.55rem 0.3rem 0.15rem;
+  text-align: center;
+}
+.dl-plate figcaption p {
+  margin: 0;
+}
+@media (min-width: 900px) {
+  .dl-plate-right {
+    float: right;
+    width: 46%;
+    margin: 0.4rem 0 1rem 1.75rem;
+  }
+  .dl-plate-left {
+    float: left;
+    width: 46%;
+    margin: 0.4rem 1.75rem 1rem 0;
+  }
+}
+.content h2,
+.content h3,
+.content table {
+  clear: both;
+}
+
+/* Tables: a ledger */
+.content table {
+  font-size: 0.9rem;
+}
+.content table th {
+  font-family: var(--faq-caps);
+  font-weight: 400;
+  font-size: 1rem;
+  border-bottom: 2px solid var(--faq-note-border) !important;
+}
+.content table tr:nth-child(even) td {
+  background: var(--faq-row);
+}
+
+/* Section dividers */
+.content hr {
+  border: 0;
+  text-align: center;
+  margin: 2.5rem 0;
+}
+.content hr::after {
+  content: "\2042";  /* ⁂ */
+  color: var(--faq-brass);
+  font-size: 1.3rem;
+}
+
+@media (min-width: 900px) {
+  .dl-plate-small.dl-plate-right,
+  .dl-plate-small.dl-plate-left {
+    width: 32%;
+  }
+}
+
+/* A rule set out like a line in a ledger */
+.content p.dl-formula {
+  font-family: var(--faq-serif);
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 1.4rem auto;
+  padding: 0.8rem 1rem;
+  max-width: 40rem;
+  border-top: 1px solid var(--faq-rule);
+  border-bottom: 1px solid var(--faq-rule);
+}
+.content p.dl-formula small {
+  display: block;
+  font-style: italic;
+  font-size: 1.1rem !important;
+  color: var(--faq-muted);
+}
