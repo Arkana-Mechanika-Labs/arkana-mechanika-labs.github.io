@@ -425,7 +425,7 @@
         "src/Darklands.Core/Rules/SaintBook.cs:638",
         "src/Darklands.Core/Rules/SaintBook.cs:372"
       ],
-      "original": "R039+0x7C6A; R039+0x7D0C; R039+0x9578; saint_fns R136+0xAFC7",
+      "original": "R039+0x7C6A; R039+0x7D0C; R039+0x9578; the saint handler R136+0xAFC7",
       "note": "The saint table gives St.Paul (105) the function R039+0x7C6A. Its help (Strength and Endurance restored, half the Intelligence lost) and its feast day (day 66) are what DARKLAND.SNT describes for St.Paul the Simple. St.Paul the Simple (106) gets R039+0x7D0C, whose help repeats St.Thomas Aquinas's (R039+0x8B58). The help the text describes for St.Paul (Endurance, Charisma, Latin, Speak Common, Read/Write, a little Strength) is R039+0x9578, which no saint number reaches. Z-9318d7 records only that it is unreachable."
     },
     "RPT-SAINT-0002": {
