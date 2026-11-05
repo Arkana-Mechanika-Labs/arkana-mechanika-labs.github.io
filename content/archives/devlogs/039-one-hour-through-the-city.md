@@ -122,7 +122,7 @@ It does not answer whether that target is fully understood, where its procedure
 ends, or whether all of its branches can be implemented. The table is therefore
 kept as routing evidence, not turned into an executable modern dispatcher.
 
-For state `0066h`, the exact target is the owner at `proc_0069_1250`.
+For state `0066h`, the exact target is the owner at `R069+0x1250`.
 
 ## The City-North Owner Has Two Moments
 
@@ -154,7 +154,7 @@ other selector or branch that is not part of the current certificate.
 ## State 006D Is an Office Notice
 
 State `006Dh` passes through its own resident wrapper and overlay-resolver
-contract before reaching `proc_0071_0D82`.
+contract before reaching `R071+0x0D82`.
 
 That owner copies the resource name `$Offic00`, loads the MSG entry, and calls
 the generic presentation machinery with card index `0006h`. The original
@@ -215,7 +215,7 @@ address and mapped its Q, C, and T choices. What it had not established was the
 controller's canonical place in the original overlay system.
 
 The resident startup owner reaches it through resolver record 37. Darklays maps
-that target to `proc_0037_9C48`, byte-for-byte identical to the controller seen
+that target to `R037+0x9C48`, byte-for-byte identical to the controller seen
 in the older runtime session.
 
 This meant an earlier attempt to continue the resident path past that call was
@@ -226,9 +226,9 @@ the call until the controller could be assessed independently.
 That assessment recovered the three choice roots:
 
 ```text
-Q/q -> proc_0037_4184
-C/c -> proc_0037_0000
-T/t -> proc_0037_81B2
+Q/q -> R037+0x4184
+C/c -> R037+0x0000
+T/t -> R037+0x81B2
 ```
 
 Each target is a substantial controller of its own. One manages default and

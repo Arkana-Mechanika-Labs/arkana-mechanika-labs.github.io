@@ -155,7 +155,7 @@ physical addresses wrap around; the logical stream is unaffected.
 
 ## Extending to the full corpus
 
-With `OPENING8` solved, the same decoder and parser ran against every `.PAN` file in `G:\DARKLAND`.
+With `OPENING8` solved, the same decoder and parser ran against every `.PAN` file in the game directory.
 The result left no room for doubt.
 
 Fifteen assets. 2,068 total frame records. Zero record-boundary mismatches. Zero malformed `42/1`

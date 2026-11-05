@@ -13,7 +13,7 @@ The marketplace's first choice is not the weaponsmith. It is the merchant who
 sells everyday goods, and its screen is one of the densest non-combat
 controllers we have reconstructed so far.
 
-It is also not an MSG card. `$MARKE00` hands control to `proc_0032_0000`,
+It is also not an MSG card. `$MARKE00` hands control to `R032+0x0000`,
 which saves global state, builds a trading surface over `BUYSELL.PIC`, polls
 its own input loop, performs transactions, and restores the caller's state on
 exit.

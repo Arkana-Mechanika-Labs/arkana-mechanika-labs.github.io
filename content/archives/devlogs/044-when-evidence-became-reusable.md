@@ -95,7 +95,7 @@ already knows.
 The result can say:
 
 ```text
-canonical action owner: proc_0048_2BAE
+canonical action owner: R048+0x2BAE
 C# candidate: present, focused-tested, not yet wired
 current RNG authority: found
 calendar literal-0 authority: found
@@ -142,7 +142,7 @@ unknown_requires_review
 
 There is no “closest match.”
 
-This mattered immediately for `proc_0048_2BAE`. The local action had already
+This mattered immediately for `R048+0x2BAE`. The local action had already
 been translated into C#. It makes one range-100 random draw, compares it with a
 raw threshold, and selects one of two previously certified calendar paths. On
 one arm it also calls the current hour classifier. The action then publishes

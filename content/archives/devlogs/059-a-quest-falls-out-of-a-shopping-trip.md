@@ -33,7 +33,7 @@ loads `PICS\XPURSE.PIC` through an initialized far pointer, and presents
 `$MARKE00.MSG` card 2. Runtime memory bytes established the resource name;
 we did not infer it from the picture.
 
-After acknowledgement, the marketplace calls `proc_0039_1712(0)` to build a
+After acknowledgement, the marketplace calls `R039+0x1712(0)` to build a
 new event record.
 
 ## Constructing the Event
@@ -54,14 +54,14 @@ used elsewhere in the game.
 The slot is stored in `DS:E7D8h`. A day/night return state is stored in
 `DS:E896h`, and raw state `0151h` is published.
 
-State `0151h` enters `proc_0128_0BF0`, which loads `$MCGUF12` and initializes
+State `0151h` enters `R128+0x0BF0`, which loads `$MCGUF12` and initializes
 a ten-owner quest/job controller. It reads the event's classification,
 message code, selected location, and a derived neighboring location. The
 classification selects different result cards and later owner behavior.
 
 ## Generating Names and Directions
 
-The classification-zero path calls `proc_0029_5CC4` before showing its first
+The classification-zero path calls `R029+0x5CC4` before showing its first
 card. This helper made it impossible to fake the visible result safely.
 
 Its selected path combines the startup BIOS timer word, the current location,

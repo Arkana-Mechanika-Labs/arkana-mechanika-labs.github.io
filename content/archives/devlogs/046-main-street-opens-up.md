@@ -102,7 +102,7 @@ dead end.
 
 Another Main Street action publishes state `001Bh`.
 
-The state atlas resolves it to `ovl_0050:1CEE`, an owner that presents
+The state atlas resolves it to `R050+0x1CEE`, an owner that presents
 `$CITYF00.MSG`. The first assessment was deliberately destination-aware: there
 was little value in certifying a click that only reached an unresolved state
 number.

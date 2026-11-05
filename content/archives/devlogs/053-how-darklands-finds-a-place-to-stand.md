@@ -23,7 +23,7 @@ raw C# owners, preserving the memory and RNG contract of the DOS program.
 
 ## Sixteen Words Decide Whether a Position Survives
 
-The centre of the first dependency group is `proc_0014_5ECA`.
+The centre of the first dependency group is `R014+0x5ECA`.
 
 It begins by clearing sixteen words at `DS:E11C`. It then constructs a raw
 geometry snapshot, conditionally composes four independently certified leaf
@@ -33,13 +33,13 @@ procedures, and OR-reduces the sixteen words. The final union is written to
 Those leaves do not return friendly booleans. They publish raw bits and words
 into the shared mask:
 
-- `proc_0014_63CC`, the leaf completed before the last devlog, can publish
+- `R014+0x63CC`, the leaf completed before the last devlog, can publish
   `4000h` at `E138` after one of 48 ordered predicates rejects a candidate;
-- `proc_0014_60B0` has twelve more low-nibble-controlled rejection gates and
+- `R014+0x60B0` has twelve more low-nibble-controlled rejection gates and
   can publish the same `4000h` bit;
-- `proc_0014_66FE` scans nine packed four-byte entries, preserves signed table
+- `R014+0x66FE` scans nine packed four-byte entries, preserves signed table
   lookups and boundary tests, and can publish `2000h` at `E136`;
-- `proc_0014_6600` scans thirteen records and conditionally copies indexed
+- `R014+0x6600` scans thirteen records and conditionally copies indexed
   words into `E11C..E134`.
 
 The parent does not replace those procedures with a simplified collision
@@ -52,11 +52,11 @@ behaviour.
 
 ## The Rectangle Test Is a Small Pipeline of Its Own
 
-Another dependency chain starts with `proc_0014_F3E2`. Given a point and four
+Another dependency chain starts with `R014+0xF3E2`. Given a point and four
 signed bounds, it assembles a four-bit outcode: left, right, below, and above.
 Equality is inside. The order of the bits and signed comparisons is exact.
 
-`proc_0014_F284` calls that helper four times while testing a segment against
+`R014+0xF284` calls that helper four times while testing a segment against
 the rectangle. It preserves shared-outcode rejection, immediate acceptance
 routes, wrapping 16-bit products, and signed 32-bit division at the conditional
 intersection points.
@@ -67,7 +67,7 @@ Then we found the awkward part.
 before that invocation initializes them. Initializing them to zero in C# would
 make the code tidier and change the program.
 
-The caller, `proc_0014_EF3C`, revealed the real contract. It invokes `F284` six
+The caller, `R014+0xEF3C`, revealed the real contract. It invokes `F284` six
 times, and each call reuses the same two physical words below the caller's
 stack pointer. Conditional writes made by one child call are live inputs to the
 next. The raw C# owners therefore pass this stack-shaped state explicitly from
@@ -80,7 +80,7 @@ erase. Here, it became a first-class part of the certified ABI.
 ## Five Fixed Tries, Then 1,002 Chances
 
 With those dependencies closed, we could certify the complete placement owner,
-`proc_0014_4188`.
+`R014+0x4188`.
 
 It first handles the no-coordinate sentinel: when both supplied coordinate
 words are `FFFFh`, it returns without reading or writing memory.

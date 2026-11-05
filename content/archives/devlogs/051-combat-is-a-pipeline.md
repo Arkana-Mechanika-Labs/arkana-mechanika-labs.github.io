@@ -27,7 +27,7 @@ line between the two is finally clear.
 
 ## One Front Door, Many Encounters
 
-The generic entry is `proc_0029_2278`.
+The generic entry is `R029+0x2278`.
 
 It is not tied to `$CITYT00`, Quickstart, or any one city. We found at least 110
 direct calls to it across 52 resolver records. Road encounters, city events,
@@ -51,7 +51,7 @@ quickly.
 
 ## The Root Does Not Take Arguments
 
-The entry prepares inherited state and eventually reaches `proc_0014_0000`,
+The entry prepares inherited state and eventually reaches `R014+0x0000`,
 the combat root.
 
 The root has no explicit arguments. By the time it runs, the request has been
@@ -122,7 +122,7 @@ revealed the missing layer.
 
 ## Placement Is an Ordered Search
 
-The main placement owner, `proc_0014_4188`, first tries deterministic
+The main placement owner, `R014+0x4188`, first tries deterministic
 positions around an anchor. If those fail, it enters a randomized search with
 fixed retry and relaxation budgets.
 

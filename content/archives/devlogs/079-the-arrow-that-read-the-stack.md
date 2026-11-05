@@ -33,7 +33,7 @@ That rule also works as a bug detector. If the original code reads a value it ne
 In ordinary guard fights at the Steyr gate, about forty ticks into combat, the engine kept stopping here:
 
 ```text
-proc_0014_F284 / 0014:F34D inherited clip
+R014+0xF284 / 0014:F34D inherited clip
 ```
 
 <figure>

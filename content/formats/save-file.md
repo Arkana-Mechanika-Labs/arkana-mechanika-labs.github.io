@@ -39,7 +39,7 @@ Each saved game consists of two files:
 | 0x64 | 2 | `city_contents_seed` | Seed for pseudo-RNG (saints/formulae/items per location) |
 | 0x66 | 2 | *(constant)* | Always `07 00` |
 | 0x68 | 8 | `curr_date` | Current date (`date_reversed` struct) |
-| 0x70 | 6 | `party_money` | Cash on hand (`money` struct) |
+| 0x70 | 6 | party money | Cash on hand (`money` struct) |
 | 0x76 | 4 | *(constant)* | Zero-filled block |
 | 0x7a | 2 | `reputation` | Global reputation |
 | 0x7c | 2 | `curr_location` | Current location index (0xffff = wilderness) |

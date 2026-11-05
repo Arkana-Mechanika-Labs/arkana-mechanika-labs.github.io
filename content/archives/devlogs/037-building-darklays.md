@@ -88,7 +88,7 @@ number is not evidence that the parser is right.
 
 Once those thunks and resolver chains were mapped, the moving parts of the
 executable started to acquire stable identities. A routine could be described
-as `proc_0045_10E2` instead of "whatever happens to be at `211F:04A2` in this
+as `R045+0x10E2` instead of "whatever happens to be at `211F:04A2` in this
 run." The former refers to original code. The latter refers to a temporary
 place where that code happened to live.
 

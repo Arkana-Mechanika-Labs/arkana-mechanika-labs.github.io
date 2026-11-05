@@ -71,7 +71,7 @@ Notes:
 
 | Offset | Size | Field | Description |
 |--------|------|-------|-------------|
-| +0x00 | 2 | `enemy_type` | Index into `enemy_types` array |
+| +0x00 | 2 | enemy type | Index into the enemy types array |
 | +0x02 | 12 | `name` | Name string |
 | +0x0e | 8 | *(constant)* | Zero-filled block |
 | +0x16 | 2 | *(unknown)* | Per-type constant with values like `0`, `1`, `3`, `7`, `0x3f`, `0x4f`, `0x81` |

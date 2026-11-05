@@ -136,7 +136,7 @@ services, encounters, saints, potions, challenges, and ordinary navigation.
 Not every callback behaves like a normal C function.
 
 The paired `$CITYG05` and `$CITYG06` owners exposed a shared tail at
-`ovl_0052:0254`. Their first selected row points there through `EA14[0]`.
+`R052+0x0254`. Their first selected row points there through `EA14[0]`.
 
 The tail does not return to a nearby local case. It reads the current raw state,
 pops the active owner's saved registers and frame, and returns directly to the

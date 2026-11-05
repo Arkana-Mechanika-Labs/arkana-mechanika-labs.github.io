@@ -25,7 +25,7 @@ replace the original MSG state machine.
 All three entry owners consult the same event query:
 
 ```text
-proc_0029_3742(2, 0, current city)
+R029+0x3742(2, 0, current city)
 ```
 
 A result of `FFFFh` is significant, but the consequences are owner-specific.

@@ -65,10 +65,10 @@ For example:
 0034h
 -> wrapper 09C0:2ACB
 -> overlay record 57
--> ovl_0057:0000
+-> R057+0x0000
 ```
 
-That is a strong routing fact. It is not yet a claim that `ovl_0057:0000` is a
+That is a strong routing fact. It is not yet a claim that `R057+0x0000` is a
 fully understood owner, that all of its branches are executable, or that state
 `0034h` has one simple gameplay name.
 
@@ -89,7 +89,7 @@ The atlas therefore has two layers.
 The first is mechanical and static:
 
 ```text
-0013h -> ovl_0048:2504
+0013h -> R048+0x2504
 ```
 
 The second is contextual:
@@ -97,7 +97,7 @@ The second is contextual:
 ```text
 under this exact entry predicate,
 with this city record and event state,
-proc_0048_2504 published $CHURC00.MSG card 0
+R048+0x2504 published $CHURC00.MSG card 0
 ```
 
 The contextual layer records how strong each statement is. A fact may be
@@ -154,7 +154,7 @@ Darklays and the evidence index made it possible to inspect them as a family:
 - separate certificates and tests.
 
 The first selected row in both owners returns through an unusual shared tail at
-`ovl_0052:0254`. It does not enter the nearby local action that first looked
+`R052+0x0254`. It does not enter the nearby local action that first looked
 like the obvious destination. The tail reads the current state, consumes the
 active parent frame, and returns directly to the central controller.
 

@@ -25,7 +25,7 @@ original owner.
 
 ## Removing a Thirty-Byte Record
 
-`proc_0014_D2CE` is a compact 90-byte procedure with one raw index word.
+`R014+0xD2CE` is a compact 90-byte procedure with one raw index word.
 
 When the live count at `DS:D6CC` is zero, it reads that count once and returns
 without writing anything. Otherwise it shifts the following `001Eh`-byte
@@ -41,7 +41,7 @@ or encounter entries. The owner proves a 30-byte layout and a mutation
 protocol. A semantic name needs evidence from its consumers.
 
 This one leaf removed a direct blocker from the adjacent parent at
-`proc_0014_4442`.
+`R014+0x4442`.
 
 ## Eight Callers Prove a Resident Shortcut
 
@@ -71,9 +71,9 @@ entire shared tail. It required an exact census of the real callers.
 
 ## A String Leads to Four Raw Bytes
 
-After that shortcut was closed, the remaining blocker inside `proc_0014_4442`
-was the much larger `proc_0025_0000`. We did not open all 2,470 bytes at once.
-We followed one complete child instead: `proc_0025_0D3C`.
+After that shortcut was closed, the remaining blocker inside `R014+0x4442`
+was the much larger `R025+0x0000`. We did not open all 2,470 bytes at once.
+We followed one complete child instead: `R025+0x0D3C`.
 
 Its raw entry receives an index and four near pointers. The original code:
 
@@ -121,7 +121,7 @@ evidence was published.
 
 The meaningful progress is not the count by itself. The placement conductor
 is now executable, and the next parent has lost two blockers. Its remaining
-`proc_0025_0000` cone is explicit rather than hidden behind a vague "combat
+`R025+0x0000` cone is explicit rather than hidden behind a vague "combat
 setup" label.
 
 Combat is still parked before a clean gameplay service, rendering loop, input

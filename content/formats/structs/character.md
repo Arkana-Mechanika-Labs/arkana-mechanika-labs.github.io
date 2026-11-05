@@ -47,7 +47,7 @@ Each character in a Darklands save file occupies exactly **554 bytes (0x22a)**. 
 | +0x64 | 7 | `max_attrs` | Maximum attribute values (`attribute_set`) |
 | +0x6b | 19 | `skills` | Skill values (`skill_set`) |
 | +0x7e | 2 | `num_items` | Number of items carried |
-| +0x80 | 20 | `saints_known` | 160-bit bitmask — one bit per saint |
+| +0x80 | 20 | known saints | 160-bit bitmask — one bit per saint |
 | +0x94 | 22 | `formulae_known` | Bitmask — 3 bits per byte (quality levels q45/q35/q25) |
 | +0xaa | 384 | `items` | Up to 64 `item` structs (6 bytes each) |
 

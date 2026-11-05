@@ -75,7 +75,7 @@ certified semantic name.
 
 ## Small Procedures Can Carry Large Contracts
 
-The shared dice wrapper, `proc_0004_20F6`, illustrates the level of fidelity.
+The shared dice wrapper, `R004+0x20F6`, illustrates the level of fidelity.
 
 If the signed count or number of sides is below one, it returns zero without
 touching RNG. If the number of sides is one, it returns the count without
@@ -85,7 +85,7 @@ adds `(raw % sides) + 1`, and preserves wrapping 16-bit accumulation.
 Replacing that with `Random.Next` would produce plausible dice and a different
 game.
 
-The coordinate classifier, `proc_0004_2160`, performs two wrapping
+The coordinate classifier, `R004+0x2160`, performs two wrapping
 subtractions, follows the original ordered signed comparisons, and returns one
 of four raw even values. The `8000h` negation edge and diagonal ties matter.
 
@@ -124,7 +124,7 @@ The snapshot loader copies four words and two bytes from parallel far tables
 into six fixed fields of a caller-owned record. We know the live caller index
 domain is zero through nine; we do not invent names for the retained fields.
 
-The newest owner, `proc_0014_63CC`, is a complete 563-byte placement-mask leaf.
+The newest owner, `R014+0x63CC`, is a complete 563-byte placement-mask leaf.
 It contains 48 resolved predicates. On success it changes nothing. On rejection
 it performs one publication:
 
@@ -136,7 +136,7 @@ Its C# implementation preserves low- and high-nibble gates, signed wrapping
 arithmetic, short-circuit read order, and no-extra-write behavior. Eight focused
 tests exercise sentinel-filled memory and the internal raw ABI.
 
-That leaf is complete. Its parent, `proc_0014_5ECA`, is not.
+That leaf is complete. Its parent, `R014+0x5ECA`, is not.
 
 ## Selected Paths Stay Selected
 
