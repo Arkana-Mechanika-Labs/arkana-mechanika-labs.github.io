@@ -6,8 +6,8 @@ width: normal
 ---
 
 <div class="drp-hero-buttons">
-  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v0.9.6/DarklandsRP-0.9.6-win-x64.zip" class="drp-btn drp-btn-primary">Download 0.9.6 for Windows (34 MB)</a>
-  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v0.9.6/DarklandsRP-0.9.6-linux-x64.tar.gz" class="drp-btn drp-btn-outline">Linux and Steam Deck, experimental (33 MB)</a>
+  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v1.0.0-rc1/DarklandsRP-1.0.0-rc1-win-x64.zip" class="drp-btn drp-btn-primary">Download 1.0.0-rc1 for Windows (34 MB)</a>
+  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v1.0.0-rc1/DarklandsRP-1.0.0-rc1-linux-x64.tar.gz" class="drp-btn drp-btn-outline">Linux and Steam Deck, experimental (33 MB)</a>
   <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases" class="drp-btn drp-btn-outline" target="_blank" rel="noopener noreferrer">All releases ↗</a>
 </div>
 
@@ -15,7 +15,7 @@ width: normal
 
 ## Getting started
 
-1. Download `DarklandsRP-0.9.6-win-x64.zip` and unpack it into a folder of its own. It holds `DarklandsRP.exe`, `SDL2.dll`, `libmt32emu.dll`, an empty `MT32_ROMS` folder, the licence, the third-party notices, the guides, an example mod and sound pack, and the release notes.
+1. Download `DarklandsRP-1.0.0-rc1-win-x64.zip` and unpack it into a folder of its own. It holds `DarklandsRP.exe`, `SDL2.dll`, `libmt32emu.dll`, an empty `MT32_ROMS` folder, the licence, the third-party notices, the guides, an example mod and sound pack, and the release notes.
 2. Start `DarklandsRP.exe`. On the first run the launcher opens: it finds your Darklands by itself (GOG, Steam, or a folder next to it); check the game folder and the settings, then start the game. They are kept in `darklands.settings.json`. To open the launcher again later, hold Shift while starting.
 3. Play. It starts like the original: the banner, the opening, then the start screen.
 
@@ -23,7 +23,7 @@ No .NET installation is needed.
 
 ### Linux and the Steam Deck (experimental)
 
-`DarklandsRP-0.9.6-linux-x64.tar.gz` runs on Linux x64 and on the Steam Deck, in desktop mode or added to Steam as a non-Steam game. Unpack it with `tar` so that `DarklandsRP` stays executable, then start `./DarklandsRP`. It needs the system's SDL2 (`libSDL2-2.0.so.0`, already present on SteamOS), and finds the game in Steam's libraries (including the Deck's SD card), Heroic, GOG/Lutris and Wine prefixes. This build has been tested by the automated builds only; if something does not work, please report it with your distribution and what you saw.
+`DarklandsRP-1.0.0-rc1-linux-x64.tar.gz` runs on Linux x64 and on the Steam Deck, in desktop mode or added to Steam as a non-Steam game. Unpack it with `tar` so that `DarklandsRP` stays executable, then start `./DarklandsRP`. It needs the system's SDL2 (`libSDL2-2.0.so.0`, already present on SteamOS), and finds the game in Steam's libraries (including the Deck's SD card), Heroic, GOG/Lutris and Wine prefixes. This build has been tested by the automated builds only; if something does not work, please report it with your distribution and what you saw.
 
 ## Music and sound
 
@@ -42,6 +42,12 @@ The keys and the mouse are the original's (Alt-S save, Alt-L load, Alt-P pause, 
 ## Release notes
 
 The full notes of each release are on [GitHub](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases).
+
+### 1.0.0-rc1 — November 5, 2026
+
+The first release candidate of 1.0. It is meant for playing and for checking: if nothing serious turns up, 1.0 follows with the same game. It adds General MIDI music to sound packs (played through a SoundFont of your own), music per card for packs and mods, and a check of the game program at start, and brings the game closer to the original again in battles, card menus, the travel map and a handful of rare cases. Your saved games carry over.
+
+SHA-256 of the Windows zip: `248700b2e4eb8276262a3fddd64826520b8ed4af5a44c6e1c8a175598f0fbe69`; of the Linux archive: `e46a1005c5e3966f7610c93f07146ce4c8f90a8ce4859108308aedfedbd517f2`
 
 ### 0.9.6 — November 2, 2026
 
