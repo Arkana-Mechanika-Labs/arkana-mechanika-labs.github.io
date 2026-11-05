@@ -31,7 +31,7 @@ params:
 <section class="drp-showcase" id="release-video">
   <span class="drp-section-kicker">Release video</span>
   <h2>Darklands Restoration Project</h2>
-  <p>Four and a half minutes of version 0.9.0: character creation, the cities, a night ambush and a real-time battle, the world map and the camp, and what comes next.</p>
+  <p>Four and a half minutes of the game: character creation, the cities, a night ambush and a real-time battle, the world map and the camp, and what comes next.</p>
   <div class="drp-video-frame">
     <iframe src="https://www.youtube-nocookie.com/embed/jaFP2INDo88" title="Darklands Restoration Project" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   </div>
