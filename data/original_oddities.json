@@ -1,13 +1,13 @@
 {
   "schema": "darklands.original-oddities.public.v2",
   "source_repository": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration",
-  "source_commit": "0aed70684a2bdd5aa96deb89f618c4938482dcd1",
-  "source_commit_date": "2026-10-31",
-  "source_version": "v0.9.5+75",
-  "generated": "2026-11-01",
+  "source_commit": "dca12d225a1050e8bf1bcd385b3ef50d305cda8a",
+  "source_commit_date": "2026-11-05",
+  "source_version": "v1.0.0-rc1",
+  "generated": "2026-11-05",
   "counts": {
-    "reproduced": 207,
-    "reproduced_with_fix": 43,
+    "reproduced": 219,
+    "reproduced_with_fix": 45,
     "dormant_total": 865,
     "dormant_curated": 8,
     "reported_leads": 62,
@@ -19,7 +19,7 @@
       "open": 20
     }
   },
-  "checked_against": "v0.9.5+75",
+  "checked_against": "v1.0.0-rc1",
   "reproduced": [
     {
       "id": "B-2e264a",
@@ -62,7 +62,7 @@
       "title": "The missile skill is the readied weapon's at the battle's end",
       "area": "Battles",
       "original": "R014+0x0694",
-      "code": "src/Darklands.Core/Battles/BattleEnd.cs:373 (BattleEnd.ImproveSkills)",
+      "code": "src/Darklands.Core/Battles/BattleEnd.cs:380 (BattleEnd.ImproveSkills)",
       "fix": "",
       "summary": "the missile skill is the readied weapon's at the battle's end: a member who threw his last javelin or axe has weapon -1 (spend-ammunition), whose category byte (R136+0x75AB, before the table) is 0, so Edged is practised instead of the thrown weapon's skill, beside the hand weapon's own (flail, spear ...)."
     },
@@ -166,6 +166,15 @@
       "summary": "loot counts wrap at 255: the counts are added in a byte with no limit test, so equal items totalling more than 255 wrap and the excess is lost."
     },
     {
+      "id": "B-f20e47",
+      "title": "The relic of the deepest section of the dwarf, kobold and vulcan mines (R009+0x4E28..0x4E3B) is forced to...",
+      "area": "Battles",
+      "original": "R009+0x4D56",
+      "code": "src/Darklands.Core/Battles/Generation/MineBuilder.Contents.cs:785 (MineBuilder.SetPiece)",
+      "fix": "",
+      "summary": "the relic of the deepest section of the dwarf, kobold and vulcan mines (R009+0x4E28..0x4E3B) is forced to quality 35: any relic 0x96..0xAB gets quality 0x23 and type 0x9F whatever DARKLAND.LST gives it, as the fortress relics (R011+0x096A)."
+    },
+    {
       "id": "B-e1ca2c",
       "title": "R014+0x48CA leaves through the common exit (R014+0x4B36)",
       "area": "Battles",
@@ -179,7 +188,7 @@
       "title": "OriginalBehaviour.FixEscapeWithoutSelectionPauseByte - with nobody selected the xor at R016+0x13F9 (bx =...",
       "area": "Battles",
       "original": "R016+0x13D4",
-      "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.OrderMode.cs:759 (TacticalBattle.CancelOrder)",
+      "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.OrderMode.cs:778 (TacticalBattle.CancelOrder)",
       "fix": "FixEscapeWithoutSelectionPauseByte",
       "summary": "OriginalBehaviour.FixEscapeWithoutSelectionPauseByte - with nobody selected the xor at R016+0x13F9 (bx = -2) lands on flags[-1]'s high byte, the pause byte DS:A695: its bit 0x10 becomes DS:D6EA (the flee bit before order mode), so a pause byte of 1 with D6EA = 1 turns 0x11, which the tests for paused (== 1) and for running (== 0) both refuse."
     },
@@ -193,11 +202,20 @@
       "summary": "the loop sets only the line's end (DS:E0A9/E0A7, R018+0x09D5/0x09DC) and relies on its start (DS:E0A5/E0A3, set to the caster at R018+0x0851); the area test it calls for the enemies (R014+0x469E, 0E76:469E) writes the start itself, from its first instruction on (0E76:46E5/46EC: the centre = the member), so after a member's count the next member's line starts at the previous member, not at the caster. Kept (found by f2witch2f: a member behind a wall counted as seen, the target chosen differed)."
     },
     {
+      "id": "B-dce381",
+      "title": "OriginalBehaviour.FixEscapeWithoutSelectionPauseByte - M with nobody selected",
+      "area": "Battles",
+      "original": "R016+0x156E;R016+0x1332;R016+0x133E",
+      "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.OrderMode.cs:216 (TacticalBattle.ChooseOrder)",
+      "fix": "FixEscapeWithoutSelectionPauseByte",
+      "summary": "OriginalBehaviour.FixEscapeWithoutSelectionPauseByte - M with nobody selected: 15BE clears bit 0x10 of flags[-1]'s high byte, the pause byte DS:A695 (bx = -2)"
+    },
+    {
       "id": "B-8f3e7c",
       "title": "OriginalBehaviour.FixEscapeWithoutSelectionPauseByte - flags[-1]'s high byte is the pause byte DS:A695...",
       "area": "Battles",
       "original": "R016+0x1590",
-      "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.OrderMode.cs:250 (TacticalBattle.ChoosePlace)",
+      "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.OrderMode.cs:269 (TacticalBattle.ChoosePlace)",
       "fix": "FixEscapeWithoutSelectionPauseByte",
       "summary": "OriginalBehaviour.FixEscapeWithoutSelectionPauseByte - flags[-1]'s high byte is the pause byte DS:A695 (R016+0x15BE, bx = -2)"
     },
@@ -224,7 +242,7 @@
       "title": "OriginalBehaviour.FixLeaveOrderModeWithoutSelection - Enter travelling individually (R016+0x0734) calls it...",
       "area": "Battles",
       "original": "R014+0xBCA8",
-      "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.OrderMode.cs:611 (TacticalBattle.LeaveWithNobodySelected)",
+      "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.OrderMode.cs:630 (TacticalBattle.LeaveWithNobodySelected)",
       "fix": "FixLeaveOrderModeWithoutSelection",
       "summary": "OriginalBehaviour.FixLeaveOrderModeWithoutSelection - Enter travelling individually (R016+0x0734) calls it with nobody selected, and a cursor target left by the button held over a member (R014+0xB632..: the target of that member's order) gives the order to record -1: for 0x400 the pause byte loses 0x10; the 0x1BE test clears it too; a missile (0x80) sets 0x02 of the pause byte; a missile or a throw sets exchange[12] = 7 (Ready) and repath[12] = the order clock DS:C867; an attack with bit 1 (or adjacent) sets exchange[12] = 7; a walk to a spot sets exchange[12] = 0 and give-up[12] = the order clock + 30, or, the party split in real combat, shows \"USE STAIRS...\" (DS:064A) for 150 ticks."
     },
@@ -269,7 +287,7 @@
       "title": "DS:9084 (Battle.LeaveAfterVictory, set when an enemy that ends the battle dies) is not among what is...",
       "area": "Battles",
       "original": "R003+0x00DC;R024+0x059A;R014+0x0694",
-      "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.Saving.cs:39 (TacticalBattle.WriteBattleFile)",
+      "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.Saving.cs:46 (TacticalBattle.WriteBattleFile)",
       "fix": "",
       "summary": "DS:9084 (Battle.LeaveAfterVictory, set when an enemy that ends the battle dies) is not among what is written (R003 never touches it): a castle battle saved after its lord fell and loaded again does not end with the victory, and leaving counts as fleeing."
     },
@@ -319,11 +337,29 @@
       "summary": "woken at night, the bowyers sell the smiths' goods: the night shop passes the smiths' categories (0xFF, 0x400) where the day shop passes the bowyers' (0x30, 0x83C)."
     },
     {
+      "id": "B-34e50b",
+      "title": "Text 1 ends with the party resuming its journey, but R129+0x12BC (text 1, pass-hours(1)) sets no...",
+      "area": "Cards and encounters",
+      "original": "R129+0x12BC;R129+0x12D4",
+      "code": "src/Darklands.Cards/Scripts/S129/BurntOutKeep.cs:58 (BurntOutKeep.Run)",
+      "fix": "",
+      "summary": "text 1 ends with the party resuming its journey, but R129+0x12BC (text 1, pass-hours(1)) sets no following-card: the card comes back to its first page and the ruin can be searched again, as often as the party likes."
+    },
+    {
+      "id": "B-ad9d9e",
+      "title": "OriginalBehaviour.FixGhostPartySlot - the slot DropAway just emptied comes back with status 1 and...",
+      "area": "Cards and encounters",
+      "original": "R088+0x0440",
+      "code": "src/Darklands.Cards/CardContext.Party.cs:29 (CardContext.SetStatusAbleStale)",
+      "fix": "FixGhostPartySlot",
+      "summary": "OriginalBehaviour.FixGhostPartySlot - the slot DropAway just emptied comes back with status 1 and ids[slot] = -1 (no charactr.tmp record): a ghost member, the saved game's record count one short of the occupied slots; here the slot is a roster-less residue (MarkOffRoster) so the save writes it as the original does (a slot past the party's end is not modelled: Party.Slot gives a throwaway there)."
+    },
+    {
       "id": "B-7fade3",
       "title": "Neither the thing fetched is taken nor the reward event ended",
       "area": "Cards and encounters",
       "original": "R056+0x2782;R056+0x26CA",
-      "code": "src/Darklands.Cards/Scripts/S056/CathedralByDay.cs:360 (CathedralByDay.AcceptTheRelic)",
+      "code": "src/Darklands.Cards/Scripts/S056/CathedralByDay.cs:361 (CathedralByDay.AcceptTheRelic)",
       "fix": "",
       "summary": "neither the thing fetched is taken nor the reward event ended: the relic can be taken again and again."
     },
@@ -332,7 +368,7 @@
       "title": "The errand is made for giver 0, the town's merchants, where the card's own tests (an errand open, one done",
       "area": "Cards and encounters",
       "original": "R056+0x2782;R056+0x26CA",
-      "code": "src/Darklands.Cards/Scripts/S056/CathedralByDay.cs:315 (CathedralByDay.AskForARelic)",
+      "code": "src/Darklands.Cards/Scripts/S056/CathedralByDay.cs:316 (CathedralByDay.AskForARelic)",
       "fix": "",
       "summary": "the errand is made for giver 0, the town's merchants, where the card's own tests (an errand open, one done: option 8) look for 3, the bishop: the merchants pay for it and the canon gives a new errand at every visit."
     },
@@ -367,8 +403,8 @@
       "id": "B-f30456",
       "title": "Party-ability-top(8) returns the skill value, which the original then uses as a member number",
       "area": "Cards and encounters",
-      "original": "R057+0x0956;R057+0x0948",
-      "code": "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:208 (CityChurchByDay.GiveATenth)",
+      "original": "R057+0x067C;R029+0x14A4",
+      "code": "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:210 (CityChurchByDay.GiveATenth)",
       "fix": "",
       "summary": "party-ability-top(8) returns the skill value, which the original then uses as a member number."
     },
@@ -494,7 +530,7 @@
       "title": "A victory has already left for the map (location-now -1), so the errand's thing is given only after a defeat",
       "area": "Cards and encounters",
       "original": "R108+0x07CA",
-      "code": "src/Darklands.Cards/Scripts/S108/CryptUnderTheRuinedChurch.cs:179 (CryptUnderTheRuinedChurch.TakeTheItem)",
+      "code": "src/Darklands.Cards/Scripts/S108/CryptUnderTheRuinedChurch.cs:188 (CryptUnderTheRuinedChurch.TakeTheItem)",
       "fix": "",
       "summary": "a victory has already left for the map (location-now -1), so the errand's thing is given only after a defeat."
     },
@@ -506,6 +542,24 @@
       "code": "src/Darklands.Cards/Scripts/S051/Docks.cs:153 (Docks.PassageHint)",
       "fix": "",
       "summary": "the hint shows R136+0x8690+0x1E5F (\"You need a missile weapon\") where \"Not enough money\" was surely meant."
+    },
+    {
+      "id": "B-5e7a72",
+      "title": "The hint (R081+0x2280) shows a chance of (the leader's Charisma + Speak Latin) / 2, a pair no other check...",
+      "area": "Cards and encounters",
+      "original": "R081+0x2278;R081+0x2280",
+      "code": "src/Darklands.Cards/Scripts/S081/DragonBlightedLand.cs:148 (DragonBlightedLand.Run)",
+      "fix": "",
+      "summary": "the hint (R081+0x2280) shows a chance of (the leader's Charisma + Speak Latin) / 2, a pair no other check uses, and the action (R081+0x2278) never rolls it: hiding and following the dragon always succeeds, whatever the chance shown."
+    },
+    {
+      "id": "B-a194c2",
+      "title": "Text 0 (\"It is $NamedOneName again, king of the dwarfs.\") reads the named slot, which this card never...",
+      "area": "Cards and encounters",
+      "original": "R101+0x0850",
+      "code": "src/Darklands.Cards/Scripts/S101/DwarfKingsRedCap_MineB03.cs:29 (DwarfKingsRedCap_MineB03.Run)",
+      "fix": "",
+      "summary": "text 0 (\"It is $NamedOneName again, king of the dwarfs.\") reads the named slot, which this card never fills (no name call, unlike 0xE5, 0xE3, 0xEA, 0xEB with the quest's dwarf name) and which the saved game does not keep: reached first (sort 0 doors 0xDD..0xE2 and 0x153..0x156 of the mine's section 8, or a failed force of the stone box), it prints what the slot still holds, as in the original: \"It is again\" with no name in a program run that has had no naming card and no character creation (a load leaves the slot), else the name the last naming card or made-up-name left there (after a new game: the creation screen's last made-up name, \"It is Gregori Steutz again\")"
     },
     {
       "id": "B-676369",
@@ -557,7 +611,7 @@
       "title": "R057+0x21DC..0x2230 never writes following-card (DS:E48A)",
       "area": "Cards and encounters",
       "original": "R057+0x21DC",
-      "code": "src/Darklands.Cards/Scripts/S057/HandbillThugs_Polit01.cs:99 (HandbillThugs_Polit01.EatTheHandbills)",
+      "code": "src/Darklands.Cards/Scripts/S057/HandbillThugs_Polit01.cs:108 (HandbillThugs_Polit01.EatTheHandbills)",
       "fix": "",
       "summary": "R057+0x21DC..0x2230 never writes following-card (DS:E48A): after the truce the card is shown again and the line can be chosen again, each time injuring the party, lowering the standing and passing an hour."
     },
@@ -566,7 +620,7 @@
       "title": "The case has no break",
       "area": "Cards and encounters",
       "original": "R057+0x1F22",
-      "code": "src/Darklands.Cards/Scripts/S057/HandbillThugs_Polit01.cs:302 (HandbillThugs_Polit01.Fight)",
+      "code": "src/Darklands.Cards/Scripts/S057/HandbillThugs_Polit01.cs:311 (HandbillThugs_Polit01.Fight)",
       "fix": "",
       "summary": "the case has no break; it fights the group of the main street and then, falling through, the group of the side street too, and only the second result counts."
     },
@@ -881,7 +935,7 @@
       "title": "The formula's risk works backwards",
       "area": "Events",
       "original": "R029+0x3FB2",
-      "code": "src/Darklands.Core/Events/EventExpiry.cs:105 (EventExpiry.AlchemyResult)",
+      "code": "src/Darklands.Core/Events/EventExpiry.cs:112 (EventExpiry.AlchemyResult)",
       "fix": "",
       "summary": "the formula's risk works backwards: the explosion (longer = 1, the inn barred 120 days) comes when roll-below(4 - risk) is not 0, so a low-risk formula (0) explodes three times in four and a high-risk one (2) half the time."
     },
@@ -890,7 +944,7 @@
       "title": "Boosts given to the whole party are never taken back (FixEverybodyBoostsUndone)",
       "area": "Events",
       "original": "R029+0x448A",
-      "code": "src/Darklands.Core/Events/EventExpiry.cs:135 (EventExpiry.UndoBoost)",
+      "code": "src/Darklands.Core/Events/EventExpiry.cs:142 (EventExpiry.UndoBoost)",
       "fix": "FixEverybodyBoostsUndone",
       "summary": "boosts given to the whole party are never taken back (FixEverybodyBoostsUndone)."
     },
@@ -899,7 +953,7 @@
       "title": "The weapon potions' kind 0x4A events (Deadly Blade, Strongedge, Great Power",
       "area": "Events",
       "original": "R029+0x448A",
-      "code": "src/Darklands.Core/Events/EventExpiry.cs:136 (EventExpiry.UndoBoost)",
+      "code": "src/Darklands.Core/Events/EventExpiry.cs:143 (EventExpiry.UndoBoost)",
       "fix": "FixEverybodyBoostsUndone",
       "summary": "the weapon potions' kind 0x4A events (Deadly Blade, Strongedge, Great Power: PotionEffects.Drink) run out here and nothing is undone: only kinds 0x48 and 0x49 are, so the bonus byte (+0x34) keeps them for good."
     },
@@ -908,7 +962,7 @@
       "title": "The recorded amount is taken off whatever the attribute is by then (raise-attribute-by(owner, type, -value))",
       "area": "Events",
       "original": "R029+0x448A",
-      "code": "src/Darklands.Core/Events/EventExpiry.cs:138 (EventExpiry.UndoBoost)",
+      "code": "src/Darklands.Core/Events/EventExpiry.cs:145 (EventExpiry.UndoBoost)",
       "fix": "FixEverybodyBoostsUndone",
       "summary": "the recorded amount is taken off whatever the attribute is by then (raise-attribute-by(owner, type, -value)): a boost that a night's rest (Endurance back to its maximum) or wounds (Strength) have already used up is taken off again and leaves the attribute below where it was; a saint's lowering (a negative value) is given back the same way."
     },
@@ -998,7 +1052,7 @@
       "title": "No limit at the teacher's ability, which a guild text says a pupil \"cannot progress beyond\" (MSGFILES)",
       "area": "Rules",
       "original": "R036+0x147A",
-      "code": "src/Darklands.Core/Rules/CampStay.cs:440 (CampStay.DoTheActivity)",
+      "code": "src/Darklands.Core/Rules/CampStay.cs:443 (CampStay.DoTheActivity)",
       "fix": "",
       "summary": "no limit at the teacher's ability, which a guild text says a pupil \"cannot progress beyond\" (MSGFILES): any teacher can take a skill to 99."
     },
@@ -1007,9 +1061,18 @@
       "title": "The weapon-skill test reads +0x57, +0x5C, +0x59, +0x5A, +0x5B, +0x5D: Impact Weapons (+0x58) is not among them",
       "area": "Rules",
       "original": "R036+0x1B80",
-      "code": "src/Darklands.Core/Rules/CampStay.cs:480 (CampStay.GrowRisk)",
+      "code": "src/Darklands.Core/Rules/CampStay.cs:483 (CampStay.GrowRisk)",
       "fix": "",
       "summary": "the weapon-skill test reads +0x57, +0x5C, +0x59, +0x5A, +0x5B, +0x5D: Impact Weapons (+0x58) is not among them."
+    },
+    {
+      "id": "B-630527",
+      "title": "Event-search (R029+0x3B62, called at R036+0x156E and by key T and the day's cost) returns the lowest...",
+      "area": "Rules",
+      "original": "R036+0x08EC;R036+0x1858;R036+0x147A",
+      "code": "src/Darklands.Core/Rules/CampStay.cs:144 (CampStay.Teacher)",
+      "fix": "",
+      "summary": "event-search (R029+0x3B62, called at R036+0x156E and by key T and the day's cost) returns the lowest matching slot: with two teachers of one skill here (the alchemist and the university both teach Alchemy) the one in the lower slot always gives the lesson, its fee and its level, whichever row is chosen."
     },
     {
       "id": "B-459e15",
@@ -1025,7 +1088,7 @@
       "title": "Esc from the childhood attributes goes back to the background list at age 15",
       "area": "Rules",
       "original": "R037+0x4664",
-      "code": "src/Darklands.Core/Characters/Creation/CharacterCreation.cs:289 (CharacterCreation.Back)",
+      "code": "src/Darklands.Core/Characters/Creation/CharacterCreation.cs:295 (CharacterCreation.Back)",
       "fix": "",
       "summary": "Esc from the childhood attributes goes back to the background list at age 15; a background row then serves the adult occupation of that number (Recruit..Knight), as in the original."
     },
@@ -1325,6 +1388,24 @@
       "code": "src/Darklands.Core/Rules/Practice.cs:78 (Practice.ChargeFame)",
       "fix": "FixFameCost",
       "summary": "v - fame is stored (FixFameCost)."
+    },
+    {
+      "id": "B-0aa03a",
+      "title": "The givers pass the nearest castle not burnt (closest-place-of-kind R030+0x2842, icon 2, e.g",
+      "area": "Rules",
+      "original": "R039+0x10B6",
+      "code": "src/Darklands.Core/Rules/Quests.cs:360 (Quests.StartQuest3)",
+      "fix": "",
+      "summary": "the givers pass the nearest castle not burnt (closest-place-of-kind R030+0x2842, icon 2, e.g. R050+0x2383..0x23C0); with every castle burnt it answers the party's own place (R030+0x28D4..0x28E9), so the task names a knight at the giver's own town, who cannot be found. The monthly rebuild (R029+0x281C, every third month one burnt castle) is the only way castles come back."
+    },
+    {
+      "id": "B-2d0c3e",
+      "title": "A task already given about this castle (any giver",
+      "area": "Rules",
+      "original": "R039+0x10B6",
+      "code": "src/Darklands.Core/Rules/Quests.cs:370 (Quests.StartQuest3)",
+      "fix": "",
+      "summary": "a task already given about this castle (any giver: the find R039+0x10C7 passes -1 for owner and type) only raises that task's value and level; a second task is still created (R039+0x10E3..0x10FD), without value, level or detail, with its own 9998 hours: the same knight is asked for twice, with two deadlines."
     },
     {
       "id": "B-09130e",
@@ -1777,6 +1858,15 @@
       "summary": "the text (DARKLAND.SNT) \"enhances local reputation in villages and with nobility\"; the code changes no standing."
     },
     {
+      "id": "B-a186ab",
+      "title": "An unlisted slot gets a prayer screen",
+      "area": "Rules",
+      "original": "R029+0x4626",
+      "code": "src/Darklands.Core/Rules/SaintPrayer.cs:69 (SaintPrayer.Listed)",
+      "fix": "",
+      "summary": "an unlisted slot gets a prayer screen: the last formula's name, a garbage feast day and picture (SaintPrayerScreen), \"Success: 99\", no Divine Favor offered, and P prays with the screen's font word as the chance (UnlistedChance)."
+    },
+    {
       "id": "B-94efea",
       "title": "\"learn the saint of this place\" (R056 19c4) and the teaching saints pass -1 and teach nobody...",
       "area": "Rules",
@@ -1831,11 +1921,20 @@
       "summary": "a click lights any of the four shop rows (R032+0x0000: DS:8832 = (y - 0x55) >> 3), also one past a shorter list's end; P then buys DS:86A2[row], the code an earlier, longer listing of this run of the game left there (item 0 before any), at this shop's price and quality (local/batch/c2stale/barter_probe.py: with 1 item listed and row 3, R032+0x0F60 prices, rates and adds DS:86A2[3])."
     },
     {
+      "id": "B-fe596a",
+      "title": "The 0x01 / 0x13 branches advance the cursor twice, so a text that ends right after a conditional marker...",
+      "area": "Screens",
+      "original": "root 0265:0134",
+      "code": "src/Darklands.Presentation/Graphics/CardTextLayout.cs:123 (CardTextLayout.Draw)",
+      "fix": "",
+      "summary": "the 0x01 / 0x13 branches advance the cursor twice, so a text that ends right after a conditional marker has its zero skipped and the loop runs on past the text's end (reachable in play: card $situa00 block 4 ends with 0x13); what is drawn then is undefined memory (D-0d3a38), so the rewrite registers it and stops at the text's end."
+    },
+    {
       "id": "B-f7799c",
       "title": "Party-member-erase-overlay-entry runs while the events are in events.tmp, so a member who died in the...",
       "area": "Screens",
       "original": "root 03A1:000A",
-      "code": "src/Darklands.Presentation/DarklandsGame.cs:440 (DarklandsGame.FightTheBattle)",
+      "code": "src/Darklands.Presentation/DarklandsGame.cs:461 (DarklandsGame.FightTheBattle)",
       "fix": "",
       "summary": "party-member-erase-overlay-entry runs while the events are in events.tmp, so a member who died in the battle keeps the term and \"has left\" events (kinds 0x43/0x47) it would cancel: they come back with the table."
     },
@@ -1853,7 +1952,7 @@
       "title": "R030+0x1133..0x1154 sets DS:286E to the last 0x83 rows without reading them (no call of R030+0x1DD4 on...",
       "area": "Screens",
       "original": "R030+0x0C44",
-      "code": "src/Darklands.Presentation/OverlandScreen.cs:412 (OverlandScreen.Scroll)",
+      "code": "src/Darklands.Presentation/OverlandScreen.cs:421 (OverlandScreen.Scroll)",
       "fix": "",
       "summary": "R030+0x1133..0x1154 sets DS:286E to the last 0x83 rows without reading them (no call of R030+0x1DD4 on this path): when the buffer's top was not already there (a top of 0x318 from world-map-start, the party walking south), the row buffer keeps the rows from the old top and the map drawn (and the cells read) from it are (height - 0x83 - old top) rows north of the view's registers until a scroll reads the rows again. Reproduced (map.Rows is left as it is)."
     },
@@ -1874,6 +1973,15 @@
       "code": "src/Darklands.Simulation/Overland/CellBuffer.cs:49 (CellBuffer.Fill)",
       "fix": "",
       "summary": "the icon loop's bounds are one row and one column too wide: an icon in column col + 18 is written at G[y - tope][19], which is G[y - tope + 1][0] (the next row's first cell, over its terrain, or past the buffer for the last row), and one in row tope + 50 at G[50][..], the bytes after the buffer, which no fill clears. Reproduced (the camp watch and the party drawing's masks read both)."
+    },
+    {
+      "id": "B-79b8e3",
+      "title": "The place entered is the first record by index inside the reach (R030+0x1471..0x14CA, no distance test),...",
+      "area": "Travel",
+      "original": "R030+0x2AC8",
+      "code": "src/Darklands.Simulation/Overland/OverlandTravel.cs:146 (OverlandTravel.Step)",
+      "fix": "",
+      "summary": "the place entered is the first record by index inside the reach (R030+0x1471..0x14CA, no distance test), not the nearest: with the shipped DARKLAND.LOC three places can never be entered by stepping, 149 Simmern (147 Geldern is taken), 197 Lauf (178 Rammelsburg, four tiles off) and 297 Putten (127 Putten, two rows off)."
     },
     {
       "id": "B-b69cb8",
@@ -2105,19 +2213,19 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/Trading.cs:162",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Trading.cs#L162"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Trading.cs#L162"
               },
               {
                 "code": "src/Darklands.Core/Rules/Trading.cs:166",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Trading.cs#L166"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Trading.cs#L166"
               },
               {
                 "code": "src/Darklands.Core/Rules/Trading.cs:192",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Trading.cs#L192"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Trading.cs#L192"
               },
               {
                 "code": "src/Darklands.Core/OriginalBehaviour.cs:27",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/OriginalBehaviour.cs#L27"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/OriginalBehaviour.cs#L27"
               }
             ],
             "original": "R032+0x192E; R032+0x1B26",
@@ -2143,11 +2251,11 @@
             "source": [
               {
                 "code": "src/Darklands.Persistence/OriginalSaves.cs:264",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Persistence/OriginalSaves.cs#L264"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Persistence/OriginalSaves.cs#L264"
               },
               {
                 "code": "src/Darklands.Presentation/SaveGameDialog.cs:26",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Presentation/SaveGameDialog.cs#L26"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Presentation/SaveGameDialog.cs#L26"
               }
             ],
             "original": "R037+0x2ACE",
@@ -2167,19 +2275,19 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Characters/Character.cs:90",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Characters/Character.cs#L90"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Characters/Character.cs#L90"
               },
               {
                 "code": "src/Darklands.Core/Battles/BattlefieldLevel.cs:12",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/BattlefieldLevel.cs#L12"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/BattlefieldLevel.cs#L12"
               },
               {
                 "code": "src/Darklands.Presentation/Battles/BattleScreen.cs:348",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Presentation/Battles/BattleScreen.cs#L348"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Presentation/Battles/BattleScreen.cs#L348"
               },
               {
                 "code": "src/Darklands.Persistence/OriginalSaves.cs:176",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Persistence/OriginalSaves.cs#L176"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Persistence/OriginalSaves.cs#L176"
               }
             ],
             "original": "R136+0x33FC; R136+0x0000",
@@ -2198,21 +2306,21 @@
             "register": [
               {
                 "id": "D-66e575",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L4"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L4"
               },
               {
                 "id": "D-66bf7d",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L272"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L276"
               }
             ],
             "source": [
               {
                 "code": "src/Darklands.Presentation/CharacterCreationScreen.cs:105",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Presentation/CharacterCreationScreen.cs#L105"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Presentation/CharacterCreationScreen.cs#L105"
               },
               {
                 "code": "src/Darklands.Simulation/NewGame.cs:30",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Simulation/NewGame.cs#L30"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Simulation/NewGame.cs#L30"
               }
             ],
             "original": "R037+0x4184",
@@ -2237,15 +2345,15 @@
             "source": [
               {
                 "code": "src/Darklands.Presentation/DarklandsGame.cs:232",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Presentation/DarklandsGame.cs#L232"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Presentation/DarklandsGame.cs#L232"
               },
               {
                 "code": "src/Darklands.Core/OriginalBehaviour.cs:136",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/OriginalBehaviour.cs#L136"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/OriginalBehaviour.cs#L136"
               },
               {
                 "code": "src/Darklands.Presentation/LoadGameScreen.cs:18",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Presentation/LoadGameScreen.cs#L18"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Presentation/LoadGameScreen.cs#L18"
               }
             ],
             "original": "R037+0x8B76",
@@ -2264,13 +2372,13 @@
             "register": [
               {
                 "id": "D-efcb07",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L280"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L284"
               }
             ],
             "source": [
               {
                 "code": "src/Darklands.Presentation/StartUp.cs:153",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Presentation/StartUp.cs#L153"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Presentation/StartUp.cs#L153"
               }
             ],
             "original": "",
@@ -2305,35 +2413,35 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Characters/Pack.cs:59",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Characters/Pack.cs#L59"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Characters/Pack.cs#L59"
               },
               {
                 "code": "src/Darklands.Core/Rules/Inventory.cs:195",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Inventory.cs#L195"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Inventory.cs#L195"
               },
               {
                 "code": "src/Darklands.Core/Rules/Trading.cs:325",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Trading.cs#L325"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Trading.cs#L325"
               },
               {
                 "code": "src/Darklands.Core/Rules/Trading.cs:339",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Trading.cs#L339"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Trading.cs#L339"
               },
               {
                 "code": "src/Darklands.Core/Rules/Storing.cs:67",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Storing.cs#L67"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Storing.cs#L67"
               },
               {
                 "code": "src/Darklands.Core/Rules/Storing.cs:73",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Storing.cs#L73"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Storing.cs#L73"
               },
               {
                 "code": "src/Darklands.Core/OriginalBehaviour.cs:30",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/OriginalBehaviour.cs#L30"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/OriginalBehaviour.cs#L30"
               },
               {
                 "code": "src/Darklands.Core/Rules/PackRules.cs:53",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/PackRules.cs#L53"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/PackRules.cs#L53"
               }
             ],
             "original": "R031+0x4A04; R032+0x0F60 (case P); R035+0x0A46 (case G)",
@@ -2358,27 +2466,27 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/Inventory.cs:234",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Inventory.cs#L234"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Inventory.cs#L234"
               },
               {
                 "code": "src/Darklands.Core/Battles/Tactics/LootStore.cs:146",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/LootStore.cs#L146"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/LootStore.cs#L146"
               },
               {
                 "code": "src/Darklands.Core/Battles/Tactics/LootStore.cs:156",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/LootStore.cs#L156"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/LootStore.cs#L156"
               },
               {
                 "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.Loot.cs:46",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/TacticalBattle.Loot.cs#L46"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/TacticalBattle.Loot.cs#L46"
               },
               {
                 "code": "src/Darklands.Core/Rules/Storing.cs:24",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Storing.cs#L24"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Storing.cs#L24"
               },
               {
                 "code": "src/Darklands.Core/OriginalBehaviour.cs:29",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/OriginalBehaviour.cs#L29"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/OriginalBehaviour.cs#L29"
               }
             ],
             "original": "R014+0xE930 (19CD:33C0); R031+0x4A04; R035+0x10D2",
@@ -2397,21 +2505,21 @@
             "register": [
               {
                 "id": "D-674296",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L12"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L12"
               }
             ],
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/Inventory.cs:55",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Inventory.cs#L55"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Inventory.cs#L55"
               },
               {
                 "code": "src/Darklands.Core/Items/StoreTable.cs:13",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Items/StoreTable.cs#L13"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Items/StoreTable.cs#L13"
               },
               {
                 "code": "src/Darklands.Core/Items/StoreTable.cs:16",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Items/StoreTable.cs#L16"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Items/StoreTable.cs#L16"
               }
             ],
             "original": "R029+0x0C76; R035+0x10D2",
@@ -2431,19 +2539,19 @@
             "source": [
               {
                 "code": "src/Darklands.Core/OriginalBehaviour.cs:29",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/OriginalBehaviour.cs#L29"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/OriginalBehaviour.cs#L29"
               },
               {
                 "code": "src/Darklands.Core/Rules/Storing.cs:15",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Storing.cs#L15"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Storing.cs#L15"
               },
               {
                 "code": "src/Darklands.Core/Rules/Storing.cs:24",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Storing.cs#L24"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Storing.cs#L24"
               },
               {
                 "code": "src/Darklands.Core/Rules/Storing.cs:33",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Storing.cs#L33"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Storing.cs#L33"
               }
             ],
             "original": "R035+0x10D2; R035+0x114A",
@@ -2474,33 +2582,33 @@
               },
               {
                 "id": "D-856386",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L8"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L8"
               },
               {
                 "id": "D-2a45ce",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L6"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L6"
               }
             ],
             "source": [
               {
                 "code": "src/Darklands.Core/Items/ItemStores.cs:147",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Items/ItemStores.cs#L147"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Items/ItemStores.cs#L147"
               },
               {
                 "code": "src/Darklands.Core/Items/ItemStores.cs:148",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Items/ItemStores.cs#L148"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Items/ItemStores.cs#L148"
               },
               {
                 "code": "src/Darklands.Core/Items/ItemStores.cs:169",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Items/ItemStores.cs#L169"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Items/ItemStores.cs#L169"
               },
               {
                 "code": "src/Darklands.Core/OriginalBehaviour.cs:62",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/OriginalBehaviour.cs#L62"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/OriginalBehaviour.cs#L62"
               },
               {
                 "code": "src/Darklands.Core/OriginalBehaviour.cs:71",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/OriginalBehaviour.cs#L71"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/OriginalBehaviour.cs#L71"
               }
             ],
             "original": "R035+0x1468; R035+0x1532; R035+0x15A2; R035+0x04BC; R037+0x4184",
@@ -2525,27 +2633,27 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/MemberRules.cs:142",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/MemberRules.cs#L142"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/MemberRules.cs#L142"
               },
               {
                 "code": "src/Darklands.Core/Rules/MemberRules.cs:274",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/MemberRules.cs#L274"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/MemberRules.cs#L274"
               },
               {
                 "code": "src/Darklands.Core/Rules/MemberRules.cs:324",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/MemberRules.cs#L324"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/MemberRules.cs#L324"
               },
               {
                 "code": "src/Darklands.Core/Rules/MemberRules.cs:325",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/MemberRules.cs#L325"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/MemberRules.cs#L325"
               },
               {
                 "code": "src/Darklands.Core/Events/EventExpiry.cs:144",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Events/EventExpiry.cs#L144"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Events/EventExpiry.cs#L144"
               },
               {
                 "code": "src/Darklands.Core/Rules/MemberRules.cs:125",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/MemberRules.cs#L125"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/MemberRules.cs#L125"
               }
             ],
             "original": "R029+0x4C04; R029+0x0A72; R029+0x448A; R029+0x4E0C",
@@ -2576,11 +2684,11 @@
             "source": [
               {
                 "code": "src/Darklands.Cards/Scripts/S064/AlchemistFormulaSeller.cs:76",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S064/AlchemistFormulaSeller.cs#L76"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S064/AlchemistFormulaSeller.cs#L76"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S064/AlchemistFormulaSeller.cs:17",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S064/AlchemistFormulaSeller.cs#L17"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S064/AlchemistFormulaSeller.cs#L17"
               }
             ],
             "original": "R064+0x2D38",
@@ -2603,21 +2711,21 @@
               },
               {
                 "id": "Z-9318d7",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L26"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L26"
               }
             ],
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/SaintBook.cs:631",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/SaintBook.cs#L631"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/SaintBook.cs#L631"
               },
               {
                 "code": "src/Darklands.Core/Rules/SaintBook.cs:638",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/SaintBook.cs#L638"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/SaintBook.cs#L638"
               },
               {
                 "code": "src/Darklands.Core/Rules/SaintBook.cs:372",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/SaintBook.cs#L372"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/SaintBook.cs#L372"
               }
             ],
             "original": "R039+0x7C6A; R039+0x7D0C; R039+0x9578; saint_fns R136+0xAFC7",
@@ -2642,19 +2750,19 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/MemberRules.cs:274",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/MemberRules.cs#L274"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/MemberRules.cs#L274"
               },
               {
                 "code": "src/Darklands.Core/Rules/MemberRules.cs:315",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/MemberRules.cs#L315"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/MemberRules.cs#L315"
               },
               {
                 "code": "src/Darklands.Core/Rules/MemberRules.cs:125",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/MemberRules.cs#L125"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/MemberRules.cs#L125"
               },
               {
                 "code": "src/Darklands.Core/Events/EventExpiry.cs:143",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Events/EventExpiry.cs#L143"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Events/EventExpiry.cs#L143"
               }
             ],
             "original": "R029+0x4C04; R029+0x0A72; R029+0x4E0C; R029+0x448A",
@@ -2679,11 +2787,11 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/SaintBook.cs:685",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/SaintBook.cs#L685"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/SaintBook.cs#L685"
               },
               {
                 "code": "src/Darklands.Core/Rules/MemberRules.cs:407",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/MemberRules.cs#L407"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/MemberRules.cs#L407"
               }
             ],
             "original": "R039+0x8A88; R029+0x0792",
@@ -2716,31 +2824,31 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/PotionEffects.cs:71",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/PotionEffects.cs#L71"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/PotionEffects.cs#L71"
               },
               {
                 "code": "src/Darklands.Core/Rules/PotionEffects.cs:93",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/PotionEffects.cs#L93"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/PotionEffects.cs#L93"
               },
               {
                 "code": "src/Darklands.Core/Rules/PotionEffects.cs:121",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/PotionEffects.cs#L121"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/PotionEffects.cs#L121"
               },
               {
                 "code": "src/Darklands.Core/Rules/SaintBook.cs:269",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/SaintBook.cs#L269"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/SaintBook.cs#L269"
               },
               {
                 "code": "src/Darklands.Core/Events/EventExpiry.cs:133",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Events/EventExpiry.cs#L133"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Events/EventExpiry.cs#L133"
               },
               {
                 "code": "src/Darklands.Presentation/CharacterSheetScreen.cs:1022",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Presentation/CharacterSheetScreen.cs#L1022"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Presentation/CharacterSheetScreen.cs#L1022"
               },
               {
                 "code": "src/Darklands.Core/OriginalBehaviour.cs:18",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/OriginalBehaviour.cs#L18"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/OriginalBehaviour.cs#L18"
               }
             ],
             "original": "R031+0x43B2; R029+0x4D24; R029+0x448A; R039 charm saints (St.Polycarp and others)",
@@ -2760,27 +2868,27 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/PotionEffects.cs:76",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/PotionEffects.cs#L76"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/PotionEffects.cs#L76"
               },
               {
                 "code": "src/Darklands.Core/Rules/PotionEffects.cs:82",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/PotionEffects.cs#L82"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/PotionEffects.cs#L82"
               },
               {
                 "code": "src/Darklands.Core/Rules/PotionEffects.cs:93",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/PotionEffects.cs#L93"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/PotionEffects.cs#L93"
               },
               {
                 "code": "src/Darklands.Core/Rules/SaintBook.cs:243",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/SaintBook.cs#L243"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/SaintBook.cs#L243"
               },
               {
                 "code": "src/Darklands.Core/Rules/SaintBook.cs:257",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/SaintBook.cs#L257"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/SaintBook.cs#L257"
               },
               {
                 "code": "src/Darklands.Core/OriginalBehaviour.cs:23",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/OriginalBehaviour.cs#L23"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/OriginalBehaviour.cs#L23"
               }
             ],
             "original": "R031+0x43B2; R039 saint functions",
@@ -2805,11 +2913,11 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/PotionEffects.cs:82",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/PotionEffects.cs#L82"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/PotionEffects.cs#L82"
               },
               {
                 "code": "src/Darklands.Core/Battles/Attacks.cs:339",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Attacks.cs#L339"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Attacks.cs#L339"
               }
             ],
             "original": "R031+0x43B2; R014+0xAC08",
@@ -2834,23 +2942,23 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/MemberRules.cs:315",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/MemberRules.cs#L315"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/MemberRules.cs#L315"
               },
               {
                 "code": "src/Darklands.Core/Rules/MemberRules.cs:125",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/MemberRules.cs#L125"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/MemberRules.cs#L125"
               },
               {
                 "code": "src/Darklands.Core/Rules/MemberRules.cs:142",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/MemberRules.cs#L142"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/MemberRules.cs#L142"
               },
               {
                 "code": "src/Darklands.Core/Events/EventLog.cs:474",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Events/EventLog.cs#L474"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Events/EventLog.cs#L474"
               },
               {
                 "code": "src/Darklands.Core/Events/EventExpiry.cs:143",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Events/EventExpiry.cs#L143"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Events/EventExpiry.cs#L143"
               }
             ],
             "original": "R029+0x4C04; R029+0x0A72; R029+0x4E0C; R029+0x448A",
@@ -2875,15 +2983,15 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Battles/Generation/FortressBattlefield.cs:746",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Generation/FortressBattlefield.cs#L746"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Generation/FortressBattlefield.cs#L746"
               },
               {
                 "code": "src/Darklands.Core/Battles/Generation/FortressBattlefield.cs:766",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Generation/FortressBattlefield.cs#L766"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Generation/FortressBattlefield.cs#L766"
               },
               {
                 "code": "src/Darklands.Core/Battles/Generation/FortressBattlefield.cs:786",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Generation/FortressBattlefield.cs#L786"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Generation/FortressBattlefield.cs#L786"
               }
             ],
             "original": "R011+0x096A (room 14); R011+0x16D2; R011+0x1794",
@@ -2903,11 +3011,11 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/Saints.cs:75",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Saints.cs#L75"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Saints.cs#L75"
               },
               {
                 "code": "src/Darklands.Core/Rules/SaintPrayer.cs:73",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/SaintPrayer.cs#L73"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/SaintPrayer.cs#L73"
               }
             ],
             "original": "R039+0x1FA0; R034+0x022C; R029+0x20C6; R029+0x2116",
@@ -2926,29 +3034,29 @@
             "register": [
               {
                 "id": "D-09b57b",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L155"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L157"
               }
             ],
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/Quests.cs:310",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Quests.cs#L310"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Quests.cs#L310"
               },
               {
                 "code": "src/Darklands.Core/Rules/Quests.cs:304",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Quests.cs#L304"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Quests.cs#L304"
               },
               {
                 "code": "src/Darklands.Cards/TextVariables.cs:319",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/TextVariables.cs#L319"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/TextVariables.cs#L319"
               },
               {
                 "code": "src/Darklands.Cards/TextVariables.cs:338",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/TextVariables.cs#L338"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/TextVariables.cs#L338"
               },
               {
                 "code": "src/Darklands.Core/Rules/Quests.cs:192",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Quests.cs#L192"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Quests.cs#L192"
               }
             ],
             "original": "R039+0x1CD2; R039+0x1CE8; R039+0x1CFE; R029+0x4534; R039+0x1B0C",
@@ -2973,19 +3081,19 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Events/EventLog.cs:23",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Events/EventLog.cs#L23"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Events/EventLog.cs#L23"
               },
               {
                 "code": "src/Darklands.Core/Events/EventLog.cs:82",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Events/EventLog.cs#L82"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Events/EventLog.cs#L82"
               },
               {
                 "code": "src/Darklands.Core/Events/EventExpiry.cs:15",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Events/EventExpiry.cs#L15"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Events/EventExpiry.cs#L15"
               },
               {
                 "code": "src/Darklands.Core/Rules/Quests.cs:169",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Quests.cs#L169"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Quests.cs#L169"
               }
             ],
             "original": "R029+0x2C4E; R029+0x3F30; R039+0x1B0C",
@@ -3010,15 +3118,15 @@
             "source": [
               {
                 "code": "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:151",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs#L151"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs#L151"
               },
               {
                 "code": "src/Darklands.Core/Time/Calendar.cs:15",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Time/Calendar.cs#L15"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Time/Calendar.cs#L15"
               },
               {
                 "code": "src/Darklands.Core/Rules/Quests.cs:44",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Quests.cs#L44"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Quests.cs#L44"
               }
             ],
             "original": "R057+0x03CC; R029+0x54D8",
@@ -3043,11 +3151,11 @@
             "source": [
               {
                 "code": "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:208",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs#L208"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs#L208"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:215",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs#L215"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs#L215"
               }
             ],
             "original": "R057+0x067C",
@@ -3067,11 +3175,11 @@
             "source": [
               {
                 "code": "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:212",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs#L212"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs#L212"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:244",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs#L244"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs#L244"
               }
             ],
             "original": "R057+0x067C",
@@ -3091,23 +3199,23 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.OrderMode.cs:181",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/TacticalBattle.OrderMode.cs#L181"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/TacticalBattle.OrderMode.cs#L181"
               },
               {
                 "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.OrderMode.cs:465",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/TacticalBattle.OrderMode.cs#L465"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/TacticalBattle.OrderMode.cs#L465"
               },
               {
                 "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.OrderMode.cs:529",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/TacticalBattle.OrderMode.cs#L529"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/TacticalBattle.OrderMode.cs#L529"
               },
               {
                 "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.Ai.cs:208",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/TacticalBattle.Ai.cs#L208"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/TacticalBattle.Ai.cs#L208"
               },
               {
                 "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.Ai.cs:232",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/TacticalBattle.Ai.cs#L232"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/TacticalBattle.Ai.cs#L232"
               }
             ],
             "original": "R016+0x156E; R014+0xBCA8; R014+0xFADC; R014+0xFC50",
@@ -3132,11 +3240,11 @@
             "source": [
               {
                 "code": "src/Darklands.Cards/Scripts/S065/BowyersGuildAtNight.cs:87",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S065/BowyersGuildAtNight.cs#L87"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S065/BowyersGuildAtNight.cs#L87"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S065/BowyersGuild.cs:105",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S065/BowyersGuild.cs#L105"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S065/BowyersGuild.cs#L105"
               }
             ],
             "original": "R065+0x21BC; R065+0x0F18",
@@ -3161,15 +3269,15 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs:676",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs#L676"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs#L676"
               },
               {
                 "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs:478",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs#L478"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs#L478"
               },
               {
                 "code": "src/Darklands.Core/Rules/Inventory.cs:195",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Inventory.cs#L195"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Inventory.cs#L195"
               }
             ],
             "original": "R019+0x0968; R019+0x0300",
@@ -3194,19 +3302,19 @@
             "source": [
               {
                 "code": "src/Darklands.Cards/Scripts/S050/FortressByDay.cs:38",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S050/FortressByDay.cs#L38"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S050/FortressByDay.cs#L38"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S050/FortressByDay.cs:103",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S050/FortressByDay.cs#L103"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S050/FortressByDay.cs#L103"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:240",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S054/CouncilHall.cs#L240"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S054/CouncilHall.cs#L240"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S048/CitySquareByDay.cs:40",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S048/CitySquareByDay.cs#L40"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S048/CitySquareByDay.cs#L40"
               }
             ],
             "original": "R050+0x1CEE; R050+0x21F8; R050+0x24E0; R054+0x1D08",
@@ -3233,29 +3341,29 @@
               },
               {
                 "id": "Z-c3c497",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L90"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L90"
               },
               {
                 "id": "Z-798fad",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L140"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L140"
               }
             ],
             "source": [
               {
                 "code": "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:393",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S054/CouncilHall.cs#L393"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S054/CouncilHall.cs#L393"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S050/FortressByDay.cs:219",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S050/FortressByDay.cs#L219"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S050/FortressByDay.cs#L219"
               },
               {
                 "code": "src/Darklands.Core/Events/EventExpiry.cs:24",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Events/EventExpiry.cs#L24"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Events/EventExpiry.cs#L24"
               },
               {
                 "code": "src/Darklands.Core/Events/EventExpiry.cs:60",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Events/EventExpiry.cs#L60"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Events/EventExpiry.cs#L60"
               }
             ],
             "original": "R054+0x22F8; R050+0x2298; R029+0x3F30; R029+0x4436",
@@ -3275,19 +3383,19 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/Quests.cs:386",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Quests.cs#L386"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Quests.cs#L386"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S060/WildHunt.cs:47",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S060/WildHunt.cs#L47"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S060/WildHunt.cs#L47"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S058/LibraryOfSaints.cs:44",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S058/LibraryOfSaints.cs#L44"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S058/LibraryOfSaints.cs#L44"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S114/HermitByTheFire.cs:131",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S114/HermitByTheFire.cs#L131"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S114/HermitByTheFire.cs#L131"
               }
             ],
             "original": "R039+0x1F00; R060+0x0978; R058+0x0928; R114+0x0566",
@@ -3307,11 +3415,11 @@
             "source": [
               {
                 "code": "src/Darklands.Cards/Scripts/S056/University_Unive00.cs:47",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S056/University_Unive00.cs#L47"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S056/University_Unive00.cs#L47"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S056/University_Unive00.cs:195",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S056/University_Unive00.cs#L195"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S056/University_Unive00.cs#L195"
               }
             ],
             "original": "R056+0x088C; R056+0x0E7C",
@@ -3337,11 +3445,11 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/PotionEffects.cs:107",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/PotionEffects.cs#L107"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/PotionEffects.cs#L107"
               },
               {
                 "code": "src/Darklands.Core/Rules/MemberRules.cs:274",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/MemberRules.cs#L274"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/MemberRules.cs#L274"
               }
             ],
             "original": "R031+0x43B2; R029+0x4C04",
@@ -3361,15 +3469,15 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs:803",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs#L803"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs#L803"
               },
               {
                 "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs:430",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs#L430"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs#L430"
               },
               {
                 "code": "src/Darklands.Core/Rules/PotionEffects.cs:36",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/PotionEffects.cs#L36"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/PotionEffects.cs#L36"
               }
             ],
             "original": "R019+0x0C80; R019+0x0300",
@@ -3389,7 +3497,7 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs:526",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs#L526"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/TacticalBattle.Effects.cs#L526"
               }
             ],
             "original": "R019+0x058A",
@@ -3414,19 +3522,19 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/PotionEffects.cs:76",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/PotionEffects.cs#L76"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/PotionEffects.cs#L76"
               },
               {
                 "code": "src/Darklands.Core/Rules/PotionEffects.cs:82",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/PotionEffects.cs#L82"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/PotionEffects.cs#L82"
               },
               {
                 "code": "src/Darklands.Core/OriginalBehaviour.cs:18",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/OriginalBehaviour.cs#L18"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/OriginalBehaviour.cs#L18"
               },
               {
                 "code": "src/Darklands.Core/OriginalBehaviour.cs:23",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/OriginalBehaviour.cs#L23"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/OriginalBehaviour.cs#L23"
               }
             ],
             "original": "R031+0x43B2; R029+0x4D24",
@@ -3472,11 +3580,11 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Battles/BattlefieldForces.cs:666",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/BattlefieldForces.cs#L666"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/BattlefieldForces.cs#L666"
               },
               {
                 "code": "src/Darklands.Core/Battles/Generation/WildBattlefield.cs:1579",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Generation/WildBattlefield.cs#L1579"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Generation/WildBattlefield.cs#L1579"
               }
             ],
             "original": "R004+0x1D90; R008+0x2ADC",
@@ -3510,25 +3618,25 @@
             "register": [
               {
                 "id": "D-b8e305",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L87"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L88"
               },
               {
                 "id": "D-4d1f0e",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L68"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L69"
               }
             ],
             "source": [
               {
                 "code": "src/Darklands.Cards/CardTable.cs:13",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/CardTable.cs#L13"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/CardTable.cs#L13"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S045/BattleStandIn.cs:45",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S045/BattleStandIn.cs#L45"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S045/BattleStandIn.cs#L45"
               },
               {
                 "code": "src/Darklands.Cards/CardContext.Fights.cs:50",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/CardContext.Fights.cs#L50"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/CardContext.Fights.cs#L50"
               }
             ],
             "original": "R044+0x0000; R045+0x0726; R029+0x577A",
@@ -3548,15 +3656,15 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Rules/InnRoster.cs:190",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/InnRoster.cs#L190"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/InnRoster.cs#L190"
               },
               {
                 "code": "src/Darklands.Core/Rules/InnRoster.cs:191",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/InnRoster.cs#L191"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/InnRoster.cs#L191"
               },
               {
                 "code": "src/Darklands.Core/OriginalBehaviour.cs:33",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/OriginalBehaviour.cs#L33"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/OriginalBehaviour.cs#L33"
               }
             ],
             "original": "R038+0x02F8",
@@ -3575,17 +3683,17 @@
             "register": [
               {
                 "id": "D-9c9eab",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L286"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L290"
               }
             ],
             "source": [
               {
                 "code": "src/Darklands.Presentation/DarklandsGame.cs:271",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Presentation/DarklandsGame.cs#L271"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Presentation/DarklandsGame.cs#L271"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/PartyAtTheInn.cs:115",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/PartyAtTheInn.cs#L115"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/PartyAtTheInn.cs#L115"
               }
             ],
             "original": "R030+0x0000",
@@ -3605,11 +3713,11 @@
             "source": [
               {
                 "code": "src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs:23",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs#L23"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs#L23"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs:93",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs#L93"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs#L93"
               }
             ],
             "original": "R048+0x0000",
@@ -3629,7 +3737,7 @@
             "source": [
               {
                 "code": "src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs:23",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs#L23"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs#L23"
               }
             ],
             "original": "R048+0x0000",
@@ -3655,11 +3763,11 @@
             "source": [
               {
                 "code": "src/Darklands.Persistence/OriginalSaves.cs:264",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Persistence/OriginalSaves.cs#L264"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Persistence/OriginalSaves.cs#L264"
               },
               {
                 "code": "src/Darklands.Persistence/OriginalSaves.cs:349",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Persistence/OriginalSaves.cs#L349"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Persistence/OriginalSaves.cs#L349"
               }
             ],
             "original": "R037+0x2ACE; R037+0x8ED4",
@@ -3715,11 +3823,11 @@
             "source": [
               {
                 "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.cs:395",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/TacticalBattle.cs#L395"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/TacticalBattle.cs#L395"
               },
               {
                 "code": "src/Darklands.Presentation/Battles/BattleScreen.cs:756",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Presentation/Battles/BattleScreen.cs#L756"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Presentation/Battles/BattleScreen.cs#L756"
               }
             ],
             "original": "R014+0x0000",
@@ -3754,11 +3862,11 @@
             "source": [
               {
                 "code": "src/Darklands.Cards/Scripts/S064/AlchemistFormulaSeller.cs:107",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S064/AlchemistFormulaSeller.cs#L107"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S064/AlchemistFormulaSeller.cs#L107"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S066/AlchemistsShop.cs:283",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S066/AlchemistsShop.cs#L283"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S066/AlchemistsShop.cs#L283"
               }
             ],
             "original": "R064+0x31DC; R066+0x13BC",
@@ -3778,7 +3886,7 @@
             "source": [
               {
                 "code": "src/Darklands.Cards/Scripts/S122/DemonPrinceAndTheSealedBook.cs:85",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S122/DemonPrinceAndTheSealedBook.cs#L85"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S122/DemonPrinceAndTheSealedBook.cs#L85"
               }
             ],
             "original": "R122+0x0000",
@@ -3798,11 +3906,11 @@
             "source": [
               {
                 "code": "src/Darklands.Cards/Scripts/S108/CryptUnderTheRuinedChurch.cs:182",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S108/CryptUnderTheRuinedChurch.cs#L182"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S108/CryptUnderTheRuinedChurch.cs#L182"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S108/CryptUnderTheRuinedChurch.cs:228",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S108/CryptUnderTheRuinedChurch.cs#L228"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S108/CryptUnderTheRuinedChurch.cs#L228"
               }
             ],
             "original": "R108+0x084E; R108+0x0A5E",
@@ -3821,21 +3929,21 @@
             "register": [
               {
                 "id": "D-ce32da",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L93"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L95"
               },
               {
                 "id": "D-a76a27",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L114"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L116"
               }
             ],
             "source": [
               {
                 "code": "src/Darklands.Cards/Scripts/S087/RandomMonsterFromTheSlime.cs:80",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S087/RandomMonsterFromTheSlime.cs#L80"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S087/RandomMonsterFromTheSlime.cs#L80"
               },
               {
                 "code": "src/Darklands.Cards/Scripts/S060/WildHunt.cs:48",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S060/WildHunt.cs#L48"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S060/WildHunt.cs#L48"
               }
             ],
             "original": "R087+0x0000; R060+0x0978",
@@ -3854,13 +3962,13 @@
             "register": [
               {
                 "id": "D-9c9eab",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L286"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L290"
               }
             ],
             "source": [
               {
                 "code": "src/Darklands.Presentation/DarklandsGame.cs:271",
-                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Presentation/DarklandsGame.cs#L271"
+                "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Presentation/DarklandsGame.cs#L271"
               }
             ],
             "original": "R030+0x0000",
@@ -3885,17 +3993,17 @@
         "register": [
           {
             "id": "D-e758be",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L249"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L252"
           }
         ],
         "source": [
           {
             "code": "src/Darklands.Presentation/Battles/AnimationLibrary.cs:28",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Presentation/Battles/AnimationLibrary.cs#L28"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Presentation/Battles/AnimationLibrary.cs#L28"
           },
           {
             "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.Animation.cs:280",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/TacticalBattle.Animation.cs#L280"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/TacticalBattle.Animation.cs#L280"
           }
         ],
         "original": "R025+0x0A84",
@@ -3916,13 +4024,13 @@
         "register": [
           {
             "id": "Z-d0f3c7",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L805"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L805"
           }
         ],
         "source": [
           {
             "code": "src/Darklands.Core/Battles/Generation/CastleGenerator.Furniture.cs:494",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Generation/CastleGenerator.Furniture.cs#L494"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Generation/CastleGenerator.Furniture.cs#L494"
           }
         ],
         "original": "R007+0x4076",
@@ -3949,11 +4057,11 @@
         "source": [
           {
             "code": "src/Darklands.Core/Battles/Generation/CastleGenerator.Walls.cs:158",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Generation/CastleGenerator.Walls.cs#L158"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Generation/CastleGenerator.Walls.cs#L158"
           },
           {
             "code": "src/Darklands.Core/Battles/Generation/CastleGenerator.Walls.cs:167",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Generation/CastleGenerator.Walls.cs#L167"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Generation/CastleGenerator.Walls.cs#L167"
           }
         ],
         "original": "R007+0x0698",
@@ -3975,7 +4083,7 @@
         "source": [
           {
             "code": "src/Darklands.Presentation/Battles/BattleScreen.cs:454",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Presentation/Battles/BattleScreen.cs#L454"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Presentation/Battles/BattleScreen.cs#L454"
           }
         ],
         "original": "R014+0x9C8C",
@@ -4002,15 +4110,15 @@
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S058/LeavingByTheGate.cs:33",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S058/LeavingByTheGate.cs#L33"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S058/LeavingByTheGate.cs#L33"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S058/LeavingByTheGate.cs:39",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S058/LeavingByTheGate.cs#L39"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S058/LeavingByTheGate.cs#L39"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S058/LeavingByTheGate.cs:296",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S058/LeavingByTheGate.cs#L296"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S058/LeavingByTheGate.cs#L296"
           }
         ],
         "original": "R058+0x0E24; R058+0x17DA",
@@ -4032,7 +4140,7 @@
         "source": [
           {
             "code": "src/Darklands.Core/Battles/EnemyKind.cs:187",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/EnemyKind.cs#L187"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/EnemyKind.cs#L187"
           }
         ],
         "original": "R024+0x0000; R020+0x0000; R025+0x0000",
@@ -4054,15 +4162,15 @@
         "source": [
           {
             "code": "src/Darklands.Core/Battles/Attacks.cs:396",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Attacks.cs#L396"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Attacks.cs#L396"
           },
           {
             "code": "src/Darklands.Core/Battles/Attacks.cs:425",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Attacks.cs#L425"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Attacks.cs#L425"
           },
           {
             "code": "src/Darklands.Core/Battles/Attacks.cs:439",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Attacks.cs#L439"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Attacks.cs#L439"
           }
         ],
         "original": "R014+0xAE1E; R014+0xAD5A",
@@ -4100,13 +4208,13 @@
         "register": [
           {
             "id": "Z-1e0c6c",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L105"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L105"
           }
         ],
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S051/InnAtNight.cs:136",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S051/InnAtNight.cs#L136"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S051/InnAtNight.cs#L136"
           }
         ],
         "original": "R051+0x1B12; R051+0x1B30",
@@ -4128,15 +4236,15 @@
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S061/HanseaticLeague.cs:11",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S061/HanseaticLeague.cs#L11"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S061/HanseaticLeague.cs#L11"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S062/HanseHousePlaceholder_Hanse01.cs:4",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S062/HanseHousePlaceholder_Hanse01.cs#L4"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S062/HanseHousePlaceholder_Hanse01.cs#L4"
           },
           {
             "code": "src/Darklands.Cards/CardTable.cs:84",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/CardTable.cs#L84"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/CardTable.cs#L84"
           }
         ],
         "original": "R061+0x2278",
@@ -4157,13 +4265,13 @@
         "register": [
           {
             "id": "Z-44c195",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L80"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L80"
           }
         ],
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S049/MilitaryCraftsQuarter.cs:74",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S049/MilitaryCraftsQuarter.cs#L74"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S049/MilitaryCraftsQuarter.cs#L74"
           }
         ],
         "original": "R049+0x2E2C; R049+0x310E; R049+0x315C",
@@ -4184,13 +4292,13 @@
         "register": [
           {
             "id": "Z-44f5f6",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L213"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L213"
           }
         ],
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S063/BlacksmithsGuildAtNight.cs:55",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S063/BlacksmithsGuildAtNight.cs#L55"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S063/BlacksmithsGuildAtNight.cs#L55"
           }
         ],
         "original": "R063+0x0964; R063+0x0966",
@@ -4211,29 +4319,29 @@
         "register": [
           {
             "id": "Z-21ab87",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L138"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L138"
           },
           {
             "id": "Z-9f11da",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L139"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L139"
           },
           {
             "id": "Z-0880d0",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L144"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L144"
           }
         ],
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:98",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S054/CouncilHall.cs#L98"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S054/CouncilHall.cs#L98"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:101",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S054/CouncilHall.cs#L101"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S054/CouncilHall.cs#L101"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:542",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S054/CouncilHall.cs#L542"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S054/CouncilHall.cs#L542"
           }
         ],
         "original": "R054+0x2C4C; R054+0x2C6A; R054+0x2CA2; R054+0x2CC0",
@@ -4254,29 +4362,29 @@
         "register": [
           {
             "id": "Z-a901ed",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L137"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L137"
           },
           {
             "id": "Z-67029d",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L142"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L142"
           },
           {
             "id": "Z-622af1",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L143"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L143"
           }
         ],
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:94",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S054/CouncilHall.cs#L94"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S054/CouncilHall.cs#L94"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:196",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S054/CouncilHall.cs#L196"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S054/CouncilHall.cs#L196"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S054/CouncilHall.cs:510",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S054/CouncilHall.cs#L510"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S054/CouncilHall.cs#L510"
           }
         ],
         "original": "R054+0x2B8C; R054+0x29F8",
@@ -4298,15 +4406,15 @@
         "source": [
           {
             "code": "src/Darklands.Core/OriginalBehaviour.cs:28",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/OriginalBehaviour.cs#L28"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/OriginalBehaviour.cs#L28"
           },
           {
             "code": "src/Darklands.Presentation/BarterScreen.cs:196",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Presentation/BarterScreen.cs#L196"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Presentation/BarterScreen.cs#L196"
           },
           {
             "code": "src/Darklands.Presentation/BarterScreen.cs:370",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Presentation/BarterScreen.cs#L370"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Presentation/BarterScreen.cs#L370"
           }
         ],
         "original": "R032+0x0F60",
@@ -4333,19 +4441,19 @@
         "source": [
           {
             "code": "src/Darklands.Core/Rules/Trading.cs:338",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Trading.cs#L338"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Trading.cs#L338"
           },
           {
             "code": "src/Darklands.Core/Rules/Trading.cs:339",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Trading.cs#L339"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Trading.cs#L339"
           },
           {
             "code": "src/Darklands.Core/Rules/Inventory.cs:230",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/Inventory.cs#L230"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/Inventory.cs#L230"
           },
           {
             "code": "src/Darklands.Core/Characters/Pack.cs:59",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Characters/Pack.cs#L59"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Characters/Pack.cs#L59"
           }
         ],
         "original": "R032+0x0F60; R029+0x5090; R031+0x4A04",
@@ -4372,11 +4480,11 @@
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S051/InnByDay.cs:181",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S051/InnByDay.cs#L181"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S051/InnByDay.cs#L181"
           },
           {
             "code": "src/Darklands.Core/Rules/PartyQueries.cs:237",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/PartyQueries.cs#L237"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/PartyQueries.cs#L237"
           }
         ],
         "original": "R051+0x0EE0; R029+0x1326",
@@ -4403,15 +4511,15 @@
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S071/AffairsElsewhere.cs:53",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S071/AffairsElsewhere.cs#L53"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S071/AffairsElsewhere.cs#L53"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S071/AffairsElsewhere.cs:73",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S071/AffairsElsewhere.cs#L73"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S071/AffairsElsewhere.cs#L73"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S071/AffairsElsewhere.cs:76",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S071/AffairsElsewhere.cs#L76"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S071/AffairsElsewhere.cs#L76"
           }
         ],
         "original": "R071+0x15A4",
@@ -4432,21 +4540,21 @@
         "register": [
           {
             "id": "D-b167a7",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L107"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L109"
           },
           {
             "id": "D-b83f90",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L108"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L110"
           }
         ],
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S080/RobberKnightTaskOffered.cs:26",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S080/RobberKnightTaskOffered.cs#L26"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S080/RobberKnightTaskOffered.cs#L26"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S080/RobberKnightTaskRewarded.cs:20",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S080/RobberKnightTaskRewarded.cs#L20"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S080/RobberKnightTaskRewarded.cs#L20"
           }
         ],
         "original": "R080+0x0000; R080+0x031C",
@@ -4473,11 +4581,11 @@
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S077/VillageSchulz.cs:113",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S077/VillageSchulz.cs#L113"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S077/VillageSchulz.cs#L113"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S077/VillageSchulz.cs:114",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S077/VillageSchulz.cs#L114"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S077/VillageSchulz.cs#L114"
           }
         ],
         "original": "R077+0x1958",
@@ -4508,15 +4616,15 @@
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S080/RobberKnightTaskRewarded.cs:48",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S080/RobberKnightTaskRewarded.cs#L48"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S080/RobberKnightTaskRewarded.cs#L48"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S080/RobberKnightTaskRewarded.cs:57",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S080/RobberKnightTaskRewarded.cs#L57"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S080/RobberKnightTaskRewarded.cs#L57"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S080/RobberKnightTaskOffered.cs:30",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S080/RobberKnightTaskOffered.cs#L30"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S080/RobberKnightTaskOffered.cs#L30"
           }
         ],
         "original": "R080+0x038C",
@@ -4538,11 +4646,11 @@
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S052/DocksAtNight_Docks01.cs:38",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S052/DocksAtNight_Docks01.cs#L38"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S052/DocksAtNight_Docks01.cs#L38"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S052/DocksAtNight_Docks01.cs:39",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S052/DocksAtNight_Docks01.cs#L39"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S052/DocksAtNight_Docks01.cs#L39"
           }
         ],
         "original": "R052+0x0000",
@@ -4564,11 +4672,11 @@
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S049/BusinessDistrict.cs:24",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S049/BusinessDistrict.cs#L24"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S049/BusinessDistrict.cs#L24"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S046/SideStreetAtNight.cs:87",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S046/SideStreetAtNight.cs#L87"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S046/SideStreetAtNight.cs#L87"
           }
         ],
         "original": "R049+0x0000",
@@ -4595,11 +4703,11 @@
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S046/SideStreetAtNight.cs:100",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S046/SideStreetAtNight.cs#L100"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S046/SideStreetAtNight.cs#L100"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S046/SideStreetAtNight.cs:103",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S046/SideStreetAtNight.cs#L103"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S046/SideStreetAtNight.cs#L103"
           }
         ],
         "original": "R046+0x1866",
@@ -4621,15 +4729,15 @@
         "source": [
           {
             "code": "src/Darklands.Core/Rules/LocationRules.cs:45",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Rules/LocationRules.cs#L45"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Rules/LocationRules.cs#L45"
           },
           {
             "code": "src/Darklands.Core/Randomness/MscRandom.cs:46",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Randomness/MscRandom.cs#L46"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Randomness/MscRandom.cs#L46"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S052/GroveAtNight_CityG06.cs:54",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S052/GroveAtNight_CityG06.cs#L54"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S052/GroveAtNight_CityG06.cs#L54"
           }
         ],
         "original": "R029+0x19D0",
@@ -4650,13 +4758,13 @@
         "register": [
           {
             "id": "Z-39c955",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L291"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L291"
           }
         ],
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S075/FactionLeadersHomes.cs:46",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S075/FactionLeadersHomes.cs#L46"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S075/FactionLeadersHomes.cs#L46"
           }
         ],
         "original": "R075+0x0000",
@@ -4677,25 +4785,25 @@
         "register": [
           {
             "id": "Z-1b902d",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L843"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L843"
           }
         ],
         "source": [
           {
             "code": "src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs:45",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs#L45"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs#L45"
           },
           {
             "code": "src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs:46",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs#L46"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs#L46"
           },
           {
             "code": "src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs:47",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs#L47"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs#L47"
           },
           {
             "code": "src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs:48",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs#L48"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Content/Formats/Characters/PersonalNamesDecoder.cs#L48"
           }
         ],
         "original": "R029+0x5CC4",
@@ -4716,29 +4824,29 @@
         "register": [
           {
             "id": "Z-a9bfd4",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L70"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L70"
           },
           {
             "id": "Z-8c4e78",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L71"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L71"
           },
           {
             "id": "Z-5c96c0",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L65"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L65"
           }
         ],
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs:108",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs#L108"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs#L108"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs:112",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs#L112"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs#L112"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S048/RevolutionHouseAtNight.cs:75",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S048/RevolutionHouseAtNight.cs#L75"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S048/RevolutionHouseAtNight.cs#L75"
           }
         ],
         "original": "R048+0x0000; R048+0x0D6E",
@@ -4765,7 +4873,7 @@
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs:163",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs#L163"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs#L163"
           }
         ],
         "original": "R048+0x03D6",
@@ -4787,7 +4895,7 @@
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs:213",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs#L213"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S048/RevolutionHouseByDay.cs#L213"
           }
         ],
         "original": "R048+0x0506",
@@ -4814,7 +4922,7 @@
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S057/ChurchAtNight_CityC01.cs:162",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S057/ChurchAtNight_CityC01.cs#L162"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S057/ChurchAtNight_CityC01.cs#L162"
           }
         ],
         "original": "R057+0x0D32",
@@ -4836,11 +4944,11 @@
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs:124",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs#L124"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S057/CityChurchByDay.cs#L124"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S057/ChurchAtNight_CityC01.cs:137",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S057/ChurchAtNight_CityC01.cs#L137"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S057/ChurchAtNight_CityC01.cs#L137"
           }
         ],
         "original": "R057+0x0214; R057+0x0B6A",
@@ -4862,7 +4970,7 @@
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:118",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs#L118"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs#L118"
           }
         ],
         "original": "R076+0x0822",
@@ -4883,17 +4991,17 @@
         "register": [
           {
             "id": "Z-ce9f89",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/dormant.csv#L301"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/dormant.csv#L301"
           }
         ],
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:109",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs#L109"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs#L109"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:110",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs#L110"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs#L110"
           }
         ],
         "original": "R076+0x0694",
@@ -4915,11 +5023,11 @@
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:12",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs#L12"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs#L12"
           },
           {
             "code": "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:13",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs#L13"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs#L13"
           }
         ],
         "original": "R076+0x0430",
@@ -4940,17 +5048,17 @@
         "register": [
           {
             "id": "D-fb3254",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/docs/faithfulness/divergences.csv#L191"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/docs/faithfulness/divergences.csv#L193"
           }
         ],
         "source": [
           {
             "code": "src/Darklands.Core/Battles/Tactics/BattleMap.cs:317",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/BattleMap.cs#L317"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/BattleMap.cs#L317"
           },
           {
             "code": "src/Darklands.Core/Battles/Tactics/BattleMap.cs:319",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/BattleMap.cs#L319"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/BattleMap.cs#L319"
           }
         ],
         "original": "R014+0xF284",
@@ -4972,11 +5080,11 @@
         "source": [
           {
             "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.Missiles.cs:176",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/TacticalBattle.Missiles.cs#L176"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/TacticalBattle.Missiles.cs#L176"
           },
           {
             "code": "src/Darklands.Core/Battles/Tactics/TacticalBattle.Missiles.cs:177",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Core/Battles/Tactics/TacticalBattle.Missiles.cs#L177"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Core/Battles/Tactics/TacticalBattle.Missiles.cs#L177"
           }
         ],
         "original": "R018+0x02BE",
@@ -4998,7 +5106,7 @@
         "source": [
           {
             "code": "src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs:132",
-            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/0aed70684a2bdd5aa96deb89f618c4938482dcd1/src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs#L132"
+            "href": "https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/dca12d225a1050e8bf1bcd385b3ef50d305cda8a/src/Darklands.Cards/Scripts/S076/ChurchSanctuary.cs#L132"
           }
         ],
         "original": "R076+0x08AC",
