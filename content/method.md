@@ -16,7 +16,7 @@ The restoration rebuilds Darklands as a native C# program that plays exactly lik
   <li><span>05</span><div><strong>Say what differs</strong><p>Every deliberate difference, every original bug kept on purpose, and every open question is listed with its reason, in registers generated from the code itself.</p></div></li>
 </ol>
 
-<p class="drp-toolchain"><strong>Toolchain:</strong> original Darklands 483.07 &nbsp;·&nbsp; C# / .NET 10 &nbsp;·&nbsp; an emulated 8086 for the oracles and the sound drivers &nbsp;·&nbsp; SDL2 &nbsp;·&nbsp; DOSBox-X for visual and timing references</p>
+<p class="drp-toolchain"><strong>Toolchain:</strong> original Darklands 483.07 &nbsp;·&nbsp; C# / .NET 10 &nbsp;·&nbsp; an emulated 8086 for the oracles and the sound drivers &nbsp;·&nbsp; SDL 3 &nbsp;·&nbsp; DOSBox-X for visual and timing references</p>
 
 ## One core, any host
 

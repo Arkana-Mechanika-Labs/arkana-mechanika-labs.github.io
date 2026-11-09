@@ -6,8 +6,8 @@ width: normal
 ---
 
 <div class="drp-hero-buttons">
-  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v1.0.0-rc1/DarklandsRP-1.0.0-rc1-win-x64.zip" class="drp-btn drp-btn-primary">Download 1.0.0-rc1 for Windows (34 MB)</a>
-  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v1.0.0-rc1/DarklandsRP-1.0.0-rc1-linux-x64.tar.gz" class="drp-btn drp-btn-outline">Linux and Steam Deck, experimental (33 MB)</a>
+  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v1.0.0-rc2/DarklandsRP-1.0.0-rc2-win-x64.zip" class="drp-btn drp-btn-primary">Download 1.0.0-rc2 for Windows (42 MB)</a>
+  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v1.0.0-rc2/DarklandsRP-1.0.0-rc2-linux-x64.tar.gz" class="drp-btn drp-btn-outline">Linux and Steam Deck, experimental (41 MB)</a>
   <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases" class="drp-btn drp-btn-outline" target="_blank" rel="noopener noreferrer">All releases ↗</a>
 </div>
 
@@ -15,15 +15,15 @@ width: normal
 
 ## Getting started
 
-1. Download `DarklandsRP-1.0.0-rc1-win-x64.zip` and unpack it into a folder of its own. It holds `DarklandsRP.exe`, `SDL2.dll`, `libmt32emu.dll`, an empty `MT32_ROMS` folder, the licence, the third-party notices, the guides, an example mod and sound pack, and the release notes.
-2. Start `DarklandsRP.exe`. On the first run the launcher opens: it finds your Darklands by itself (GOG, Steam, or a folder next to it); check the game folder and the settings, then start the game. They are kept in `darklands.settings.json`. To open the launcher again later, hold Shift while starting.
+1. Download `DarklandsRP-1.0.0-rc2-win-x64.zip` and unpack it into a folder of its own. It holds `DarklandsRP.exe`, `DarklandsRP Launcher.exe`, `SDL3.dll`, `libmt32emu.dll`, an empty `MT32_ROMS` folder, a `SOUNDFONT` folder for a SoundFont of your own, the licence, the third-party notices, the guides, an example mod and sound pack, and the release notes.
+2. Start `DarklandsRP Launcher.exe`. The launcher finds your Darklands by itself (GOG, Steam, or a folder next to it); check the game folder and the settings (display, picture filter with a preview, sound, packs), then press Play. They are kept in `darklands.settings.json`. Later, `DarklandsRP.exe` starts the game directly; the launcher is there whenever you want to change something.
 3. Play. It starts like the original: the banner, the opening, then the start screen.
 
 No .NET installation is needed.
 
 ### Linux and the Steam Deck (experimental)
 
-`DarklandsRP-1.0.0-rc1-linux-x64.tar.gz` runs on Linux x64 and on the Steam Deck, in desktop mode or added to Steam as a non-Steam game. Unpack it with `tar` so that `DarklandsRP` stays executable, then start `./DarklandsRP`. It needs the system's SDL2 (`libSDL2-2.0.so.0`, already present on SteamOS), and finds the game in Steam's libraries (including the Deck's SD card), Heroic, GOG/Lutris and Wine prefixes. This build has been tested by the automated builds only; if something does not work, please report it with your distribution and what you saw.
+`DarklandsRP-1.0.0-rc2-linux-x64.tar.gz` runs on Linux x64 and on the Steam Deck, in desktop mode or added to Steam as a non-Steam game. Unpack it with `tar` so that `DarklandsRP` stays executable, then start `./DarklandsRP-Launcher` for the settings or `./DarklandsRP` for the game. It needs the system's **SDL 3** (`libSDL3.so.0`, SDL 3.2 or later), which SteamOS, the Steam runtime, Arch, Fedora, Debian 13 and Ubuntu 25.04 or later have; on Ubuntu 24.04 or Debian 12 install it yourself or run the game through Steam. It finds the game in Steam's libraries (including the Deck's SD card), Heroic, GOG/Lutris and Wine prefixes. This build has been tested by the automated builds only; if something does not work, please report it with your distribution and what you saw.
 
 ## Music and sound
 
@@ -35,13 +35,19 @@ Saves go to the game's own `SAVES` folder, shared with the original game both wa
 
 ## Settings and keys
 
-`darklands.settings.json` is commented and shows every default: the game folder, the saves folder, the window size (`"scale": 2`, any `"resolution"`, or `"fullscreen": true`), the sound card, the MT-32 ROM folder, and skipping the banner or the opening.
+`darklands.settings.json` is commented and shows every default: the game folder, the saves folder, the window size (`"scale": 2`, any `"resolution"`, or `"fullscreen": true`), the picture filter (Sharp, Even, Soft, Soft CRT, HQ, CRT, CRT+), the sound card, the MT-32 ROM folder, and skipping the banner or the opening.
 
-The keys and the mouse are the original's (Alt-S save, Alt-L load, Alt-P pause, F1–F5 character sheets, the menu bar on the right button or F10...). Two keys are new: **F12** saves a screenshot and **F11** opens a developer console.
+The keys and the mouse are the original's (Alt-S save, Alt-L load, Alt-P pause, F1–F5 character sheets, the menu bar on the right button or F10...). A few are new: **F12** saves a screenshot, **F11** opens a developer console, **Ctrl+F11** cycles the picture filters, and the mouse wheel moves the highlight in menus and lists.
 
 ## Release notes
 
 The full notes of each release are on [GitHub](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases).
+
+### 1.0.0-rc2 — November 9, 2026
+
+The second release candidate of 1.0. It brings a new launcher (a painted window with the settings on two tabs, and its own `DarklandsRP Launcher.exe`), seven picture filters for large screens with a live preview, the mouse wheel in menus, right click and + / − in character creation, and a move to SDL 3. The game plays as in rc1, with the last differences we found in battles closed; all 1,001 recorded battles and sessions agree with the original. Your saved games and settings carry over. On Linux it now needs SDL 3.
+
+SHA-256 of the Windows zip: `990c18d2882842a1a826cb9a3cb39cd420c965f21e296e77217d7e599908c447`; of the Linux archive: `cda56dafcc89424d49397565f003d8efcc1e0f82e38b090943ccd943b761eed5`
 
 ### 1.0.0-rc1 — November 5, 2026
 
