@@ -13,7 +13,7 @@ aliases: ["/posts/073-when-the-rulebook-and-the-code-disagree/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 According to the Darklands clue book, a weapon whose penetration exactly matches the target's armour should have its damage value divided by three. With a starting value of 12, that leaves 4.

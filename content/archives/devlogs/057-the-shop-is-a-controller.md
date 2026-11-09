@@ -6,7 +6,7 @@ aliases: ["/posts/057-the-shop-is-a-controller/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 The marketplace's first choice is not the weaponsmith. It is the merchant who

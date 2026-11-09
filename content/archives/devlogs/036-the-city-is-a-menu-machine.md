@@ -6,7 +6,7 @@ aliases: ["/posts/036-the-city-is-a-menu-machine/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 City navigation looked, at first, like one of the simpler parts of Darklands.

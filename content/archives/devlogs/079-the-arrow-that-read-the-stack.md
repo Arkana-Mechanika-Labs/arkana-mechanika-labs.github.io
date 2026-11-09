@@ -13,7 +13,7 @@ aliases: ["/posts/079-the-arrow-that-read-the-stack/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 A guard at the Steyr city gate raises a crossbow, fires at the party and misses. In our reconstruction, that ordinary shot led to two separate anomalies in the code MicroProse shipped as Darklands 483.07.

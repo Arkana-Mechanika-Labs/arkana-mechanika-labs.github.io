@@ -7,7 +7,7 @@ aliases: ["/posts/063-more-pixels-the-same-painting/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 A Darklands message screen is more than text and a list of choices. Beside the

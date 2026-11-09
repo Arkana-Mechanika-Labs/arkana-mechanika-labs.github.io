@@ -13,7 +13,7 @@ aliases: ["/posts/078-the-revolution-in-the-back-streets/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 A member of our Discord recently shared a memory from years ago: once, and only once, while wandering a city's side streets towards some unknown destination, their party was drawn into a kind of political campaign. It never seemed to lead anywhere, and they never saw it again.

@@ -9,7 +9,7 @@ aliases: ["/posts/069-behind-the-sanctuary-door/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 The party has reached sanctuary. That settles where it is, but not what happens next.

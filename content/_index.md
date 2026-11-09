@@ -22,7 +22,7 @@ params:
   <div class="drp-hero-art">
     <figure class="drp-hero-game-frame">
       <img src="/images/0.9.0/city.png" alt="An evening in a Gasthaus in Strassburg, the party swearing its oath" class="drp-hero-game" />
-      <figcaption>Version 0.9.0: a Gasthaus in Strassburg</figcaption>
+      <figcaption>A Gasthaus in Strassburg</figcaption>
     </figure>
     <img src="/images/darklands-cover.jpg" alt="Original Darklands box art" class="drp-hero-box-art" />
   </div>
@@ -51,7 +51,15 @@ The Darklands Restoration Project brings it back as a native program. This is no
   <p>The whole game plays: character creation, cities, inns and shops, guilds, banks and churches, the world map and its encounters, battles, camping, saints and alchemy, saving and loading. You need your own copy of Darklands (GOG or Steam). This is the second release candidate of 1.0, with a new launcher and picture filters for large screens: if nothing serious turns up, 1.0 follows with the same game. <a href="/news/1.0.0-rc2-released/">What's new →</a> <a href="/download/">Get it →</a></p>
 </div>
 
-## Version 1.0.0-rc2
+## New in 1.0.0-rc2
+
+<div class="drp-story-grid">
+  <figure class="drp-story-card"><a href="/news/1.0.0-rc2-released/#a-new-launcher"><img src="/images/1.0.0-rc2/launcher.jpg" alt="The new launcher" loading="lazy" style="image-rendering:auto" /></a><span class="drp-section-kicker">Launcher</span><strong>A launcher of its own</strong><span>A painted window with the settings on two tabs; the game starts straight away from DarklandsRP.exe.</span></figure>
+  <figure class="drp-story-card"><a href="/news/1.0.0-rc2-released/#picture-filters"><img src="/images/1.0.0-rc2/launcher-preview.jpg" alt="The launcher's preview of the CRT filter" loading="lazy" style="image-rendering:auto" /></a><span class="drp-section-kicker">Display</span><strong>Seven picture filters</strong><span>From sharp pixels to a soft VGA monitor or a CRT, previewed on a picture from your own game.</span></figure>
+  <figure class="drp-story-card"><a href="/news/1.0.0-rc2-released/#picture-filters"><img src="/images/1.0.0-rc2/battle-crtplus-curved.jpg" alt="A battle with the CRT+ filter and a curved picture" loading="lazy" style="image-rendering:auto" /></a><span class="drp-section-kicker">Comfort</span><strong>Built for today's screens</strong><span>The mouse wheel in menus, faster character sheets, SDL 3. <a href="/news/1.0.0-rc2-released/">All that's new →</a></span></figure>
+</div>
+
+## The game
 
 <div class="drp-story-grid">
   <figure class="drp-story-card"><img src="/images/0.9.0/start-screen.png" alt="The start screen" loading="lazy" /><span class="drp-section-kicker">Start</span><strong>The original start screen</strong><span>Quickstart, a new world, or a saved game.</span></figure>

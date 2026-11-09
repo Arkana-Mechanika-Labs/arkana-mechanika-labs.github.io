@@ -6,7 +6,7 @@ aliases: ["/posts/040-from-power-on-to-the-main-menu/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 For a long time, the reconstruction could explain many parts of the Darklands

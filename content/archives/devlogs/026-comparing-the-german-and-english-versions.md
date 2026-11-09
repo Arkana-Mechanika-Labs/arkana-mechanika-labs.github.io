@@ -6,7 +6,7 @@ aliases: ["/posts/026-comparing-the-german-and-english-versions/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 I had completely forgotten that a German version of Darklands even existed.

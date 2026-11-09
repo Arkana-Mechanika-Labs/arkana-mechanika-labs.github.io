@@ -13,7 +13,7 @@ aliases: ["/posts/075-the-abbess-checks-your-wounds/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 In [Presentation #02](https://youtu.be/wnP9VwCIHuo), the party walks from Main Street to the great churches of Steyr and on to the Kloster. An elderly monk asks their business, the party asks for healing, and after a short wait the answer comes back: the abbess only helps the truly virtuous and those with serious wounds. Visit the city physician instead.

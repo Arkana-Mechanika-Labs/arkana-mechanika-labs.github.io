@@ -9,7 +9,7 @@ aliases: ["/posts/070-one-hour-several-hidden-decisions/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 A small instruction in a reconstruction can hide a very large assumption:

@@ -13,7 +13,7 @@ aliases: ["/posts/077-two-areas-one-battle/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 [Devlog #072](/archives/devlogs/072-the-battlefield-starts-moving/) showed a guard fight on a single battlefield: orders, arrows, melee and the first fall. Darklands dungeons are larger than that. They are split into **areas** joined by stairs, and a fight does not stop just because the party is no longer all in the same place.

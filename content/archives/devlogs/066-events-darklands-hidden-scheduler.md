@@ -9,7 +9,7 @@ aliases: ["/posts/066-events-darklands-hidden-scheduler/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 In Darklands, an “event” is best understood as a persistent, typed record in a shared scheduler/state table—not necessarily an encounter or a message card.

@@ -7,7 +7,7 @@ aliases: ["/posts/064-one-game-two-ways-to-see-it/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 In [devlog #063](/archives/devlogs/063-more-pixels-the-same-painting/), we showed what a

@@ -13,7 +13,7 @@ aliases: ["/posts/076-a-failed-sneak-at-the-gate/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 [Devlog #056](/archives/devlogs/056-from-the-city-guard-to-a-cell/) followed the chain from a guard challenge into a cell. Since then the world map has arrived, and with it a new way to reach that chain: walking back to a city whose guards remember you.

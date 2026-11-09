@@ -9,7 +9,7 @@ aliases: ["/posts/068-a-sword-blow-checked-against-the-original/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 A combat calculation can be wrong without looking wrong.

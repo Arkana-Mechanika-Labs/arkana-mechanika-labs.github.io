@@ -6,7 +6,7 @@ aliases: ["/posts/049-seven-ways-out-of-an-ambush/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 `$CITYT00.MSG` is a compact test of almost every rule that makes Darklands hard

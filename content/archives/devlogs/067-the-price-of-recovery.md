@@ -9,7 +9,7 @@ aliases: ["/posts/067-the-price-of-recovery/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 Getting a wounded party back on its feet sounds like one of the simpler jobs in an RPG. Find someone willing to help, pay the bill, and wait for the numbers to recover.

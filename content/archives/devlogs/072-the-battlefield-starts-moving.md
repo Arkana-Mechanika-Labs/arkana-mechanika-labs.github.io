@@ -12,7 +12,7 @@ aliases: ["/posts/072-the-battlefield-starts-moving/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 In the previous combat devlog, the goal was straightforward to describe: choose **“Draw weapons and attack the guards!”** and have the reconstructed game produce the battlefield that follows. The work was still concentrated on everything between that choice and the first image. <!-- Source: previous; https://arkana-mechanika-labs.github.io/posts/071-before-the-battlefield-appears/ -->

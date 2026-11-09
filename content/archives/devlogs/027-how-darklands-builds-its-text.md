@@ -6,7 +6,7 @@ aliases: ["/posts/027-how-darklands-builds-its-text/"]
 ---
 
 {{< callout type="info" >}}
-**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is [Darklands Restoration Project 0.9.0](/download/).
+**Archived devlog.** Written during the earlier development of the restoration; later findings may supersede it. The current version is on the [download page](/download/).
 {{< /callout >}}
 
 Devlog #026 ended with a specific open question. The German edition revealed a richer token vocabulary than the English data suggests: `$his1` through `$his6`, `$him1`, `$him2`, `$CON`, grammar-sensitive substitutions that German players see and English players never do. But finding the vocabulary in the data is not the same as finding the machinery in the executable. How does the game actually dispatch a `$token` at runtime? Where does the pronoun grammar bundle live, and what calls into it?
