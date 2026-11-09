@@ -48,7 +48,7 @@ The Darklands Restoration Project brings it back as a native program. This is no
 
 <div class="drp-current-note">
   <strong>Version 1.0.0-rc2 is out</strong>
-  <p>The whole game plays: character creation, cities, inns and shops, guilds, banks and churches, the world map and its encounters, battles, camping, saints and alchemy, saving and loading. You need your own copy of Darklands (GOG or Steam). This is the second release candidate of 1.0, with a new launcher and picture filters for large screens: if nothing serious turns up, 1.0 follows with the same game. <a href="/download/">Get it →</a></p>
+  <p>The whole game plays: character creation, cities, inns and shops, guilds, banks and churches, the world map and its encounters, battles, camping, saints and alchemy, saving and loading. You need your own copy of Darklands (GOG or Steam). This is the second release candidate of 1.0, with a new launcher and picture filters for large screens: if nothing serious turns up, 1.0 follows with the same game. <a href="/news/1.0.0-rc2-released/">What's new →</a> <a href="/download/">Get it →</a></p>
 </div>
 
 ## Version 1.0.0-rc2
