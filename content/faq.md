@@ -8,7 +8,7 @@ width: normal
 
 ### Is it playable?
 
-Yes. Version 1.0.0-rc3 plays the whole game: character creation, cities, inns and shops, guilds, banks and churches, the world map and its encounters, real-time battles, camping, saints and alchemy, saving and loading. [Download it here](/download/). This is the third release candidate of 1.0: if nothing serious turns up, 1.0 follows with the same game.
+Yes. Version 1.0.0-rc4 plays the whole game: character creation, cities, inns and shops, guilds, banks and churches, the world map and its encounters, real-time battles, camping, saints and alchemy, saving and loading. [Download it here](/download/). This is the fourth release candidate of 1.0: if nothing serious turns up, 1.0 follows with the same game.
 
 ### Do I need the original game?
 
