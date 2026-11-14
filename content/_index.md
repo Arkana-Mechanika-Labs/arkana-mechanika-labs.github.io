@@ -48,7 +48,7 @@ The Darklands Restoration Project brings it back as a native program. This is no
 
 <div class="drp-current-note">
   <strong>Version 1.0.0-rc5 is out</strong>
-  <p>The whole game plays: character creation, cities, inns and shops, guilds, banks and churches, the world map and its encounters, battles, camping, saints and alchemy, saving and loading. You need your own copy of Darklands (GOG or Steam). This is the fourth release candidate of 1.0, which fixes what goes wrong when you split the party over the floors of a castle or a mine: if nothing serious turns up, 1.0 follows with the same game. <a href="/news/1.0.0-rc4-released/">What's new →</a> <a href="/download/">Get it →</a></p>
+  <p>The whole game plays: character creation, cities, inns and shops, guilds, banks and churches, the world map and its encounters, battles, camping, saints and alchemy, saving and loading. You need your own copy of Darklands (GOG or Steam). This is the fifth release candidate of 1.0: the same game as rc4 with one small display fix in battles, built from code gone through name by name for 1.0. If nothing turns up, 1.0 follows with the same game. <a href="/news/1.0.0-rc5-released/">What's new →</a> <a href="/download/">Get it →</a></p>
 </div>
 
 ## New in the release candidates
