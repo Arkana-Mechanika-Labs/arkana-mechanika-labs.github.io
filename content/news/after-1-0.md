@@ -2,8 +2,8 @@
 title: "After 1.0: what comes next"
 description: "What follows Darklands Restoration 1.0: the Fixed and Restored games, translations, a modular engine, and mods with the Darklands Workshop."
 summary: "What follows 1.0: the Fixed and Restored games, translations and a modular engine in 1.1, then mods and the Darklands Workshop in 1.2. The mod specification draft is open for review."
-date: 2026-11-15T12:00:00+01:00
-draft: true
+date: 2026-11-18T22:00:00+01:00
+draft: false
 tags: ["Darklands", "roadmap", "restoration"]
 width: wide
 ---
