@@ -10,6 +10,7 @@ sidebar:
 Releases and announcements. The devlogs written during the earlier development are kept in the [archives](/archives/devlogs/).
 
 {{< cards >}}
+{{< card link="1.0.0-released" title="Darklands Restoration Project 1.0 is out" icon="sparkles" subtitle="November 18, 2026. Version 1.0: the whole game, faithful to the original, on today's Windows and Linux. The game of the release candidates, with one small fix to saving in battles." >}}
 {{< card link="1.0.0-rc6-released" title="Darklands Restoration Project 1.0.0-rc6 is out" icon="sparkles" subtitle="November 15, 2026. The sixth release candidate of 1.0: the FM music's lower parts fixed, and SDL 3 included in the Linux package." >}}
 {{< card link="1.0.0-rc5-released" title="Darklands Restoration Project 1.0.0-rc5 is out" icon="sparkles" subtitle="November 14, 2026. The fifth release candidate of 1.0: the same game as rc4 with one small display fix in battles, built from code gone through name by name for 1.0." >}}
 {{< card link="1.0.0-rc4-released" title="Darklands Restoration Project 1.0.0-rc4 is out" icon="sparkles" subtitle="November 12, 2026. The fourth release candidate of 1.0: a party split over several floors no longer loses members, gets stuck in walls or fights through the floors." >}}

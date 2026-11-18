@@ -8,7 +8,7 @@ width: normal
 
 ### Is it playable?
 
-Yes. Version 1.0.0-rc6 plays the whole game: character creation, cities, inns and shops, guilds, banks and churches, the world map and its encounters, real-time battles, camping, saints and alchemy, saving and loading. [Download it here](/download/). This is the sixth release candidate of 1.0: if nothing serious turns up, 1.0 follows with the same game.
+Yes. Version 1.0 plays the whole game: character creation, cities, inns and shops, guilds, banks and churches, the world map and its encounters, real-time battles, camping, saints and alchemy, saving and loading. [Download it here](/download/). If you find something that plays differently from the original, please [report it](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/issues).
 
 ### Do I need the original game?
 
