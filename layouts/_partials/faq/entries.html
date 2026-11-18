@@ -1,0 +1,15 @@
+{{- /* The numbered entries (h2) of one FAQ chapter, folded away under the title. */ -}}
+{{- $entries := slice -}}
+{{- range .Fragments.Headings -}}
+  {{- range .Headings -}}{{ $entries = $entries | append . }}{{- end -}}
+{{- end -}}
+{{- with $entries }}
+<details class="dl-entries">
+  <summary>Entries in this section ({{ len . }})</summary>
+  <ul>
+    {{- range . }}
+    <li><a href="#{{ .ID }}">{{ .Title | safeHTML }}</a></li>
+    {{- end }}
+  </ul>
+</details>
+{{- end }}

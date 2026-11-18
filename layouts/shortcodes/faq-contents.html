@@ -1,0 +1,20 @@
+{{- /* Full contents of the Darklands FAQ: every chapter with its numbered entries. */ -}}
+<div class="dl-contents">
+{{- range .Page.Pages.ByWeight }}
+  {{- $page := . }}
+  <section class="dl-contents-part">
+    <h3 class="dl-contents-title"><a href="{{ .RelPermalink }}">{{ replaceRE `^(\d+)\s` `<span class="dl-num">$1</span> ` .Title | safeHTML }}</a></h3>
+    {{- $entries := slice -}}
+    {{- range .Fragments.Headings -}}
+      {{- range .Headings -}}{{ $entries = $entries | append . }}{{- end -}}
+    {{- end -}}
+    {{- with $entries }}
+    <ul>
+      {{- range . }}
+      <li><a href="{{ $page.RelPermalink }}#{{ .ID }}">{{ .Title | safeHTML }}</a></li>
+      {{- end }}
+    </ul>
+    {{- end }}
+  </section>
+{{- end }}
+</div>

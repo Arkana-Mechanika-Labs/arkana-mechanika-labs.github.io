@@ -1,0 +1,7 @@
+{{- /* A framed picture in the Darklands FAQ.
+  {{< plate src="/images/faq/x.png" alt="..." side="right" pixel="true" >}}caption (markdown){{< /plate >}} */ -}}
+{{- $side := .Get "side" | default "" -}}
+<figure class="dl-plate{{ with $side }} dl-plate-{{ . }}{{ end }}{{ if eq (.Get "pixel") "true" }} dl-plate-pixel{{ end }}{{ with .Get "size" }} dl-plate-{{ . }}{{ end }}">
+  <img src="{{ .Get "src" | relURL }}" alt="{{ .Get "alt" }}" loading="lazy">
+  {{- with .InnerDeindent }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+</figure>

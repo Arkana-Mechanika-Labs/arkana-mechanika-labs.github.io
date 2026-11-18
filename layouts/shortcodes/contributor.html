@@ -1,0 +1,5 @@
+{{- /* A contributor's note in the Darklands FAQ: {{< contributor "Name" >}}markdown{{< /contributor >}} */ -}}
+<aside class="dl-note">
+  <div class="dl-note-by">{{ .Get 0 }}</div>
+  <div class="dl-note-body">{{ .InnerDeindent | markdownify }}</div>
+</aside>
