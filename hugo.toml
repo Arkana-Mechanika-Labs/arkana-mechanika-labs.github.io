@@ -40,6 +40,10 @@ enableRobotsTXT = true
     url = "/news/"
     weight = 10
   [[menu.main]]
+    name = "Roadmap"
+    url = "/roadmap/"
+    weight = 11
+  [[menu.main]]
     name = "Bugs & Oddities"
     url = "/formats/original-bugs-and-oddities/"
     weight = 12
