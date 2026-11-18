@@ -2,7 +2,7 @@
 title: "7 Revision History"
 description: "What changed in each version of the Darklands FAQ, from version 1.0 in 1995 to version 4.0 in 2026."
 weight: 7
-draft: true
+draft: false
 toc: true
 width: normal
 ---

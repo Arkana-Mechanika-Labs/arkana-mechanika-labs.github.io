@@ -1,7 +1,7 @@
 ---
 title: "The Darklands FAQ"
 description: "The players' FAQ for Darklands, version 4.0: the darklands.net FAQ v3.0, corrected, brought up to date and extended."
-draft: true
+draft: false
 toc: false
 width: normal
 cascade:

@@ -2,7 +2,7 @@
 title: "5 Miscellaneous Tidbits"
 description: "Items, holy relics, unique places, the cities of the Empire, cathedrals and universities, random tips, the game's oddities, and a sample adventure."
 weight: 5
-draft: true
+draft: false
 toc: true
 width: normal
 ---

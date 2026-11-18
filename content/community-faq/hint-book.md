@@ -2,7 +2,7 @@
 title: "6 Summary of the Darklands Hint Book"
 description: "Garrett R. Le-Page's tour of the Darklands clue book, chapter by chapter, with its figures checked against the game."
 weight: 6
-draft: true
+draft: false
 toc: true
 width: normal
 ---

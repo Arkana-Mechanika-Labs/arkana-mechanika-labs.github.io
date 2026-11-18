@@ -2,7 +2,7 @@
 title: "3 General Game Considerations"
 description: "Character generation, money, alchemy, saints, arms and armour, cities, skills, fame, jobs, help, travel, fighting, enemies, retiring, and life after Baphomet."
 weight: 3
-draft: true
+draft: false
 toc: true
 width: normal
 ---

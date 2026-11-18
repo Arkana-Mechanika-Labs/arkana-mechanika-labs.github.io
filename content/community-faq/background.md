@@ -2,7 +2,7 @@
 title: "1 Some Background Information"
 description: "The designer, MicroProse's announcement, where to find the game today, the sequel that never came, who made it, who owns it, and what was cut."
 weight: 1
-draft: true
+draft: false
 toc: true
 width: normal
 ---

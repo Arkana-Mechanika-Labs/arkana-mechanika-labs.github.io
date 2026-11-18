@@ -5,7 +5,7 @@ toc: true
 width: normal
 ---
 
-Version 1.0 is the faithful game: Darklands 483.07 rebuilt, every rule checked against the original program. After 1.0 the project opens up, and the faithful game stays the reference. There are no dates: each release ships when it is ready. The full roadmap, with every step, is [in the repository](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/master/docs/ROADMAP.md).
+Version 1.0 is the faithful game: Darklands 483.07 rebuilt, every rule checked against the original program. After 1.0 the project opens up, and the faithful game stays the reference. There are no dates: each release ships when it is ready.
 
 ## Three games to choose from
 
@@ -29,7 +29,7 @@ A large release that reworks the engine once, in order:
 
 Once the engine work is done, the mod format is fixed and the tools come:
 
-- a mod format for pictures, sounds, fonts, texts, cards and quests, items and other data, rules, battles, the world map and screens. A [draft of the specification](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/master/docs/modding/SPEC-DRAFT.md) is open for your review now;
+- a mod format for pictures, sounds, fonts, texts, cards and quests, items and other data, rules, battles, the world map and screens. A draft of the specification will be posted for your review on the Discord;
 - a checker that explains every problem, a packager, and mods in the launcher;
 - the **Darklands Workshop**: one window with an editor for each kind of mod, each showing its change in the running game;
 - public notes on the original game's file formats.
@@ -37,9 +37,9 @@ Once the engine work is done, the mod format is fixed and the tools come:
 ## How you can help now
 
 - **Play 1.0 and report** anything that plays differently from the original: **Ctrl+F12** in the game packs a report.
-- **Read the mod specification draft** and tell us what you think on the [Discord](https://discord.gg/HjzWvmHhqZ).
+- **Share your ideas** for the Fixed game, comfort features and mods on the [Discord](https://discord.gg/HjzWvmHhqZ).
 - **Research**: what the designers meant, what the manual or the hint book describes that the game does not do, the history behind places, saints and alchemy.
 - **Translate**: tell us on Discord which language you would like to work on.
 - **Make packs**: picture and sound packs already work today.
 
-Contributions are welcome and stay their authors' own. How it all works is in the [contributing guide](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/master/CONTRIBUTING.md) and the [project's principles](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/master/docs/GOVERNANCE.md).
+Contributions are welcome and stay their authors' own. How it all works is on the [Get involved](/community/) page and in the [contributing guide](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/master/CONTRIBUTING.md).

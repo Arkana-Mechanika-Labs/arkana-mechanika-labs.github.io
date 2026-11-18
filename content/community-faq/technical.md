@@ -2,7 +2,7 @@
 title: "2 Technical Assistance"
 description: "Versions and patches, known bugs, files, running Darklands on old and new systems, sound, saving and loading, the copy check, keys and difficulty, the manual and the clue book."
 weight: 2
-draft: true
+draft: false
 toc: true
 width: normal
 ---

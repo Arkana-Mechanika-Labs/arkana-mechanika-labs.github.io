@@ -20,7 +20,7 @@ enableRobotsTXT = true
 
   [params.theme]
     default = "dark"
-    displayToggle = true
+    displayToggle = false
 
   [params.navbar]
     displayTitle = true
@@ -28,7 +28,8 @@ enableRobotsTXT = true
 
   [params.footer]
     enable = true
-    displayCopyright = true
+    displayCopyright = false
+    displayPoweredBy = false
 
 [menu]
   [[menu.main]]
@@ -40,57 +41,94 @@ enableRobotsTXT = true
     url = "/news/"
     weight = 10
   [[menu.main]]
-    name = "Roadmap"
-    url = "/roadmap/"
-    weight = 11
+    identifier = "game"
+    name = "The Game"
+    weight = 20
+  [[menu.main]]
+    name = "The Darklands FAQ"
+    url = "/community-faq/"
+    parent = "game"
+    weight = 10
+  [[menu.main]]
+    name = "History"
+    url = "/history/"
+    parent = "game"
+    weight = 20
   [[menu.main]]
     name = "Bugs & Oddities"
     url = "/formats/original-bugs-and-oddities/"
-    weight = 12
+    parent = "game"
+    weight = 30
   [[menu.main]]
-    name = "Join Discord ↗"
-    url = "https://discord.gg/HjzWvmHhqZ"
-    weight = 15
+    name = "The Classic FAQ, Checked"
+    url = "/classic-faq/"
+    parent = "game"
+    weight = 40
   [[menu.main]]
-    identifier = "resources"
-    name = "Explore"
-    weight = 20
+    identifier = "project"
+    name = "Project"
+    weight = 30
+  [[menu.main]]
+    name = "Roadmap"
+    url = "/roadmap/"
+    parent = "project"
+    weight = 10
   [[menu.main]]
     name = "How It Is Made"
     url = "/method/"
-    parent = "resources"
-    weight = 10
+    parent = "project"
+    weight = 20
+  [[menu.main]]
+    name = "Restoration FAQ"
+    url = "/faq/"
+    parent = "project"
+    weight = 30
   [[menu.main]]
     name = "File Formats"
     url = "/formats/"
-    parent = "resources"
-    weight = 20
+    parent = "project"
+    weight = 40
   [[menu.main]]
     name = "Tools"
     url = "/tools/"
-    parent = "resources"
-    weight = 30
-  [[menu.main]]
-    name = "FAQ"
-    url = "/faq/"
-    parent = "resources"
-    weight = 40
-  [[menu.main]]
-    name = "Links"
-    url = "/links/"
-    parent = "resources"
+    parent = "project"
     weight = 50
   [[menu.main]]
     name = "Archives"
     url = "/archives/"
-    parent = "resources"
+    parent = "project"
     weight = 60
   [[menu.main]]
-    name = "RPG Combat Toolkit ↗"
-    url = "https://arkana-mechanika-studios.github.io/"
+    name = "Links"
+    url = "/links/"
+    parent = "project"
+    weight = 70
+  [[menu.main]]
+    identifier = "community"
+    name = "Community"
+    weight = 40
+  [[menu.main]]
+    name = "Get Involved"
+    url = "/community/"
+    parent = "community"
+    weight = 10
+  [[menu.main]]
+    name = "Discord ↗"
+    url = "https://discord.gg/HjzWvmHhqZ"
+    parent = "community"
+    weight = 20
+  [[menu.main]]
+    name = "GitHub ↗"
+    url = "https://github.com/Arkana-Mechanika-Studios/darklands-restoration"
+    parent = "community"
     weight = 30
   [[menu.main]]
+    name = "Our Other Projects"
+    url = "/projects/"
+    parent = "community"
+    weight = 40
+  [[menu.main]]
     name = "Search"
-    weight = 25
+    weight = 50
     [menu.main.params]
       type = "search"
