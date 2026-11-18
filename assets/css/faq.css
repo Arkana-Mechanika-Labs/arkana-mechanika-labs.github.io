@@ -429,3 +429,47 @@ article h1 {
 .dl-contents-part:first-child {
   border-top: 0;
 }
+
+/* The site's dark-mode rule colours every link in .content gold and outranks the FAQ's own link colours;
+   #content (the page's main element) puts the FAQ's back on top. */
+#content .content .dl-contents h3.dl-contents-title a {
+  color: var(--faq-text);
+}
+#content .content .dl-contents h3.dl-contents-title a:hover {
+  color: var(--faq-rubric);
+}
+#content .content p a:hover,
+#content .content li a:hover,
+#content .content td a:hover {
+  color: var(--faq-rubric);
+}
+#content .content p.dl-totop a {
+  color: var(--faq-muted);
+}
+#content .content p.dl-totop a:hover {
+  color: var(--faq-rubric);
+}
+#content .content p,
+#content .content li,
+#content .content td,
+#content .content dd {
+  color: var(--faq-text);
+}
+#content .content strong {
+  color: var(--faq-strong);
+}
+#content .content h3 {
+  color: var(--faq-brass) !important;
+}
+#content .content h3.dl-contents-title {
+  color: var(--faq-text) !important;
+}
+#content .content p a,
+#content .content li a,
+#content .content td a {
+  color: var(--faq-brass);
+}
+#content .content details.dl-entries a,
+#content .content .dl-contents li a {
+  color: var(--faq-brass);
+}
