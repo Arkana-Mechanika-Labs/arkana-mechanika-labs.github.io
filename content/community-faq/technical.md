@@ -11,8 +11,8 @@ width: normal
 
 The latest version of Darklands is v483.07. If you don't know what version you have, check out the BANNER.DAT file which should contain the number of the latest version. This is the file that appears as a grey screen when you first boot the game up. In my version 5, the file flashed by so rapidly that I couldn't tell which version it was, so I used a DOS utility like DR.EXE (you could also use WRITE or NOTEPAD from WINDOWS) to open the BANNER.DAT file and read the number. If you use a text editor, don't save afterwards. Just exit.
 
-{{< plate src="/images/faq/s2-banner.png" alt="Grey text in a double frame on a black DOS screen: Darklands(TM) - Version 483.07, the game's motto and MicroProse's copyright" pixel="true" >}}
-The banner of version 483.07, shown for a few seconds when the game starts. Rendered from BANNER.DAT in the PC's standard text-mode font.
+{{< plate src="/images/faq/s2-startup-banner.png" alt="White text in a double frame on a light grey band across the top of a black DOS screen: Darklands(TM) - Version 483.07, the game's motto and MicroProse's copyright" pixel="true" >}}
+The banner of version 483.07, shown for a few seconds when the game starts. Screenshot of the Darklands Restoration Project, which draws it from BANNER.DAT as the original does.
 {{< /plate >}}
 
 The versions released were 483.04 (August 1992), 483.05 and 483.051, 483.06 (September 1992) and 483.07 (February 1993), plus a later sound update. The copies sold today on GOG and Steam are 483.07. The patches survive on darklands.net and in the files of the Darklands mailing list, but they must be applied in order: the 483.07 update installs only over 483.06, so 483.04 and 483.05 must be brought to 483.06 first.
@@ -242,8 +242,8 @@ In the old days: get a slower box for playing DOS games, or try MoSlo. Today, in
 
 ## 2.10 How do I run Darklands today?
 
-{{< plate src="/images/faq/s2-start-screen.png" alt="The Darklands main menu with the choices Quickstart, Create a New World and The Story Continues" side="right" size="small" pixel="true" >}}
-The main menu of version 483.07, after the opening. Rendered from the game's files (MicroProse, 1992).
+{{< plate src="/images/faq/s2-main-menu.png" alt="The Darklands main menu with the choices Quickstart, Create a New World and The Story Continues" side="right" size="small" pixel="true" >}}
+The main menu of version 483.07, after the opening. Screenshot of the Darklands Restoration Project, from the game's files (MicroProse, 1992).
 {{< /plate >}}
 
 The GOG and Steam versions come set up to run in DOSBox. DOSBox itself runs on Windows, Mac and Linux. With a boxed or older copy, install DOSBox yourself, mount the game's folder as drive C and run `DARKLAND`. DOSBox supplies the expanded memory the game needs, and emulates its sound cards.
