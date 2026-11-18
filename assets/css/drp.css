@@ -206,6 +206,8 @@ main h1 { font-size: clamp(2.4rem, 5vw, 3.4rem) !important; }
 .dlp-chapters li { counter-increment: ch; padding: .45rem 0 .45rem 2rem; border-bottom: 1px solid var(--rule); position: relative; margin: 0 !important; list-style: none; }
 .dlp-chapters li::before { content: counter(ch, upper-roman); position: absolute; left: 0; color: var(--rubric-hi); font-family: var(--serif); }
 .dlp-soon { font-size: .95rem; color: var(--parch-mute) !important; }
+.dlp-episode .dlh-player { max-width: none; margin: 0; }
+.dlp-time { float: right; color: var(--parch-mute); font-size: .9rem; font-variant-numeric: tabular-nums; }
 .dlp-later { grid-template-columns: 1fr; background: transparent; border-style: dashed; }
 .dlp-ways { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 .dlp-ways section { background: var(--ink-1); border: 1px solid var(--rule); border-top: 2px solid var(--rubric); padding: 1.6rem 1.6rem 1.4rem; }
