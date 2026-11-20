@@ -32,7 +32,28 @@ type: dlpage
       <p class="dlp-soon"><a href="https://youtu.be/enUxjqR3tdo" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a> · The sources, pictures and music are listed under the video.</p>
     </div>
   </article>
+  <article class="dlp-episode">
+    <div class="dlh-player dl-frame" data-yt="b0yWBLVtlA4" data-title="A History of Darklands, Part 2: Making It" role="button" tabindex="0" aria-label="Play part 2 (loads YouTube)">
+      <img class="smooth" src="/images/faq/s4-dragon.png" alt="" loading="lazy">
+      <button type="button" aria-hidden="true" tabindex="-1">▶</button>
+      <span class="note">Plays from YouTube once you click</span>
+    </div>
+    <div>
+      <div class="dl-kicker">Part 2 · 7 minutes · out now</div>
+      <h2 class="dl-title">Making It</h2>
+      <p>Why Arnold Hendrick set the game in medieval Germany, characters built by living a life, the team, two different ideas of what the game should be, a design that was never mapped out, and the bugs of the last six months.</p>
+      <ol class="dlp-chapters">
+        <li><a href="https://youtu.be/b0yWBLVtlA4?t=23" target="_blank" rel="noopener noreferrer">Why Germany</a> <span class="dlp-time">0:23</span></li>
+        <li><a href="https://youtu.be/b0yWBLVtlA4?t=69" target="_blank" rel="noopener noreferrer">A life, not a class</a> <span class="dlp-time">1:09</span></li>
+        <li><a href="https://youtu.be/b0yWBLVtlA4?t=171" target="_blank" rel="noopener noreferrer">The team</a> <span class="dlp-time">2:51</span></li>
+        <li><a href="https://youtu.be/b0yWBLVtlA4?t=218" target="_blank" rel="noopener noreferrer">Two different games</a> <span class="dlp-time">3:38</span></li>
+        <li><a href="https://youtu.be/b0yWBLVtlA4?t=268" target="_blank" rel="noopener noreferrer">Never mapped out</a> <span class="dlp-time">4:28</span></li>
+        <li><a href="https://youtu.be/b0yWBLVtlA4?t=375" target="_blank" rel="noopener noreferrer">Hunting bugs in the dark</a> <span class="dlp-time">6:15</span></li>
+      </ol>
+      <p class="dlp-soon"><a href="https://youtu.be/b0yWBLVtlA4" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a> · The sources, pictures and music are listed under the video.</p>
+    </div>
+  </article>
   <article class="dlp-episode dlp-later">
-    <div><div class="dl-kicker">Later parts</div><p>Part 2, <em>Making it</em>, comes next: the making of the game, then its release and the community that kept it alive.</p></div>
+    <div><div class="dl-kicker">Later parts</div><p>Part 3, <em>Shipping it</em>, comes next: the release of 1992, then the long work of fixing the game and the community that kept it alive.</p></div>
   </article>
 </div>
