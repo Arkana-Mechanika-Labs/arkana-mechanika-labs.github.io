@@ -23,7 +23,7 @@ No .NET installation is needed.
 
 ## Translating: the Darklands Workshop (beta)
 
-The **Darklands Workshop** is the translators' editor, a separate download: [Workshop 1.1.0-beta.1 on GitHub](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/tag/workshop-v1.1.0-beta.1) (Windows, 77 MB; Linux, experimental). Unzip it into the game's folder; it makes a `Workshop` folder there. It shows every text as the game draws it, checks your pack, opens the game at the text you are translating, and comes with sample packs, the translator's guide, and the example sound pack and mod. Watch the [video tutorial](YOUTUBE-LINK) to get started.
+The **Darklands Workshop** is the translators' editor, a separate download: [Workshop 1.1.0-beta.1 on GitHub](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/tag/workshop-v1.1.0-beta.1) (Windows, 77 MB; Linux, experimental). Unzip it into the game's folder; it makes a `Workshop` folder there. It shows every text as the game draws it, checks your pack, opens the game at the text you are translating, and comes with sample packs, the translator's guide, and the example sound pack and mod. Watch the [video tutorial](https://youtu.be/tPzPl-0qWg4) to get started.
 
 To play in another language, put a language pack in `packs/languages` and choose it on the launcher's Advanced tab.
 
