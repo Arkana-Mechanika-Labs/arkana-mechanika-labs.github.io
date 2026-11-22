@@ -21,7 +21,7 @@ Any switch can also be set on its own, and your saved games keep working in the 
 
 - **language packs** for every text of the game, card texts included, in Latin, Greek and Cyrillic letters and in Chinese, Japanese and Korean, with fonts that fit and sharp HD fonts;
 - the **Darklands Workshop** (beta), the translators' editor, which shows each text as the game draws it and opens the game at the text being translated;
-- the **Interface** switch: Comfort, with walking on over the map and a clearer saved-games list, or Classic, the 1992 interface.
+- the **Interface** switch: Comfort, with walking on over the map and a clearer saved-games list, or Classic, with the 1992 map and saved-games screens.
 
 ## 1.2: fixed and modular
 
