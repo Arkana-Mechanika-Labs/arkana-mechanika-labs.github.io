@@ -10,6 +10,8 @@ sidebar:
 Releases and announcements. The devlogs written during the earlier development are kept in the [archives](/archives/devlogs/).
 
 {{< cards >}}
+{{< card link="history-part-4" title="A History of Darklands, Part 4: Fixing It" icon="film" subtitle="November 22, 2026. The video series continues: seven months of patches, from version 4 to version 7, and the players who passed them around." >}}
+{{< card link="history-part-3" title="A History of Darklands, Part 3: Shipping It" icon="film" subtitle="November 22, 2026. The video series continues: why Darklands shipped in 1992 before it was ready, and what the first players found." >}}
 {{< card link="after-1-0" title="After 1.0: what comes next" icon="map" subtitle="November 18, 2026. The Fixed and Restored games, translations and a modular engine in 1.1, then mods and the Darklands Workshop in 1.2. The mod specification draft is open for review." >}}
 {{< card link="1.0.0-released" title="Darklands Restoration Project 1.0 is out" icon="sparkles" subtitle="November 18, 2026. Version 1.0: the whole game, faithful to the original, on today's Windows and Linux. The game of the release candidates, with one small fix to saving in battles." >}}
 {{< card link="1.0.0-rc6-released" title="Darklands Restoration Project 1.0.0-rc6 is out" icon="sparkles" subtitle="November 15, 2026. The sixth release candidate of 1.0: the FM music's lower parts fixed, and SDL 3 included in the Linux package." >}}
