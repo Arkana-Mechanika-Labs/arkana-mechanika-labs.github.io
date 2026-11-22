@@ -96,7 +96,29 @@ type: dlpage
       <p class="dlp-soon"><a href="https://youtu.be/hjdk70J3UCY" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a> · The sources, pictures and music are listed under the video.</p>
     </div>
   </article>
+  <article class="dlp-episode">
+    <div class="dlh-player dl-frame" data-yt="DM8PyCmnhZY" data-title="A History of Darklands, Part 5: What Was Left Out" role="button" tabindex="0" aria-label="Play part 5 (loads YouTube)">
+      <img class="smooth" src="/images/history/part5-door.png" alt="" loading="lazy">
+      <button type="button" aria-hidden="true" tabindex="-1">▶</button>
+      <span class="note">Plays from YouTube once you click</span>
+    </div>
+    <div>
+      <div class="dl-kicker">Part 5 · 10 minutes · out now</div>
+      <h2 class="dl-title">What Was Left Out</h2>
+      <p>The game behind the card that says “this option isn’t working yet”: a Germany meant to change as the party travelled, with wars, revolts and a whole city uprising written but never shown; the roads beyond the map; the costed plan for Darklands II in Britain; the cities’ unfinished doors; why knights fight on foot; and the web of quests that became one main quest.</p>
+      <ol class="dlp-chapters">
+        <li><a href="https://youtu.be/DM8PyCmnhZY?t=33" target="_blank" rel="noopener noreferrer">How we know</a> <span class="dlp-time">0:33</span></li>
+        <li><a href="https://youtu.be/DM8PyCmnhZY?t=83" target="_blank" rel="noopener noreferrer">Revolution on paper</a> <span class="dlp-time">1:23</span></li>
+        <li><a href="https://youtu.be/DM8PyCmnhZY?t=246" target="_blank" rel="noopener noreferrer">Beyond the map</a> <span class="dlp-time">4:06</span></li>
+        <li><a href="https://youtu.be/DM8PyCmnhZY?t=279" target="_blank" rel="noopener noreferrer">Darklands II</a> <span class="dlp-time">4:39</span></li>
+        <li><a href="https://youtu.be/DM8PyCmnhZY?t=373" target="_blank" rel="noopener noreferrer">A city of unfinished doors</a> <span class="dlp-time">6:13</span></li>
+        <li><a href="https://youtu.be/DM8PyCmnhZY?t=445" target="_blank" rel="noopener noreferrer">Horses</a> <span class="dlp-time">7:25</span></li>
+        <li><a href="https://youtu.be/DM8PyCmnhZY?t=498" target="_blank" rel="noopener noreferrer">Promises and quests</a> <span class="dlp-time">8:18</span></li>
+      </ol>
+      <p class="dlp-soon"><a href="https://youtu.be/DM8PyCmnhZY" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a> · The sources, pictures and music are listed under the video.</p>
+    </div>
+  </article>
   <article class="dlp-episode dlp-later">
-    <div><div class="dl-kicker">Later parts</div><p>Part 5, <em>What was left out</em>, comes next: the texts, scenes and wars hidden in the game’s files, the journeys beyond Germany and the sequel, then the community that kept the game alive.</p></div>
+    <div><div class="dl-kicker">Later parts</div><p>Part 6, <em>After MicroProse</em>, comes next: the takeover, the CD-ROM, a game that nobody sold, and the players who kept it running anyway.</p></div>
   </article>
 </div>
