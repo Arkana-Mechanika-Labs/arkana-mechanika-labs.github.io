@@ -53,7 +53,7 @@ The full notes of each release are on [GitHub](https://github.com/Arkana-Mechani
 
 Darklands Restoration 1.1 makes Darklands translatable: language packs for the card texts, the screens, the names and the battle messages, in Latin, Greek and Cyrillic letters and in Chinese, Japanese and Korean, with pixel or TrueType fonts. HD fonts for English, and the Interface switch: Comfort (the default) walks on over the map with a double tap or Shift and a direction and has a clearer saved-games list; Classic keeps the 1992 map and saved-games screens. The character sheet's skill values now line up. The Darklands Workshop beta, the translators' editor, is a download of its own. The game's rules are those of 1.0: all 1,040 recorded battles and sessions agree with the original. Your saved games and settings carry over.
 
-SHA-256 of the Windows zip: `SHA-WIN-1.1.0`; of the Linux archive: `SHA-LINUX-1.1.0`
+SHA-256 of the Windows zip: `e6cebb49ed897c03665e3e4de1398682b6d03c3198748e29252b65d2335c6d8e`; of the Linux archive: `8c5197767e32b59d1fee60164b7f2d5d6c3edf4265422191a05d36ba1aaaac7c`
 
 ### 1.0.0 — November 18, 2026
 
