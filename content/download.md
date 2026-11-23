@@ -6,8 +6,8 @@ width: normal
 ---
 
 <div class="drp-hero-buttons">
-  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v1.1.0/DarklandsRP-1.1.0-win-x64.zip" class="drp-btn drp-btn-primary">Download 1.1 for Windows (43 MB)</a>
-  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v1.1.0/DarklandsRP-1.1.0-linux-x64.tar.gz" class="drp-btn drp-btn-outline">Linux and Steam Deck, experimental (43 MB)</a>
+  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v1.1.1/DarklandsRP-1.1.1-win-x64.zip" class="drp-btn drp-btn-primary">Download 1.1.1 for Windows (43 MB)</a>
+  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v1.1.1/DarklandsRP-1.1.1-linux-x64.tar.gz" class="drp-btn drp-btn-outline">Linux and Steam Deck, experimental (43 MB)</a>
   <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases" class="drp-btn drp-btn-outline" target="_blank" rel="noopener noreferrer">All releases ↗</a>
 </div>
 
@@ -15,7 +15,7 @@ width: normal
 
 ## Getting started
 
-1. Download `DarklandsRP-1.1.0-win-x64.zip` and unpack it into a folder of its own, or over your 1.0 folder. It holds `DarklandsRP.exe`, `DarklandsRP Launcher.exe`, `SDL3.dll`, `libmt32emu.dll`, an `MT32_ROMS` folder for your MT-32 ROM files, a `SOUNDFONT` folder for a SoundFont of your own, `mods` and `packs` folders (with the HD fonts pack, and room for language and sound packs), the licence, the third-party notices, the guides and the release notes.
+1. Download `DarklandsRP-1.1.1-win-x64.zip` and unpack it into a folder of its own, or over your 1.1.0 or 1.0 folder. It holds `DarklandsRP.exe`, `DarklandsRP Launcher.exe`, `SDL3.dll`, `libmt32emu.dll`, an `MT32_ROMS` folder for your MT-32 ROM files, a `SOUNDFONT` folder for a SoundFont of your own, `mods` and `packs` folders (with the HD fonts pack, and room for language and sound packs), the licence, the third-party notices, the guides and the release notes.
 2. Start `DarklandsRP Launcher.exe`. The launcher finds your Darklands by itself (GOG, Steam, or a folder next to it); check the game folder and the settings (display, picture filter with a preview, sound, packs), then press Play. They are kept in `darklands.settings.json`. Later, `DarklandsRP.exe` starts the game directly; the launcher is there whenever you want to change something.
 3. Play. It starts like the original: the banner, the opening, then the start screen.
 
@@ -29,7 +29,7 @@ To play in another language, put a language pack in `packs/languages` and choose
 
 ### Linux and the Steam Deck (experimental)
 
-`DarklandsRP-1.1.0-linux-x64.tar.gz` runs on Linux x64 and on the Steam Deck, in desktop mode or added to Steam as a non-Steam game. Unpack it with `tar` so that `DarklandsRP` stays executable, then start `./DarklandsRP-Launcher` for the settings or `./DarklandsRP` for the game. **SDL 3** comes with it (`libSDL3.so.0`, beside the program), so it also runs on systems without SDL 3 of their own, such as Ubuntu 24.04 and 22.04 or Debian 12. It finds the game in Steam's libraries (including the Deck's SD card), Heroic, GOG/Lutris and Wine prefixes. This build has been tested by the automated builds only; if something does not work, please report it with your distribution and what you saw.
+`DarklandsRP-1.1.1-linux-x64.tar.gz` runs on Linux x64 and on the Steam Deck, in desktop mode or added to Steam as a non-Steam game. Unpack it with `tar` so that `DarklandsRP` stays executable, then start `./DarklandsRP-Launcher` for the settings or `./DarklandsRP` for the game. **SDL 3** comes with it (`libSDL3.so.0`, beside the program), so it also runs on systems without SDL 3 of their own, such as Ubuntu 24.04 and 22.04 or Debian 12. It finds the game in Steam's libraries (including the Deck's SD card), Heroic, GOG/Lutris and Wine prefixes. This build has been tested by the automated builds only; if something does not work, please report it with your distribution and what you saw.
 
 ## Music and sound
 
@@ -48,6 +48,12 @@ The keys and the mouse are the original's (Alt-S save, Alt-L load, Alt-P pause, 
 ## Release notes
 
 The full notes of each release are on [GitHub](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases).
+
+### 1.1.1 — November 23, 2026
+
+A small fix to 1.1: with the HD fonts, on cards whose answers appear only after a key press, faint outlines of the hidden answers no longer show over the picture before the key. Reported on Linux, it happened on every system. Everything else is as in 1.1.0; all 1,040 recorded battles and sessions agree with the original. Your saved games and settings carry over.
+
+SHA-256 of the Windows zip: `367d1ffa91c5578b9aa1a4e09c5561e56e3879ac89070c19894be6f769a14b70`; of the Linux archive: `9c091f77e65e376db772d7da5e8b98a1f08a66a40ab2a5eb020da5188e4b703a`
 
 ### 1.1.0 — November 22, 2026
 
