@@ -10,6 +10,7 @@ sidebar:
 Releases and announcements. The devlogs written during the earlier development are kept in the [archives](/archives/devlogs/).
 
 {{< cards >}}
+{{< card link="1.1.2-released" title="Darklands Restoration Project 1.1.2 is out" icon="sparkles" subtitle="November 24, 2026. A small fix to 1.1: the HD fonts no longer show thin bits of the original letters at their edges, and their text shadow is a light emboss." >}}
 {{< card link="1.1.1-released" title="Darklands Restoration Project 1.1.1 is out" icon="sparkles" subtitle="November 23, 2026. A small fix to 1.1: with the HD fonts, the hidden answers of some cards no longer show as faint outlines over the picture." >}}
 {{< card link="history-part-5" title="A History of Darklands, Part 5: What Was Left Out" icon="film" subtitle="November 22, 2026. The video series continues: what was cut from Darklands, from a whole city uprising to Darklands II, and how we know." >}}
 {{< card link="1.1.0-released" title="Darklands Restoration Project 1.1 is out" icon="sparkles" subtitle="November 22, 2026. Version 1.1 makes Darklands translatable: language packs, HD fonts for English, the Interface switch with walking on the map and a new saved-games list, and the Darklands Workshop beta for translators." >}}
