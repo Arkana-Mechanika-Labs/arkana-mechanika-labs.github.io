@@ -6,8 +6,8 @@ width: normal
 ---
 
 <div class="drp-hero-buttons">
-  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v1.1.3/DarklandsRP-1.1.3-win-x64.zip" class="drp-btn drp-btn-primary">Download 1.1.3 for Windows (43 MB)</a>
-  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v1.1.3/DarklandsRP-1.1.3-linux-x64.tar.gz" class="drp-btn drp-btn-outline">Linux and Steam Deck, experimental (43 MB)</a>
+  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v1.1.4/DarklandsRP-1.1.4-win-x64.zip" class="drp-btn drp-btn-primary">Download 1.1.4 for Windows (43 MB)</a>
+  <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/download/v1.1.4/DarklandsRP-1.1.4-linux-x64.tar.gz" class="drp-btn drp-btn-outline">Linux and Steam Deck, experimental (43 MB)</a>
   <a href="https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases" class="drp-btn drp-btn-outline" target="_blank" rel="noopener noreferrer">All releases ↗</a>
 </div>
 
@@ -15,7 +15,7 @@ width: normal
 
 ## Getting started
 
-1. Download `DarklandsRP-1.1.3-win-x64.zip` and unpack it into a folder of its own, or over your 1.1.x or 1.0 folder. It holds `DarklandsRP.exe`, `DarklandsRP Launcher.exe`, `SDL3.dll`, `libmt32emu.dll`, an `MT32_ROMS` folder for your MT-32 ROM files, a `SOUNDFONT` folder for a SoundFont of your own, `mods` and `packs` folders (with the HD fonts pack, and room for language and sound packs), the licence, the third-party notices, the guides and the release notes.
+1. Download `DarklandsRP-1.1.4-win-x64.zip` and unpack it into a folder of its own, or over your 1.1.x or 1.0 folder. It holds `DarklandsRP.exe`, `DarklandsRP Launcher.exe`, `SDL3.dll`, `libmt32emu.dll`, an `MT32_ROMS` folder for your MT-32 ROM files, a `SOUNDFONT` folder for a SoundFont of your own, `mods` and `packs` folders (with the HD fonts pack, and room for language and sound packs), the licence, the third-party notices, the guides and the release notes.
 2. Start `DarklandsRP Launcher.exe`. The launcher finds your Darklands by itself (GOG, Steam, or a folder next to it); check the game folder and the settings (display, picture filter with a preview, sound, packs), then press Play. They are kept in `darklands.settings.json`. Later, `DarklandsRP.exe` starts the game directly; the launcher is there whenever you want to change something.
 3. Play. It starts like the original: the banner, the opening, then the start screen.
 
@@ -23,13 +23,13 @@ No .NET installation is needed.
 
 ## Translating: the Darklands Workshop (beta)
 
-The **Darklands Workshop** is the translators' editor, a separate download: [Workshop 1.1.0-beta.2 on GitHub](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/tag/workshop-v1.1.0-beta.2) (Windows, 77 MB; Linux, experimental). Unzip it into the game's folder; it makes a `Workshop` folder there. It shows every text as the game draws it, checks your pack, opens the game at the text you are translating, and comes with sample packs, the translator's guide, and the example sound pack and mod. Watch the [video tutorial](https://youtu.be/tPzPl-0qWg4) to get started.
+The **Darklands Workshop** is the translators' editor, a separate download: [Workshop 1.1.0-beta.3 on GitHub](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/tag/workshop-v1.1.0-beta.3) (Windows, 77 MB; Linux, experimental). Unzip it into the game's folder; it makes a `Workshop` folder there. It shows every text as the game draws it, checks your pack, opens the game at the text you are translating, and comes with sample packs, the translator's guide, and the example sound pack and mod. Watch the [video tutorial](https://youtu.be/tPzPl-0qWg4) to get started.
 
 To play in another language, put a language pack in `packs/languages` and choose it on the launcher's Advanced tab.
 
 ### Linux and the Steam Deck (experimental)
 
-`DarklandsRP-1.1.3-linux-x64.tar.gz` runs on Linux x64 and on the Steam Deck, in desktop mode or added to Steam as a non-Steam game. Unpack it with `tar` so that `DarklandsRP` stays executable, then start `./DarklandsRP-Launcher` for the settings or `./DarklandsRP` for the game. **SDL 3** comes with it (`libSDL3.so.0`, beside the program), so it also runs on systems without SDL 3 of their own, such as Ubuntu 24.04 and 22.04 or Debian 12. It finds the game in Steam's libraries (including the Deck's SD card), Heroic, GOG/Lutris and Wine prefixes. This build has been tested by the automated builds only; if something does not work, please report it with your distribution and what you saw.
+`DarklandsRP-1.1.4-linux-x64.tar.gz` runs on Linux x64 and on the Steam Deck, in desktop mode or added to Steam as a non-Steam game. Unpack it with `tar` so that `DarklandsRP` stays executable, then start `./DarklandsRP-Launcher` for the settings or `./DarklandsRP` for the game. **SDL 3** comes with it (`libSDL3.so.0`, beside the program), so it also runs on systems without SDL 3 of their own, such as Ubuntu 24.04 and 22.04 or Debian 12. It finds the game in Steam's libraries (including the Deck's SD card), Heroic, GOG/Lutris and Wine prefixes. This build has been tested by the automated builds only; if something does not work, please report it with your distribution and what you saw.
 
 ## Music and sound
 
@@ -48,6 +48,12 @@ The keys and the mouse are the original's (Alt-S save, Alt-L load, Alt-P pause, 
 ## Release notes
 
 The full notes of each release are on [GitHub](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases).
+
+### 1.1.4 — November 25, 2026
+
+A small fix to 1.1 for players who use the HD fonts, and for translators. With the HD fonts, the pointer no longer hides under the text or wipes the letters next to it, and coming back to a card from a store no longer leaves pieces of the store's text over the picture. With a language pack, many more texts are translated (the character generator, the camp, the battle's messages, the saved games' places, the names cards copy, the map's messages) and none loses its Chinese, Japanese, Korean, Greek or Cyrillic letters. The Darklands Workshop 1.1.0-beta.3 comes with it. Without a font or language pack the game is exactly as before. All 1,040 recorded battles and sessions agree with the original. Your saved games and settings carry over.
+
+SHA-256 of the Windows zip: `d8e068759ec09c79131cb208b4b0620c90b4449708ec863d5a9354a356cc9ef6`; of the Linux archive: `2dc3c13f07ad17e76e172fb6b77e76b26840100a5d4e32e50f24f46c491f58ce`
 
 ### 1.1.3 — November 25, 2026
 

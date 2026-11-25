@@ -46,7 +46,7 @@ Once the engine work is done, the mod format is fixed and the tools come:
 - **Play 1.1 and report** anything that plays differently from the original: **Ctrl+F12** in the game packs a report.
 - **Share your ideas** for the Fixed game, comfort features and mods on the [Discord](https://discord.gg/HjzWvmHhqZ).
 - **Research**: what the designers meant, what the manual or the hint book describes that the game does not do, the history behind places, saints and alchemy.
-- **Translate**: download the [Workshop](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/tag/workshop-v1.1.0-beta.2), and tell us on Discord which language you are working on.
+- **Translate**: download the [Workshop](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/tag/workshop-v1.1.0-beta.3), and tell us on Discord which language you are working on.
 - **Make packs**: picture and sound packs already work today.
 
 Contributions are welcome and stay their authors' own. How it all works is on the [Get involved](/community/) page and in the [contributing guide](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/blob/master/CONTRIBUTING.md).
