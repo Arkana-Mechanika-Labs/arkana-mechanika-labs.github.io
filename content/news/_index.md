@@ -10,6 +10,7 @@ sidebar:
 Releases and announcements. The devlogs written during the earlier development are kept in the [archives](/archives/devlogs/).
 
 {{< cards >}}
+{{< card link="1.1.5-released" title="Darklands Restoration Project 1.1.5 is out" icon="sparkles" subtitle="November 26, 2026. A small fix to 1.1: Groningen shows right again after a game loaded in the wilderness." >}}
 {{< card link="1.1.4-released" title="Darklands Restoration Project 1.1.4 is out" icon="sparkles" subtitle="November 25, 2026. A small fix to 1.1: with the HD fonts the pointer and card texts draw cleanly again, and language packs reach many more texts." >}}
 {{< card link="1.1.3-released" title="Darklands Restoration Project 1.1.3 is out" icon="sparkles" subtitle="November 25, 2026. A small fix to 1.1 for translators: the descriptions of saints, formulae and cities can be translated, with a new Workshop beta." >}}
 {{< card link="1.1.2-released" title="Darklands Restoration Project 1.1.2 is out" icon="sparkles" subtitle="November 24, 2026. A small fix to 1.1: the HD fonts no longer show thin bits of the original letters at their edges, and their text shadow is a light emboss." >}}
