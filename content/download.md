@@ -21,6 +21,16 @@ width: normal
 
 No .NET installation is needed.
 
+## Language packs
+
+Language packs are made by players. Download one and put its folder in the game's `packs/languages` folder, then choose it under "Language pack" in the launcher.
+
+| Language | Pack | Status |
+|---|---|---|
+| Simplified Chinese (zh-Hans) | [darklands-restoration-zh-pack](https://github.com/ycsqwan/darklands-restoration-zh-pack) by ycsqwan | Community language pack, experimental, not yet fully proofread |
+
+Working on another language? Tell us on [Discord](https://discord.gg/HjzWvmHhqZ), and we will add it here.
+
 ## Translating: the Darklands Workshop (beta)
 
 The **Darklands Workshop** is the translators' editor, a separate download: [Workshop 1.1.0-beta.3 on GitHub](https://github.com/Arkana-Mechanika-Studios/darklands-restoration/releases/tag/workshop-v1.1.0-beta.3) (Windows, 77 MB; Linux, experimental). Unzip it into the game's folder; it makes a `Workshop` folder there. It shows every text as the game draws it, checks your pack, opens the game at the text you are translating, and comes with sample packs, the translator's guide, and the example sound pack and mod. Watch the [video tutorial](https://youtu.be/tPzPl-0qWg4) to get started.
